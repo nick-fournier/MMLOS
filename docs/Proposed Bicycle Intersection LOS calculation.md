@@ -1,7 +1,7 @@
 # BICYCLE MODE 
 
-> - The following bicycle delay calculation for non-STOP controlled intersections has been modified from the Highway Capacity Manual's pedestrian methodology for two-way stop-controlled intersections. 
-> - The reasoning being that a left turning bicyclist experiences similar delay due to gap acceptance that a pedestrian would when crossing the uncontrolled approaches of a TWSC intersection.
+> - The following bicycle delay calculation methodology is a modified from the HCM's two-way STOP-controlled intersection delay and from the Kittelson & Associates, Inc. NCHRP Project 17-876 Working Paper "Model for Predicting the Pedestrian Delay at Signalized Intersections". 
+> - The reasoning being that a left turning bicyclist experiences similar delay due to gap acceptance that a pedestrian would when crossing the uncontrolled approaches of a TWSC intersection, and that a two-stage left turn for a bicycle is the same as a pedestrian's two-stage turn when trying to move  diagonally across an intersection. Thus, the delay calculations are analogous with modification.
 
 Although bicycles may experience some amount of queuing in locations of particularly high bicycle usage, bicycle delay is largely unaffected by capacity at present bicycle usage levels in the United States. The primary source of bicycle delay, *in addition to signal delay*, is due to left-turn maneuvers at intersections, lane blockage by automobiles, and crossing two-way STOP-controlled (TWSC) intersections. Thus the calculation of intersection delay for bicycles will be performed by:
 
@@ -87,35 +87,130 @@ $t_{sb}$ = bicycle start‐up time and end clearance time (s).
 
 If pedestrian platooning is observed in the field, then the spatial distribution of pedestrians should be computed with Equation $\ref{eq:Nlb}$. If no platooning is observed, the spatial distribution of pedestrians is assumed to be 1.
 $$
-N_{lb} = Int\left[\frac{8.0(N_{lb}-1)}{W_{lb}}\right] \label{eq:Nlb}
+N_{b} = Int\left[\frac{8.0(N_{cb}-1)}{W_{c}}\right] \label{eq:Nlb}
 $$
 where 
-$N_{lb}$ = spatial distribution of pedestrians (ped);
-$N_b$ = total number of pedestrians in the crossing platoon, from Equation $\ref{eq:Nb}$ (bikes);
-$W_c$ = bike lane width (ft); and
-8.0 = default clear effective width used by a single pedestrian to avoid interference when passing other pedestrians (ft).
+$N_{b}$ = spatial distribution of bicycles (bikes);
+$N_{cb}$ = total number of bicycles in the crossing platoon, from Equation $\ref{eq:Nb}$ (bikes);
+$W_c$ = width of intersection for bicycles (ft); and
+4.0 = default clear effective width used by a single bicycle (ft).
 
 To compute spatial distribution, the analyst must make field observations or estimate the platoon size by using Equation $\ref{eq:Nb}$:
 $$
-N_b = \frac{v_b e^{v_b t_{cb}} + v_v e^{-vt_{cb}}}{(v_b + v_v) e^{v_b - v_v)t_{cb}}} \label{eq:Nb}
+N_{cb} = \frac{v_b e^{v_b t_{cb}} + v e^{-vt_{cb}}}{(v_b + v) e^{v_b - v)t_{cb}}} \label{eq:Nb}
 $$
 where
-$N_c$ = total number of pedestrians in the crossing platoon (ped),
-$v_b$ = bicycle flow rate (ped/s),
-$v_v$ = vehicular flow rate (veh/s), and
+$N_{cb}$ = total number of bicycles in the crossing platoon (bikes),
+$v_b$ = bicycle flow rate (bikes/s),
+$v$ = vehicular flow rate (veh/s), and
 $t_{cb}$ = single bicycle critical headway (s).
 
-Group critical headway is determined with Equation $\ref{eq:tcbG}$:
+Bicycle group critical headway is determined with Equation $\ref{eq:tcbG}$:
 $$
-t_{cb,G} = t_{cb} + 2(N_b -1) \label{eq:tcbG}
+t_{cb,G} = t_{cb}+2(N_b -1) \label{eq:tcbG}
 $$
 where
 $t_{cb,G}$ = group critical headway (s),
-$t_c$ = critical headway for a single pedestrian (s), and
-$N_p$ = spatial distribution of pedestrians (ped).
+$t_c$ = critical headway for a single bicycle (s), and
+$N_b$ = spatial distribution of bicycles (bikes).
 
 #### ii. Estimate Probability of a Delayed Crossing
 
+On the basis of calculation of the critical headway $t_G$, the probability that a bicycle will not incur any turning delay is equal to the likelihood that a bicycle will encounter a gap greater than or equal to the critical headway immediately upon arrival at the intersection. Assuming random arrivals of vehicles on the major street, and equal distribution of vehicles among all through lanes on the major street, the probability of encountering a headway exceeding the critical headway in any given lane can be estimated by using a Poisson distribution. The likelihood that a gap in a given lane does not exceed the critical headway is thus the complement as shown in Equation $\ref{eq:Pb}$. Because traffic is assumed to be distributed independently in each through lane, Equation $\ref{eq:Pd}$ shows the probability that a bicycle incurs nonzero delay at a TWSC crossing.
+$$
+\begin{align}
+P_b & = 1 - e^\frac{-t_{cb,G}v_v}{L}\label{eq:Pb}\\
+P_d & = 1 - (1-P_b)^L\label{eq:Pd}
+\end{align}
+$$
+where
+$P_b$ = probability of a blocked lane,
+$P_d$ = probability of a delayed crossing,
+$L$ = number of through lanes crossed,
+$t_{cb,G}$ = group critical headway (s), and
+$v$ = vehicular flow rate (veh/s).
+
 #### iii: Calculate Average Delay to Wait for Adequate Gap
 
+Research indicates that average delay to pedestrians at unsignalized crossings, assuming that no motor vehicles yield and the pedestrian is forced to wait for an adequate gap, depends on the critical headway [cite], the vehicular flow rate of the subject crossing, and the mean vehicle headway. Thus, bicyclists making the same unsignalized crossing are subject to the same delay calculation as for pedestrians. The average delay per bicycle to wait for an adequate gap is given by Equation $\ref{eq:dbg}$.
+$$
+d_{bg} = \frac{1}{v_v} \left( e^{vt_{cb,G}} - v_v t_{cb,G} \right) \label{eq:dbg}
+$$
+where
+$d_bg$ = average bicycle gap delay (s),
+$t_{cb,G}$ = bicycle group critical headway (s), and
+$v$ = vehicular flow rate (veh/s).
+
+The average delay for any pedestrian who is unable to cross immediately upon reaching the intersection (e.g., any pedestrian experiencing nonzero delay) is thus a function of Pd and dg, as shown in Equation $\ref{eq:d_bgd}$:
+$$
+d_{bgd} = \frac{d_{b}}{P_d} \label{eq:d_bgd}
+$$
+where
+$d_{bgd}$ = average gap delay for pedestrians who incur nonzero delay,
+$d_{bg}$ = average pedestrian gap delay (s), and
+$P_d$ = probability of a delayed crossing.
+
 #### iv. Estimate Delay Reduction due to Yielding Vehicles
+
+Although automobiles are generally ***not*** legally required to stop for bicycles, the delay calculation is dominated by Equation $\ref{eq:dbg}$, but vehicles do yield to bicycles nonetheless and should not only be included in the calculation, but encouraged. 
+
+When a bicycle arrives at a crossing and finds an inadequate gap, that pedestrian is delayed until one of two situations occurs: (a) a gap greater than the critical headway is available, or (b) motor vehicles yield and allow the pedestrian to cross. Equation 19‐75 estimates pedestrian delay when motorists on the major approaches do not yield to pedestrians. Where motorist yield rates are significantly higher than zero,  pedestrians will experience considerably less delay than that estimated by Equation 19‐75.
+
+In the United States, motorists are legally required to yield to pedestrians, under most circumstances, in both marked and unmarked crosswalks. However, actual motorist yielding behavior varies considerably. Motorist yield rates are influenced by a range of factors, including roadway geometry, travel speeds, pedestrian crossing treatments, local culture, and law enforcement practices.
+
+Research (11, 12) provides information on motorist responses to typical pedestrian crossing treatments, as shown in Exhibit 19‐17. The exhibit shows results from two separate data collection methods. Staged data were collected with pedestrians trained by the research team to maintain consistent positioning, stance, and aggressiveness in crossing attempts. Unstaged data were collected through video recordings of the general population. The values shown in Exhibit 19‐17 are based on a limited number of sites and do not encompass the full range of available crossing treatments. As always, practitioners should supplement these values with local knowledge and engineering judgment.
+
+It is possible for pedestrians to incur less actual delay than dg because of yielding vehicles. The likelihood of this situation occurring is a function of vehicle volumes, motorist yield rates, and number of through lanes on the major street. Consider a pedestrian waiting for a crossing opportunity at a TWSC intersection, with vehicles in each conflicting through lane arriving every h seconds. On average, a potential yielding event will occur every h seconds, where P(Y) represents the probability of motorists yielding for a given event. As vehicles are assumed to arrive randomly, each potential yielding event is considered to be independent. For any given yielding event, each through lane is in one of two states:
+
+1. Clear—no vehicles are arriving within the critical headway window, or
+2. Blocked—a vehicle is arriving within the critical headway window. The pedestrian may cross only if vehicles in each blocked lane choose to yield. If not, the pedestrian must wait an additional h seconds for the next yielding event. On average, this process will be repeated until the wait exceeds the expected delay required for an adequate gap in traffic (dgd), at which point the average pedestrian will receive an adequate gap in traffic and will be able to cross the street without having to depend on yielding motorists. Thus, average pedestrian delay can be calculated with Equation 19‐77, where the first term in the equation represents expected delay from crossings occurring when motorists yield, and the second term represents expected delay from crossings where pedestrians wait for an adequate gap.
+
+$$
+d_b = \sum\limits^n_{i=1}h(i-0.5) P(Y_i) + \left(P_d - \sum\limits^n_{i=1}P(Y_i) \right) d_{bgd}
+$$
+
+where
+$d_b$ = average pedestrian delay (s),
+$i$ = crossing event (i = 1 to n),
+$h$ = average headway for each through lane,
+$P(Y_i)$ = probability that motorists yield to pedestrian on crossing event i, and
+$n$ = $Int(\frac{d_{bgd}}{h})$, average number of crossing events before an adequate gap is
+available.
+
+Equation 19‐77 requires the calculation of $P(Y_i)$. The probabilities $P(Y_i)$ that motorists will yield for a given crossing event are considered below for pedestrian crossings of one, two, three, and four through lanes.
+
+##### *One-Lane Crossing*
+
+Under the scenario in which a pedestrian crosses one through lane, P(Yi) is found simply. When i = 1, P(Yi) is equal to the probability of a delayed crossing Pd multiplied by the motorist yield rate, My. For i = 2, P(Yi) is equal to My multiplied by the probability that the second yielding event occurs (i.e., that the pedestrian did not cross on the first yielding event), Pd *(1 – My). Equation 19‐78 gives P(Yi) for any i.
+$$
+P(Y_i) = P_d M_y (1-M_y)^{i-1}
+$$
+where
+$M_y$ = motorist yield rate (decimal), and
+$i$ = crossing event ($i$ = 1 to $n$).
+
+##### *Two-Lane Crossing*
+For a two‐lane pedestrian crossing at a TWSC intersection, P(Yi) requires either (a) motorists in both lanes to yield simultaneously if both lanes are blocked, or (b) a single motorist to yield if only one lane is blocked. Because these cases are mutually exclusive, where i = 1, P(Yi) is equal to Equation 19‐79:
+$$
+P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{2P_b(1-P_b)M_y + P_b^2 M_y^2 }{P_d} \right]
+$$
+where $P(Y_0)=0$
+
+##### *Three-Lane Crossing*
+
+A three‐lane crossing follows the same principles as a two‐lane crossing. Equation 19‐81 shows the calculation for P(Yi):
+$$
+P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{P_b^3 M_y^3 + 3P_b^2(1-P_b)M_y^2 + 3P_b(1-P_b)^2 M_y}{P_d} \right]
+$$
+where $P(Y_0)$ = 0.
+
+##### *Four-Lane Crossing*
+A four‐lane crossing follows the same principles as above. Equation 19‐82 shows the calculation for $P(Y_i)$:
+$$
+P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{P_b^4 M_y^4 + 4P_b^3(1-P_b)M_y^3 + 6P_b^2(1-P_b)^2 M_y^2 + 4P_b(1-P_b^3)M_y}{P_d} \right]
+$$
+where $P(Y_0)$ = 0.
+
+#### v. Calculate Average Pedestrian Delay and Determine LOS
+
+The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
