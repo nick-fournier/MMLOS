@@ -1,3 +1,5 @@
+<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
+
 # BICYCLE MODE 
 
 > - The following bicycle delay calculation for non-STOP controlled intersections has been modified from the Highway Capacity Manual's pedestrian methodology for two-way stop-controlled intersections. 
