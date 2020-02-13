@@ -59,6 +59,7 @@ The main issue to determine the appropriate turning maneuver. While a small perc
 When bicycles make a two-phased left, bicycle delay should be estimated separately for each stage of the crossing by using the procedures described in Steps 2 to 6. To determine bicycle LOS, the bicycle delay for each stage should be summed in addition to the signal delay to establish the average bicycle delay associated with the entire crossing. This service measure is used to determine bicycle LOS for a signalized intersection with two‐stage crossings.
 
 ### A: Identify Left Turn Maneuvers
+
 At signalized intersections, bicycles typically perform a left turn using one of two maneuvers.
 
 - **Single-phased permissive left using acceptable gaps in traffic.**
@@ -73,6 +74,7 @@ At signalized intersections, bicycles typically perform a left turn using one of
 ### C: Determine Two-Phase Left-Turn Delay
 
 #### i. Determine Critical Headway
+
 The procedure for estimating the critical headway is similar to that described Critical headway for pedestrians. for automobiles. The critical headway is the time in seconds below which a pedestrian will not attempt to begin crossing the street. Pedestrians use their judgment to determine whether the available headway between conflicting vehicles is long enough for a safe crossing. If the available headway is greater than the critical headway, it is assumed that the pedestrian will cross, but if the available headway is less than the critical headway, it is assumed that the pedestrian will not cross.
 
 $$
@@ -190,6 +192,10 @@ $M_y$ = motorist yield rate (decimal), and
 $i$ = crossing event ($i$ = 1 to $n$).
 
 ##### *Two-Lane Crossing*
+<<<<<<< HEAD
+=======
+
+>>>>>>> 84e107513e912f186e71d21c7c1789c21f2a612f
 For a two‐lane pedestrian crossing at a TWSC intersection, P(Yi) requires either (a) motorists in both lanes to yield simultaneously if both lanes are blocked, or (b) a single motorist to yield if only one lane is blocked. Because these cases are mutually exclusive, where i = 1, P(Yi) is equal to Equation 19‐79:
 $$
 P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{2P_b(1-P_b)M_y + P_b^2 M_y^2 }{P_d} \right]
@@ -205,6 +211,10 @@ $$
 where $P(Y_0)$ = 0.
 
 ##### *Four-Lane Crossing*
+<<<<<<< HEAD
+=======
+
+>>>>>>> 84e107513e912f186e71d21c7c1789c21f2a612f
 A four‐lane crossing follows the same principles as above. Equation 19‐82 shows the calculation for $P(Y_i)$:
 $$
 P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{P_b^4 M_y^4 + 4P_b^3(1-P_b)M_y^3 + 6P_b^2(1-P_b)^2 M_y^2 + 4P_b(1-P_b^3)M_y}{P_d} \right]
@@ -213,4 +223,8 @@ where $P(Y_0)$ = 0.
 
 #### v. Calculate Average Pedestrian Delay and Determine LOS
 
+<<<<<<< HEAD
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
+=======
+The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
+>>>>>>> 84e107513e912f186e71d21c7c1789c21f2a612f
