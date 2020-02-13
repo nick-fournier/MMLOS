@@ -192,10 +192,7 @@ $M_y$ = motorist yield rate (decimal), and
 $i$ = crossing event ($i$ = 1 to $n$).
 
 ##### *Two-Lane Crossing*
-<<<<<<< HEAD
-=======
 
->>>>>>> 84e107513e912f186e71d21c7c1789c21f2a612f
 For a two‐lane pedestrian crossing at a TWSC intersection, P(Yi) requires either (a) motorists in both lanes to yield simultaneously if both lanes are blocked, or (b) a single motorist to yield if only one lane is blocked. Because these cases are mutually exclusive, where i = 1, P(Yi) is equal to Equation 19‐79:
 $$
 P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{2P_b(1-P_b)M_y + P_b^2 M_y^2 }{P_d} \right]
@@ -211,10 +208,7 @@ $$
 where $P(Y_0)$ = 0.
 
 ##### *Four-Lane Crossing*
-<<<<<<< HEAD
-=======
 
->>>>>>> 84e107513e912f186e71d21c7c1789c21f2a612f
 A four‐lane crossing follows the same principles as above. Equation 19‐82 shows the calculation for $P(Y_i)$:
 $$
 P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{P_b^4 M_y^4 + 4P_b^3(1-P_b)M_y^3 + 6P_b^2(1-P_b)^2 M_y^2 + 4P_b(1-P_b^3)M_y}{P_d} \right]
@@ -223,8 +217,4 @@ where $P(Y_0)$ = 0.
 
 #### v. Calculate Average Pedestrian Delay and Determine LOS
 
-<<<<<<< HEAD
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
-=======
-The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
->>>>>>> 84e107513e912f186e71d21c7c1789c21f2a612f
