@@ -282,11 +282,6 @@ P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{P_b^4 M_
 $$
 where $P(Y_0)$ = 0.
 
-
-
-
-
-
 ### C: Determine two-stage Left-Turn Delay
 
 Two-stage left turns may be computed as
@@ -295,15 +290,15 @@ $$
 d_{bL2} = [ d_{1,R1}P_{R1} + d_{1,G1}(1-P_{R1}) ]_1 + [ d_{2,R1}P_{R1} + d_{2,G1}(1-P_{R1})]_2
 $$
 
-$$
-d_{bL2} = \left[ d_{1,R1}P_{R1} + d_{1,G1}(1-P_{R1}) ]_1 + [ d_{2,R1}P_{R1} + d_{2,G1}(1-P_{R1})\right]_2
-$$
-
 where
 $d_{bL2}$ = bicycle delay for two-stage left turn (s/bike),
+
 $d_{1,R1}$ = delay for stage 1, given arrival is during a red phase (s/bike),
+
 $d_{1,G1}$ = delay for stage 1, given arrival is during a green phase (s/bike),
+
 $d_{2,R1}$ = delay on median for stage 2, given arrival is during a Don’t Walk indication at corner (s/p),
+
 $d_{2,G1}$ = delay on median for stage 2, given arrival is during the Walk indication at corner (s/p), and
 $P_{R1}$ = proportion of arrivals during a Don’t Walk indication at corner (s/p).
 
@@ -323,7 +318,7 @@ $$
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAyNDUwODQ5OCwyMDI1MTI1NjMzLDIxOT
+eyJoaXN0b3J5IjpbMjA0NzY4MzU5NywyMDI1MTI1NjMzLDIxOT
 QyNDE2OCwtNTE0MTM5MDk0LDE4Nzg1MDEwNSwyMTUwNDU4MTgs
 LTEyOTcwMTMzNywtMTc1MjU2MTk2NSwtMTQxNDE4MzUzOCwxMz
 U5Njg2NDMyLC0xNTYzODA3MjgyXX0=
