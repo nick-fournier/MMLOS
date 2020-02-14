@@ -307,11 +307,13 @@ $P_{R1}$ = proportion of arrivals during a Don’t Walk indication at corner (s/
 
 
 $$
-d_b = d_{bS} + P_L*\frac{g_c}{Cycletime}*(PropOneStage*d_{b1} + PropTwoStage*d_{b2}) 
+d_b = d_{bS} + P_L \frac{g_c}{C} (P_{L1}*d_{b1} + P_{LPropTwoStage*d_{b2}) 
 $$
 where
-$P_L$ = the proportion of left turning bicycles
-$g_c$ = the effective green time of the bicycle lane
+$P_L$ = the proportion of left turning bicycles,
+$P_{L1}$ = the proportion of left turning bicycles using one-stage maneuver,
+$P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver,
+$g_c$ = the effective green time of the bicycle lane,
 $C$ = cycle time
 
 
@@ -319,10 +321,10 @@ $C$ = cycle time
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTk1MTgwOTMxLC00NTcyNTQyMTAsNDY4MT
-YwOTUsLTU3MTMzNTU5NywtMTM0ODk0NDczNSwtNTk3NTQ1Njc5
-LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC01MTQxMzkwOTQsMTg3OD
-UwMTA1LDIxNTA0NTgxOCwtMTI5NzAxMzM3LC0xNzUyNTYxOTY1
-LC0xNDE0MTgzNTM4LDEzNTk2ODY0MzIsLTE1NjM4MDcyODJdfQ
-==
+eyJoaXN0b3J5IjpbLTExOTQ4ODU1MjEsLTQ1NzI1NDIxMCw0Nj
+gxNjA5NSwtNTcxMzM1NTk3LC0xMzQ4OTQ0NzM1LC01OTc1NDU2
+NzksMjAyNTEyNTYzMywyMTk0MjQxNjgsLTUxNDEzOTA5NCwxOD
+c4NTAxMDUsMjE1MDQ1ODE4LC0xMjk3MDEzMzcsLTE3NTI1NjE5
+NjUsLTE0MTQxODM1MzgsMTM1OTY4NjQzMiwtMTU2MzgwNzI4Ml
+19
 -->
