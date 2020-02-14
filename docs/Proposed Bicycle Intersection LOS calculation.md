@@ -73,7 +73,9 @@ Signalized intersection bicycle delay is computed with:
 $$
 d_{bS} = \frac{0.5(1-\frac{g_b}{C})^2}{1 - min\left[\frac{v_{bic}}{c_b},1.0\right]\frac{g_b}{C}}
 $$
-where $d_{bS}$ is bicycle delay (s/bicycle) from the signal itself, $v_{bic}$ is bicycle flow rate (bicycles/h), and other variables are as previously defined.
+where
+$d_{bS}$ is bicycle delay (s/bicycle) from the signal itself,
+$v_{bic}$ is bicycle flow rate (bicycles/h), and other variables are as previously defined.
 
 This delay equation is based on the assumption that there is no bicycle incremental delay or initial queue delay. Bicyclists will not normally tolerate an oversaturated condition and will select other routes or ignore traffic regulations to avoid the associated delays.
 
@@ -305,17 +307,22 @@ $P_{R1}$ = proportion of arrivals during a Don’t Walk indication at corner (s/
 
 
 $$
-d_b = d_{bS} + PropLeft*\frac{GreenTime}{Cycletime}*(PropOneStage*d_{b1} + PropTwoStage*d_{b2}) 
+d_b = d_{bS} + P_L*\frac{g_c}{Cycletime}*(PropOneStage*d_{b1} + PropTwoStage*d_{b2}) 
 $$
+where
+$P_L$ = the proportion of left turning bicycles
+$g_c$ = the effective green time of the bicycle lane
+$C$ = cycle time
 
 
 
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ1NzI1NDIxMCw0NjgxNjA5NSwtNTcxMz
-M1NTk3LC0xMzQ4OTQ0NzM1LC01OTc1NDU2NzksMjAyNTEyNTYz
-MywyMTk0MjQxNjgsLTUxNDEzOTA5NCwxODc4NTAxMDUsMjE1MD
-Q1ODE4LC0xMjk3MDEzMzcsLTE3NTI1NjE5NjUsLTE0MTQxODM1
-MzgsMTM1OTY4NjQzMiwtMTU2MzgwNzI4Ml19
+eyJoaXN0b3J5IjpbNTk1MTgwOTMxLC00NTcyNTQyMTAsNDY4MT
+YwOTUsLTU3MTMzNTU5NywtMTM0ODk0NDczNSwtNTk3NTQ1Njc5
+LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC01MTQxMzkwOTQsMTg3OD
+UwMTA1LDIxNTA0NTgxOCwtMTI5NzAxMzM3LC0xNzUyNTYxOTY1
+LC0xNDE0MTgzNTM4LDEzNTk2ODY0MzIsLTE1NjM4MDcyODJdfQ
+==
 -->
