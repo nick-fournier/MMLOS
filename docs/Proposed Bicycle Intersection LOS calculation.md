@@ -69,7 +69,7 @@ The effective green time for the bicycle lane can be assumed to equal that for t
 ### *B. Compute Bicycle Delay*
 
 
-Signalized intersection bicycle delay is computed with Equation $\ref{eq:dbsignal}$.
+Signalized intersection bicycle delay is computed with:
 $$
 d_{bS} = \frac{0.5(1-\frac{g_b}{C})^2}{1 - min\left[\frac{v_{bic}}{c_b},1.0\right]\frac{g_b}{C}}
 $$
@@ -322,8 +322,8 @@ $$
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjE5NDI0MTY4LC01MTQxMzkwOTQsMTg3OD
-UwMTA1LDIxNTA0NTgxOCwtMTI5NzAxMzM3LC0xNzUyNTYxOTY1
-LC0xNDE0MTgzNTM4LDEzNTk2ODY0MzIsLTE1NjM4MDcyODJdfQ
-==
+eyJoaXN0b3J5IjpbNTk0MTQwNDcxLDIxOTQyNDE2OCwtNTE0MT
+M5MDk0LDE4Nzg1MDEwNSwyMTUwNDU4MTgsLTEyOTcwMTMzNywt
+MTc1MjU2MTk2NSwtMTQxNDE4MzUzOCwxMzU5Njg2NDMyLC0xNT
+YzODA3MjgyXX0=
 -->
