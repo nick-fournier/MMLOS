@@ -101,7 +101,8 @@ When bicycles make a two-staged left, bicycle delay should be estimated separate
 
 
 At signalized intersections, bicycles typically perform a left turn using one of two maneuvers.
-![left turn image](https://raw.githubusercontent.com/nick-fournier/complete-streets-los/master/docs/Bike-left-turn-conflicts.svg)
+<img src = "https://raw.githubusercontent.com/nick-fournier/complete-streets-los/master/docs/Bike-left-turn-conflicts.svg">
+
 
 - **Single-phased permissive left using acceptable gaps in traffic.**
   Calculation of delay in this case is analogous to a pedestrian crossing at a TWSC intersection where delay is encountered when waiting for an acceptable gap in each traffic lane crossed. These maneuvers are typically performed at most intersections with small or moderate traffic volumes. Even upstream mixing lanes or centerline left turn lanes (e.g., Scott St. between Fell St. and Oak St. in San Francisco) still require a bicyclist to cross a lane of traffic before making a permissive left. Mitigation of this includes advanced bicycle/pedestrian signal phasing or two-staged left turn maneuvers.
@@ -311,8 +312,9 @@ $$
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNDg5NDQ3MzUsLTU5NzU0NTY3OSwyMD
-I1MTI1NjMzLDIxOTQyNDE2OCwtNTE0MTM5MDk0LDE4Nzg1MDEw
-NSwyMTUwNDU4MTgsLTEyOTcwMTMzNywtMTc1MjU2MTk2NSwtMT
-QxNDE4MzUzOCwxMzU5Njg2NDMyLC0xNTYzODA3MjgyXX0=
+eyJoaXN0b3J5IjpbMTY0NTIxOTIzNiwtMTM0ODk0NDczNSwtNT
+k3NTQ1Njc5LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC01MTQxMzkw
+OTQsMTg3ODUwMTA1LDIxNTA0NTgxOCwtMTI5NzAxMzM3LC0xNz
+UyNTYxOTY1LC0xNDE0MTgzNTM4LDEzNTk2ODY0MzIsLTE1NjM4
+MDcyODJdfQ==
 -->
