@@ -290,8 +290,9 @@ where $P(Y_0)$ = 0.
 ### C: Determine two-stage Left-Turn Delay
 
 Two-stage left turns may be computed as
+
 $$
-d_{bL2} = [ d_{1,R1}P_{R1} + d_{1,G1}(1-P_{R1}) ]_1 + [ d_{2,R1}P_{R1} + d_{2,G1}(1-P_{R1})]_2 
+d_{bL2} = \left[ d_{1,R1}P_{R1} + d_{1,G1}(1-P_{R1}) ]_1 + [ d_{2,R1}P_{R1} + d_{2,G1}(1-P_{R1})\right]_2
 $$
 
 where
@@ -318,8 +319,8 @@ $$
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MjE0ODQ1MTUsMjAyNTEyNTYzMywyMT
-k0MjQxNjgsLTUxNDEzOTA5NCwxODc4NTAxMDUsMjE1MDQ1ODE4
-LC0xMjk3MDEzMzcsLTE3NTI1NjE5NjUsLTE0MTQxODM1MzgsMT
-M1OTY4NjQzMiwtMTU2MzgwNzI4Ml19
+eyJoaXN0b3J5IjpbLTE1MjA2NTM5MCwyMDI1MTI1NjMzLDIxOT
+QyNDE2OCwtNTE0MTM5MDk0LDE4Nzg1MDEwNSwyMTUwNDU4MTgs
+LTEyOTcwMTMzNywtMTc1MjU2MTk2NSwtMTQxNDE4MzUzOCwxMz
+U5Njg2NDMyLC0xNTYzODA3MjgyXX0=
 -->
