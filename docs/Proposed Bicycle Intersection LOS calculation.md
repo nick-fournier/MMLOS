@@ -52,11 +52,11 @@ subject bicycle lane (i.e., $g_b = D_p – l_1 – l_2$).
 
 ### *B. Compute Bicycle Delay*
 
-Bicycle delay is computed with Equation $\ref{eq:dbsignal}$.
+Signalized intersection bicycle delay is computed with Equation $\ref{eq:dbsignal}$.
 $$
-d_b = \frac{0.5(1-\frac{g_b}{C})^2}{1 - min\left[\frac{v_{bic}}{c_b},1.0\right]\frac{g_b}{C}} \label{eq:dbsignal}
+d_{bS} = \frac{0.5(1-\frac{g_b}{C})^2}{1 - min\left[\frac{v_{bic}}{c_b},1.0\right]\frac{g_b}{C}} \label{eq:dbsignal}
 $$
-where $d_b$ is bicycle delay (s/bicycle), $v_{bic}$ is bicycle flow rate (bicycles/h), and other variables are as previously defined.
+where $d_{bS}$ is bicycle delay (s/bicycle) from the signal itself, $v_{bic}$ is bicycle flow rate (bicycles/h), and other variables are as previously defined.
 
 This delay equation is based on the assumption that there is no bicycle incremental delay or initial queue delay. Bicyclists will not normally tolerate an oversaturated condition and will select other routes or ignore traffic regulations to avoid the associated delays.
 
@@ -76,10 +76,7 @@ When bicycles make a two-staged left, bicycle delay should be estimated separate
 
 At signalized intersections, bicycles typically perform a left turn using one of two maneuvers.
 
-![alt text](https://github.com/nick-fournier/complete-streets-los/blob/master/docs/Bike-left-turn-conflicts.svg "Logo Title Text 1")
-
-
-
+<img src="./bike-left-turn-conflicts.svg" width="600">
 
 - **Single-phased permissive left using acceptable gaps in traffic.**
   Calculation of delay in this case is analogous to a pedestrian crossing at a TWSC intersection where delay is encountered when waiting for an acceptable gap in each traffic lane crossed. These maneuvers are typically performed at most intersections with small or moderate traffic volumes. Even upstream mixing lanes or centerline left turn lanes (e.g., Scott St. between Fell St. and Oak St. in San Francisco) still require a bicyclist to cross a lane of traffic before making a permissive left. Mitigation of this includes advanced bicycle/pedestrian signal phasing or two-staged left turn maneuvers.
@@ -87,10 +84,6 @@ At signalized intersections, bicycles typically perform a left turn using one of
   Delay calculation for this maneuver is analogous to two-staged (diagonal) pedestrian crossing. These maneuvers are typically performed at larger intersections with high volume and/or multiple traffic lanes that makes permissive left turns difficult or impossible to perform safely. Infrastructure such as "left-turn queue boxes" and "protected intersections" attempt to encourage this maneuver. 
 
 ### B: Determine Single-Phase Left-Turn Delay
-
-
-
-### C: Determine two-stage Left-Turn Delay
 
 #### i. Determine Critical Headway
 
@@ -153,7 +146,7 @@ $v$ = vehicular flow rate (veh/s).
 
 #### iii: Calculate Average Delay to Wait for Adequate Gap
 
-Research indicates that average delay to pedestrians at unsignalized crossings, assuming that no motor vehicles yield and the pedestrian is forced to wait for an adequate gap, depends on the critical headway [cite], the vehicular flow rate of the subject crossing, and the mean vehicle headway. Thus, bicyclists making the same unsignalized crossing are subject to the same delay calculation as for pedestrians. The average delay per bicycle to wait for an adequate gap is given by Equation $\ref{eq:dbg}$.
+Assuming that no motor vehicles yield and the bicycle is forced to wait for an adequate gap, depends on the critical headway, the vehicular flow rate of the subject crossing, and the mean vehicle headway. Thus, bicyclists making the a left turn crossing are subject to the same delay calculation as for pedestrians making a crossing uncontrolled intersection approaches. The average delay per bicycle to wait for an adequate gap is given by Equation $\ref{eq:dbg}$.
 $$
 d_{bg} = \frac{1}{v_v} \left( e^{vt_{cb,G}} - v_v t_{cb,G} -1 \right) \label{eq:dbg}
 $$
@@ -162,13 +155,13 @@ $d_bg$ = average bicycle gap delay (s),
 $t_{cb,G}$ = bicycle group critical headway (s), and
 $v$ = vehicular flow rate (veh/s).
 
-The average delay for any pedestrian who is unable to cross immediately upon reaching the intersection (e.g., any pedestrian experiencing nonzero delay) is thus a function of Pd and dg, as shown in Equation $\ref{eq:d_bgd}$:
+The average delay for any bicycle who is unable to cross immediately upon reaching the intersection (e.g., any pedestrian experiencing nonzero delay) is thus a function of $P_d$ and $d_g$, as shown in Equation $\ref{eq:d_bgd}$:
 $$
 d_{bgd} = \frac{d_{b}}{P_d} \label{eq:d_bgd}
 $$
 where
-$d_{bgd}$ = average gap delay for pedestrians who incur nonzero delay,
-$d_{bg}$ = average pedestrian gap delay (s), and
+$d_{bgd}$ = average gap delay for bicycles who incur nonzero delay,
+$d_{bg}$ = average bicycle gap delay (s), and
 $P_d$ = probability of a delayed crossing.
 
 #### iv. Estimate Delay Reduction due to Yielding Vehicles
@@ -190,11 +183,11 @@ On average, a potential yielding event will occur every $h$ seconds, where $P(Y)
 2. Blocked—a vehicle is arriving within the critical headway window. The bicycle may cross only if vehicles in each blocked lane choose to yield. If not, the bicycle must wait an additional $h$ seconds for the next yielding event. On average, this process will be repeated until the wait exceeds the expected delay required for an adequate gap in traffic ($d_{bgd}$), at which point the average bicycle will receive an adequate gap in traffic and will be able to cross the street without having to depend on yielding motorists. Thus, average bicycle delay can be calculated with Equation $\ref{eq:dbtwostage}$, where the first term in the equation represents expected delay from crossings occurring when motorists yield, and the second term represents expected delay from crossings where pedestrians wait for an adequate gap.
 
 $$
-d_b = \sum\limits^n_{i=0}h(i-0.5) P(Y_i) + \left(P_d - \sum\limits^n_{i=0}P(Y_i) \right) d_{bgd} \label{eq:dbtwostage}
+d_{bL} = \sum\limits^n_{i=0}h(i-0.5) P(Y_i) + \left(P_d - \sum\limits^n_{i=0}P(Y_i) \right) d_{bgd} \label{eq:dbtwostage}
 $$
 
 where
-$d_b$ = average pedestrian delay (s),
+$d_{bL}$ = average bicycle delay when turning left (s),
 $i$ = crossing event ($i = 1$ to $n$),
 $h$ = average headway for each through lane,
 $P(Y_i)$ = probability that motorists yield to pedestrian on crossing event i, and
@@ -205,7 +198,7 @@ Equation $\ref{eq:dbtwostage}$ requires the calculation of $P(Y_i)$. The probabi
 
 ##### *One-Lane Crossing*
 
-Under the scenario in which a pedestrian crosses one through lane, P(Yi) is found simply. When i = 1, P(Yi) is equal to the probability of a delayed crossing Pd multiplied by the motorist yield rate, My. For i = 2, P(Yi) is equal to My multiplied by the probability that the second yielding event occurs (i.e., that the pedestrian did not cross on the first yielding event), Pd *(1 – My). Equation 19‐78 gives P(Yi) for any i.
+Under the scenario in which a bicycle crosses one lane, $P(Y_i)$ is found simply. When $i = 1$, $P(Y_i)$ is equal to the probability of a delayed crossing $P_d$ multiplied by the motorist yield rate, $M_y$. For $i = 2$, $P(Y_i)$ is equal to $M_y$ multiplied by the probability that the second yielding event occurs (i.e., that the bicycle did not cross on the first yielding event). For any $i$.
 $$
 P(Y_i) = P_d M_y (1-M_y)^{i-1}
 $$
@@ -215,7 +208,7 @@ $i$ = crossing event ($i$ = 1 to $n$).
 
 ##### *Two-Lane Crossing*
 
-For a two‐lane pedestrian crossing at a TWSC intersection, P(Yi) requires either (a) motorists in both lanes to yield simultaneously if both lanes are blocked, or (b) a single motorist to yield if only one lane is blocked. Because these cases are mutually exclusive, where i = 1, P(Yi) is equal to Equation 19‐79:
+For a two‐lane (one in each direction) bicycle left turn crossing, $P(Y_i)$ requires either (a) motorists in both lanes to yield simultaneously if both lanes are blocked, or (b) a single motorist to yield if only one lane is blocked. Because these cases are mutually exclusive, where $i = 1$, $P(Y_i)$ is equal to:
 $$
 P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{2P_b(1-P_b)M_y + P_b^2 M_y^2 }{P_d} \right]
 $$
@@ -223,7 +216,7 @@ where $P(Y_0)=0$
 
 ##### *Three-Lane Crossing*
 
-A three‐lane crossing follows the same principles as a two‐lane crossing. Equation 19‐81 shows the calculation for P(Yi):
+A three‐lane crossing follows the same principles as a two‐lane crossing. The calculation for P(Yi) with three lanes is:
 $$
 P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{P_b^3 M_y^3 + 3P_b^2(1-P_b)M_y^2 + 3P_b(1-P_b)^2 M_y}{P_d} \right]
 $$
@@ -231,12 +224,36 @@ where $P(Y_0)$ = 0.
 
 ##### *Four-Lane Crossing*
 
-A four‐lane crossing follows the same principles as above. Equation 19‐82 shows the calculation for $P(Y_i)$:
+A four‐lane crossing follows the same principles as above. The calculation for $P(Y_i)$ with four-lanes is:
 $$
 P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{P_b^4 M_y^4 + 4P_b^3(1-P_b)M_y^3 + 6P_b^2(1-P_b)^2 M_y^2 + 4P_b(1-P_b^3)M_y}{P_d} \right]
 $$
 where $P(Y_0)$ = 0.
 
-## Step. 3: Calculate Average Pedestrian Delay and Determine LOS
+
+
+### C: Determine two-stage Left-Turn Delay
+
+
+$$
+d_p = [ d_{1,R1}P_{R1} + d_{1,G1}(1-P_{R1}) ]_1 + [ d_{2,R1}P_{R1} + d_{2,G1}(1-P_{R1})]_2 
+$$
+where
+dp = pedestrian delay (s/p);
+d1,DW1 = delay at corner for stage 1, given arrival is during a Don’t Walk indication at corner (s/p);
+d1,W1 = delay at corner for stage 1, given arrival is during the Walk indication at corner (s/p);
+d2,DW1 = delay on median for stage 2, given arrival is during a Don’t Walk indication at corner (s/p);
+d2,W1 = delay on median for stage 2, given arrival is during the Walk indication at corner (s/p); and
+PDW1 = proportion of arrivals during a Don’t Walk indication at corner (s/p).
+
+
+
+## Step. 3: Calculate Average Bicycle Delay and Determine LOS
+
+
+$$
+d_b = d_{bS} + PropLeft*\frac{GreenTime}{Cycletime}*(PropOneStage*d_{b1} + PropTwoStage*d_{b2}) 
+$$
+
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
