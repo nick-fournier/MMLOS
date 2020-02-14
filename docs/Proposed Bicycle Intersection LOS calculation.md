@@ -1,23 +1,37 @@
-# BICYCLE MODE 
+# BICYCLE MODE SIGNALIZED INTERSECTION LOS
 
 > - The following bicycle delay calculation methodology is a modified from the HCM's two-way STOP-controlled intersection delay and from the Kittelson & Associates, Inc. NCHRP Project 17-876 Working Paper "Model for Predicting the Pedestrian Delay at Signalized Intersections". 
 > - The reasoning being that a left turning bicyclist experiences similar delay due to gap acceptance that a pedestrian would when crossing the uncontrolled approaches of a TWSC intersection, and that a two-stage left turn for a bicycle is the same as a pedestrian's two-stage turn when trying to move  diagonally across an intersection. Thus, the delay calculations are analogous with modification.
 
-Although bicycles may experience some amount of queuing in locations of particularly high bicycle usage, bicycle delay is largely unaffected by capacity at present bicycle usage levels in the United States. The primary source of bicycle delay, *in addition to signal delay*, is due to left-turn maneuvers at intersections, lane blockage by automobiles, and crossing two-way STOP-controlled (TWSC) intersections. Thus the calculation of intersection delay for bicycles will be performed by:
+Although bicycles may experience some amount of queuing in locations of particularly high bicycle usage, bicycle delay is largely unaffected by capacity at present bicycle usage levels in the United States. The primary source of bicycle delay, *in addition to signal delay*, is due to left-turn maneuvers at intersections, lane blockage by automobiles, and crossing two-way STOP-controlled (TWSC) intersections. Thus the calculation of intersection delay for bicycles will be performed using the following proposed steps:
 
-1. Calculate Signal Delay
-2. Determine appropriate left-turn maneuver, or proportion of each.
-3. Calculate left-turn delay.
-4. Calculate average delay from signal delay and left-turn delay.
-5. Determine Bicycle LOS Score for Intersection
-6. Determine LOS.
+1. Determine Signal Delay for Through Maneuvers
 
-If no control, calculate using TWSC intersection delay. If stop controlled, intersection delay is 0.
+2. Determine Left-Turn Maneuver Delay
 
-## Step 1: Determine Signal Delay
+   a. Identify left-turn maneuver
 
-This step describes a procedure for evaluating the performance of one intersection approach. It is repeated for each approach of interest. Bicycle delay can be calculated only for intersection approaches that have an on‐street bicycle lane or a shoulder that can be used by bicyclists as a bicycle lane. Bicyclists who
-share a lane with automobile traffic will incur the same delay as the automobiles.
+   b. Determine single-phase turn delay
+
+   c. Determine two-stage turn delay
+
+   ​	i.  Determine Critical Headway
+
+   ​	ii. Estimate Probability of a Delayed Crossing
+
+   ​	iii. Calculate Average Delay to Wait for Adequate Gap
+
+   ​	iv. Estimate Delay Reduction due to Yielding Vehicles
+
+   ​	v. Calculate Average Pedestrian Delay and Determine LOS
+
+3. Determine average intersection Delay and Bicycle LOS Score for Intersection
+
+*If no control, use TWSC intersection delay. If stop controlled, intersection delay is 0.
+
+## Step 1: Determine Signal Delay for Through Maneuvers
+
+This step describes a procedure for evaluating the performance of one intersection approach. It is repeated for each approach of interest. Bicycle delay can be calculated only for intersection approaches that have an on‐street bicycle lane or a shoulder that can be used by bicyclists as a bicycle lane. Bicyclists who share a lane with automobile traffic will incur the same delay as the automobiles.
 
 ### *A. Compute Bicycle Lane Capacity*
 
@@ -38,40 +52,40 @@ subject bicycle lane (i.e., $g_b = D_p – l_1 – l_2$).
 
 ### *B. Compute Bicycle Delay*
 
-Bicycle delay is computed with Equation $\ref{eq:db}$.
+Bicycle delay is computed with Equation $\ref{eq:dbsignal}$.
 $$
-d_b = \frac{0.5(1-\frac{g_b}{C})^2}{1 - min\left[\frac{v_{bic}}{c_b},1.0\right]\frac{g_b}{C}} \label{eq:db}
+d_b = \frac{0.5(1-\frac{g_b}{C})^2}{1 - min\left[\frac{v_{bic}}{c_b},1.0\right]\frac{g_b}{C}} \label{eq:dbsignal}
 $$
 where $d_b$ is bicycle delay (s/bicycle), $v_{bic}$ is bicycle flow rate (bicycles/h), and other variables are as previously defined.
 
 This delay equation is based on the assumption that there is no bicycle incremental delay or initial queue delay. Bicyclists will not normally tolerate an oversaturated condition and will select other routes or ignore traffic regulations to avoid the associated delays.
 
-At most signalized intersections, the only delay to through bicycles is caused by the signal, because bicycles have the right‐of‐way over right‐turning vehicles during the green indication. Bicycle delay could be longer than that obtained from Equation $\ref{eq:db}$ when (a) bicycles are forced to weave with right‐turning traffic during the green indication, or (b) drivers do not acknowledge the bicycle right‐of‐way because of high flows of right‐turning vehicles. 
+At most signalized intersections, the only delay to through bicycles is caused by the signal, because bicycles have the right‐of‐way over right‐turning vehicles during the green indication. Bicycle delay could be longer than that obtained from Equation $\ref{eq:dbsignal}$ when (a) bicycles are forced to weave with right‐turning traffic during the green indication, or (b) drivers do not acknowledge the bicycle right‐of‐way because of high flows of right‐turning vehicles. 
 
-The delay obtained from Equation $\ref{eq:db}$ can be used to make some judgment about intersection performance. Bicyclists tend to have about the same tolerance for delay as pedestrians. They tend to become impatient when they experience a delay in excess of 30 s/bicycle. In contrast, they are very likely to comply with the signal indication if their expected delay is less than 10 s/bicycle.
+The delay obtained from Equation $\ref{eq:dbsignal}$ can be used to make some judgment about intersection performance. Bicyclists tend to have about the same tolerance for delay as pedestrians. They tend to become impatient when they experience a delay in excess of 30 s/bicycle. In contrast, they are very likely to comply with the signal indication if their expected delay is less than 10 s/bicycle.
 
 
 
-## Step 2: Determine Intersection Delay
+## Step 2: Determine Left-Turn Maneuver Delay
 
-The main issue to determine the appropriate turning maneuver. While a small percentage of "strong and fearless" [cite] bicyclists may feel comfortable performing a single-phased left turn even at large intersections, this does not represent the majority of "concerned" bicyclists. Most bicyclists may perform a two-phased  turn at large or busy intersections, some may even transition to a pedestrian to make the crossing, but this transition will incur significant additional delay and inconvenience. 
+The main issue to determine the appropriate turning maneuver. While a small percentage of "strong and fearless" (Dill and McNeil, 2013) bicyclists may feel comfortable performing a single-phased left turn even at large intersections, this does not represent the majority of "concerned" bicyclists. Most bicyclists however, may perform a two-staged turn at large or busy intersections. Some bicyclists may even transition to a pedestrian to make uncomfortable crossings, but this transition will incur significant additional delay and inconvenience. 
 
-When bicycles make a two-phased left, bicycle delay should be estimated separately for each stage of the crossing by using the procedures described in Steps 2 to 6. To determine bicycle LOS, the bicycle delay for each stage should be summed in addition to the signal delay to establish the average bicycle delay associated with the entire crossing. This service measure is used to determine bicycle LOS for a signalized intersection with two‐stage crossings.
+When bicycles make a two-staged left, bicycle delay should be estimated separately for each stage of the crossing by using the procedures described in Step 2.C. To determine bicycle LOS, the bicycle delay for each stage should be summed in addition to the signal delay to establish the average bicycle delay associated with the entire crossing. This service measure is used to determine bicycle LOS for a signalized intersection with two‐stage crossings.
 
 ### A: Identify Left Turn Maneuvers
 
 At signalized intersections, bicycles typically perform a left turn using one of two maneuvers.
 
 - **Single-phased permissive left using acceptable gaps in traffic.**
-  Calculation of delay in this case is analogous to a pedestrian crossing at a TWSC intersection where delay is encountered when waiting for an acceptable gap in each traffic lane crossed. These maneuvers are typically performed at most intersections with small or moderate traffic volumes. Even upstream mixing lanes or centerline left turn lanes (e.g., Scott St. between Fell St. and Oak St. in San Francisco) still require a bicyclist to cross a lane of traffic before making a permissive left. Mitigation of this includes advanced bicycle/pedestrian signal phasing or two-phased left turn maneuvers.
-- **Two-phased maneuver where the bicycle moves parallel with traffic in each signal phase.**
-  Delay calculation for this maneuver is analogous to two-phased (diagonal) pedestrian crossing. These maneuvers are typically performed at larger intersections with high volume and/or multiple traffic lanes that makes permissive left turns difficult or impossible to perform safely. Infrastructure such as "left-turn queue boxes" and "protected intersections" attempt to encourage this maneuver. 
+  Calculation of delay in this case is analogous to a pedestrian crossing at a TWSC intersection where delay is encountered when waiting for an acceptable gap in each traffic lane crossed. These maneuvers are typically performed at most intersections with small or moderate traffic volumes. Even upstream mixing lanes or centerline left turn lanes (e.g., Scott St. between Fell St. and Oak St. in San Francisco) still require a bicyclist to cross a lane of traffic before making a permissive left. Mitigation of this includes advanced bicycle/pedestrian signal phasing or two-staged left turn maneuvers.
+- **two-staged maneuver where the bicycle moves parallel with traffic in each signal phase.**
+  Delay calculation for this maneuver is analogous to two-staged (diagonal) pedestrian crossing. These maneuvers are typically performed at larger intersections with high volume and/or multiple traffic lanes that makes permissive left turns difficult or impossible to perform safely. Infrastructure such as "left-turn queue boxes" and "protected intersections" attempt to encourage this maneuver. 
 
 ### B: Determine Single-Phase Left-Turn Delay
 
 
 
-### C: Determine Two-Phase Left-Turn Delay
+### C: Determine two-stage Left-Turn Delay
 
 #### i. Determine Critical Headway
 
@@ -89,12 +103,12 @@ $t_{sb}$ = bicycle start‐up time and end clearance time (s).
 
 If pedestrian platooning is observed in the field, then the spatial distribution of pedestrians should be computed with Equation $\ref{eq:Nlb}$. If no platooning is observed, the spatial distribution of pedestrians is assumed to be 1.
 $$
-N_{b} = Int\left[\frac{8.0(N_{cb}-1)}{W_{c}}\right] \label{eq:Nlb}
+N_{b} = Max\left[\frac{4.0N_{cb}}{W_{bl}}, 1.0\right] \label{eq:Nlb}
 $$
 where 
 $N_{b}$ = spatial distribution of bicycles (bikes);
 $N_{cb}$ = total number of bicycles in the crossing platoon, from Equation $\ref{eq:Nb}$ (bikes);
-$W_c$ = width of intersection for bicycles (ft); and
+$W_{bl}$ = width of bike lane (ft); and
 4.0 = default clear effective width used by a single bicycle (ft).
 
 To compute spatial distribution, the analyst must make field observations or estimate the platoon size by using Equation $\ref{eq:Nb}$:
@@ -136,7 +150,7 @@ $v$ = vehicular flow rate (veh/s).
 
 Research indicates that average delay to pedestrians at unsignalized crossings, assuming that no motor vehicles yield and the pedestrian is forced to wait for an adequate gap, depends on the critical headway [cite], the vehicular flow rate of the subject crossing, and the mean vehicle headway. Thus, bicyclists making the same unsignalized crossing are subject to the same delay calculation as for pedestrians. The average delay per bicycle to wait for an adequate gap is given by Equation $\ref{eq:dbg}$.
 $$
-d_{bg} = \frac{1}{v_v} \left( e^{vt_{cb,G}} - v_v t_{cb,G} \right) \label{eq:dbg}
+d_{bg} = \frac{1}{v_v} \left( e^{vt_{cb,G}} - v_v t_{cb,G} -1 \right) \label{eq:dbg}
 $$
 where
 $d_bg$ = average bicycle gap delay (s),
@@ -154,32 +168,35 @@ $P_d$ = probability of a delayed crossing.
 
 #### iv. Estimate Delay Reduction due to Yielding Vehicles
 
-Although automobiles are generally ***not*** legally required to stop for bicycles, the delay calculation is dominated by Equation $\ref{eq:dbg}$, but vehicles do yield to bicycles nonetheless and should not only be included in the calculation, but encouraged. 
+Equation $\ref{eq:d_bgd}$ estimates bicycle delay when motorists on the major approaches do not yield to pedestrians. Where motorist yield rates are significantly higher than zero,  pedestrians will experience considerably less delay. Although automobiles are generally ***not*** legally required to stop for bicycles, actual motorist yielding behavior varies considerably. Motorist yield rates are influenced by a range of factors, including roadway geometry, travel speeds, roadway treatments, local culture, and law enforcement practices. When a bicycle arrives at a crossing and finds an inadequate gap, that bicycle is delayed until one of two situations occurs: (a) a gap greater than the critical headway is available, or (b) motor vehicles yield and allow the bicycle to cross. 
 
-When a bicycle arrives at a crossing and finds an inadequate gap, that pedestrian is delayed until one of two situations occurs: (a) a gap greater than the critical headway is available, or (b) motor vehicles yield and allow the pedestrian to cross. Equation 19‐75 estimates pedestrian delay when motorists on the major approaches do not yield to pedestrians. Where motorist yield rates are significantly higher than zero,  pedestrians will experience considerably less delay than that estimated by Equation 19‐75.
+It is possible for bicycles to incur less actual delay than $d_g$ because of yielding vehicles. The likelihood of this situation occurring is a function of vehicle volumes, motorist yield rates, and number of through lanes on the major street. Consider a left-turn bicycle waiting for a crossing opportunity at an intersection, with vehicles in each conflicting through lane arriving every $h$ seconds. The headways that the bicycles are assessing during this delay period are always less than the group critical headway. The following equation should be used to compute the appropriate headway $h$ needed by the methodology (Bonneson and McCoy 1993).
+$$
+h = \frac{\frac{1}{v}-\left(t_{cb,G}+\frac{1}{v}\right)e^{-vt_{cb,G}}}{1 - e^{-vt_{cb,G}}}
+$$
+where
+$h$ = average headway of all headways less than the group critical gap (s);
+$t_{cb,G}$ = group critical headway (s), and
+$v$ = conflicting vehicular flow rate (veh/s) (combined flows for one-stage crossings; separate flows for two-stage crossings).
 
-In the United States, motorists are legally required to yield to pedestrians, under most circumstances, in both marked and unmarked crosswalks. However, actual motorist yielding behavior varies considerably. Motorist yield rates are influenced by a range of factors, including roadway geometry, travel speeds, pedestrian crossing treatments, local culture, and law enforcement practices.
-
-Research (11, 12) provides information on motorist responses to typical pedestrian crossing treatments, as shown in Exhibit 19‐17. The exhibit shows results from two separate data collection methods. Staged data were collected with pedestrians trained by the research team to maintain consistent positioning, stance, and aggressiveness in crossing attempts. Unstaged data were collected through video recordings of the general population. The values shown in Exhibit 19‐17 are based on a limited number of sites and do not encompass the full range of available crossing treatments. As always, practitioners should supplement these values with local knowledge and engineering judgment.
-
-It is possible for pedestrians to incur less actual delay than dg because of yielding vehicles. The likelihood of this situation occurring is a function of vehicle volumes, motorist yield rates, and number of through lanes on the major street. Consider a pedestrian waiting for a crossing opportunity at a TWSC intersection, with vehicles in each conflicting through lane arriving every h seconds. On average, a potential yielding event will occur every h seconds, where P(Y) represents the probability of motorists yielding for a given event. As vehicles are assumed to arrive randomly, each potential yielding event is considered to be independent. For any given yielding event, each through lane is in one of two states:
+On average, a potential yielding event will occur every $h$ seconds, where $P(Y)$ represents the probability of motorists yielding for a given event. As vehicles are assumed to arrive randomly, each potential yielding event is considered to be independent. For any given yielding event, each through lane is in one of two states:
 
 1. Clear—no vehicles are arriving within the critical headway window, or
-2. Blocked—a vehicle is arriving within the critical headway window. The pedestrian may cross only if vehicles in each blocked lane choose to yield. If not, the pedestrian must wait an additional h seconds for the next yielding event. On average, this process will be repeated until the wait exceeds the expected delay required for an adequate gap in traffic (dgd), at which point the average pedestrian will receive an adequate gap in traffic and will be able to cross the street without having to depend on yielding motorists. Thus, average pedestrian delay can be calculated with Equation 19‐77, where the first term in the equation represents expected delay from crossings occurring when motorists yield, and the second term represents expected delay from crossings where pedestrians wait for an adequate gap.
+2. Blocked—a vehicle is arriving within the critical headway window. The bicycle may cross only if vehicles in each blocked lane choose to yield. If not, the bicycle must wait an additional $h$ seconds for the next yielding event. On average, this process will be repeated until the wait exceeds the expected delay required for an adequate gap in traffic ($d_{bgd}$), at which point the average bicycle will receive an adequate gap in traffic and will be able to cross the street without having to depend on yielding motorists. Thus, average bicycle delay can be calculated with Equation $\ref{eq:dbtwostage}$, where the first term in the equation represents expected delay from crossings occurring when motorists yield, and the second term represents expected delay from crossings where pedestrians wait for an adequate gap.
 
 $$
-d_b = \sum\limits^n_{i=1}h(i-0.5) P(Y_i) + \left(P_d - \sum\limits^n_{i=1}P(Y_i) \right) d_{bgd}
+d_b = \sum\limits^n_{i=0}h(i-0.5) P(Y_i) + \left(P_d - \sum\limits^n_{i=0}P(Y_i) \right) d_{bgd} \label{eq:dbtwostage}
 $$
 
 where
 $d_b$ = average pedestrian delay (s),
-$i$ = crossing event (i = 1 to n),
+$i$ = crossing event ($i = 1$ to $n$),
 $h$ = average headway for each through lane,
 $P(Y_i)$ = probability that motorists yield to pedestrian on crossing event i, and
-$n$ = $Int(\frac{d_{bgd}}{h})$, average number of crossing events before an adequate gap is
+$n=Int\left(\frac{1}{e^{-vt_{bc,G}}} \right)$, average number of crossing events before an adequate gap is
 available.
 
-Equation 19‐77 requires the calculation of $P(Y_i)$. The probabilities $P(Y_i)$ that motorists will yield for a given crossing event are considered below for pedestrian crossings of one, two, three, and four through lanes.
+Equation $\ref{eq:dbtwostage}$ requires the calculation of $P(Y_i)$. The probabilities $P(Y_i)$ that motorists will yield for a given crossing event are considered below for bicycle crossings of one, two, three, and four through lanes.
 
 ##### *One-Lane Crossing*
 
@@ -215,6 +232,6 @@ P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{P_b^4 M_
 $$
 where $P(Y_0)$ = 0.
 
-#### v. Calculate Average Pedestrian Delay and Determine LOS
+## Step. 3: Calculate Average Pedestrian Delay and Determine LOS
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
