@@ -77,7 +77,8 @@ At signalized intersections, bicycles typically perform a left turn using one of
 <img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/Bike-left-turn-conflicts.svg?sanitize=true" width=600>
 
 - **Single-phased permissive left using acceptable gaps in traffic.**
---These maneuvers are typically performed at most intersections with small or moderate traffic volumes. Even upstream mixing lanes or centerline left turn lanes (e.g., Scott St. between Fell St. and Oak St. in San Francisco) still require a bicyclist to cross a lane of traffic before making a permissive left. Mitigation of this includes advanced bicycle/pedestrian signal phasing or two-staged left turn maneuvers.
+-- These maneuvers are typically performed at most intersections with small or moderate traffic volumes. Even upstream mixing lanes or center-line left turn lanes (e.g., Scott St. between Fell St. and Oak St. in San Francisco) still require a bicyclist to cross a lane of traffic before making a permissive left. 
+-- Mitigation of this includes advanced bicycle/pedestrian signal phasing or two-staged left turn maneuvers.
 -- Calculation of delay in this case is analogous to a pedestrian crossing at a TWSC intersection where delay is encountered when waiting for an acceptable gap in each traffic lane crossed. 
 - **two-staged maneuver where the bicycle moves parallel with traffic in each signal phase.**
 -- These maneuvers are typically performed at larger intersections with high volume and/or multiple traffic lanes that makes permissive left turns difficult or impossible to perform safely.
@@ -311,11 +312,11 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzIxOTExMTU4LC04NzY1ODgxNjQsMTMwMD
-MxMTA2MSw4MDkyNDAxOTUsMTQzODI4Mjc0NiwtMjAzNDM0MTI2
-MywtMTczMDAxOTQzMSwxNzEzNTgwODMsLTM4NDAyNDYzMCwtMT
-U2NjgxMTQ2NywtMTc5OTc1NjcwNiwtNDU3MjU0MjEwLDQ2ODE2
-MDk1LC01NzEzMzU1OTcsLTEzNDg5NDQ3MzUsLTU5NzU0NTY3OS
-wyMDI1MTI1NjMzLDIxOTQyNDE2OCwtNTE0MTM5MDk0LDE4Nzg1
-MDEwNV19
+eyJoaXN0b3J5IjpbLTI5MjY1NDcwNywtODc2NTg4MTY0LDEzMD
+AzMTEwNjEsODA5MjQwMTk1LDE0MzgyODI3NDYsLTIwMzQzNDEy
+NjMsLTE3MzAwMTk0MzEsMTcxMzU4MDgzLC0zODQwMjQ2MzAsLT
+E1NjY4MTE0NjcsLTE3OTk3NTY3MDYsLTQ1NzI1NDIxMCw0Njgx
+NjA5NSwtNTcxMzM1NTk3LC0xMzQ4OTQ0NzM1LC01OTc1NDU2Nz
+ksMjAyNTEyNTYzMywyMTk0MjQxNjgsLTUxNDEzOTA5NCwxODc4
+NTAxMDVdfQ==
 -->
