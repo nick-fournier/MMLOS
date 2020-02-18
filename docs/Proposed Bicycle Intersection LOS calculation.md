@@ -221,22 +221,20 @@ On average, a potential yielding event will occur every $h$ seconds, where $P(Y)
 
 
 1. Clear—no vehicles are arriving within the critical headway window, or
-2. Blocked—a vehicle is arriving within the critical headway window. The bicycle may cross only if vehicles in each blocked lane choose to yield. If not, the bicycle must wait an additional $h$ seconds for the next yielding event. On average, this process will be repeated until the wait exceeds the expected delay required for an adequate gap in traffic ($d_{bgd}$), at which point the average bicycle will receive an adequate gap in traffic and will be able to cross the street without having to depend on yielding motorists. Thus, average bicycle delay can be calculated below, where the first term in the equation represents expected delay from crossings occurring when motorists yield, and the second term represents expected delay from crossings where pedestrians wait for an adequate gap.
-
+2. Blocked—a vehicle is arriving within the critical headway window. The bicycle may cross only if vehicles in each blocked lane choose to yield. If not, the bicycle must wait an additional $h$ seconds for the next yielding event. On average, this process will be repeated until the wait exceeds the expected delay required for an adequate gap in traffic ($d_{bgd}$), at which point the average bicycle will receive an adequate gap in traffic and will be able to cross the street without having to depend on yielding motorists. Thus, average bicycle delay can be calculated 
 
 $$
 d_{bL1} = \sum\limits^n_{i=0}h(i-0.5) P(Y_i) + \left(P_d - \sum\limits^n_{i=0}P(Y_i) \right) d_{bgd}
 $$
-
 
 where
 $d_{bL}$ = average bicycle delay when turning left (s),
 $i$ = crossing event ($i = 1$ to $n$),
 $h$ = average headway for each through lane,
 $P(Y_i)$ = probability that motorists yield to pedestrian on crossing event i, and
-$n=Int\left(\frac{1}{e^{-vt_{bc,G}}} \right)$, average number of crossing events before an adequate gap is
-available.
+$n=Int\left(\frac{1}{e^{-vt_{bc,G}}} \right)$, average number of crossing events before an adequate gap is available.
 
+The first term in the equation represents expected delay from crossings occurring when motorists yield, and the second term represents expected delay from crossings where pedestrians wait for an adequate gap. 
 
 Equation $\ref{eq:dbtwostage}$ requires the calculation of $P(Y_i)$. The probabilities $P(Y_i)$ that motorists will yield for a given crossing event are considered below for bicycle crossings of one, two, three, and four through lanes.
 
@@ -331,11 +329,11 @@ $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (dec
 $g_c$ = the effective green time of the bicycle lane (s),
 $C$ = cycle time (s).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5OTAxODgyNDksODA5MjQwMTk1LDE0Mz
-gyODI3NDYsLTIwMzQzNDEyNjMsLTE3MzAwMTk0MzEsMTcxMzU4
-MDgzLC0zODQwMjQ2MzAsLTE1NjY4MTE0NjcsLTE3OTk3NTY3MD
-YsLTQ1NzI1NDIxMCw0NjgxNjA5NSwtNTcxMzM1NTk3LC0xMzQ4
-OTQ0NzM1LC01OTc1NDU2NzksMjAyNTEyNTYzMywyMTk0MjQxNj
-gsLTUxNDEzOTA5NCwxODc4NTAxMDUsMjE1MDQ1ODE4LC0xMjk3
-MDEzMzddfQ==
+eyJoaXN0b3J5IjpbNTcwMjE0NjEzLDgwOTI0MDE5NSwxNDM4Mj
+gyNzQ2LC0yMDM0MzQxMjYzLC0xNzMwMDE5NDMxLDE3MTM1ODA4
+MywtMzg0MDI0NjMwLC0xNTY2ODExNDY3LC0xNzk5NzU2NzA2LC
+00NTcyNTQyMTAsNDY4MTYwOTUsLTU3MTMzNTU5NywtMTM0ODk0
+NDczNSwtNTk3NTQ1Njc5LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC
+01MTQxMzkwOTQsMTg3ODUwMTA1LDIxNTA0NTgxOCwtMTI5NzAx
+MzM3XX0=
 -->
