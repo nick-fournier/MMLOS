@@ -45,12 +45,9 @@ Although bicycles may experience some amount of queuing in locations of particul
 ## Step 1: Determine Signal Delay for Through Maneuvers
 
 
-This step describes a procedure for evaluating the performance of one intersection approach. It is repeated for each approach of interest. Bicycle delay can be calculated only for intersection approaches that have an on‐street bicycle lane or a shoulder that can be used by bicyclists as a bicycle lane. Bicyclists who share a lane with automobile traffic will incur the same delay as the automobiles.
-
+This step describes a procedure for evaluating the performance of one intersection approach. It is repeated for each approach of interest.
 
 ### *A. Compute Bicycle Lane Capacity*
-
-
 A wide range of capacities and saturation flow rates have been reported by many countries for bicycle lanes at intersections. Research indicates that the base saturation flow rate may be as high as 2,600 bicycles/h (31). However, few intersections provide base conditions for bicyclists, and current information is insufficient to calibrate a series of appropriate saturation flow adjustment factors. Until such factors are developed, it is recommended that a saturation flow rate of 2,000 bicycles/h be used as an average value achievable at most intersections. A saturation flow rate of 2,000 bicycles/h assumes that right‐turning motor vehicles yield the right‐of‐way to through bicyclists. Where aggressive right turning
 traffic exists, 2,000 bicycles/h may not be achievable. Local observations to determine a saturation flow rate are recommended in such cases. The capacity of the bicycle lane at a signalized intersection may be computed with:
 $$
@@ -327,11 +324,11 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMwMDMxMTA2MSw4MDkyNDAxOTUsMTQzOD
-I4Mjc0NiwtMjAzNDM0MTI2MywtMTczMDAxOTQzMSwxNzEzNTgw
-ODMsLTM4NDAyNDYzMCwtMTU2NjgxMTQ2NywtMTc5OTc1NjcwNi
-wtNDU3MjU0MjEwLDQ2ODE2MDk1LC01NzEzMzU1OTcsLTEzNDg5
-NDQ3MzUsLTU5NzU0NTY3OSwyMDI1MTI1NjMzLDIxOTQyNDE2OC
-wtNTE0MTM5MDk0LDE4Nzg1MDEwNSwyMTUwNDU4MTgsLTEyOTcw
-MTMzN119
+eyJoaXN0b3J5IjpbLTEwMjc5Njg4MTksMTMwMDMxMTA2MSw4MD
+kyNDAxOTUsMTQzODI4Mjc0NiwtMjAzNDM0MTI2MywtMTczMDAx
+OTQzMSwxNzEzNTgwODMsLTM4NDAyNDYzMCwtMTU2NjgxMTQ2Ny
+wtMTc5OTc1NjcwNiwtNDU3MjU0MjEwLDQ2ODE2MDk1LC01NzEz
+MzU1OTcsLTEzNDg5NDQ3MzUsLTU5NzU0NTY3OSwyMDI1MTI1Nj
+MzLDIxOTQyNDE2OCwtNTE0MTM5MDk0LDE4Nzg1MDEwNSwyMTUw
+NDU4MThdfQ==
 -->
