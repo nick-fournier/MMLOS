@@ -69,20 +69,10 @@ where
 $d_{bS}$ is bicycle delay (s/bicycle) from the signal itself,
 $v_{bic}$ is bicycle flow rate (bicycles/h), and other variables are as previously defined.
 
-At most signalized intersections, the only delay to through bicycles is caused by the signal, because bicycles have the right‐of‐way over right‐turning vehicles during the green indication. Bicycle delay could be longer than that obtained from Equation when (a) bicycles are forced to weave with right‐turning traffic during the green indication, or (b) drivers do not acknowledge the bicycle right‐of‐way because of high flows of right‐turning vehicles. 
-
-
-The delay obtained from Equation  can be used to make some judgment about intersection performance. Bicyclists tend to have about the same tolerance for delay as pedestrians. They tend to become impatient when they experience a delay in excess of 30 s/bicycle. In contrast, they are very likely to comply with the signal indication if their expected delay is less than 10 s/bicycle.
-
-
-
-
-
+At most signalized intersections, the only delay to through bicycles is caused by the signal, because bicycles have the right‐of‐way over right‐turning vehicles during the green indication. Bicycle delay could be longer when (a) bicycles are forced to weave with right‐turning traffic during the green indication, or (b) drivers do not acknowledge the bicycle right‐of‐way because of high flows of right‐turning vehicles. 
 
 ## Step 2: Determine Left-Turn Maneuver Delay
-
-
-The main issue to determine the appropriate turning maneuver. While a small percentage of "strong and fearless" (Dill and McNeil, 2013) bicyclists may feel comfortable performing a single-phased left turn even at large intersections, this does not represent the majority of "concerned" bicyclists. Most bicyclists however, may perform a two-staged turn at large or busy intersections. Some bicyclists may even transition to a pedestrian to make uncomfortable crossings, but this transition will incur significant additional delay and inconvenience. 
+While a small percentage of "strong and fearless" (Dill and McNeil, 2013) bicyclists may feel comfortable performing a single-phased permissive left turn at large intersection, this may not represent the majority of "concerned" bicyclists. Most bicyclists however, may perform a two-staged turn at large or busy intersections. Some bicyclists may even transition to a pedestrian to make uncomfortable crossings, but this transition will incur significant additional delay and inconvenience. 
 
 
 When bicycles make a two-staged left, bicycle delay should be estimated separately for each stage of the crossing by using the procedures described in Step 2.C. To determine bicycle LOS, the bicycle delay for each stage should be summed in addition to the signal delay to establish the average bicycle delay associated with the entire crossing. This service measure is used to determine bicycle LOS for a signalized intersection with two‐stage crossings.
@@ -316,7 +306,7 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzQyNDk2NDg5LDEzMDAzMTEwNjEsODA5Mj
+eyJoaXN0b3J5IjpbMzU3ODk4NDE1LDEzMDAzMTEwNjEsODA5Mj
 QwMTk1LDE0MzgyODI3NDYsLTIwMzQzNDEyNjMsLTE3MzAwMTk0
 MzEsMTcxMzU4MDgzLC0zODQwMjQ2MzAsLTE1NjY4MTE0NjcsLT
 E3OTk3NTY3MDYsLTQ1NzI1NDIxMCw0NjgxNjA5NSwtNTcxMzM1
