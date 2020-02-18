@@ -274,7 +274,8 @@ For two-stage left turns, two situations can occur:
 The respective delay for each case is then calculated as:
 $$
 d_{bL2G} = \frac{g_1}{2} + Y_1 + AR_1 + t_s
-$$$$
+$$
+$$
 d_{bL2R} = \frac{C-g_1}{2} + R_2 + 2t_s
 $$
 where
@@ -296,12 +297,3 @@ where
 $d_{bL2}$ = bicycle delay for two-stage left turn (s/bike),
 $\frac{g_1}{C}$ = the proportion of bicycles arriving during green, and
 $\frac{C-g_1}{C}$ = the proportion of bicycles arriving during red or yellow.
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MzUxMjQ3NzYsLTE3MzUxMjQ3NzYsOD
-E4NzI4ODExLC04NzY1ODgxNjQsMTMwMDMxMTA2MSw4MDkyNDAx
-OTUsMTQzODI4Mjc0NiwtMjAzNDM0MTI2MywtMTczMDAxOTQzMS
-wxNzEzNTgwODMsLTM4NDAyNDYzMCwtMTU2NjgxMTQ2NywtMTc5
-OTc1NjcwNiwtNDU3MjU0MjEwLDQ2ODE2MDk1LC01NzEzMzU1OT
-csLTEzNDg5NDQ3MzUsLTU5NzU0NTY3OSwyMDI1MTI1NjMzLDIx
-OTQyNDE2OF19
--->
