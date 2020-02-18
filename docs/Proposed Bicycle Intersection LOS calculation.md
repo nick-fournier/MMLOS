@@ -72,7 +72,7 @@ $v_{bic}$ is bicycle flow rate (bicycles/h), and other variables are as previous
 At most signalized intersections, the only delay to through bicycles is caused by the signal, because bicycles have the right‐of‐way over right‐turning vehicles during the green indication. Bicycle delay could be longer when (a) bicycles are forced to weave with right‐turning traffic during the green indication, or (b) drivers do not acknowledge the bicycle right‐of‐way because of high flows of right‐turning vehicles. 
 
 ## Step 2: Determine Left-Turn Maneuver Delay
-While a small percentage of "strong and fearless" (Dill and McNeil, 2013) bicyclists may feel comfortable performing a single-phased permissive left turn at large intersection, this may not represent the majority of "concerned" bicyclists. Most bicyclists however, may perform a two-staged turn at large or busy intersections. Some bicyclists may even transition to a pedestrian to make uncomfortable crossings, but this transition will incur significant additional delay and inconvenience. 
+While a small percentage of "strong and fearless" (Dill and McNeil, 2013) bicyclists may feel comfortable performing a single-phased permissive left turn at large intersection, this may not represent the majority of "concerned" bicyclists. Most bicyclists however, may perform a left turn in two stages like a pedestrian, , making the maneuver like a pedestrian. Some bicyclists may even transition entirely into a pedestrian to make uncomfortable crossings, but this transition will incur significant additional delay and inconvenience. 
 
 
 When bicycles make a two-staged left, bicycle delay should be estimated separately for each stage of the crossing by using the procedures described in Step 2.C. To determine bicycle LOS, the bicycle delay for each stage should be summed in addition to the signal delay to establish the average bicycle delay associated with the entire crossing. This service measure is used to determine bicycle LOS for a signalized intersection with two‐stage crossings.
@@ -306,11 +306,11 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzU3ODk4NDE1LDEzMDAzMTEwNjEsODA5Mj
-QwMTk1LDE0MzgyODI3NDYsLTIwMzQzNDEyNjMsLTE3MzAwMTk0
-MzEsMTcxMzU4MDgzLC0zODQwMjQ2MzAsLTE1NjY4MTE0NjcsLT
-E3OTk3NTY3MDYsLTQ1NzI1NDIxMCw0NjgxNjA5NSwtNTcxMzM1
-NTk3LC0xMzQ4OTQ0NzM1LC01OTc1NDU2NzksMjAyNTEyNTYzMy
-wyMTk0MjQxNjgsLTUxNDEzOTA5NCwxODc4NTAxMDUsMjE1MDQ1
-ODE4XX0=
+eyJoaXN0b3J5IjpbLTIwMzAzNDcyMTksMTMwMDMxMTA2MSw4MD
+kyNDAxOTUsMTQzODI4Mjc0NiwtMjAzNDM0MTI2MywtMTczMDAx
+OTQzMSwxNzEzNTgwODMsLTM4NDAyNDYzMCwtMTU2NjgxMTQ2Ny
+wtMTc5OTc1NjcwNiwtNDU3MjU0MjEwLDQ2ODE2MDk1LC01NzEz
+MzU1OTcsLTEzNDg5NDQ3MzUsLTU5NzU0NTY3OSwyMDI1MTI1Nj
+MzLDIxOTQyNDE2OCwtNTE0MTM5MDk0LDE4Nzg1MDEwNSwyMTUw
+NDU4MThdfQ==
 -->
