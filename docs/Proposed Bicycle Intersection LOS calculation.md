@@ -104,7 +104,7 @@ $S_p$ = average bicycle crossing speed (ft/s) (*note: this will be lower than cr
 $L$ = width of street crossed (ft), and
 $t_{sb}$ = bicycle start‐up time and end clearance time (s).
 
-If bicycle platooning is observed in the field, then the spatial distribution of pedestrians should be computed. If no platooning is observed, the spatial distribution of pedestrians is assumed to be 1.
+If bicycle platooning is observed in the field, then the spatial distribution of bicyclists should be computed. If no platooning is observed, the spatial distribution is assumed to be 1.
 $$
 N_{b} = Max\left[\frac{4.0N_{cb}}{W_{bl}}, 1.0\right]
 $$
@@ -136,8 +136,6 @@ $N_b$ = spatial distribution of bicycles (bikes).
 
 
 #### ii. Estimate Probability of a Delayed Crossing
-
-
 On the basis of calculation of the critical headway $t_G$, the probability that a bicycle will not incur any turning delay is equal to the likelihood that a bicycle will encounter a gap greater than or equal to the critical headway immediately upon arrival at the intersection. Assuming random arrivals of vehicles on the major street, and equal distribution of vehicles among all through lanes on the major street, the probability of encountering a headway exceeding the critical headway in any given lane can be estimated by using a Poisson distribution. The likelihood that a gap in a given lane does not exceed the critical headway is thus the complement as shown in the equation. Because traffic is assumed to be distributed independently in each through lane, the equation below shows the probability that a bicycle incurs nonzero delay at a TWSC crossing.
 $$
 P_b = 1 - e^\frac{-t_{cb,G}v_v}{L}\\
@@ -298,11 +296,11 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ5NzI4MDM0MSwtODc2NTg4MTY0LDEzMD
-AzMTEwNjEsODA5MjQwMTk1LDE0MzgyODI3NDYsLTIwMzQzNDEy
-NjMsLTE3MzAwMTk0MzEsMTcxMzU4MDgzLC0zODQwMjQ2MzAsLT
-E1NjY4MTE0NjcsLTE3OTk3NTY3MDYsLTQ1NzI1NDIxMCw0Njgx
-NjA5NSwtNTcxMzM1NTk3LC0xMzQ4OTQ0NzM1LC01OTc1NDU2Nz
-ksMjAyNTEyNTYzMywyMTk0MjQxNjgsLTUxNDEzOTA5NCwxODc4
-NTAxMDVdfQ==
+eyJoaXN0b3J5IjpbLTE5Njc3ODg3NTEsLTg3NjU4ODE2NCwxMz
+AwMzExMDYxLDgwOTI0MDE5NSwxNDM4MjgyNzQ2LC0yMDM0MzQx
+MjYzLC0xNzMwMDE5NDMxLDE3MTM1ODA4MywtMzg0MDI0NjMwLC
+0xNTY2ODExNDY3LC0xNzk5NzU2NzA2LC00NTcyNTQyMTAsNDY4
+MTYwOTUsLTU3MTMzNTU5NywtMTM0ODk0NDczNSwtNTk3NTQ1Nj
+c5LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC01MTQxMzkwOTQsMTg3
+ODUwMTA1XX0=
 -->
