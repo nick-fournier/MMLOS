@@ -101,6 +101,8 @@ $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (dec
 
 A proportion of bicyclists making each left turn maneuver should be locally measured or assumed. Research is needed in this area to determine typical proportions of bicyclists making each maneuver depending on intersection size, operation, and volume.
 
+Delay for single- and two-staged left turns are calculated in Steps A and B. 
+
 ### A: Determine Single-Stage Left Turn Delay
 Single-stage left turn bicycle delay is calculated similar to the delay experienced by pedestrians crossing lanes of uncontrolled traffic. In this case, bicyclists must wait for an acceptable gap to cross each respective lane of traffic. 
 
@@ -294,29 +296,12 @@ where
 $d_{bL2}$ = bicycle delay for two-stage left turn (s/bike),
 $\frac{g_1}{C}$ = the proportion of bicycles arriving during green, and
 $\frac{C-g_1}{C}$ = the proportion of bicycles arriving during red or yellow.
-
-
-
-
-## Step. 3: Calculate Average Bicycle Delay and Determine LOS
-
-The overall bicycle delay is then calculated 
-$$
-d_b = d_{bS} + P_L \left[(1-P_{L2})d_{bL1} + P_{L2}d_{bL2})\right]
-$$
-where
-$d_b$ = overall average bicycle delay (s/bike),
-$d_{bS}$ = bicycle delay from signal (s/bike),
-$d_{bL1}$ = bicycle delay for one-stage left turns (s/bike),
-$d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
-$P_L$ = the proportion of left turning bicycles (decimal), and
-$P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE4NzA0NjE3Niw4MTg3Mjg4MTEsLTg3Nj
-U4ODE2NCwxMzAwMzExMDYxLDgwOTI0MDE5NSwxNDM4MjgyNzQ2
-LC0yMDM0MzQxMjYzLC0xNzMwMDE5NDMxLDE3MTM1ODA4MywtMz
-g0MDI0NjMwLC0xNTY2ODExNDY3LC0xNzk5NzU2NzA2LC00NTcy
-NTQyMTAsNDY4MTYwOTUsLTU3MTMzNTU5NywtMTM0ODk0NDczNS
-wtNTk3NTQ1Njc5LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC01MTQx
-MzkwOTRdfQ==
+eyJoaXN0b3J5IjpbLTE3MzUxMjQ3NzYsODE4NzI4ODExLC04Nz
+Y1ODgxNjQsMTMwMDMxMTA2MSw4MDkyNDAxOTUsMTQzODI4Mjc0
+NiwtMjAzNDM0MTI2MywtMTczMDAxOTQzMSwxNzEzNTgwODMsLT
+M4NDAyNDYzMCwtMTU2NjgxMTQ2NywtMTc5OTc1NjcwNiwtNDU3
+MjU0MjEwLDQ2ODE2MDk1LC01NzEzMzU1OTcsLTEzNDg5NDQ3Mz
+UsLTU5NzU0NTY3OSwyMDI1MTI1NjMzLDIxOTQyNDE2OCwtNTE0
+MTM5MDk0XX0=
 -->
