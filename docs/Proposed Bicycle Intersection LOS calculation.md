@@ -296,7 +296,7 @@ where
 $d_{bL2}$ = bicycle delay for two-stage left turn (s/bike),
 $d_{bL2R}$ = left turn bicycle delay given arrival is during a red phase (s/bike),
 $d_{bL2G}$ = left turn bicycle delay given arrival is during a green phase (s/bike),
-$G_1$ = the green time in the first approach (s),
+$G_1$ = the green time in the first approach (s), and
 $C$ = the cycle time (s),
 
 The respective delay for each case is then calculated as:
@@ -350,11 +350,11 @@ $C$ = cycle time (s).
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4OTg3MzQ3ODMsLTE3MzAwMTk0MzEsMT
-cxMzU4MDgzLC0zODQwMjQ2MzAsLTE1NjY4MTE0NjcsLTE3OTk3
-NTY3MDYsLTQ1NzI1NDIxMCw0NjgxNjA5NSwtNTcxMzM1NTk3LC
-0xMzQ4OTQ0NzM1LC01OTc1NDU2NzksMjAyNTEyNTYzMywyMTk0
-MjQxNjgsLTUxNDEzOTA5NCwxODc4NTAxMDUsMjE1MDQ1ODE4LC
-0xMjk3MDEzMzcsLTE3NTI1NjE5NjUsLTE0MTQxODM1MzgsMTM1
-OTY4NjQzMl19
+eyJoaXN0b3J5IjpbNTA3OTkwMzE0LC0xNzMwMDE5NDMxLDE3MT
+M1ODA4MywtMzg0MDI0NjMwLC0xNTY2ODExNDY3LC0xNzk5NzU2
+NzA2LC00NTcyNTQyMTAsNDY4MTYwOTUsLTU3MTMzNTU5NywtMT
+M0ODk0NDczNSwtNTk3NTQ1Njc5LDIwMjUxMjU2MzMsMjE5NDI0
+MTY4LC01MTQxMzkwOTQsMTg3ODUwMTA1LDIxNTA0NTgxOCwtMT
+I5NzAxMzM3LC0xNzUyNTYxOTY1LC0xNDE0MTgzNTM4LDEzNTk2
+ODY0MzJdfQ==
 -->
