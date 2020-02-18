@@ -83,7 +83,9 @@ At signalized intersections, bicycles typically perform a left turn using one of
 -- These maneuvers are typically performed at larger intersections with high volume and/or multiple traffic lanes that makes permissive left turns difficult or impossible to perform safely.
 -- Delay calculation for this maneuver is analogous to two-staged (diagonal) pedestrian crossing. 
 
-While a two-stage turn may encounter greater delay than a single-staged turn, only a small percentage of "strong and fearless" (Dill and McNeil, 2013) bicyclists may feel comfortable performing a single-phased permissive left turns at large busy intersections. More cautious bicyclists may perform a left turn in two stages like a pedestrian. Some bicyclists may even transition entirely into a pedestrian to use the crosswalk in very uncomfortable crossings, but this transition will incur significant additional delay and inconvenience for the bicyclist, as well as interfere with pedestrian movement. Infrastructure such as "left-turn queue boxes" and "protected intersections" attempt to mitigate encourage this maneuver by providing guidance
+While a two-stage turn may encounter greater delay than a single-staged turn, only a small percentage of "strong and fearless" (Dill and McNeil, 2013) bicyclists may feel comfortable performing a single-phased permissive left turns at large busy intersections. More cautious bicyclists may perform a left turn in two stages like a pedestrian. Some bicyclists may even transition entirely into a pedestrian to use the crosswalk in very uncomfortable crossings, but this transition will incur significant additional delay and inconvenience for the bicyclist, as well as interfere with pedestrian movement.
+
+Infrastructure such as "left-turn queue boxes" and "protected intersections" attempt to mitigate encourage this maneuver by providing guidance
 
 When bicycles make a two-staged left turn, bicycle delay should be estimated separately for each stage of the crossing by using the procedures described in Step 2.B. The t
 
@@ -309,11 +311,11 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MTAzMTA3NTgsLTg3NjU4ODE2NCwxMz
-AwMzExMDYxLDgwOTI0MDE5NSwxNDM4MjgyNzQ2LC0yMDM0MzQx
-MjYzLC0xNzMwMDE5NDMxLDE3MTM1ODA4MywtMzg0MDI0NjMwLC
-0xNTY2ODExNDY3LC0xNzk5NzU2NzA2LC00NTcyNTQyMTAsNDY4
-MTYwOTUsLTU3MTMzNTU5NywtMTM0ODk0NDczNSwtNTk3NTQ1Nj
-c5LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC01MTQxMzkwOTQsMTg3
-ODUwMTA1XX0=
+eyJoaXN0b3J5IjpbMzIxOTExMTU4LC04NzY1ODgxNjQsMTMwMD
+MxMTA2MSw4MDkyNDAxOTUsMTQzODI4Mjc0NiwtMjAzNDM0MTI2
+MywtMTczMDAxOTQzMSwxNzEzNTgwODMsLTM4NDAyNDYzMCwtMT
+U2NjgxMTQ2NywtMTc5OTc1NjcwNiwtNDU3MjU0MjEwLDQ2ODE2
+MDk1LC01NzEzMzU1OTcsLTEzNDg5NDQ3MzUsLTU5NzU0NTY3OS
+wyMDI1MTI1NjMzLDIxOTQyNDE2OCwtNTE0MTM5MDk0LDE4Nzg1
+MDEwNV19
 -->
