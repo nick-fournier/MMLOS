@@ -277,7 +277,7 @@ where $P(Y_0)$ = 0.
 
 
 A four‐lane crossing follows the same principles as above. The calculation for $P(Y_i)$ with four-lanes is:
-$$
+$$\tiny
 P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{P_b^4 M_y^4 + 4P_b^3(1-P_b)M_y^3 + 6P_b^2(1-P_b)^2 M_y^2 + 4P_b(1-P_b^3)M_y}{P_d} \right]
 $$
 where $P(Y_0)$ = 0.
@@ -331,11 +331,11 @@ $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (dec
 $g_c$ = the effective green time of the bicycle lane (s),
 $C$ = cycle time (s).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODA5MjQwMTk1LDE0MzgyODI3NDYsLTIwMz
-QzNDEyNjMsLTE3MzAwMTk0MzEsMTcxMzU4MDgzLC0zODQwMjQ2
-MzAsLTE1NjY4MTE0NjcsLTE3OTk3NTY3MDYsLTQ1NzI1NDIxMC
-w0NjgxNjA5NSwtNTcxMzM1NTk3LC0xMzQ4OTQ0NzM1LC01OTc1
-NDU2NzksMjAyNTEyNTYzMywyMTk0MjQxNjgsLTUxNDEzOTA5NC
-wxODc4NTAxMDUsMjE1MDQ1ODE4LC0xMjk3MDEzMzcsLTE3NTI1
-NjE5NjVdfQ==
+eyJoaXN0b3J5IjpbLTE3NjUyNzk0ODUsODA5MjQwMTk1LDE0Mz
+gyODI3NDYsLTIwMzQzNDEyNjMsLTE3MzAwMTk0MzEsMTcxMzU4
+MDgzLC0zODQwMjQ2MzAsLTE1NjY4MTE0NjcsLTE3OTk3NTY3MD
+YsLTQ1NzI1NDIxMCw0NjgxNjA5NSwtNTcxMzM1NTk3LC0xMzQ4
+OTQ0NzM1LC01OTc1NDU2NzksMjAyNTEyNTYzMywyMTk0MjQxNj
+gsLTUxNDEzOTA5NCwxODc4NTAxMDUsMjE1MDQ1ODE4LC0xMjk3
+MDEzMzddfQ==
 -->
