@@ -295,7 +295,7 @@ $$
 where
 
 $$
-d_{bL2} = d_{bL2G}  + d_{bL2R} 
+d_{bL2} = \frac{G_1}{C} d_{bL2G}  + \frac{C-G_1}{C}d_{bL2R} 
 $$
 
 
@@ -335,11 +335,11 @@ $C$ = cycle time (s).
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjE1MzIzNDAzLDE3MTM1ODA4MywtMzg0MD
-I0NjMwLC0xNTY2ODExNDY3LC0xNzk5NzU2NzA2LC00NTcyNTQy
-MTAsNDY4MTYwOTUsLTU3MTMzNTU5NywtMTM0ODk0NDczNSwtNT
-k3NTQ1Njc5LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC01MTQxMzkw
-OTQsMTg3ODUwMTA1LDIxNTA0NTgxOCwtMTI5NzAxMzM3LC0xNz
-UyNTYxOTY1LC0xNDE0MTgzNTM4LDEzNTk2ODY0MzIsLTE1NjM4
-MDcyODJdfQ==
+eyJoaXN0b3J5IjpbLTE3MzAwMTk0MzEsMTcxMzU4MDgzLC0zOD
+QwMjQ2MzAsLTE1NjY4MTE0NjcsLTE3OTk3NTY3MDYsLTQ1NzI1
+NDIxMCw0NjgxNjA5NSwtNTcxMzM1NTk3LC0xMzQ4OTQ0NzM1LC
+01OTc1NDU2NzksMjAyNTEyNTYzMywyMTk0MjQxNjgsLTUxNDEz
+OTA5NCwxODc4NTAxMDUsMjE1MDQ1ODE4LC0xMjk3MDEzMzcsLT
+E3NTI1NjE5NjUsLTE0MTQxODM1MzgsMTM1OTY4NjQzMiwtMTU2
+MzgwNzI4Ml19
 -->
