@@ -249,10 +249,10 @@ P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\times\\\left[ \frac{
 $$
 where $P(Y_0)$ = 0.
 
-### C: Determine two-stage Left Turn Delay
+### B: Determine two-stage Left Turn Delay
 
 For two-stage left turns, two situations can occur:
-- A bicycle arrives at the first stage during a green phase. The delay is the average remaining green time from the first approach before the signal changes, plus a startup time.
+- A bicycle arrives during a green phase at the first stage. The delay is the average remaining green time from the first approach before the signal changes, plus a startup time.
 - A bicycle arrives at the first stage during a red phase. The delay is the average remaining red time in the first approach plus the entire red time in the second approach, plus two startup times.
 
 Assuming bicycles arrive randomly at the first approach, the total two-stage left turn delay is then calculated as the sum of the product of the delay and proportion of bicycles arriving in each case, expressed as:
@@ -296,7 +296,7 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1Mjg2NjY2MzIsLTg3NjU4ODE2NCwxMz
+eyJoaXN0b3J5IjpbLTE0MzE3NzkyNDUsLTg3NjU4ODE2NCwxMz
 AwMzExMDYxLDgwOTI0MDE5NSwxNDM4MjgyNzQ2LC0yMDM0MzQx
 MjYzLC0xNzMwMDE5NDMxLDE3MTM1ODA4MywtMzg0MDI0NjMwLC
 0xNTY2ODExNDY3LC0xNzk5NzU2NzA2LC00NTcyNTQyMTAsNDY4
