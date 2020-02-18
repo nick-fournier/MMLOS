@@ -285,8 +285,9 @@ where $P(Y_0)$ = 0.
 ### C: Determine two-stage Left Turn Delay
 
 For a two-stage left turns, two situations can occur:
-- a bicycle arrives at the first stage during a green phase, only stopping at the corner to wait for the phase to finish and the signal to turn green.
-- a bicycle arrives at the first stage during a red phase and must wait for the firs
+- a bicycle arrives at the first stage during a green phase, only stopping at the corner to wait the remaining  
+for the phase to finish and the signal to turn green.
+- a bicycle arrives at the first stage during a red phase and must wait for the first phase to finish, plus the second 
 for the cycle to finish and turn green before proceeding to the second leg, to then wait a full 
 
 Two-stage left turns may be computed as
@@ -328,10 +329,10 @@ $C$ = cycle time (s).
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2NjI5ODk5MSwtMTc5OTc1NjcwNiwtND
-U3MjU0MjEwLDQ2ODE2MDk1LC01NzEzMzU1OTcsLTEzNDg5NDQ3
-MzUsLTU5NzU0NTY3OSwyMDI1MTI1NjMzLDIxOTQyNDE2OCwtNT
-E0MTM5MDk0LDE4Nzg1MDEwNSwyMTUwNDU4MTgsLTEyOTcwMTMz
-NywtMTc1MjU2MTk2NSwtMTQxNDE4MzUzOCwxMzU5Njg2NDMyLC
-0xNTYzODA3MjgyXX0=
+eyJoaXN0b3J5IjpbLTEyMjgzODQ4MzgsLTE3OTk3NTY3MDYsLT
+Q1NzI1NDIxMCw0NjgxNjA5NSwtNTcxMzM1NTk3LC0xMzQ4OTQ0
+NzM1LC01OTc1NDU2NzksMjAyNTEyNTYzMywyMTk0MjQxNjgsLT
+UxNDEzOTA5NCwxODc4NTAxMDUsMjE1MDQ1ODE4LC0xMjk3MDEz
+MzcsLTE3NTI1NjE5NjUsLTE0MTQxODM1MzgsMTM1OTY4NjQzMi
+wtMTU2MzgwNzI4Ml19
 -->
