@@ -307,7 +307,9 @@ d_{bL2R} = \frac{C-G_1}{2} + R_2 + 2t_s
 $$
 where
 $Y_1$ = yellow time for first approach,
-$AR_1$ = all red clearance time for first approach,
+$AR_1$ = all red clearance interval after first approach,
+$R_2$ = red clearance interval after first approach, and 
+$t_s$ = startup time for bicycle to begin moving from full stop.
 
 
 $d_{2,G1}$ = delay on median for stage 2, given arrival is during the Walk indication at corner (s/p), and
@@ -348,7 +350,7 @@ $C$ = cycle time (s).
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQzNjE0NjUzMiwtMTczMDAxOTQzMSwxNz
+eyJoaXN0b3J5IjpbLTQ2ODI1OTU0MiwtMTczMDAxOTQzMSwxNz
 EzNTgwODMsLTM4NDAyNDYzMCwtMTU2NjgxMTQ2NywtMTc5OTc1
 NjcwNiwtNDU3MjU0MjEwLDQ2ODE2MDk1LC01NzEzMzU1OTcsLT
 EzNDg5NDQ3MzUsLTU5NzU0NTY3OSwyMDI1MTI1NjMzLDIxOTQy
