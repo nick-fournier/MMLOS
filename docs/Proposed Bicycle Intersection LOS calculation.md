@@ -72,21 +72,23 @@ $v_{bic}$ is bicycle flow rate (bicycles/h), and other variables are as previous
 At most signalized intersections, the only delay to through bicycles is caused by the signal, because bicycles have the right‐of‐way over right‐turning vehicles during the green indication. Bicycle delay could be longer when (a) bicycles are forced to weave with right‐turning traffic during the green indication, or (b) drivers do not acknowledge the bicycle right‐of‐way because of high flows of right‐turning vehicles. 
 
 ## Step 2: Determine Left-Turn Maneuver Delay
-While a small percentage of "strong and fearless" (Dill and McNeil, 2013) bicyclists may feel comfortable performing a single-phased permissive left turn at large intersection, this may not represent the majority of "concerned" bicyclists. At large or busy intersections, bicyclists may perform a left turn in two stages like a pedestrian. Some bicyclists may even transition entirely into a pedestrian to use the crosswalk in very uncomfortable crossings, but this transition will incur significant additional delay and inconvenience for the bicyclist, as well as interfere with pedestrian movement.
+At signalized intersections, bicycles typically perform a left turn using one of two maneuvers.
 
 <img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/Bike-left-turn-conflicts.svg?sanitize=true" width=600>
 
 - **Single-phased permissive left using acceptable gaps in traffic.**
-  Calculation of delay in this case is analogous to a pedestrian crossing at a TWSC intersection where delay is encountered when waiting for an acceptable gap in each traffic lane crossed. These maneuvers are typically performed at most intersections with small or moderate traffic volumes. Even upstream mixing lanes or centerline left turn lanes (e.g., Scott St. between Fell St. and Oak St. in San Francisco) still require a bicyclist to cross a lane of traffic before making a permissive left. Mitigation of this includes advanced bicycle/pedestrian signal phasing or two-staged left turn maneuvers.
+These maneuvers are typically performed at most intersections with small or moderate traffic volumes. Even upstream mixing lanes or centerline left turn lanes (e.g., Scott St. between Fell St. and Oak St. in San Francisco) still require a bicyclist to cross a lane of traffic before making a permissive left. Mitigation of this includes advanced bicycle/pedestrian signal phasing or two-staged left turn maneuvers.
+-- Calculation of delay in this case is analogous to a pedestrian crossing at a TWSC intersection where delay is encountered when waiting for an acceptable gap in each traffic lane crossed. 
 - **two-staged maneuver where the bicycle moves parallel with traffic in each signal phase.**
   Delay calculation for this maneuver is analogous to two-staged (diagonal) pedestrian crossing. These maneuvers are typically performed at larger intersections with high volume and/or multiple traffic lanes that makes permissive left turns difficult or impossible to perform safely. Infrastructure such as "left-turn queue boxes" and "protected intersections" attempt to encourage this maneuver. 
+
+While a small percentage of "strong and fearless" (Dill and McNeil, 2013) bicyclists may feel comfortable performing a single-phased permissive left turn at large intersection, this may not represent the majority of "concerned" bicyclists. At large or busy intersections, bicyclists may perform a left turn in two stages like a pedestrian. Some bicyclists may even transition entirely into a pedestrian to use the crosswalk in very uncomfortable crossings, but this transition will incur significant additional delay and inconvenience for the bicyclist, as well as interfere with pedestrian movement.
 
 
 When bicycles make a two-staged left, bicycle delay should be estimated separately for each stage of the crossing by using the procedures described in Step 2.C. To determine bicycle LOS, the bicycle delay for each stage should be summed in addition to the signal delay to establish the average bicycle delay associated with the entire crossing. This service measure is used to determine bicycle LOS for a signalized intersection with two‐stage crossings.
 
 
 ### A: Identify Left Turn Maneuvers
-At signalized intersections, bicycles typically perform a left turn using one of two maneuvers.
 
 
 
@@ -307,11 +309,11 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIyNjQ2ODIyNCwxMzAwMzExMDYxLDgwOT
-I0MDE5NSwxNDM4MjgyNzQ2LC0yMDM0MzQxMjYzLC0xNzMwMDE5
-NDMxLDE3MTM1ODA4MywtMzg0MDI0NjMwLC0xNTY2ODExNDY3LC
-0xNzk5NzU2NzA2LC00NTcyNTQyMTAsNDY4MTYwOTUsLTU3MTMz
-NTU5NywtMTM0ODk0NDczNSwtNTk3NTQ1Njc5LDIwMjUxMjU2Mz
-MsMjE5NDI0MTY4LC01MTQxMzkwOTQsMTg3ODUwMTA1LDIxNTA0
-NTgxOF19
+eyJoaXN0b3J5IjpbLTEyNjQ5NTEwNTIsMTMwMDMxMTA2MSw4MD
+kyNDAxOTUsMTQzODI4Mjc0NiwtMjAzNDM0MTI2MywtMTczMDAx
+OTQzMSwxNzEzNTgwODMsLTM4NDAyNDYzMCwtMTU2NjgxMTQ2Ny
+wtMTc5OTc1NjcwNiwtNDU3MjU0MjEwLDQ2ODE2MDk1LC01NzEz
+MzU1OTcsLTEzNDg5NDQ3MzUsLTU5NzU0NTY3OSwyMDI1MTI1Nj
+MzLDIxOTQyNDE2OCwtNTE0MTM5MDk0LDE4Nzg1MDEwNSwyMTUw
+NDU4MThdfQ==
 -->
