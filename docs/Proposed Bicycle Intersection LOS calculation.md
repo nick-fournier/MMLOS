@@ -89,12 +89,10 @@ While a two-stage turn may encounter greater delay than a single-staged turn in 
 
 To determine overall intersection bicycle LOS, the bicycle delay is the sum of signal delay plus turning maneuver delay. A proportion of bicyclists making each left turn maneuver should be locally measured or assumed. Research is needed in this area to determine typical proportions of bicyclists making each maneuver depending on intersection size, operation, and volume.
 
-### A: Determine Single-Phase Left-Turn Delay
-
+### A: Determine Single-Stage Left Turn Delay
+Single-stage left turn bicycle delay is calculated similar to the delay experienced by pedestrians crossing lanes of uncontrolled traffic. Like pedestria
 
 #### i. Determine Critical Headway
-
-
 The procedure for estimating the critical headway is similar to that described Critical headway for pedestrians. for automobiles. The critical headway is the time in seconds below which a pedestrian will not attempt to begin crossing the street. Pedestrians use their judgment to determine whether the available headway between conflicting vehicles is long enough for a safe crossing. If the available headway is greater than the critical headway, it is assumed that the pedestrian will cross, but if the available headway is less than the critical headway, it is assumed that the pedestrian will not cross.
 
 
@@ -304,11 +302,11 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzOTMzMzM0ODksLTg3NjU4ODE2NCwxMz
-AwMzExMDYxLDgwOTI0MDE5NSwxNDM4MjgyNzQ2LC0yMDM0MzQx
-MjYzLC0xNzMwMDE5NDMxLDE3MTM1ODA4MywtMzg0MDI0NjMwLC
-0xNTY2ODExNDY3LC0xNzk5NzU2NzA2LC00NTcyNTQyMTAsNDY4
-MTYwOTUsLTU3MTMzNTU5NywtMTM0ODk0NDczNSwtNTk3NTQ1Nj
-c5LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC01MTQxMzkwOTQsMTg3
-ODUwMTA1XX0=
+eyJoaXN0b3J5IjpbMTA2Mzg4MDEwNywtODc2NTg4MTY0LDEzMD
+AzMTEwNjEsODA5MjQwMTk1LDE0MzgyODI3NDYsLTIwMzQzNDEy
+NjMsLTE3MzAwMTk0MzEsMTcxMzU4MDgzLC0zODQwMjQ2MzAsLT
+E1NjY4MTE0NjcsLTE3OTk3NTY3MDYsLTQ1NzI1NDIxMCw0Njgx
+NjA5NSwtNTcxMzM1NTk3LC0xMzQ4OTQ0NzM1LC01OTc1NDU2Nz
+ksMjAyNTEyNTYzMywyMTk0MjQxNjgsLTUxNDEzOTA5NCwxODc4
+NTAxMDVdfQ==
 -->
