@@ -290,14 +290,14 @@ For a two-stage left turns, two situations can occur:
 
 Assuming bicycles arrive randomly at the first approach, the total two-stage left turn delay is then calculated as the sum of the product of the delay and proportion of bicycles arriving in each case, expressed as:
 $$
-d_{bL2} = P_{bL2G} d_{bL2G}  + P_{bL2R}d_{bL2R} 
+d_{bL2} = P_{bL2G}d_{bL2G}  + P_{bL2R}d_{bL2R} 
 $$
 where
 $d_{bL2}$ = bicycle delay for two-stage left turn (s/bike),
 $d_{bL2R}$ = left turn bicycle delay given arrival is during a red phase (s/bike),
 $d_{bL2G}$ = left turn bicycle delay given arrival is during a green phase (s/bike),
-$P_{bL2G}$\frac{G_1}{C}$
-$frac{C-G_1}{C}$
+$P_{bL2G}$ = $\frac{G_1}{C}$, the average proportion of left turning bicycles arriving during green,
+$P_{bL2R}$ = $\frac{C-G_1}{C}$, the average proportion of left turning bicycles arriving during red,
 $G_1$ = the green time in the first approach (s), and
 $C$ = the cycle time (s),
 
@@ -351,11 +351,11 @@ $C$ = cycle time (s).
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMwNTkyODczNywtMTczMDAxOTQzMSwxNz
-EzNTgwODMsLTM4NDAyNDYzMCwtMTU2NjgxMTQ2NywtMTc5OTc1
-NjcwNiwtNDU3MjU0MjEwLDQ2ODE2MDk1LC01NzEzMzU1OTcsLT
-EzNDg5NDQ3MzUsLTU5NzU0NTY3OSwyMDI1MTI1NjMzLDIxOTQy
-NDE2OCwtNTE0MTM5MDk0LDE4Nzg1MDEwNSwyMTUwNDU4MTgsLT
-EyOTcwMTMzNywtMTc1MjU2MTk2NSwtMTQxNDE4MzUzOCwxMzU5
-Njg2NDMyXX0=
+eyJoaXN0b3J5IjpbNDAzNTc3OTkwLC0xNzMwMDE5NDMxLDE3MT
+M1ODA4MywtMzg0MDI0NjMwLC0xNTY2ODExNDY3LC0xNzk5NzU2
+NzA2LC00NTcyNTQyMTAsNDY4MTYwOTUsLTU3MTMzNTU5NywtMT
+M0ODk0NDczNSwtNTk3NTQ1Njc5LDIwMjUxMjU2MzMsMjE5NDI0
+MTY4LC01MTQxMzkwOTQsMTg3ODUwMTA1LDIxNTA0NTgxOCwtMT
+I5NzAxMzM3LC0xNzUyNTYxOTY1LC0xNDE0MTgzNTM4LDEzNTk2
+ODY0MzJdfQ==
 -->
