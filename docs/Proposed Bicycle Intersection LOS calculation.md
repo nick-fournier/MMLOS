@@ -257,17 +257,6 @@ For two-stage left turns, two situations can occur:
 - ***A bicycle arrives during a red phase*** at the first stage. 
 	- The delay is the average remaining red time in the first approach plus the entire red time in the second approach, plus two startup times.
 
-Assuming bicycles arrive randomly at the first approach, the total two-stage left turn delay is then calculated as the sum of the product of the delay and proportion of bicycles arriving in each case, expressed as:
-$$
-d_{bL2} = P_{bL2G}d_{bL2G}  + P_{bL2R}d_{bL2R} 
-$$
-where
-$d_{bL2}$ = bicycle delay for two-stage left turn (s/bike),
-$d_{bL2R}$ = left turn bicycle delay given arrival is during a red phase (s/bike),
-$d_{bL2G}$ = left turn bicycle delay given arrival is during a green phase (s/bike),
-$P_{bL2G}$ = $\frac{g_1}{C}$, the proportion of two-stage left turning bicycles arriving during green, and
-$P_{bL2R}$ = $\frac{C-g_1}{C}$, the proportion of two-stage left turning bicycles arriving during red.
-
 The respective delay for each case is then calculated as:
 $$
 d_{bL2G} = \frac{g_1}{2} + Y_1 + AR_1 + t_s
@@ -275,12 +264,25 @@ $$$$
 d_{bL2R} = \frac{C-g_1}{2} + R_2 + 2t_s
 $$
 where
+$d_{bL2R}$ = left turn bicycle delay given arrival is during a red phase (s/bike),
+$d_{bL2G}$ = left turn bicycle delay given arrival is during a green phase (s/bike),
 $g_1$ = the green time in the first approach (s), and
 $C$ = the cycle time (s),
 $Y_1$ = yellow time for first approach,
 $AR_1$ = all red clearance interval after first approach,
 $R_2$ = red time for second approach, and
 $t_s$ = startup time for bicycle to begin moving from full stop.
+
+
+Assuming bicycles arrive randomly at the first approach, the total two-stage left turn delay is then calculated as the sum of the product of the delay and proportion of bicycles arriving in each case, expressed as:
+$$
+d_{bL2} = \frac{g_1}{C}d_{bL2G}  + \frac{C-g_1}{C}d_{bL2R} 
+$$
+where
+$d_{bL2}$ = bicycle delay for two-stage left turn (s/bike),
+$\frac{g_1}{C}$ = the proportion of two-stage left turning bicycles arriving during green, and
+$\frac{C-g_1}{C}$ = the proportion of two-stage left turning bicycles arriving during red.
+
 
 
 
@@ -298,11 +300,11 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyOTA3NDAyMjcsLTg3NjU4ODE2NCwxMz
-AwMzExMDYxLDgwOTI0MDE5NSwxNDM4MjgyNzQ2LC0yMDM0MzQx
-MjYzLC0xNzMwMDE5NDMxLDE3MTM1ODA4MywtMzg0MDI0NjMwLC
-0xNTY2ODExNDY3LC0xNzk5NzU2NzA2LC00NTcyNTQyMTAsNDY4
-MTYwOTUsLTU3MTMzNTU5NywtMTM0ODk0NDczNSwtNTk3NTQ1Nj
-c5LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC01MTQxMzkwOTQsMTg3
-ODUwMTA1XX0=
+eyJoaXN0b3J5IjpbODE4NzI4ODExLC04NzY1ODgxNjQsMTMwMD
+MxMTA2MSw4MDkyNDAxOTUsMTQzODI4Mjc0NiwtMjAzNDM0MTI2
+MywtMTczMDAxOTQzMSwxNzEzNTgwODMsLTM4NDAyNDYzMCwtMT
+U2NjgxMTQ2NywtMTc5OTc1NjcwNiwtNDU3MjU0MjEwLDQ2ODE2
+MDk1LC01NzEzMzU1OTcsLTEzNDg5NDQ3MzUsLTU5NzU0NTY3OS
+wyMDI1MTI1NjMzLDIxOTQyNDE2OCwtNTE0MTM5MDk0LDE4Nzg1
+MDEwNV19
 -->
