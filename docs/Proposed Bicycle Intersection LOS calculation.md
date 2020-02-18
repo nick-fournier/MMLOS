@@ -294,18 +294,20 @@ d_{bL2} = \frac{G_1}{C} d_{bL2G}  + \frac{C-G_1}{C}d_{bL2R}
 $$
 where
 $d_{bL2}$ = bicycle delay for two-stage left turn (s/bike),
-$d_{bR}$ = delay given arrival is during a red phase (s/bike),
-$d_{1,G1}$ = delay for stage 1, given arrival is during a green phase (s/bike),
-$d_{2,R1}$ = delay on median for stage 2, given arrival is during a Don’t Walk indication at corner (s/p),
+$d_{bL2R}$ = left turn bicycle delay given arrival is during a red phase (s/bike),
+$d_{bL2G}$ = left turn bicycle delay given arrival is during a green phase (s/bike),
+$G_1$ = the green time in the first approach (s),
+$C$ = the cycle time (s),
 
-$d_{2,G1}$ = delay on median for stage 2, given arrival is during the Walk indication at corner (s/p), and
-$P_{R1}$ = proportion of arrivals during a Don’t Walk indication at corner (s/p).
-
+The respective delay for each case is then calcualted as 
 $$
-d_{bL2G} = \frac{G_1}{2} + Y_1 + AR_1 + t_s \\
+d_{bL2G} = \frac{G_1}{2} + Y_1 + AR_1 + t_s 
 d_{bL2R} = \frac{C-G_1}{2} + R_2 + 2t_s
 $$
 where
+
+$d_{2,G1}$ = delay on median for stage 2, given arrival is during the Walk indication at corner (s/p), and
+$P_{R1}$ = proportion of arrivals during a Don’t Walk indication at corner (s/p).
 
 
 
@@ -342,7 +344,7 @@ $C$ = cycle time (s).
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk5MzY3Mjg5OCwtMTczMDAxOTQzMSwxNz
+eyJoaXN0b3J5IjpbMTk5ODU3ODM5MCwtMTczMDAxOTQzMSwxNz
 EzNTgwODMsLTM4NDAyNDYzMCwtMTU2NjgxMTQ2NywtMTc5OTc1
 NjcwNiwtNDU3MjU0MjEwLDQ2ODE2MDk1LC01NzEzMzU1OTcsLT
 EzNDg5NDQ3MzUsLTU5NzU0NTY3OSwyMDI1MTI1NjMzLDIxOTQy
