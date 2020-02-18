@@ -85,7 +85,7 @@ At signalized intersections, bicycles typically perform a left turn using one of
 
 While a small percentage of "strong and fearless" (Dill and McNeil, 2013) bicyclists may feel comfortable performing a single-phased permissive left turns at any intersection, regardless of size, this may not represent the majority of "concerned" bicyclists. At large or busy intersections, more cautious bicyclists may perform a left turn in two stages like a pedestrian. Some bicyclists may even transition entirely into a pedestrian to use the crosswalk in very uncomfortable crossings, but this transition will incur significant additional delay and inconvenience for the bicyclist, as well as interfere with pedestrian movement.
 
-When bicycles make a two-staged left, bicycle delay should be estimated separately for each stage of the crossing by using the procedures described in Step 2.B. To determine bicycle LOS, the bicycle delay for each stage should be summed in addition to the signal delay to establish the average bicycle delay associated with the entire crossing. This service measure is used to determine bicycle LOS for a signalized intersection with two‐stage crossings.
+When bicycles make a two-staged left, bicycle delay should be estimated separately for each stage of the crossing by using the procedures described in Step 2.B. To determine bicycle LOS, the bicycle delay for each stage should be summed in addition to the signal delay to establish the average bicycle delay associated with the entire crossing. This service measure is used to determine bicycle LOS for a signalized intersection for either maneuver. However, a proportion of maneuvers should be locally measured or assumed. Research is needed in this area to determine typical proportions of bicyclists making each maneuver depending on intersection size, operation, and volume.
 
 ### A: Determine Single-Phase Left-Turn Delay
 
@@ -302,11 +302,11 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ5NTk3MzU0LDEzMDAzMTEwNjEsODA5Mj
-QwMTk1LDE0MzgyODI3NDYsLTIwMzQzNDEyNjMsLTE3MzAwMTk0
-MzEsMTcxMzU4MDgzLC0zODQwMjQ2MzAsLTE1NjY4MTE0NjcsLT
-E3OTk3NTY3MDYsLTQ1NzI1NDIxMCw0NjgxNjA5NSwtNTcxMzM1
-NTk3LC0xMzQ4OTQ0NzM1LC01OTc1NDU2NzksMjAyNTEyNTYzMy
-wyMTk0MjQxNjgsLTUxNDEzOTA5NCwxODc4NTAxMDUsMjE1MDQ1
-ODE4XX0=
+eyJoaXN0b3J5IjpbLTg3NjU4ODE2NCwxMzAwMzExMDYxLDgwOT
+I0MDE5NSwxNDM4MjgyNzQ2LC0yMDM0MzQxMjYzLC0xNzMwMDE5
+NDMxLDE3MTM1ODA4MywtMzg0MDI0NjMwLC0xNTY2ODExNDY3LC
+0xNzk5NzU2NzA2LC00NTcyNTQyMTAsNDY4MTYwOTUsLTU3MTMz
+NTU5NywtMTM0ODk0NDczNSwtNTk3NTQ1Njc5LDIwMjUxMjU2Mz
+MsMjE5NDI0MTY4LC01MTQxMzkwOTQsMTg3ODUwMTA1LDIxNTA0
+NTgxOF19
 -->
