@@ -296,17 +296,17 @@ where
 $d_{bL2}$ = bicycle delay for two-stage left turn (s/bike),
 $d_{bL2R}$ = left turn bicycle delay given arrival is during a red phase (s/bike),
 $d_{bL2G}$ = left turn bicycle delay given arrival is during a green phase (s/bike),
-$P_{bL2G}$ = $\frac{G_1}{C}$, the proportion of two-stage left turning bicycles arriving during green, and
-$P_{bL2R}$ = $\frac{C-G_1}{C}$, the proportion of two-stage left turning bicycles arriving during red.
+$P_{bL2G}$ = $\frac{g_1}{C}$, the proportion of two-stage left turning bicycles arriving during green, and
+$P_{bL2R}$ = $\frac{C-g_1}{C}$, the proportion of two-stage left turning bicycles arriving during red.
 
 The respective delay for each case is then calculated as:
 $$
-d_{bL2G} = \frac{G_1}{2} + Y_1 + AR_1 + t_s
+d_{bL2G} = \frac{g_1}{2} + Y_1 + AR_1 + t_s
 $$$$
-d_{bL2R} = \frac{C-G_1}{2} + R_2 + 2t_s
+d_{bL2R} = \frac{C-g_1}{2} + R_2 + 2t_s
 $$
 where
-$G_1$ = the green time in the first approach (s), and
+$g_1$ = the green time in the first approach (s), and
 $C$ = the cycle time (s),
 $Y_1$ = yellow time for first approach,
 $AR_1$ = all red clearance interval after first approach,
@@ -331,11 +331,11 @@ $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (dec
 $g_c$ = the effective green time of the bicycle lane (s),
 $C$ = cycle time (s).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg3NzU2MzkzOSwxNDM4MjgyNzQ2LC0yMD
-M0MzQxMjYzLC0xNzMwMDE5NDMxLDE3MTM1ODA4MywtMzg0MDI0
-NjMwLC0xNTY2ODExNDY3LC0xNzk5NzU2NzA2LC00NTcyNTQyMT
-AsNDY4MTYwOTUsLTU3MTMzNTU5NywtMTM0ODk0NDczNSwtNTk3
-NTQ1Njc5LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC01MTQxMzkwOT
-QsMTg3ODUwMTA1LDIxNTA0NTgxOCwtMTI5NzAxMzM3LC0xNzUy
-NTYxOTY1XX0=
+eyJoaXN0b3J5IjpbODA5MjQwMTk1LDE0MzgyODI3NDYsLTIwMz
+QzNDEyNjMsLTE3MzAwMTk0MzEsMTcxMzU4MDgzLC0zODQwMjQ2
+MzAsLTE1NjY4MTE0NjcsLTE3OTk3NTY3MDYsLTQ1NzI1NDIxMC
+w0NjgxNjA5NSwtNTcxMzM1NTk3LC0xMzQ4OTQ0NzM1LC01OTc1
+NDU2NzksMjAyNTEyNTYzMywyMTk0MjQxNjgsLTUxNDEzOTA5NC
+wxODc4NTAxMDUsMjE1MDQ1ODE4LC0xMjk3MDEzMzcsLTE3NTI1
+NjE5NjVdfQ==
 -->
