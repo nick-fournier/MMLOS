@@ -317,6 +317,7 @@ $t_s$ = startup time for bicycle to begin moving from full stop.
 
 ## Step. 3: Calculate Average Bicycle Delay and Determine LOS
 
+The overall bicycle delay is then calculated 
 $$
 d_b = d_{bS} + P_L [(1-P_{L2})d_{bL1} + P_{L2}d_{bL2})] \frac{g_c}{C}
 $$
@@ -329,17 +330,12 @@ $P_L$ = the proportion of left turning bicycles (decimal),
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal),
 $g_c$ = the effective green time of the bicycle lane (s),
 $C$ = cycle time (s).
-
-
-
-
-The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQzODI4Mjc0NiwtMjAzNDM0MTI2MywtMT
-czMDAxOTQzMSwxNzEzNTgwODMsLTM4NDAyNDYzMCwtMTU2Njgx
-MTQ2NywtMTc5OTc1NjcwNiwtNDU3MjU0MjEwLDQ2ODE2MDk1LC
-01NzEzMzU1OTcsLTEzNDg5NDQ3MzUsLTU5NzU0NTY3OSwyMDI1
-MTI1NjMzLDIxOTQyNDE2OCwtNTE0MTM5MDk0LDE4Nzg1MDEwNS
-wyMTUwNDU4MTgsLTEyOTcwMTMzNywtMTc1MjU2MTk2NSwtMTQx
-NDE4MzUzOF19
+eyJoaXN0b3J5IjpbMTg3NzU2MzkzOSwxNDM4MjgyNzQ2LC0yMD
+M0MzQxMjYzLC0xNzMwMDE5NDMxLDE3MTM1ODA4MywtMzg0MDI0
+NjMwLC0xNTY2ODExNDY3LC0xNzk5NzU2NzA2LC00NTcyNTQyMT
+AsNDY4MTYwOTUsLTU3MTMzNTU5NywtMTM0ODk0NDczNSwtNTk3
+NTQ1Njc5LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC01MTQxMzkwOT
+QsMTg3ODUwMTA1LDIxNTA0NTgxOCwtMTI5NzAxMzM3LC0xNzUy
+NTYxOTY1XX0=
 -->
