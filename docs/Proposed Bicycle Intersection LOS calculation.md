@@ -78,15 +78,16 @@ At signalized intersections, bicycles typically perform a left turn using one of
 
 * **Single-phased permissive left using acceptable gaps in traffic.**
 	* These maneuvers are typically performed at most intersections with small or moderate traffic volumes. Even upstream mixing lanes or center-line left turn lanes (e.g., Scott St. between Fell St. and Oak St. in San Francisco) still require a bicyclist to cross a lane of traffic before making a permissive left. 
-	* Mitigation includes advanced bicycle/pedestrian signal phasing, bicycle boxes,
+	* Mitigation includes advanced bicycle/pedestrian signal phasing or bicycle boxes.
 	* Calculation of delay in this case is analogous to a pedestrian crossing at a TWSC intersection where delay is encountered when waiting for an acceptable gap in each traffic lane crossed. 
-- **two-staged maneuver where the bicycle moves parallel with traffic in each signal phase.**
--- These maneuvers are typically performed at larger intersections with high volume and/or multiple traffic lanes that makes permissive left turns difficult or impossible to perform safely.
--- Delay calculation for this maneuver is analogous to two-staged (diagonal) pedestrian crossing. 
+* **two-staged maneuver where the bicycle moves parallel with traffic in each signal phase.**
+	* These maneuvers are typically performed at larger intersections with high volume and/or multiple traffic lanes that makes permissive left turns difficult or impossible to perform safely.
+	* Mitigation includes "left-turn queue boxes" and "protected intersections" which help encourage two-staged turns by providing guidance on the roadway, physically separated lanes, and even dedicated signal phases.
+	* Delay calculation for this maneuver is analogous to two-staged (diagonal) pedestrian crossing. 
 
 While a two-stage turn may encounter greater delay than a single-staged turn, only a small percentage of "strong and fearless" (Dill and McNeil, 2013) bicyclists may feel comfortable performing a single-phased permissive left turns at large busy intersections. More cautious bicyclists may perform a left turn in two stages like a pedestrian. Some bicyclists may even transition entirely into a pedestrian to use the crosswalk in very uncomfortable crossings, but this transition will incur significant additional delay and inconvenience for the bicyclist, as well as interfere with pedestrian movement.
 
-Infrastructure such as "left-turn queue boxes" and "protected intersections" attempt to mitigate encourage this maneuver by providing guidance
+
 
 When bicycles make a two-staged left turn, bicycle delay should be estimated separately for each stage of the crossing by using the procedures described in Step 2.B. The t
 
@@ -312,7 +313,7 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk1NzcxNTIzMSwtODc2NTg4MTY0LDEzMD
+eyJoaXN0b3J5IjpbMTMzOTQwOTc4NiwtODc2NTg4MTY0LDEzMD
 AzMTEwNjEsODA5MjQwMTk1LDE0MzgyODI3NDYsLTIwMzQzNDEy
 NjMsLTE3MzAwMTk0MzEsMTcxMzU4MDgzLC0zODQwMjQ2MzAsLT
 E1NjY4MTE0NjcsLTE3OTk3NTY3MDYsLTQ1NzI1NDIxMCw0Njgx
