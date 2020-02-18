@@ -314,22 +314,6 @@ $R_2$ = red time for second approach, and
 $t_s$ = startup time for bicycle to begin moving from full stop.
 
 
-$P_{R1}$ = proportion of arrivals during a Don’t Walk indication at corner (s/p).
-
-
-
-
-
-where
-$d_{bL2}$ = bicycle delay for two-stage left turn (s/bike),
-$d_{1,R1}$ = delay for stage 1, given arrival is during a red phase (s/bike),
-$d_{1,G1}$ = delay for stage 1, given arrival is during a green phase (s/bike),
-$d_{2,R1}$ = delay on median for stage 2, given arrival is during a Don’t Walk indication at corner (s/p),
-
-$d_{2,G1}$ = delay on median for stage 2, given arrival is during the Walk indication at corner (s/p), and
-$P_{R1}$ = proportion of arrivals during a Don’t Walk indication at corner (s/p).
-
-
 
 ## Step. 3: Calculate Average Bicycle Delay and Determine LOS
 
@@ -351,11 +335,11 @@ $C$ = cycle time (s).
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMzQzNDEyNjMsLTE3MzAwMTk0MzEsMT
-cxMzU4MDgzLC0zODQwMjQ2MzAsLTE1NjY4MTE0NjcsLTE3OTk3
-NTY3MDYsLTQ1NzI1NDIxMCw0NjgxNjA5NSwtNTcxMzM1NTk3LC
-0xMzQ4OTQ0NzM1LC01OTc1NDU2NzksMjAyNTEyNTYzMywyMTk0
-MjQxNjgsLTUxNDEzOTA5NCwxODc4NTAxMDUsMjE1MDQ1ODE4LC
-0xMjk3MDEzMzcsLTE3NTI1NjE5NjUsLTE0MTQxODM1MzgsMTM1
-OTY4NjQzMl19
+eyJoaXN0b3J5IjpbMTQ4ODUwOTQzNSwtMjAzNDM0MTI2MywtMT
+czMDAxOTQzMSwxNzEzNTgwODMsLTM4NDAyNDYzMCwtMTU2Njgx
+MTQ2NywtMTc5OTc1NjcwNiwtNDU3MjU0MjEwLDQ2ODE2MDk1LC
+01NzEzMzU1OTcsLTEzNDg5NDQ3MzUsLTU5NzU0NTY3OSwyMDI1
+MTI1NjMzLDIxOTQyNDE2OCwtNTE0MTM5MDk0LDE4Nzg1MDEwNS
+wyMTUwNDU4MTgsLTEyOTcwMTMzNywtMTc1MjU2MTk2NSwtMTQx
+NDE4MzUzOF19
 -->
