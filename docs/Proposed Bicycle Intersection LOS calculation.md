@@ -48,8 +48,7 @@ Although bicycles may experience some amount of queuing in locations of particul
 This step describes a procedure for evaluating the performance of one intersection approach. It is repeated for each approach of interest.
 
 ### *A. Compute Bicycle Lane Capacity*
-A wide range of capacities and saturation flow rates have been reported by many countries for bicycle lanes at intersections. Research indicates that the base saturation flow rate may be as high as 2,600 bicycles/h (31). However, few intersections provide base conditions for bicyclists, and current information is insufficient to calibrate a series of appropriate saturation flow adjustment factors. Until such factors are developed, it is recommended that a saturation flow rate of 2,000 bicycles/h be used as an average value achievable at most intersections. A saturation flow rate of 2,000 bicycles/h assumes that right‐turning motor vehicles yield the right‐of‐way to through bicyclists. Where aggressive right turning
-traffic exists, 2,000 bicycles/h may not be achievable. Local observations to determine a saturation flow rate are recommended in such cases. The capacity of the bicycle lane at a signalized intersection may be computed with:
+The capacity of the bicycle lane at a signalized intersection may be computed with:
 $$
 c_b = s_b \frac{g_b}{C}
 $$
@@ -58,10 +57,6 @@ $c_b$ = capacity of the bicycle lane (bicycles/h),
 $s_b$ = saturation flow rate of the bicycle lane = 2,000 (bicycles/h),
 $g_b$ = effective green time for the bicycle lane (s), and
 $C$ = cycle length (s).
-
-
-The effective green time for the bicycle lane can be assumed to equal that for the adjacent motor‐vehicle traffic stream that is served concurrently with the subject bicycle lane (i.e., $g_b = D_p – l_1 – l_2$).
-
 
 ### *B. Compute Bicycle Delay*
 
@@ -73,9 +68,6 @@ $$
 where
 $d_{bS}$ is bicycle delay (s/bicycle) from the signal itself,
 $v_{bic}$ is bicycle flow rate (bicycles/h), and other variables are as previously defined.
-
-This delay equation is based on the assumption that there is no bicycle incremental delay or initial queue delay. Bicyclists will not normally tolerate an oversaturated condition and will select other routes or ignore traffic regulations to avoid the associated delays.
-
 
 At most signalized intersections, the only delay to through bicycles is caused by the signal, because bicycles have the right‐of‐way over right‐turning vehicles during the green indication. Bicycle delay could be longer than that obtained from Equation when (a) bicycles are forced to weave with right‐turning traffic during the green indication, or (b) drivers do not acknowledge the bicycle right‐of‐way because of high flows of right‐turning vehicles. 
 
@@ -324,11 +316,11 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMjc5Njg4MTksMTMwMDMxMTA2MSw4MD
-kyNDAxOTUsMTQzODI4Mjc0NiwtMjAzNDM0MTI2MywtMTczMDAx
-OTQzMSwxNzEzNTgwODMsLTM4NDAyNDYzMCwtMTU2NjgxMTQ2Ny
-wtMTc5OTc1NjcwNiwtNDU3MjU0MjEwLDQ2ODE2MDk1LC01NzEz
-MzU1OTcsLTEzNDg5NDQ3MzUsLTU5NzU0NTY3OSwyMDI1MTI1Nj
-MzLDIxOTQyNDE2OCwtNTE0MTM5MDk0LDE4Nzg1MDEwNSwyMTUw
-NDU4MThdfQ==
+eyJoaXN0b3J5IjpbNzQyNDk2NDg5LDEzMDAzMTEwNjEsODA5Mj
+QwMTk1LDE0MzgyODI3NDYsLTIwMzQzNDEyNjMsLTE3MzAwMTk0
+MzEsMTcxMzU4MDgzLC0zODQwMjQ2MzAsLTE1NjY4MTE0NjcsLT
+E3OTk3NTY3MDYsLTQ1NzI1NDIxMCw0NjgxNjA5NSwtNTcxMzM1
+NTk3LC0xMzQ4OTQ0NzM1LC01OTc1NDU2NzksMjAyNTEyNTYzMy
+wyMTk0MjQxNjgsLTUxNDEzOTA5NCwxODc4NTAxMDUsMjE1MDQ1
+ODE4XX0=
 -->
