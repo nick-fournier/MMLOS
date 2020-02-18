@@ -288,15 +288,17 @@ For a two-stage left turns, two situations can occur:
 - A bicycle arrives at the first stage during a green phase. The delay is the average remaining green time from the first approach before the signal changes, plus a startup time.
 - A bicycle arrives at the first stage during a red phase. The delay is the average remaining red time in the first approach plus the entire red time in the second approach, plus two startup times.
 
+The total
+$$
+d_{bL2} = \frac{G_1}{C} d_{bL2G}  + \frac{C-G_1}{C}d_{bL2R} 
+$$
+
+
 $$
 d_{bL2G} = \frac{G_1}{2} + Y_1 + AR_1 + t_s \\
 d_{bL2R} = \frac{C-G_1}{2} + R_2 + 2t_s
 $$
 where
-
-$$
-d_{bL2} = \frac{G_1}{C} d_{bL2G}  + \frac{C-G_1}{C}d_{bL2R} 
-$$
 
 
 
@@ -335,11 +337,11 @@ $C$ = cycle time (s).
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MzAwMTk0MzEsMTcxMzU4MDgzLC0zOD
-QwMjQ2MzAsLTE1NjY4MTE0NjcsLTE3OTk3NTY3MDYsLTQ1NzI1
-NDIxMCw0NjgxNjA5NSwtNTcxMzM1NTk3LC0xMzQ4OTQ0NzM1LC
-01OTc1NDU2NzksMjAyNTEyNTYzMywyMTk0MjQxNjgsLTUxNDEz
-OTA5NCwxODc4NTAxMDUsMjE1MDQ1ODE4LC0xMjk3MDEzMzcsLT
-E3NTI1NjE5NjUsLTE0MTQxODM1MzgsMTM1OTY4NjQzMiwtMTU2
-MzgwNzI4Ml19
+eyJoaXN0b3J5IjpbLTEwMDQ5NTUxODIsLTE3MzAwMTk0MzEsMT
+cxMzU4MDgzLC0zODQwMjQ2MzAsLTE1NjY4MTE0NjcsLTE3OTk3
+NTY3MDYsLTQ1NzI1NDIxMCw0NjgxNjA5NSwtNTcxMzM1NTk3LC
+0xMzQ4OTQ0NzM1LC01OTc1NDU2NzksMjAyNTEyNTYzMywyMTk0
+MjQxNjgsLTUxNDEzOTA5NCwxODc4NTAxMDUsMjE1MDQ1ODE4LC
+0xMjk3MDEzMzcsLTE3NTI1NjE5NjUsLTE0MTQxODM1MzgsMTM1
+OTY4NjQzMl19
 -->
