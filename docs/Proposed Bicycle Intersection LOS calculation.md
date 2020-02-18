@@ -9,10 +9,10 @@ Although bicycles may experience some amount of queuing in locations of particul
 1. Determine Signal Delay for Through Maneuvers
 
 
-2. Determine Left-Turn Maneuver Delay
+2. Determine Left Turn Maneuver Delay
 
 
-   a. Identify left-turn maneuver
+   a. Identify left turn maneuver
 
 
    b. Determine single-phase turn delay
@@ -282,9 +282,13 @@ P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{P_b^4 M_
 $$
 where $P(Y_0)$ = 0.
 
-### C: Determine two-stage Left-Turn Delay
+### C: Determine two-stage Left Turn Delay
+
+For a two-stage left turn a bicycle 
 
 Two-stage left turns may be computed as
+
+
 
 $$
 d_{bL2} = [ d_{1,R1}P_{R1} + d_{1,G1}(1-P_{R1}) ]_1 + [ d_{2,R1}P_{R1} + d_{2,G1}(1-P_{R1})]_2
@@ -302,7 +306,6 @@ $P_{R1}$ = proportion of arrivals during a Don’t Walk indication at corner (s/
 
 
 ## Step. 3: Calculate Average Bicycle Delay and Determine LOS
-
 
 $$
 d_b = d_{bS} + P_L [(1-P_{L2})d_{bL1} + P_{L2}d_{bL2})] \frac{g_c}{C}
@@ -322,10 +325,10 @@ $C$ = cycle time (s).
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3OTk3NTY3MDYsLTQ1NzI1NDIxMCw0Nj
-gxNjA5NSwtNTcxMzM1NTk3LC0xMzQ4OTQ0NzM1LC01OTc1NDU2
-NzksMjAyNTEyNTYzMywyMTk0MjQxNjgsLTUxNDEzOTA5NCwxOD
-c4NTAxMDUsMjE1MDQ1ODE4LC0xMjk3MDEzMzcsLTE3NTI1NjE5
-NjUsLTE0MTQxODM1MzgsMTM1OTY4NjQzMiwtMTU2MzgwNzI4Ml
-19
+eyJoaXN0b3J5IjpbLTYyOTk5NTYyLC0xNzk5NzU2NzA2LC00NT
+cyNTQyMTAsNDY4MTYwOTUsLTU3MTMzNTU5NywtMTM0ODk0NDcz
+NSwtNTk3NTQ1Njc5LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC01MT
+QxMzkwOTQsMTg3ODUwMTA1LDIxNTA0NTgxOCwtMTI5NzAxMzM3
+LC0xNzUyNTYxOTY1LC0xNDE0MTgzNTM4LDEzNTk2ODY0MzIsLT
+E1NjM4MDcyODJdfQ==
 -->
