@@ -221,7 +221,7 @@ On average, a potential yielding event will occur every $h$ seconds, where $P(Y)
 
 
 1. Clear—no vehicles are arriving within the critical headway window, or
-2. Blocked—a vehicle is arriving within the critical headway window. The bicycle may cross only if vehicles in each blocked lane choose to yield. If not, the bicycle must wait an additional $h$ seconds for the next yielding event. On average, this process will be repeated until the wait exceeds the expected delay required for an adequate gap in traffic ($d_{bgd}$), at which point the average bicycle will receive an adequate gap in traffic and will be able to cross the street without having to depend on yielding motorists. Thus, average bicycle delay can be calculated with Equation $\ref{eq:dbtwostage}$, where the first term in the equation represents expected delay from crossings occurring when motorists yield, and the second term represents expected delay from crossings where pedestrians wait for an adequate gap.
+2. Blocked—a vehicle is arriving within the critical headway window. The bicycle may cross only if vehicles in each blocked lane choose to yield. If not, the bicycle must wait an additional $h$ seconds for the next yielding event. On average, this process will be repeated until the wait exceeds the expected delay required for an adequate gap in traffic ($d_{bgd}$), at which point the average bicycle will receive an adequate gap in traffic and will be able to cross the street without having to depend on yielding motorists. Thus, average bicycle delay can be calculated below, where the first term in the equation represents expected delay from crossings occurring when motorists yield, and the second term represents expected delay from crossings where pedestrians wait for an adequate gap.
 
 
 $$
@@ -277,8 +277,8 @@ where $P(Y_0)$ = 0.
 
 
 A four‐lane crossing follows the same principles as above. The calculation for $P(Y_i)$ with four-lanes is:
-$$\tiny
-P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\left[ \frac{P_b^4 M_y^4 + 4P_b^3(1-P_b)M_y^3 + 6P_b^2(1-P_b)^2 M_y^2 + 4P_b(1-P_b^3)M_y}{P_d} \right]
+$$
+P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\times\\\left[ \frac{P_b^4 M_y^4 + 4P_b^3(1-P_b)M_y^3 + 6P_b^2(1-P_b)^2 M_y^2 + 4P_b(1-P_b^3)M_y}{P_d} \right]
 $$
 where $P(Y_0)$ = 0.
 
@@ -331,7 +331,7 @@ $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (dec
 $g_c$ = the effective green time of the bicycle lane (s),
 $C$ = cycle time (s).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NjUyNzk0ODUsODA5MjQwMTk1LDE0Mz
+eyJoaXN0b3J5IjpbLTE5OTAxODgyNDksODA5MjQwMTk1LDE0Mz
 gyODI3NDYsLTIwMzQzNDEyNjMsLTE3MzAwMTk0MzEsMTcxMzU4
 MDgzLC0zODQwMjQ2MzAsLTE1NjY4MTE0NjcsLTE3OTk3NTY3MD
 YsLTQ1NzI1NDIxMCw0NjgxNjA5NSwtNTcxMzM1NTk3LC0xMzQ4
