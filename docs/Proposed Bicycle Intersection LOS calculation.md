@@ -317,23 +317,21 @@ $t_s$ = startup time for bicycle to begin moving from full stop.
 
 The overall bicycle delay is then calculated 
 $$
-d_b = d_{bS} + P_L [(1-P_{L2})d_{bL1} + P_{L2}d_{bL2})] \frac{g_c}{C}
+d_b = d_{bS} + P_L \left[(1-P_{L2})d_{bL1} + P_{L2}d_{bL2})\right]
 $$
 where
 $d_b$ = overall average bicycle delay (s/bike),
 $d_{bS}$ = bicycle delay from signal (s/bike),
 $d_{bL1}$ = bicycle delay for one-stage left turns (s/bike),
 $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
-$P_L$ = the proportion of left turning bicycles (decimal),
-$P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal),
-$g_c$ = the effective green time of the bicycle lane (s),
-$C$ = cycle time (s).
+$P_L$ = the proportion of left turning bicycles (decimal), and
+$P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTcwMjE0NjEzLDgwOTI0MDE5NSwxNDM4Mj
-gyNzQ2LC0yMDM0MzQxMjYzLC0xNzMwMDE5NDMxLDE3MTM1ODA4
-MywtMzg0MDI0NjMwLC0xNTY2ODExNDY3LC0xNzk5NzU2NzA2LC
-00NTcyNTQyMTAsNDY4MTYwOTUsLTU3MTMzNTU5NywtMTM0ODk0
-NDczNSwtNTk3NTQ1Njc5LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC
-01MTQxMzkwOTQsMTg3ODUwMTA1LDIxNTA0NTgxOCwtMTI5NzAx
-MzM3XX0=
+eyJoaXN0b3J5IjpbMTMwMDMxMTA2MSw4MDkyNDAxOTUsMTQzOD
+I4Mjc0NiwtMjAzNDM0MTI2MywtMTczMDAxOTQzMSwxNzEzNTgw
+ODMsLTM4NDAyNDYzMCwtMTU2NjgxMTQ2NywtMTc5OTc1NjcwNi
+wtNDU3MjU0MjEwLDQ2ODE2MDk1LC01NzEzMzU1OTcsLTEzNDg5
+NDQ3MzUsLTU5NzU0NTY3OSwyMDI1MTI1NjMzLDIxOTQyNDE2OC
+wtNTE0MTM5MDk0LDE4Nzg1MDEwNSwyMTUwNDU4MTgsLTEyOTcw
+MTMzN119
 -->
