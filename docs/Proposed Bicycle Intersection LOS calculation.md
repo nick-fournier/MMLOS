@@ -280,8 +280,8 @@ d_{bL2} = \frac{g_1}{C}d_{bL2G}  + \frac{C-g_1}{C}d_{bL2R}
 $$
 where
 $d_{bL2}$ = bicycle delay for two-stage left turn (s/bike),
-$\frac{g_1}{C}$ = the proportion of two-stage left turning bicycles arriving during green, and
-$\frac{C-g_1}{C}$ = the proportion of two-stage left turning bicycles arriving during red.
+$\frac{g_1}{C}$ = the proportion of bicycles arriving during green, and
+$\frac{C-g_1}{C}$ = the proportion of bicycles arriving during red or yellow.
 
 
 
@@ -300,11 +300,11 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODE4NzI4ODExLC04NzY1ODgxNjQsMTMwMD
-MxMTA2MSw4MDkyNDAxOTUsMTQzODI4Mjc0NiwtMjAzNDM0MTI2
-MywtMTczMDAxOTQzMSwxNzEzNTgwODMsLTM4NDAyNDYzMCwtMT
-U2NjgxMTQ2NywtMTc5OTc1NjcwNiwtNDU3MjU0MjEwLDQ2ODE2
-MDk1LC01NzEzMzU1OTcsLTEzNDg5NDQ3MzUsLTU5NzU0NTY3OS
-wyMDI1MTI1NjMzLDIxOTQyNDE2OCwtNTE0MTM5MDk0LDE4Nzg1
-MDEwNV19
+eyJoaXN0b3J5IjpbLTE5NzQwNzY4MDgsODE4NzI4ODExLC04Nz
+Y1ODgxNjQsMTMwMDMxMTA2MSw4MDkyNDAxOTUsMTQzODI4Mjc0
+NiwtMjAzNDM0MTI2MywtMTczMDAxOTQzMSwxNzEzNTgwODMsLT
+M4NDAyNDYzMCwtMTU2NjgxMTQ2NywtMTc5OTc1NjcwNiwtNDU3
+MjU0MjEwLDQ2ODE2MDk1LC01NzEzMzU1OTcsLTEzNDg5NDQ3Mz
+UsLTU5NzU0NTY3OSwyMDI1MTI1NjMzLDIxOTQyNDE2OCwtNTE0
+MTM5MDk0XX0=
 -->
