@@ -90,16 +90,14 @@ While a two-stage turn may encounter greater delay than a single-staged turn in 
 To determine overall intersection bicycle LOS, the bicycle delay is the sum of signal delay plus turning maneuver delay. A proportion of bicyclists making each left turn maneuver should be locally measured or assumed. Research is needed in this area to determine typical proportions of bicyclists making each maneuver depending on intersection size, operation, and volume.
 
 ### A: Determine Single-Stage Left Turn Delay
-Single-stage left turn bicycle delay is calculated similar to the delay experienced by pedestrians crossing lanes of uncontrolled traffic. Like pedestria
+Single-stage left turn bicycle delay is calculated similar to the delay experienced by pedestrians crossing lanes of uncontrolled traffic. In this case, bicyclists must wait for an acceptable gap to cross each respective lane of traffic. 
 
 #### i. Determine Critical Headway
-The procedure for estimating the critical headway is similar to that described Critical headway for pedestrians. for automobiles. The critical headway is the time in seconds below which a pedestrian will not attempt to begin crossing the street. Pedestrians use their judgment to determine whether the available headway between conflicting vehicles is long enough for a safe crossing. If the available headway is greater than the critical headway, it is assumed that the pedestrian will cross, but if the available headway is less than the critical headway, it is assumed that the pedestrian will not cross.
-
+The critical headway is the time in seconds below which a bicycle will not attempt to cross traffic. Bicyclists use their judgment to determine whether the available headway between conflicting vehicles is long enough for a safe crossing. If the available headway is greater than the critical headway, it is assumed that the pedestrian will cross, but if the available headway is less than the critical headway, it is assumed that the pedestrian will not cross.
 
 $$
 t_{cb} = \frac{L}{S_b} + t_{sb}
 $$
-
 
 where
 $t_{lb}$ = critical headway for a single left-turning bicycle (s),
@@ -302,11 +300,11 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA2Mzg4MDEwNywtODc2NTg4MTY0LDEzMD
-AzMTEwNjEsODA5MjQwMTk1LDE0MzgyODI3NDYsLTIwMzQzNDEy
-NjMsLTE3MzAwMTk0MzEsMTcxMzU4MDgzLC0zODQwMjQ2MzAsLT
-E1NjY4MTE0NjcsLTE3OTk3NTY3MDYsLTQ1NzI1NDIxMCw0Njgx
-NjA5NSwtNTcxMzM1NTk3LC0xMzQ4OTQ0NzM1LC01OTc1NDU2Nz
-ksMjAyNTEyNTYzMywyMTk0MjQxNjgsLTUxNDEzOTA5NCwxODc4
-NTAxMDVdfQ==
+eyJoaXN0b3J5IjpbNjgyMzE5NzYxLC04NzY1ODgxNjQsMTMwMD
+MxMTA2MSw4MDkyNDAxOTUsMTQzODI4Mjc0NiwtMjAzNDM0MTI2
+MywtMTczMDAxOTQzMSwxNzEzNTgwODMsLTM4NDAyNDYzMCwtMT
+U2NjgxMTQ2NywtMTc5OTc1NjcwNiwtNDU3MjU0MjEwLDQ2ODE2
+MDk1LC01NzEzMzU1OTcsLTEzNDg5NDQ3MzUsLTU5NzU0NTY3OS
+wyMDI1MTI1NjMzLDIxOTQyNDE2OCwtNTE0MTM5MDk0LDE4Nzg1
+MDEwNV19
 -->
