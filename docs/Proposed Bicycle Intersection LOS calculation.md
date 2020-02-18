@@ -217,9 +217,7 @@ $h$ = average headway for each through lane,
 $P(Y_i)$ = probability that motorists yield to pedestrian on crossing event i, and
 $n=Int\left(\frac{1}{e^{-vt_{bc,G}}} \right)$, average number of crossing events before an adequate gap is available.
 
-The first term in the equation represents expected delay from crossings occurring when motorists yield, and the second term represents expected delay from crossings where pedestrians wait for an adequate gap. 
-
-Equation $\ref{eq:dbtwostage}$ requires the calculation of $P(Y_i)$. The probabilities $P(Y_i)$ that motorists will yield for a given crossing event are considered below for bicycle crossings of one, two, three, and four through lanes.
+The first term in the equation represents expected delay from crossings occurring when motorists yield, and the second term represents expected delay from crossings where pedestrians wait for an adequate gap. The equation requires the calculation of $P(Y_i)$. The probabilities $P(Y_i)$ that motorists will yield for a given crossing event are considered below for bicycle crossings of one, two, three, and four through lanes.
 
 
 ##### *One-Lane Crossing*
@@ -259,7 +257,7 @@ where $P(Y_0)$ = 0.
 
 A four‐lane crossing follows the same principles as above. The calculation for $P(Y_i)$ with four-lanes is:
 $$
-P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\times\\\left[ \frac{P_b^4 M_y^4 + 4P_b^3(1-P_b)M_y^3 + 6P_b^2(1-P_b)^2 M_y^2 + 4P_b(1-P_b^3)M_y}{P_d} \right]
+P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\times\left[ \frac{P_b^4 M_y^4 + 4P_b^3(1-P_b)M_y^3 + 6P_b^2(1-P_b)^2 M_y^2 + 4P_b(1-P_b^3)M_y}{P_d} \right]
 $$
 where $P(Y_0)$ = 0.
 
