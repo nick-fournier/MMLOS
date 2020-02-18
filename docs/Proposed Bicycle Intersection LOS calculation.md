@@ -288,13 +288,18 @@ For a two-stage left turns, two situations can occur:
 - A bicycle arrives at the first stage during a green phase. The delay is the average remaining green time from the first approach before the signal changes, plus a startup time.
 - A bicycle arrives at the first stage during a red phase. The delay is the average remaining red time in the first approach plus the entire red time in the second approach, plus two startup times.
 
-Assuming bicycles arrive randomly at the first approach, the total two-stage left turn delay is then calculated as the sum of the proportion of bicycles ar
-
- above delay for arriving at a red or green in the first approach times the proportion of bicycles arriving in each. 
+Assuming bicycles arrive randomly at the first approach, the total two-stage left turn delay is then calculated as the sum of the product of the delay and proportion of bicycles arriving in each case, expressed as:
 $$
 d_{bL2} = \frac{G_1}{C} d_{bL2G}  + \frac{C-G_1}{C}d_{bL2R} 
 $$
+where
+$d_{bL2}$ = bicycle delay for two-stage left turn (s/bike),
+$d_{bR}$ = delay given arrival is during a red phase (s/bike),
+$d_{1,G1}$ = delay for stage 1, given arrival is during a green phase (s/bike),
+$d_{2,R1}$ = delay on median for stage 2, given arrival is during a Don’t Walk indication at corner (s/p),
 
+$d_{2,G1}$ = delay on median for stage 2, given arrival is during the Walk indication at corner (s/p), and
+$P_{R1}$ = proportion of arrivals during a Don’t Walk indication at corner (s/p).
 
 $$
 d_{bL2G} = \frac{G_1}{2} + Y_1 + AR_1 + t_s \\
@@ -304,9 +309,7 @@ where
 
 
 
-$$
-d_{bL2} = [ d_{1,R1}P_{R1} + d_{1,G1}(1-P_{R1}) ]_1 + [ d_{2,R1}P_{R1} + d_{2,G1}(1-P_{R1})]_2
-$$
+
 
 where
 $d_{bL2}$ = bicycle delay for two-stage left turn (s/bike),
@@ -339,11 +342,11 @@ $C$ = cycle time (s).
 
 The delay experienced by a pedestrian is the service measure. Exhibit 19‐2 lists LOS criteria for pedestrians at TWSC intersections based on pedestrian delay. Pedestrian delay at TWSC intersections with two‐stage crossings is equal to the sum of the delay for each stage of the crossing.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NTc2NDk0OTUsLTE3MzAwMTk0MzEsMT
-cxMzU4MDgzLC0zODQwMjQ2MzAsLTE1NjY4MTE0NjcsLTE3OTk3
-NTY3MDYsLTQ1NzI1NDIxMCw0NjgxNjA5NSwtNTcxMzM1NTk3LC
-0xMzQ4OTQ0NzM1LC01OTc1NDU2NzksMjAyNTEyNTYzMywyMTk0
-MjQxNjgsLTUxNDEzOTA5NCwxODc4NTAxMDUsMjE1MDQ1ODE4LC
-0xMjk3MDEzMzcsLTE3NTI1NjE5NjUsLTE0MTQxODM1MzgsMTM1
-OTY4NjQzMl19
+eyJoaXN0b3J5IjpbMTk5MzY3Mjg5OCwtMTczMDAxOTQzMSwxNz
+EzNTgwODMsLTM4NDAyNDYzMCwtMTU2NjgxMTQ2NywtMTc5OTc1
+NjcwNiwtNDU3MjU0MjEwLDQ2ODE2MDk1LC01NzEzMzU1OTcsLT
+EzNDg5NDQ3MzUsLTU5NzU0NTY3OSwyMDI1MTI1NjMzLDIxOTQy
+NDE2OCwtNTE0MTM5MDk0LDE4Nzg1MDEwNSwyMTUwNDU4MTgsLT
+EyOTcwMTMzNywtMTc1MjU2MTk2NSwtMTQxNDE4MzUzOCwxMzU5
+Njg2NDMyXX0=
 -->
