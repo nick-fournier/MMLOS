@@ -87,7 +87,19 @@ At signalized intersections, bicycles typically perform a left turn using one of
 
 While a two-stage turn may encounter greater delay than a single-staged turn in most cases, finding a gap in a stream on parallel and oncoming traffic is intimidating and often dangerous at busy intersections. Only a small percentage of "strong and fearless" (Dill and McNeil, 2013) bicyclists may feel comfortable performing a single-phased permissive left turns at large busy intersections. More cautious bicyclists may perform a left turn in two stages like a pedestrian. Some bicyclists may even transition entirely into a pedestrian to invoke right-of-way in a crosswalk for very uncomfortable crossings, but this transition will incur significant additional delay and inconvenience for the bicyclist, as well as interfere with pedestrian movement.
 
-To determine overall intersection bicycle LOS, the bicycle delay is the sum of signal delay plus turning maneuver delay. A proportion of bicyclists making each left turn maneuver should be locally measured or assumed. Research is needed in this area to determine typical proportions of bicyclists making each maneuver depending on intersection size, operation, and volume.
+To determine overall intersection bicycle LOS, the bicycle delay is the sum of signal delay plus turning maneuver delay.  The overall bicycle delay is then calculated with:
+$$
+d_b = d_{bS} + P_L \left[(1-P_{L2})d_{bL1} + P_{L2}d_{bL2})\right]
+$$
+where
+$d_b$ = overall average bicycle delay (s/bike),
+$d_{bS}$ = bicycle delay from signal (s/bike),
+$d_{bL1}$ = bicycle delay for one-stage left turns (s/bike),
+$d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
+$P_L$ = the proportion of left turning bicycles (decimal), and
+$P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
+
+A proportion of bicyclists making each left turn maneuver should be locally measured or assumed. Research is needed in this area to determine typical proportions of bicyclists making each maneuver depending on intersection size, operation, and volume.
 
 ### A: Determine Single-Stage Left Turn Delay
 Single-stage left turn bicycle delay is calculated similar to the delay experienced by pedestrians crossing lanes of uncontrolled traffic. In this case, bicyclists must wait for an acceptable gap to cross each respective lane of traffic. 
@@ -300,11 +312,11 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NzQwNzY4MDgsODE4NzI4ODExLC04Nz
-Y1ODgxNjQsMTMwMDMxMTA2MSw4MDkyNDAxOTUsMTQzODI4Mjc0
-NiwtMjAzNDM0MTI2MywtMTczMDAxOTQzMSwxNzEzNTgwODMsLT
-M4NDAyNDYzMCwtMTU2NjgxMTQ2NywtMTc5OTc1NjcwNiwtNDU3
-MjU0MjEwLDQ2ODE2MDk1LC01NzEzMzU1OTcsLTEzNDg5NDQ3Mz
-UsLTU5NzU0NTY3OSwyMDI1MTI1NjMzLDIxOTQyNDE2OCwtNTE0
-MTM5MDk0XX0=
+eyJoaXN0b3J5IjpbMTE4NzA0NjE3Niw4MTg3Mjg4MTEsLTg3Nj
+U4ODE2NCwxMzAwMzExMDYxLDgwOTI0MDE5NSwxNDM4MjgyNzQ2
+LC0yMDM0MzQxMjYzLC0xNzMwMDE5NDMxLDE3MTM1ODA4MywtMz
+g0MDI0NjMwLC0xNTY2ODExNDY3LC0xNzk5NzU2NzA2LC00NTcy
+NTQyMTAsNDY4MTYwOTUsLTU3MTMzNTU5NywtMTM0ODk0NDczNS
+wtNTk3NTQ1Njc5LDIwMjUxMjU2MzMsMjE5NDI0MTY4LC01MTQx
+MzkwOTRdfQ==
 -->
