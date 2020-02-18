@@ -136,7 +136,7 @@ $N_b$ = spatial distribution of bicycles (bikes).
 
 
 #### ii. Estimate Probability of a Delayed Crossing
-On the basis of calculation of the critical headway $t_G$, the probability that a bicycle will not incur any turning delay is equal to the likelihood that a bicycle will encounter a gap greater than or equal to the critical headway immediately upon arrival at the intersection. Assuming random arrivals of vehicles on the major street, and equal distribution of vehicles among all through lanes on the major street, the probability of encountering a headway exceeding the critical headway in any given lane can be estimated by using a Poisson distribution. The likelihood that a gap in a given lane does not exceed the critical headway is thus the complement as shown in the equation. Because traffic is assumed to be distributed independently in each through lane, the equation below shows the probability that a bicycle incurs nonzero delay at a TWSC crossing.
+On the basis of calculation of the critical headway $t_G$, the probability that a bicycle will not incur any turning delay is equal to the likelihood that a bicycle will encounter a gap greater than or equal to the critical headway immediately upon arrival at the intersection. Assuming random arrivals of vehicles on the major street, and equal distribution of vehicles among all through lanes on the major street, the probability of encountering a headway exceeding the critical headway in any given lane can be estimated by using a Poisson distribution. The likelihood that a gap in a given lane does not exceed the critical headway is thus the complement as shown in the equation. Because traffic is assumed to be distributed independently in each through lane, the equation below shows the probability that a bicycle incurs nonzero delay.
 $$
 P_b = 1 - e^\frac{-t_{cb,G}v_v}{L}\\
 P_d = 1 - (1-P_b)^L
@@ -296,7 +296,7 @@ $d_{bL2}$ = bicycle delay for two-stage left turns (s/bike),
 $P_L$ = the proportion of left turning bicycles (decimal), and
 $P_{L2}$ = the proportion of left turning bicycles using two-stage maneuver (decimal).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5Njc3ODg3NTEsLTg3NjU4ODE2NCwxMz
+eyJoaXN0b3J5IjpbLTE1Mjg2NjY2MzIsLTg3NjU4ODE2NCwxMz
 AwMzExMDYxLDgwOTI0MDE5NSwxNDM4MjgyNzQ2LC0yMDM0MzQx
 MjYzLC0xNzMwMDE5NDMxLDE3MTM1ODA4MywtMzg0MDI0NjMwLC
 0xNTY2ODExNDY3LC0xNzk5NzU2NzA2LC00NTcyNTQyMTAsNDY4
