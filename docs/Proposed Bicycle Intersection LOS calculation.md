@@ -12,31 +12,22 @@ Although bicycles may experience some amount of queuing in locations of particul
 2. Determine Left Turn Maneuver Delay
 
 
-   a. Identify left turn maneuver
+      b. Determine single-phase turn delay
+
+      c. Determine two-stage turn delay
+
+   ​		i.  Determine Critical Headway
+
+   ​		ii. Estimate Probability of a Delayed Crossing
 
 
-   b. Determine single-phase turn delay
+   ​		iii. Calculate Average Delay to Wait for Adequate Gap
 
 
-   c. Determine two-stage turn delay
+   ​		iv. Estimate Delay Reduction due to Yielding Vehicles
 
 
-   ​	i.  Determine Critical Headway
-
-
-   ​	ii. Estimate Probability of a Delayed Crossing
-
-
-   ​	iii. Calculate Average Delay to Wait for Adequate Gap
-
-
-   ​	iv. Estimate Delay Reduction due to Yielding Vehicles
-
-
-   ​	v. Calculate Average Pedestrian Delay and Determine LOS
-
-
-3. Determine average intersection Delay and Bicycle LOS Score for Intersection
+   ​		v. Calculate Average Pedestrian Delay and Determine LOS
 
 
 *If no control, use TWSC intersection delay. If stop controlled, intersection delay is 0.
