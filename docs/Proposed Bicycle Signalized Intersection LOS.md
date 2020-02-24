@@ -1,3 +1,12 @@
+---
+output: 
+  pdf_document:
+    toc: true
+    number_sections: true
+documentclass: article
+classoption: letterpaper
+---
+
 # BICYCLE MODE SIGNALIZED INTERSECTION LOS
 
 > - The following bicycle delay calculation methodology is a modified from the Highway Capacity Manual's pedestrian delay calculation for Two-Way Stop Controlled Intersections, Kittelson & Associates, Inc. NCHRP Project 17-87 Appendix C: "Revised Model for Predicting the Pedestrian Delay at Signalized Intersections" and Appendix D: "Revised Model for Predicting the Pedestrian Delay at Uncontrolled Intersections".
