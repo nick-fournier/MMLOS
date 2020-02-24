@@ -17,48 +17,69 @@ Although bicycles may experience some amount of queuing in locations of particul
 
 1. Determine Signal Delay for Through Maneuvers
 
+   A. Compute Bicycle Lane Capacity
+
+   B. Compute Signal Delay
+
+   C. Compute delay from right-turning vehicles blocking lane
 
 2. Determine Left Turn Maneuver Delay
 
+   A. Determine single-phase turn delay
 
-      b. Determine single-phase turn delay
-    
-      c. Determine two-stage turn delay
+   B. Determine two-stage turn delay
 
-   ​		i.  Determine Critical Headway
+   ​	i.  Determine Critical Headway
 
-   ​		ii. Estimate Probability of a Delayed Crossing
+   ​	ii. Estimate Probability of a Delayed Crossing
 
+   ​	iii. Calculate Average Delay to Wait for Adequate Gap
 
-   ​		iii. Calculate Average Delay to Wait for Adequate Gap
-
-
-   ​		iv. Estimate Delay Reduction due to Yielding Vehicles
+   ​	iv. Estimate Delay Reduction due to Yielding Vehicles
 
 
-   ​		v. Calculate Average Bicycle Delay and Determine LOS
+   ​3. Calculate Average Bicycle Delay and Determine LOS
 
 
 *If no control, use TWSC intersection delay. If stop controlled, intersection delay is 0.
 
 
-## Step 1: Determine Signal Delay for Through Maneuvers
-
+## Step 1: Determine signal delay for through maneuvers
 
 This step describes a procedure for evaluating the performance of one intersection approach. It is repeated for each approach of interest.
 
-### *A. Compute Bicycle Lane Capacity*
-The capacity of the bicycle lane at a signalized intersection may be computed with:
+At most signalized intersections, the only technical delay for bicycles is caused by the signal, because bicycles have the right‐of‐way over right‐turning vehicles during the green indication. However, bicycle delay could be longer when:
+
+​	a. bicycles are forced to weave with right‐turning traffic during the green indication, or
+
+​	b. drivers do not acknowledge the bicycle right‐of‐way because of high flows of right‐turning vehicles. 
+
+​	c. bicycles make a left-turn either as permissive left or a two-stage turn with the signal change.
+
+### *A. Compute bicycle lane capacity*
+Bicycle lane capacity is largely undetermined in the industry and currently being researched. The Highway Capacity Manual use 2,000 bicycles per hour, but notes that this is merely an estimated guess to be used as a starting value. The complexity comes from highly variable bicyclists speeds and lack of discrete lane configurations as with automobiles. For example, bicycles may bunch up into multiple queues within a single bicycles lane. Research by Raksuntorn and Khan (2003) found the saturation flow rate of bicycles to be approximately 1,500 bicycles per hour per whole 2.5-foot "sub-lane", calculated as
 $$
-c_b = s_b \frac{g_b}{C}
+s_b = 1,500 \times \left\lfloor\frac{W_{b}}{2.5}\right\rfloor
+$$
+
+Intersection capacity becomes more complex as right-turning automobiles will block the bicycle lane, forcing bicycles to stop, or take a risky weaving maneuver. The capacity reduction is analogous to intersecting flows at an intersection with a priority street. 
+
+<img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/Bike-right-turn-conflicts.svg?sanitize=true" width=600>
+
+The capacity of the bicycle lane at a signalized intersection may be computed as the product of the saturation flow rate, the capacity reduction factor, and the available green time:
+$$
+c_b = s_b \times f_(v_{auto}) \times \frac{g_b}{C}
 $$
 where
 $c_b$ = capacity of the bicycle lane (bicycles/h),
+
+$f_{cr}(v_{auto})$ = right turning vehicle capacity reduction factor,
+
 $s_b$ = saturation flow rate of the bicycle lane = 2,000 (bicycles/h),
 $g_b$ = effective green time for the bicycle lane (s), and
 $C$ = cycle length (s).
 
-### *B. Compute Bicycle Delay*
+### *B. Compute bicycle delay*
 
 
 Signalized intersection bicycle delay is computed with:
@@ -66,12 +87,18 @@ $$
 d_{bS} = \frac{0.5(1-\frac{g_b}{C})^2}{1 - min\left[\frac{v_{bic}}{c_b},1.0\right]\frac{g_b}{C}}
 $$
 where
-$d_{bS}$ is bicycle delay (s/bicycle) from the signal itself,
+$d_{bS}$ is bicycle delay (s/bicycle) from the signalized intersection itself,
 $v_{bic}$ is bicycle flow rate (bicycles/h), and other variables are as previously defined.
 
-At most signalized intersections, the only delay to through bicycles is caused by the signal, because bicycles have the right‐of‐way over right‐turning vehicles during the green indication. Bicycle delay could be longer when (a) bicycles are forced to weave with right‐turning traffic during the green indication, or (b) drivers do not acknowledge the bicycle right‐of‐way because of high flows of right‐turning vehicles. 
+### C. Compute capacity reduction from right-turning vehicles blocking lane
 
-## Step 2: Determine Left-Turn Maneuver Delay
+
+
+
+
+
+
+## Step 2: Determine left-turn maneuver delay
 At signalized intersections, bicycles typically perform a left turn using one of two maneuvers.
 
 <img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/Bike-left-turn-conflicts.svg?sanitize=true" width=600>
@@ -103,10 +130,10 @@ A proportion of bicyclists making each left turn maneuver should be locally meas
 
 Delay for single- and two-staged left turns are calculated in Steps A and B. 
 
-### A: Determine Single-Stage Left Turn Delay
+### A: Determine single-stage left turn delay
 Single-stage left turn bicycle delay is calculated similar to the delay experienced by pedestrians crossing lanes of uncontrolled traffic. In this case, bicyclists must wait for an acceptable gap to cross each respective lane of traffic. 
 
-#### i. Determine Critical Headway
+#### i. Determine critical headway
 The critical headway is the time in seconds below which a bicycle will not attempt to cross traffic. Bicyclists use their judgment to determine whether the available headway between conflicting vehicles is long enough for a safe crossing. If the available headway is greater than the critical headway, it is assumed that the bicycle will cross, but if the available headway is less than the critical headway, it is assumed that the bicycle will not cross.
 
 $$
@@ -149,7 +176,7 @@ $t_c$ = critical headway for a single bicycle (s), and
 $N_b$ = spatial distribution of bicycles (bikes).
 
 
-#### ii. Estimate Probability of a Delayed Crossing
+#### ii. Estimate probability of a delayed crossing
 On the basis of calculation of the critical headway $t_G$, the probability that a bicycle will not incur any turning delay is equal to the likelihood that a bicycle will encounter a gap greater than or equal to the critical headway immediately upon arrival at the intersection. Assuming random arrivals of vehicles on the major street, and equal distribution of vehicles among all through lanes on the major street, the probability of encountering a headway exceeding the critical headway in any given lane can be estimated by using a Poisson distribution. The likelihood that a gap in a given lane does not exceed the critical headway is thus the complement as shown in the equation. Because traffic is assumed to be distributed independently in each through lane, the equation below shows the probability that a bicycle incurs nonzero delay.
 $$
 P_b = 1 - e^\frac{-t_{cb,G}v_v}{L}\\
@@ -163,7 +190,7 @@ $t_{cb,G}$ = group critical headway (s), and
 $v$ = vehicular flow rate (veh/s).
 
 
-#### iii: Calculate Average Delay to Wait for Adequate Gap
+#### iii: Calculate average delay to wait for adequate gap
 
 
 Assuming that no motor vehicles yield and the bicycle is forced to wait for an adequate gap, depends on the critical headway, the vehicular flow rate of the subject crossing, and the mean vehicle headway. Thus, bicyclists making the a left turn crossing are subject to the same delay calculation as for pedestrians making a crossing uncontrolled intersection approaches. The average delay per bicycle to wait for an adequate gap is given by:
@@ -186,7 +213,7 @@ $d_{bg}$ = average bicycle gap delay (s), and
 $P_d$ = probability of a delayed crossing.
 
 
-#### iv. Estimate Delay Reduction due to Yielding Vehicles
+#### iv. Estimate delay reduction due to yielding vehicles
 Thus far the equations estimate bicycle delay when motorists on the major approaches do not yield to pedestrians. Where motorist yield rates are significantly higher than zero,  pedestrians will experience considerably less delay. Although automobiles are generally ***not*** legally required to stop for bicycles, actual motorist yielding behavior varies considerably. Motorist yield rates are influenced by a range of factors, including roadway geometry, travel speeds, roadway treatments, local culture, and law enforcement practices. When a bicycle arrives at a crossing and finds an inadequate gap, that bicycle is delayed until one of two situations occurs: (a) a gap greater than the critical headway is available, or (b) motor vehicles yield and allow the bicycle to cross. 
 
 
@@ -220,7 +247,7 @@ $n=Int\left(\frac{1}{e^{-vt_{bc,G}}} \right)$, average number of crossing events
 The first term in the equation represents expected delay from crossings occurring when motorists yield, and the second term represents expected delay from crossings where pedestrians wait for an adequate gap. The equation requires the calculation of $P(Y_i)$. The probabilities $P(Y_i)$ that motorists will yield for a given crossing event are considered below for bicycle crossings of one, two, three, and four through lanes.
 
 
-##### *One-Lane Crossing*
+##### *One-lane crossing*
 
 
 Under the scenario in which a bicycle crosses one lane, $P(Y_i)$ is found simply. When $i = 1$, $P(Y_i)$ is equal to the probability of a delayed crossing $P_d$ multiplied by the motorist yield rate, $M_y$. For $i = 2$, $P(Y_i)$ is equal to $M_y$ multiplied by the probability that the second yielding event occurs (i.e., that the bicycle did not cross on the first yielding event). For any $i$.
@@ -232,7 +259,7 @@ $M_y$ = motorist yield rate (decimal), and
 $i$ = crossing event ($i$ = 1 to $n$).
 
 
-##### *Two-Lane Crossing*
+##### *Two-lane crossing*
 
 
 For a two‐lane (one in each direction) bicycle left turn crossing, $P(Y_i)$ requires either (a) motorists in both lanes to yield simultaneously if both lanes are blocked, or (b) a single motorist to yield if only one lane is blocked. Because these cases are mutually exclusive, where $i = 1$, $P(Y_i)$ is equal to:
@@ -242,7 +269,7 @@ $$
 where $P(Y_0)=0$
 
 
-##### *Three-Lane Crossing*
+##### *Three-lane crossing*
 
 
 A three‐lane crossing follows the same principles as a two‐lane crossing. The calculation for P(Yi) with three lanes is:
@@ -252,7 +279,7 @@ $$
 where $P(Y_0)$ = 0.
 
 
-##### *Four-Lane Crossing*
+##### *Four-lane crossing*
 
 
 A four‐lane crossing follows the same principles as above. The calculation for $P(Y_i)$ with four-lanes is:
@@ -261,7 +288,7 @@ P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\times\left[ \frac{P_
 $$
 where $P(Y_0)$ = 0.
 
-### B: Determine two-stage Left Turn Delay
+### B: Determine two-stage left turn delay
 
 For two-stage left turns, two situations can occur:
 - ***A bicycle arrives during a green phase*** at the first stage.
