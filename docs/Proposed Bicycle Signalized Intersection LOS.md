@@ -64,7 +64,7 @@ $$
 
 Intersection capacity becomes more complex as right-turning automobiles will block the bicycle lane, forcing bicycles to stop, or take a risky weaving maneuver. The capacity reduction is analogous to intersecting flows at an intersection with a priority street. 
 
-<img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/Bike-right-turn-conflicts.svg?sanitize=true" width=600>
+<img src="https://raw.githubusercontent.com/nick-fournier/complete-streets-los/master/docs/Bike-right-turn-conflicts.svg?sanitize=true" width=300>
 
 The capacity of the bicycle lane at a signalized intersection may be computed as the product of the saturation flow rate, the capacity reduction factor, and the available green time:
 $$
