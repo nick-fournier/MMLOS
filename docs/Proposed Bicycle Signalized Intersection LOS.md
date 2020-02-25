@@ -62,39 +62,38 @@ $$
 s_b = 1,500 \times \left\lfloor\frac{W_{b}}{2.5}\right\rfloor
 $$
 
-Intersection capacity becomes more complex as right-turning automobiles will block the bicycle lane, forcing bicycles to stop, or take a risky weaving maneuver. The capacity reduction is analogous to intersecting flows at an intersection with a priority street. The intrusion of right turning automobiles effectively reduces bike lane capacity by occupying its space. This occupancy goes beyond physical size, but the critical headway required by bicyclists to avoid the turning vehicles.
+Intersection capacity becomes more complex as right-turning automobiles will block the bicycle lane, forcing bicycles to stop, or take a risky weaving maneuver. The intrusion of right turning automobiles effectively reduces bike lane capacity by occupying its space. 
 
-<img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/Bike-right-turn-conflicts.svg?sanitize=true" width=300 align=center><img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/Bike-right-turn-capacity-function.svg?sanitize=true" width=300 align=center>
+<img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/Bike-right-turn-conflicts.svg?sanitize=true" width=300 align=center>
+
+This occupancy goes beyond physical size, but the critical headway required by bicyclists to avoid the turning vehicles. The capacity reduction is analogous to intersecting flows at an intersection with a priority street. A function can be drawn which reduces the bicycle capacity by some factor as a function of right-turning vehicle volume.
+
+<img src="https://raw.githubusercontent.com/nick-fournier/complete-streets-los/master/docs/Bike-right-turn-capacity-function.svg?sanitize=true" width=300 align=center>
 
 This function is hypothesized at this point, but has drawn inspiration from similar functions used to model unsignalized intersection capacity. To start, Siegloch's (1974) very simple function can be used to describe the capacity reduction due to right-turning vehicle flows intersecting with bicycle through flows:
 $$
-f_{RTV}(v_{RTV}) = e^{-v_{RTV}t_c}
+f_{RTV} = e^{-v_{RTV}t_c}
 $$
 where
 $v_{RTV}$ = is the right turning automobile flow (veh/s) and
 $t_c$ = the critical gap for bicycles.
 
-The critical gap also requires research for more precise determination. It is likely that this number will vary depending on the right turning vehicle speed, which depends upon the corner radius. Meaning that tighter corner radii will require a smaller $t_c$.
-
-
-
-
+The critical gap also requires research for more precise determination. It is likely that this number will vary depending on the right turning vehicle speed, which in turn depends upon the corner radius. Meaning that tighter corner radii would likely require a smaller $t_c$ by reducing vehicle turning speeds. 
 
 The capacity of the bicycle lane at a signalized intersection may be computed as the product of the bicycle saturation flow rate, the capacity reduction factor, and the available green time:
 $$
-c_b = s_b \times f_{RTV}(v_{auto}) \times \frac{g_b}{C}
+c_b = s_b \times f_{RTV} \times \frac{g_b}{C}
 $$
 where
 $c_b$ = capacity of the bicycle lane (bicycles/h),
 
-$f_{cr}(v_{auto})$ = right turning vehicle capacity reduction factor,
+$f_{cr}$ = right turning vehicle capacity reduction factor,
 
 $s_b$ = saturation flow rate of the bicycle lane = 2,000 (bicycles/h),
 $g_b$ = effective green time for the bicycle lane (s), and
 $C$ = cycle length (s).
 
 ### *B. Compute bicycle delay*
-
 
 Signalized intersection bicycle delay is computed with:
 $$
@@ -103,12 +102,6 @@ $$
 where
 $d_{bS}$ is bicycle delay (s/bicycle) from the signalized intersection itself,
 $v_{bic}$ is bicycle flow rate (bicycles/h), and other variables are as previously defined.
-
-### C. Compute capacity reduction from right-turning vehicles blocking lane
-
-
-
-
 
 
 
