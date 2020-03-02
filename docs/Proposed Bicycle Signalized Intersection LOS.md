@@ -57,18 +57,18 @@ At most signalized intersections, the only technical delay for bicycles is cause
 ​	c. bicycles make a left-turn either as permissive left or a two-stage turn with the signal change.
 
 ### *A. Compute bicycle lane capacity*
-Bicycle lane capacity is largely undetermined in the industry and currently being researched. The Highway Capacity Manual use 2,000 bicycles per hour, but notes that this is merely an estimated guess to be used as a starting value. The complexity comes from highly variable bicyclists speeds and lack of discrete lane configurations as with automobiles. For example, bicycles may bunch up into multiple queues within a single bicycles lane. Research by Raksuntorn and Khan (2003) found the saturation flow rate of bicycles to be approximately 1,500 bicycles per hour per whole 2.5-foot "sub-lane", calculated as
+Bicycle lane capacity is largely undetermined in the industry and currently being researched. The Highway Capacity Manual use 2,000 bicycles per hour, but notes that this is merely an estimated guess to be used as a starting value. The complexity comes from highly variable bicyclists speeds and lack of discrete lane configurations as with automobiles. For example, bicycles may bunch up into multiple queues within a single bicycles lane. Research by Raksuntorn and Khan (2003) found the saturation flow rate of bicycles to be approximately 1,500 bicycles per hour per whole 2.5-foot "sub-lane". When no bike lane is present, we will conservatively assume bicycles will queue in single file, thus choosing the maximum of the two in the function:
 $$
-s_b = 1,500 \times \left\lfloor\frac{W_{b}}{2.5}\right\rfloor
+s_b = \text{max}\left[ 1500 \times \left\lfloor\frac{W_{b}}{2.5}\right\rfloor,1500 \right]
 $$
 
-Intersection capacity becomes more complex as right-turning automobiles will block the bicycle lane, forcing bicycles to stop, or take a risky weaving maneuver. The intrusion of right turning automobiles effectively reduces bike lane capacity by occupying its space. 
+ Intersection capacity becomes more complex as right-turning automobiles will block the bicycle lane, forcing bicycles to stop, or take a risky weaving maneuver. The intrusion of right turning automobiles effectively reduces bike lane capacity by occupying its space. 
 
-<img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/Bike-right-turn-conflicts.svg?sanitize=true" width=300 align=center>
+<img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/graphics/Bike-right-turn-conflicts.svg?sanitize=true" width=300 align=center>
 
 This occupancy goes beyond physical size, but the critical headway required by bicyclists to avoid the turning vehicles. The capacity reduction is analogous to intersecting flows at an intersection with a priority street. A function can be drawn which reduces the bicycle capacity by some factor as a function of right-turning vehicle volume.
 
-<img src="https://raw.githubusercontent.com/nick-fournier/complete-streets-los/master/docs/Bike-right-turn-capacity-function.svg?sanitize=true" width=300 align=center>
+<img src="https://raw.githubusercontent.com/nick-fournier/complete-streets-los/master/docs/graphics/Bike-right-turn-capacity-function.svg?sanitize=true" width=300 align=center>
 
 This function is hypothesized at this point, but has drawn inspiration from similar functions used to model unsignalized intersection capacity. To start, Siegloch's (1974) very simple function can be used to describe the capacity reduction due to right-turning vehicle flows intersecting with bicycle through flows:
 $$
@@ -76,7 +76,7 @@ f_{RTV} = e^{-v_{RTV}t_c}
 $$
 where
 $v_{RTV}$ = is the right turning automobile flow (veh/s) and
-$t_c$ = the critical gap for bicycles.
+$t_{c,rt}$ = the critical gap for bicycles (default = 5s, requires further research).
 
 The critical gap also requires research for more precise determination. It is likely that this number will vary depending on the right turning vehicle speed, which in turn depends upon the corner radius. Meaning that tighter corner radii would likely require a smaller $t_c$ by reducing vehicle turning speeds. 
 
@@ -86,10 +86,7 @@ c_b = s_b \times f_{RTV} \times \frac{g_b}{C}
 $$
 where
 $c_b$ = capacity of the bicycle lane (bicycles/h),
-
 $f_{cr}$ = right turning vehicle capacity reduction factor,
-
-$s_b$ = saturation flow rate of the bicycle lane = 2,000 (bicycles/h),
 $g_b$ = effective green time for the bicycle lane (s), and
 $C$ = cycle length (s).
 
@@ -97,7 +94,7 @@ $C$ = cycle length (s).
 
 Signalized intersection bicycle delay is computed with:
 $$
-d_{bS} = \frac{0.5(1-\frac{g_b}{C})^2}{1 - min\left[\frac{v_{bic}}{c_b},1.0\right]\frac{g_b}{C}}
+d_{bS} = \frac{0.5C(1-\frac{g_b}{C})^2}{1 - min\left[\frac{v_{bic}}{c_b},1.0\right]\frac{g_b}{C}}
 $$
 where
 $d_{bS}$ is bicycle delay (s/bicycle) from the signalized intersection itself,
@@ -108,7 +105,7 @@ $v_{bic}$ is bicycle flow rate (bicycles/h), and other variables are as previous
 ## Step 2: Determine left-turn maneuver delay
 At signalized intersections, bicycles typically perform a left turn using one of two maneuvers.
 
-<img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/Bike-left-turn-conflicts.svg?sanitize=true" width=600>
+<img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/graphics/Bike-left-turn-conflicts.svg?sanitize=true" width=600>
 
 * **Single-phased permissive left using acceptable gaps in traffic.**
 	* These maneuvers are typically performed at most intersections with small or moderate traffic volumes. Even upstream mixing lanes or center-line left turn lanes (e.g., Scott St. between Fell St. and Oak St. in San Francisco) still require a bicyclist to cross a lane of traffic before making a permissive left. 
@@ -147,7 +144,7 @@ $$
 t_{cb} = \frac{L}{S_b} + t_{sb}
 $$
 where
-$t_{lb}$ = critical headway for a single left-turning bicycle (s),
+$t_{clb}$ = critical headway for a single left-turning bicycle (s),
 $S_p$ = average bicycle crossing speed (ft/s) (*note: this will be lower than cruising speed*),
 $L$ = width of street crossed (ft), and
 $t_{sb}$ = bicycle start‐up time and end clearance time (s).
@@ -165,13 +162,13 @@ $W_{bl}$ = width of bike lane (ft), and
 
 To compute spatial distribution, the analyst must make field observations or estimate the platoon size by using:
 $$
-N_{cb} = \frac{v_b e^{v_b t_{cb}} + v e^{-vt_{cb}}}{(v_b + v) e^{v_b - v)t_{cb}}}
+N_{cb} = \frac{v_b e^{v_b t_{cb}} + v e^{-vt_{cb}}}{(v_b + v) e^{(v_b - v)t_{cb}}}
 $$
 where
 $N_{cb}$ = total number of bicycles in the crossing platoon (bikes),
 $v_b$ = bicycle flow rate (bikes/s),
 $v$ = vehicular flow rate (veh/s), and
-$t_{cb}$ = single bicycle critical headway (s).
+$t_{clb}$ = single bicycle critical headway (s).
 
 Bicycle group critical headway is determined with:
 $$
@@ -191,7 +188,7 @@ P_d = 1 - (1-P_b)^L
 $$
 where
 $P_b$ = probability of a blocked lane,
-$P_d$ = probability of a delayed crossing,
+$P_d$ = probability of a delayed left turn,
 $L$ = number of through lanes crossed,
 $t_{cb,G}$ = group critical headway (s), and
 $v$ = vehicular flow rate (veh/s).
@@ -202,7 +199,7 @@ $v$ = vehicular flow rate (veh/s).
 
 Assuming that no motor vehicles yield and the bicycle is forced to wait for an adequate gap, depends on the critical headway, the vehicular flow rate of the subject crossing, and the mean vehicle headway. Thus, bicyclists making the a left turn crossing are subject to the same delay calculation as for pedestrians making a crossing uncontrolled intersection approaches. The average delay per bicycle to wait for an adequate gap is given by:
 $$
-d_{bg} = \frac{1}{v_v} \left( e^{vt_{cb,G}} - v_v t_{cb,G} -1 \right) 
+d_{bg} = \frac{1}{v_v} \left( e^{vt_{cb,G}} - v_v t_{cb,G} -1 \right)
 $$
 where
 $d_{bg}$ = average bicycle gap delay (s),
@@ -212,7 +209,7 @@ $v$ = vehicular flow rate (veh/s).
 
 The average delay for any bicycle who is unable to cross immediately upon reaching the intersection (e.g., any pedestrian experiencing nonzero delay) is thus a function of $P_d$ and $d_g$, as shown in:
 $$
-d_{bgd} = \frac{d_{b}}{P_d}
+d_{bgd} = \frac{d_{bg}}{P_d}
 $$
 where
 $d_{bgd}$ = average gap delay for bicycles who incur nonzero delay,
@@ -305,20 +302,20 @@ For two-stage left turns, two situations can occur:
 
 The respective delay for each case is then calculated as:
 $$
-d_{bL2G} = \frac{g_1}{2} + Y_1 + AR_1 + t_s
+d_{bL2G} = \frac{g_1}{2} + l_1 + t_{sb}
 $$
 $$
-d_{bL2R} = \frac{C-g_1}{2} + R_2 + 2t_s
+d_{bL2R} = \frac{C-g_1}{2} + g_1 + l_1 + 2t_{sb}
 $$
 where
 $d_{bL2R}$ = left turn bicycle delay given arrival is during a red phase (s/bike),
 $d_{bL2G}$ = left turn bicycle delay given arrival is during a green phase (s/bike),
-$g_1$ = the green time in the first approach (s), and
+$g_1$ = the green time in the first approach (s),
+$g_2$ = the green time in the second approach (s), 
 $C$ = the cycle time (s),
-$Y_1$ = yellow time for first approach,
-$AR_1$ = all red clearance interval after first approach,
-$R_2$ = red time for second approach, and
-$t_s$ = startup time for bicycle to begin moving from full stop.
+$l_1$ = clearance time for first approach (s),
+$l_2$ = clearance time for second approach (s), and 
+$t_{sb}$ = startup time for bicycle to begin moving from full stop.
 
 
 Assuming bicycles arrive randomly at the first approach, the total two-stage left turn delay is then calculated as the sum of the product of the delay and proportion of bicycles arriving in each case, expressed as:
