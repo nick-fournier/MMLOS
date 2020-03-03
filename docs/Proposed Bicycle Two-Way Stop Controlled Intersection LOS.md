@@ -37,22 +37,20 @@ $$
 t_{cb} = \frac{L}{S_b} + t_{sb}
 $$
 where
-$t_{lb}$ = critical headway for a single left-turning bicycle (s),
+$t_{lb}$ = critical headway for a single bicycle (s),
 $S_b$ = average bicycle crossing speed (ft/s) (*note: this will be lower than full cruising speed*),
 $L$ = width of street crossed (ft), and
 $t_{sb}$ = bicycle start‐up time and end clearance time (s).
 
-
-
 If bicycle platooning is observed in the field, then the spatial distribution of bicyclists should be computed. If no platooning is observed, the spatial distribution is assumed to be 1.
 $$
-N_{b} = Max\left[\frac{4.0N_{cb}}{W_{bl}}, 1.0\right]
+N_{b} = Max\left[\frac{2.5N_{cb}}{W_{bl}}, 1.0\right]
 $$
 where 
 $N_{b}$ = spatial distribution of bicycles (bikes),
 $N_{cb}$ = total number of bicycles in the crossing platoon,
 $W_{bl}$ = width of bike lane (ft), and
-4.0 = default clear effective width used by a single bicycle (ft).
+2.5= default clear effective width used by a single bicycle (ft)
 
 
 To compute spatial distribution, the analyst must make field observations or estimate the platoon size by using:
@@ -132,7 +130,7 @@ On average, a potential yielding event will occur every $h$ seconds, where $P(Y)
 2. Blocked—a vehicle is arriving within the critical headway window. The bicycle may cross only if vehicles in each blocked lane choose to yield. If not, the bicycle must wait an additional $h$ seconds for the next yielding event. On average, this process will be repeated until the wait exceeds the expected delay required for an adequate gap in traffic ($d_{bgd}$), at which point the average bicycle will receive an adequate gap in traffic and will be able to cross the street without having to depend on yielding motorists. Thus, average bicycle delay can be calculated 
 
 $$
-d_{bL1} = \sum\limits^n_{i=0}h(i-0.5) P(Y_i) + \left(P_d - \sum\limits^n_{i=0}P(Y_i) \right) d_{bgd}
+d_{btwsc} = \sum\limits^n_{i=0}h(i-0.5) P(Y_i) + \left(P_d - \sum\limits^n_{i=0}P(Y_i) \right) d_{bgd}
 $$
 
 where

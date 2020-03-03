@@ -105,7 +105,9 @@ $v_{bic}$ is bicycle flow rate (bicycles/h), and other variables are as previous
 ## Step 2: Determine left-turn maneuver delay
 At signalized intersections, bicycles typically perform a left turn using one of two maneuvers.
 
-<img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/graphics/Bike-left-turn-conflicts.svg?sanitize=true" width=600>
+<img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/graphics/bike-left-turn-conflicts.svg?sanitize=true" width=600>
+
+
 
 * **Single-phased permissive left using acceptable gaps in traffic.**
 	* These maneuvers are typically performed at most intersections with small or moderate traffic volumes. Even upstream mixing lanes or center-line left turn lanes (e.g., Scott St. between Fell St. and Oak St. in San Francisco) still require a bicyclist to cross a lane of traffic before making a permissive left. 
@@ -151,13 +153,13 @@ $t_{sb}$ = bicycle start‐up time and end clearance time (s).
 
 If bicycle platooning is observed in the field, then the spatial distribution of bicyclists should be computed. If no platooning is observed, the spatial distribution is assumed to be 1.
 $$
-N_{b} = Max\left[\frac{4.0N_{cb}}{W_{bl}}, 1.0\right]
+N_{b} = Max\left[\frac{2.5N_{cb}}{W_{bl}}, 1.0\right]
 $$
 where 
 $N_{b}$ = spatial distribution of bicycles (bikes),
 $N_{cb}$ = total number of bicycles in the crossing platoon,
 $W_{bl}$ = width of bike lane (ft), and
-4.0 = default clear effective width used by a single bicycle (ft).
+2.5 = default clear effective width used by a single bicycle (ft).
 
 
 To compute spatial distribution, the analyst must make field observations or estimate the platoon size by using:
