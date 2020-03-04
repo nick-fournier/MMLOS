@@ -1,11 +1,3 @@
----
-output: 
-  pdf_document:
-    toc: true
-    number_sections: true
-documentclass: article
-classoption: letterpaper
----
 
 # BICYCLE MODE SIGNALIZED INTERSECTION LOS
 
