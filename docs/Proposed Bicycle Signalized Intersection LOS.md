@@ -60,7 +60,7 @@ $$
 
 This occupancy goes beyond physical size, but the critical headway required by bicyclists to avoid the turning vehicles. The capacity reduction is analogous to intersecting flows at an intersection with a priority street. A function can be drawn which reduces the bicycle capacity by some factor as a function of right-turning vehicle volume.
 
-<img src="https://raw.githubusercontent.com/nick-fournier/complete-streets-los/master/docs/graphics/Bike-right-turn-capacity-function.svg?sanitize=true" width=300 align=center>
+<img src="https://raw.githubusercontent.com/nick-fournier/complete-streets-los/master/graphics/Bike-right-turn-capacity-function.svg?sanitize=true" width=300 align=center>
 
 This function is hypothesized at this point, but has drawn inspiration from similar functions used to model unsignalized intersection capacity. To start, Siegloch's (1974) very simple function can be used to describe the capacity reduction due to right-turning vehicle flows intersecting with bicycle through flows:
 $$
