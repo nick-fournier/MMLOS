@@ -282,7 +282,7 @@ where $P(Y_0)$ = 0.
 
 A four‐lane crossing follows the same principles as above. The calculation for $P(Y_i)$ with four-lanes is:
 $$
-P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\times\left[ \frac{P_b^4 M_y^4 + 4P_b^3(1-P_b)M_y^3 + 6P_b^2(1-P_b)^2 M_y^2 + 4P_b(1-P_b)^3M_y}{P_d} \right]
+P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\times\left[ \frac{P_b^4 M_y^4 + 4P_b^3(1-P_b)M_y^3 + 6P_b^2(1-P_b)^2 M_y^2 + 4P_b(1-P_b)^3 M_y}{P_d} \right]
 $$
 where $P(Y_0)$ = 0.
 
