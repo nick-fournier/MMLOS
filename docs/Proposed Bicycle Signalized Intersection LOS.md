@@ -56,7 +56,7 @@ $$
 
  Intersection capacity becomes more complex as right-turning automobiles will block the bicycle lane, forcing bicycles to stop, or take a risky weaving maneuver. The intrusion of right turning automobiles effectively reduces bike lane capacity by occupying its space. 
 
-<img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/graphics/Bike-right-turn-conflicts.svg?sanitize=true" width=300 align=center>
+<img src="https://raw.github.com/nick-fournier/complete-streets-los/master/graphics/Bike-right-turn-conflicts.svg?sanitize=true" width=300 align=center>
 
 This occupancy goes beyond physical size, but the critical headway required by bicyclists to avoid the turning vehicles. The capacity reduction is analogous to intersecting flows at an intersection with a priority street. A function can be drawn which reduces the bicycle capacity by some factor as a function of right-turning vehicle volume.
 
@@ -97,7 +97,7 @@ $v_{bic}$ is bicycle flow rate (bicycles/h), and other variables are as previous
 ## Step 2: Determine left-turn maneuver delay
 At signalized intersections, bicycles typically perform a left turn using one of two maneuvers.
 
-<img src="https://raw.github.com/nick-fournier/complete-streets-los/master/docs/graphics/bike-left-turn-conflicts.svg?sanitize=true" width=600>
+<img src="https://raw.github.com/nick-fournier/complete-streets-los/master/graphics/bike-left-turn-conflicts.svg?sanitize=true" width=600>
 
 
 
@@ -282,7 +282,7 @@ where $P(Y_0)$ = 0.
 
 A four‐lane crossing follows the same principles as above. The calculation for $P(Y_i)$ with four-lanes is:
 $$
-P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\times\left[ \frac{P_b^4 M_y^4 + 4P_b^3(1-P_b)M_y^3 + 6P_b^2(1-P_b)^2 M_y^2 + 4P_b(1-P_b^3)M_y}{P_d} \right]
+P(Y_i) = \left[ P_d - \sum\limits^{i-1}_{j=0}P(Y_j) \right]\times\left[ \frac{P_b^4 M_y^4 + 4P_b^3(1-P_b)M_y^3 + 6P_b^2(1-P_b)^2 M_y^2 + 4P_b(1-P_b)^3M_y}{P_d} \right]
 $$
 where $P(Y_0)$ = 0.
 
