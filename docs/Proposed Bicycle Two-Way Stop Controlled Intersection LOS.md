@@ -1,4 +1,4 @@
-# BICYCLE MODE SIGNALIZED INTERSECTION LOS
+# BICYCLE MODE TWO-WAY STOP CONTROLLED INTERSECTION LOS
 
 > - The following bicycle delay calculation methodology is a modified from the Highway Capacity Manual's pedestrian delay calculation for Two-Way Stop Controlled Intersections, Kittelson & Associates, Inc. NCHRP Project 17-87 Appendix C: "Revised Model for Predicting the Pedestrian Delay at Signalized Intersections" and Appendix D: "Revised Model for Predicting the Pedestrian Delay at Uncontrolled Intersections".
 > - The reasoning behind these adaptations is that a bicyclist experiences similar delay as pedestrians, or potentially higher due to lower yielding rates, when crossing an uncontrolled approach of a TWSC intersection.

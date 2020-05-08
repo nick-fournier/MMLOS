@@ -32,7 +32,6 @@ Although bicycles may experience some amount of queuing in locations of particul
 
    ​3. Calculate Average Bicycle Delay and Determine LOS
 
-
 *If no control, use TWSC intersection delay. If stop controlled, intersection delay is 0.
 
 

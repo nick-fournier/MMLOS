@@ -1,0 +1,78 @@
+VAR	TYPE	DESC
+LINK_ID	LINK	"Link Identification, name and direction or number"
+LL	LINK	Link length (ft)
+link_dir	LINK	Direction
+N_aps	LINK	Number of access point approaches on right side of subject direction
+V_m	LINK	Outside lane demand flow rate at midsegment (veh/h)
+PHV	LINK	Heavy vehicle percentage
+S_R	LINK	"Average vehicle running speed, including intersection delay (mi/h)"
+S_p	LINK	Pedestrian walking speeed (ft/s)
+S_b	LINK	Bicycle running speed (mph)
+N_th	LINK	Number of through lanes in the subject direction of travel
+W_A	LINK	"Sidewalk width (ft) (Enter 0 if no sidewalk, Enter entire width if shared use)"
+W_buf	LINK	Buffer width from sidewalk to street (ft)
+W_bl	LINK	Bicycle lane width (ft) (Entire entire width if shared with peds)
+W_os	LINK	Paved outside shoulder width (ft)
+W_ol	LINK	Outside travel lane (closest to sidewalk) width (ft)
+p_pk	LINK	Proportion of on-street parking occupied
+W_pk	LINK	Striped parking lane width (ft)
+P_c	LINK	Pavement condition rating (0 to 5)
+p_mx	LINK	Proportion of midblock pedestrian demand (default = 0.35)
+bar_blsw	LINK	Does a continuous barrier (at least 3 feet high) exist between the street and sidewalk?
+bar_blst	LINK	Does a continuous barrier exist between the street and bicycle lane?
+h_blst	LINK	Height of barrier between street and bike lane
+h_blsw	LINK	Height of barrier between street and sidewalk
+div	LINK	Is the street divided?
+p_strp	LINK	Are parking spaces striped?
+curb	LINK	Curb is present?
+sharedbl	LINK	Shared bike and pedestrian path? (bikelane and sidewalk)
+n_bus	LINK	Number of local buses on street segment per hour (bus/h)
+n_xbus	LINK	Number of express buses stopping in segment per hour (bus/h)
+t_ex	LINK	Average excess wait time (min)
+L_f	LINK	Average passenger load factor (p/seat)
+S	LINK	Average transit travel speed (mi/h)
+l_pt	LINK	Average passenger trip length (mi)
+pop	LINK	Is the segment in the CBD of a metro area of 5 million or more?
+p_sh	LINK	Percent stops in segment with a shelter
+p_be	LINK	Percent stops in segment with a bench
+bus	LINK	Does the link direction has bus service?
+int_id	INT	"Intersection identification, name and direction or number"
+int_dir	INT	Intersection approach direction
+N_d	INT	Number of traffic lanes crossed when traversing the crosswalk
+N_dc	INT	Number of cross treet traffic lanes crossed when going through intersection
+N_th	INT	Number of through lanes in the midsegment
+S_85mj	INT	85th Percentile speed at midsegment on the street crossed (mi/h)
+v_rt	INT	Right-turn demand flow rate (veh/h) 
+v_lt	INT	Left-turn demand flow rate (veh/h) 
+v_th	INT	Through movement demand flow rate (veh/h) 
+v_v	INT	Vehicle flow rate at crosswalk (veh/h)
+v_vc	INT	Vehicle flow rate at cross street (veh/h)
+v_rtor	INT	Right-turn-on-red flow rate (veh/h)
+v_ltperm	INT	Permited left-turn demand flow rate (veh/h)
+v_p	INT	Pedestrian demand flow rate (ped/h)
+v_b	INT	Bicycle flow rate
+v_bl	INT	Bicycle left turn volume (veh/hr)
+v_br	INT	Bicycle right turn volume (veh/hr)
+P_bl2	INT	Proportion of two-stage left turns for bicycles (decimal)
+N_rtcid	INT	Number of right-turn channelizing islands along the crosswalk
+g	INT	Green time
+l	INT	Clearance time
+C	INT	Cycle length (s)
+Walkmi	INT	Pedestrian walk setting for the phase serving the minor street through movement (s)
+W_c	INT	Crosswalk width (ft)
+W_cd	INT	"Curb-to-curb width of the street being crossed i.e., crosswalk length (ft)"
+L	INT	"Curb-to-curb width of the cross street, i.e., through length (ft)"
+W_bl	INT	Bicycle lane width (ft)
+W_ol	INT	Outside travel lane (closest to sidewalk) width (ft)
+p_pk	INT	Proportion of on-street parking occupied
+W_pk	INT	Striped parking lane width (ft)
+W_os	INT	Paved outside shoulder width (ft)
+M_yp	INT	Motorist pedestrian yield rate (decimal)
+M_yb	INT	Motorist bicycle yield rate (decimal)
+S_p	INT	Pedestrian crossing speed (ft/s)
+S_b	INT	Bicycle crossing speed (ft/s)
+t_sb	INT	Bicycle start-up and clearance time (s)
+t_sp	INT	Pedestrian start-up and clearance time (s)
+Control	INT	Traffic control?
+Curb	INT	Curb is present?
+Major	INT	Is the leg on the major street corridor (as opposed to a minor street approach)?Note 1

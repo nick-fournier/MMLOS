@@ -56,10 +56,10 @@ F_{delay} = 0.0401 ln(d_{p,d})
 $$
 
 $$
-F_s = 0.00013 N_{15,mj}S_{85,mj}
+F_s = 0.00013 n_{15,mj}S_{85,mj}
 $$
 
-In all likelihood, the calibration constants (i.e., 0.0401 and 0.00013) are not applicable to bicycles, but the basic function could be utilized.
+where $n_{15,mj}$ is the number of cars traveling the midsegment in a 15 minute increment. In all likelihood, the calibration constants (i.e., 0.0401 and 0.00013) are not applicable to bicycles, but the basic function could be utilized.
 
 
 
