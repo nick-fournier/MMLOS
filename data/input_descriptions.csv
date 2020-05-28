@@ -6,7 +6,7 @@ LL,LINK,Link length (ft)
 N_aps,LINK,Number of access point approaches on right side of subject direction
 v_m,LINK,Outside lane demand flow rate at midsegment (veh/h)
 v_ped,LINK,Pedestrian flow rate (walking in both directions)(ped/hr)
-PHV,LINK,Heavy vehicle percentage
+P_HV,LINK,Heavy vehicle percentage
 S_f,LINK,"Free flow speed, default to speed limit (mph)"
 S_R,LINK,"Average vehicle running speed, including intersection delay (mi/h)"
 S_pf,LINK,Pedestrian walking speeed (ft/s)
