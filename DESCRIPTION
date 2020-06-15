@@ -1,13 +1,11 @@
-Package: prototype
+Package: MMLOS
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Multimodal level of service calculator
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Nicholas MarC Fournier
+Maintainer: The package maintainer <nick.fournier@berkeley.edu>
+Description: Multimodal level of service calculation using the Highway Capacity Manual's methodology with proposed revisions.
+License: GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007
 Encoding: UTF-8
 LazyData: true
-
 Imports: data.table

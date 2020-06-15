@@ -63,29 +63,36 @@ func.loadtab <- function() {
 
 #LOS Grade from score
 func.score2LOS <- function(score) {
-  tab$score2los[score > lo_score & score <= hi_score, LOS]
+  
+  score2LOS <- data.table( LOS = c("A","B","C","D","E","F"), 
+                           lo_score = c(-Inf,2.00,2.75,3.50,4.25,5.00),
+                           hi_score = c(2.00,2.75,3.50,4.25,5.00,Inf))
+  
+  return(score2LOS[score > lo_score & score <= hi_score, LOS])
 }
 
-#Pedestrian LOS
-func.MMLOS <- function(dat) {
-  
+
+
+#Multimodal level of service
+MMLOS <- function(dat, revs = T) {
   #Split by intersection
   int.split <- split(dat$intersections, by = "int_id")  
   link.split <- split(dat$links, by = c("link_id","link_dir")) 
   
   #Getting LOS score for each link, intersection, and segment.
-  bike.LOS = rbindlist(lapply(link.split, function(link)
-    func.bike.I_seg(link, int = int.split[[link$boundary_id]])
-  ))
-  
-  
-  ped.LOS = rbindlist(lapply(link.split, function(link) 
-    func.ped.I_seg(link, int = int.split[[link$boundary_id]])
-  ))
-  
-  #Create output list
-  LOS = list(bikes = bike.LOS,
-             pedestrians = ped.LOS)
-  
+  if(revs) {
+    #Proposed revisions
+    LOS = list(
+      bike = rbindlist(lapply(link.split, function(link) func.bike.I_seg(link, int = int.split[[link$boundary_id]]))),
+      ped = rbindlist(lapply(link.split, function(link) func.ped.I_seg(link, int = int.split[[link$boundary_id]])))
+    )
+  } else {
+    #Existing HCM 
+    LOS = list(
+      bike = rbindlist(lapply(link.split, function(link) func.ogbike.I_seg(link, int = int.split[[link$boundary_id]]))),
+      ped = rbindlist(lapply(link.split, function(link) func.ogped.I_seg(link, int = int.split[[link$boundary_id]])))
+    )
+  }
+
   return(LOS)
 }

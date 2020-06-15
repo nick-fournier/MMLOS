@@ -12,7 +12,7 @@
 
 
 #Pedestrian paved width factor (links)
-func.ped.F_w.link  <- function(link) {
+func.ogped.F_w.link  <- function(link) {
   
   #Total width of outside thru lane, bike lane, and paved shoulder/parking
   W_t = link[, W_ol + W_bl + W_buf + W_os]
@@ -27,7 +27,7 @@ func.ped.F_w.link  <- function(link) {
   } else {
     W_v = W_t*(2 - 0.005*link$v_m)
   }
-  
+    
   #Total width shoulder, bike lane, and parking lane
   W_l = link$W_bl + W_osstar + link$W_pk
   
@@ -55,22 +55,11 @@ func.ped.F_w.link  <- function(link) {
   return(F_w)
 }
 
-#Pedestrian traffic speed factor (links)
-func.ped.F_s.link <- function(link, int) {
-  #Vehicle running speed
-  S_R = func.auto.S_R(link, int)
-  
-  #Motorized vehicle speed adjustment factor
-  F_s = 4*(S_R/100)^2
-
-  return(F_s)
-}
-
 #Pedestrian level of service score for links
-func.ped.I_link <- function(link, int) {
-  
+func.ogped.I_link <- function(link, int) {
+    
   #### Caclulate final factors for LOS score
-  F_w = func.ped.F_w.link(link) #Cross-section adjustment factor
+  F_w = func.ogped.F_w.link(link) #Cross-section adjustment factor
   
   #Motorized vehicle volume adjustment factor
   F_v = 0.0091*link$v_m/(4*link$N_th) 
@@ -88,22 +77,22 @@ func.ped.I_link <- function(link, int) {
 }
 
 #Pedestrian control delay
-func.ped.d_pd <- function(int, dir) {
+func.ogped.d_pd <- function(int, dir) {
   switch(int[traf_dir == dir, control],
-         "Signalized" = func.ped.d_signal(int, dir), 
+         "Signalized" = func.ogped.d_signal(int, dir), 
          "AWSC - Stop" = 0,
-         "TWSC - Stop" = func.ped.d_twsc(int, dir), 
+         "TWSC - Stop" = func.ogped.d_twsc(int, dir), 
          "Uncontrolled" = 0,
          "Yield" = 0)
   }
 
 #Pedestrian control delay from signal
-func.ped.d_signal <- function(int, dir) {
+func.ogped.d_signal <- function(int, dir) {
   with(int[traf_dir == dir, ], ((C - g)^2)/(2*C) )
 }
 
 #Current HCM Pedestrian delay for uncontrolled (e.g., TWSC)
-func.ped.d_twsc_og <- function(int, dir) {
+func.ogped.d_twsc <- function(int, dir) {
   
   #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
   xdir = switch(dir,
@@ -235,138 +224,8 @@ func.ped.d_twsc_og <- function(int, dir) {
   
 }
 
-#Revised pedestrian delay for uncontrolled (e.g., TWSC)
-func.ped.d_twsc <- function(int, dir) {
-  
-  #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
-  xdir = switch(dir,
-                "NB" = "WB",
-                "SB" = "EB",
-                "EB" = "NB",
-                "WB" = "SB")
-  
-  #Opposite cross street dir
-  odir = switch(xdir,
-                "NB" = "SB",
-                "SB" = "NB",
-                "EB" = "WB",
-                "WB" = "EB")
-  
-  #Yield rate
-  M_y = int[traf_dir == xdir, M_yp]
-  
-  #Number of thru lanes (inclusive of opposite direction)
-  N_th = int[traf_dir == xdir, N_th]
-  
-  #Total thru lanes
-  #int[traf_dir %in% c(xdir,odir), sum(N_th)]
-  
-  #Vehicle flow rate (veh/s)
-  v_v = int[traf_dir == xdir, (v_v/N_d)/3600]
-  
-  #Pedestrian flow rate (ped/s)
-  v_p = int[traf_dir == xdir, v_p/3600]
-  
-  #Critical headway
-  t_c = int[traf_dir == xdir, (W_cd/S_p) + t_sp]
-  
-  #Average number of peds waiting to cross
-  N_c = (v_p*exp(v_p*t_c) + v_v*exp(-v_v*t_c)) / ((v_p + v_v)*exp(v_p-v_v)*t_c)
-  
-  #Number of rows of peds
-  N_p = max( ((8*N_c) / int[traf_dir == xdir, W_c]), 1 )
-  
-  #Critical group headway
-  t_cg = t_c + 2*(N_p - 1)
-  
-  #Probability of blocked lane
-  P_b = 1 - exp(-t_cg * v_v / N_th)
-  
-  #Probability of delayed crossing
-  P_d = 1 - (1 - P_b)^N_th
-  
-  #Average gap waiting delay per pedestrian
-  d_g = (1/v_v)*(exp(v_v*t_cg) - v_v*t_cg - 1)
-  
-  #Average delay for any pedestrian
-  d_gd = d_g / P_d
-  
-  #Average headway
-  h = ((1/v_v) - (t_cg + (1/v_v))*exp(-v_v*t_cg)) / (1 - exp(-v_v*t_cg))
-  
-  #Average number of crossing events
-  n = round(1/exp(-v_v*t_cg), 0)
-  
-  #Initial sum of PYi
-  sumPY = 0 
-  term1 = 0
-  
-  #Delay accounting for motorist yield probability
-  if(N_th == 1) {
-    #One lane
-    for(i in 1:n) {
-      PY = P_d*M_y*(1 - M_y)^(i-1)
-      sumPY = sumPY + PY
-      
-      #Calculates and sums up the first term
-      term1 = h*(i - 0.5)*PY + term1
-      
-      #Calculates the second term
-      term2 = (P_d - sumPY)*d_gd
-    }
-    d_pd <- term1 + term2
-    
-  } else if(N_th == 2) {
-    #Two lane
-    for(i in 1:n) {
-      PY = (P_d - sumPY)*( ((2*P_b*(1-P_b)*M_y) + P_b^2 * M_y^2) / P_d)
-      sumPY = sumPY + PY
-      
-      #Calculates and sums up the first term
-      term1 = h*(i - 0.5)*PY + term1
-      
-      #Calculates the second term
-      term2 = (P_d - sumPY)*d_gd
-    }
-    d_pd <- term1 + term2
-    
-  } else if(N_th == 3) {
-    #Three lane
-    for(i in 1:n) {
-      PY = (P_d - sumPY)*((P_b^3 * M_y^3 + 3*P_b^2 * (1-P_b)*M_y^2 + 3*P_b*(1-P_b)^2 * M_y) / P_d)
-      sumPY = sumPY + PY
-      
-      #Calculates and sums up the first term
-      term1 = h*(i - 0.5)*PY + term1
-      
-      #Calculates the second term
-      term2 = (P_d - sumPY)*d_gd
-    }
-    d_pd <- term1 + term2
-    
-  } else if(N_th == 4) {
-    #Four lane
-    for(i in 1:n) {
-      PY = (P_d - sumPY)*((P_b^4 * M_y^4 + 4*P_b^3 * (1-P_b)*M_y^3 + 6*P_b*(1-P_b)^2 * M_y^2 + 4*P_b*(1-P_b)^3 * M_y) / P_d)
-      sumPY = sumPY + PY
-      
-      #Calculates and sums up the first term
-      term1 = h*(i - 0.5)*PY + term1
-      
-      #Calculates the second term
-      term2 = (P_d - sumPY)*d_gd
-    }
-    d_pd <- term1 + term2
-  } else {
-    stop(paste0("Invalid number of lanes: ", N_th))
-  }
-  
-  return(d_pd)
-  
-}
-
-#Pedestrian level of service score for midsegment crossings
-func.ped.I_mx <- function(link, int) {
+#Pedestrian crossing difficulty factor
+func.ogped.F_cd <- function(link, int, Ilink, Iint) {
   
   #Crossing direction for diversion
   mxdir = switch(link$link_dir,
@@ -384,28 +243,30 @@ func.ped.I_mx <- function(link, int) {
                    "WB" = "EB")
   }
   
-  #Hardcoded delay LOS conversion table
-  delayLOS <- data.table(delay = c(0,10,20,30,40,60,90),
-                         LOS = c(0,1.5,2.5,3.5,4.5,5.5,6.0))
-  
-  
   #Calculate average diversion delay from midsegment point
   D_c = link$LL / 3
   D_d = 2 * D_c
-  d_pd = (0.084*2*D_d / link$S_pf) + func.ped.d_pd(int, mxdir)
+  
+  #Calculate average diversion delay from midsegment point
+  d_pd = (D_d / link$S_pf) + func.ogped.d_pd(int, mxdir)
   
   #Calculate wait delay from control delay
-  d_pw = func.ped.d_twsc(int, mxdir)
+  d_pw = func.ogped.d_twsc(int, mxdir)
   
-  #Convert to LOS score
-  I_pd = approx(x = delayLOS$delay, y = delayLOS$LOS, xout = d_pd, rule = 2)$y
-  I_pw = approx(x = delayLOS$delay, y = delayLOS$LOS, xout = d_pw, rule = 2)$y
+  #Cossing delay
+  d_px = min(d_pd, d_pw, 60)
   
-  return(min(I_pd, I_pw, 6))
+  
+  #
+  
+  #Crossing difficulty factor
+  F_cd = 1 + (0.10*d_px - (0.318*Ilink + 0.220*Iint + 1.606))/7.5
+  
+  return(F_cd)
 }
 
 #Pedestrian LOS score for intersections
-func.ped.I_int <- function(link, int) {
+func.ogped.I_int <- function(link, int) {
   
   #The traffic direction being crossed
   xdir = switch(link$link_dir,
@@ -422,7 +283,7 @@ func.ped.I_int <- function(link, int) {
                 "WB" = "EB")
   
   #Intersection delay
-  d_pd = func.ped.d_pd(int,link$link_dir)
+  d_pd = func.ogped.d_pd(int,link$link_dir)
   
   #Number of traffic lanes crossed
   N_d = int[traf_dir == xdir, N_d]
@@ -457,25 +318,20 @@ func.ped.I_int <- function(link, int) {
 }
 
 #Pedestrian LOS score for segment
-func.ped.I_seg <- function(link, int) {
+func.ogped.I_seg <- function(link, int) {
   #Put LOS scores for link and intersection into table
   scores = data.table(
     segment_id = link$link_id,
     direction = link$link_dir,
     mode = "pedestrian",
-    I_link = func.ped.I_link(link, int),
-    I_mx = func.ped.I_mx(link, int),
-    I_int = func.ped.I_int(link, int)
+    I_link = func.ogped.I_link(link, int),
+    I_int = func.ogped.I_int(link, int)
   )
   
-  #Calculate segment LOS
-  p_mx = link$p_mx
-  S_pf = link$S_pf
-  LL = link$LL
-  d_pp = func.ped.d_pd(int, link$link_dir)
+  F_cd = func.ogped.F_cd(link,int, scores$I_link, scores$I_int)
   
   #Calculate score
-  scores[ , I_seg := ( ((I_link*(1-p_mx) + I_mx*p_mx)^3 * (LL/S_pf) + I_int^3 *d_pp) / ((LL/S_pf) + d_pp) )^(1/3)]
+  scores[ , I_seg := F_cd*(0.318*I_link + 0.220*I_int + 1.606)]
   
   #Get grade from score
   scores = cbind(scores,
@@ -483,4 +339,6 @@ func.ped.I_seg <- function(link, int) {
   
   return(scores)
 }
+
+
 

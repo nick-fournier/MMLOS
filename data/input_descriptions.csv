@@ -8,16 +8,14 @@ v_m,LINK,Outside lane demand flow rate at midsegment (veh/h)
 v_ped,LINK,Pedestrian flow rate (walking in both directions)(ped/hr)
 P_HV,LINK,Heavy vehicle percentage
 S_f,LINK,"Free flow speed, default to speed limit (mph)"
-S_R,LINK,"Average vehicle running speed, including intersection delay (mi/h)"
 S_pf,LINK,Pedestrian walking speeed (ft/s)
 S_b,LINK,Bicycle running speed (mph)
 N_th,LINK,Number of through lanes in the subject direction of travel
-W_T,LINK,"Sidewalk width (ft) (Enter 0 if no sidewalk, Enter entire width if shared use)"
-W_buf,LINK,Buffer width from sidewalk to street (ft)
+W_T,LINK,Total walkway width
 W_bl,LINK,Bicycle lane width (ft) (Entire entire width if shared with peds)
-W_os,LINK,Paved outside shoulder width (ft)
+W_buf,LINK,Buffer width from sidewalk to street (ft)
+W_os,LINK,Paved outside shoulder width [includes parking] (ft)
 W_ol,LINK,Outside travel lane (closest to sidewalk) width (ft)
-W_pk,LINK,Striped parking lane width (ft)
 w_oi,LINK,Fixed object width on inside of sidewalk
 w_oo,LINK,Fixed object width on outside of sidewalk
 pwindow,LINK,Portion of sidewalk length adjacent to window display
@@ -26,10 +24,9 @@ pfence,LINK,Portion of sidewalk adjacent to fence or low wall
 p_pk,LINK,Proportion of on-street parking occupied
 P_c,LINK,Pavement condition rating (0 to 5)
 p_mx,LINK,Proportion of midblock pedestrian demand (default = 0.35)
-bar_blsw,LINK,Does a continuous barrier (at least 3 feet high) exist between the street and sidewalk?
-bar_blst,LINK,Does a continuous barrier exist between the street and bicycle lane?
 h_blst,LINK,Height of barrier between street and bike lane
 h_blsw,LINK,Height of barrier between street and sidewalk
+protec,LINK,Is the bike lane protected by parking?
 div,LINK,Is the street divided?
 p_strp,LINK,Are parking spaces striped?
 curb,LINK,Curb is present?
@@ -49,7 +46,7 @@ app_dir,INT,Intersection approach direction
 traf_dir,INT,Traffic direction
 N_d,INT,Number of traffic lanes crossed when traversing the crosswalk
 N_dc,INT,Number of cross treet traffic lanes crossed when going through intersection
-N_th,INT,Number of through lanes in the midsegment
+N_th,INT,Number of through lanes in the midsegment (both directions)
 S_85mj,INT,85th Percentile speed at midsegment on the street crossed (mi/h)
 v_rt,INT,Right-turn demand flow rate (veh/h) 
 v_lt,INT,Left-turn demand flow rate (veh/h) 
