@@ -13,7 +13,8 @@ S_b,LINK,Bicycle running speed (mph)
 N_th,LINK,Number of through lanes in the subject direction of travel
 W_T,LINK,Total walkway width
 W_bl,LINK,Bicycle lane width (ft) (Entire entire width if shared with peds)
-W_buf,LINK,Buffer width from sidewalk to street (ft)
+W_swbuf,LINK,Buffer width from sidewalk to street (ft)
+W_blbuf,LINK,Buffer width from bike lane to street (ft)
 W_os,LINK,Paved outside shoulder width [includes parking] (ft)
 W_ol,LINK,Outside travel lane (closest to sidewalk) width (ft)
 w_oi,LINK,Fixed object width on inside of sidewalk
@@ -24,9 +25,9 @@ pfence,LINK,Portion of sidewalk adjacent to fence or low wall
 p_pk,LINK,Proportion of on-street parking occupied
 P_c,LINK,Pavement condition rating (0 to 5)
 p_mx,LINK,Proportion of midblock pedestrian demand (default = 0.35)
-h_blst,LINK,Height of barrier between street and bike lane
-h_blsw,LINK,Height of barrier between street and sidewalk
-protec,LINK,Is the bike lane protected by parking?
+H_swbuf,LINK,Height of barrier between street and bike lane
+H_blbuf,LINK,Height of barrier between street and sidewalk
+protected,LINK,Is the bike lane protected by parking?
 div,LINK,Is the street divided?
 p_strp,LINK,Are parking spaces striped?
 curb,LINK,Curb is present?

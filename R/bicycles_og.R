@@ -20,7 +20,11 @@ func.ogbike.F_w.link  <- function(link) {
   }
   
   #Total width of outside thru lane, bike lane, and paved shoulder/parking
-  W_t = link[, W_ol + W_bl + W_osstar]
+  if(link$p_pk == 0) {
+    W_t = link[, W_ol + W_bl + W_osstar]
+  } else {
+    W_t = link[, W_ol + W_bl]
+  }
   
   #Effective total weidth of outside through lane
   if(link$v_m < 160 | link$div) {

@@ -72,7 +72,6 @@ func.score2LOS <- function(score) {
 }
 
 
-
 #Multimodal level of service
 MMLOS <- function(dat, revs = T) {
   #Split by intersection

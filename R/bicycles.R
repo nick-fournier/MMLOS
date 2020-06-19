@@ -9,38 +9,46 @@
 
 
 #Bicycle paved width factor (links)
-func.bike.F_w.link  <- function(link) {
+func.bike.F_w.link <- function(link) {
+  #Effective buffer width
+  #W_bufstar = link[ , sqrt(W_blbuf^2 + 16*H_blbuf^0.5)]
+  W_bufstar = link[ , 4*(W_blbuf^2 + (24*H_blbuf))^(1/4)]
   
-  #Total width of outside thru lane, bike lane, and paved shoulder/parking
-  W_t = link[, W_ol + W_bl + W_buf + W_os]
-  
-  #Effective bike lane width, includes buffer and height benefits
-  W_ebl = link[ , W_bl + W_buf + h_blst]
-  
-  #If parking protected bike lane, p_pk = 0
-  p_pk = link[ , ifelse(protec, 0, p_pk)]
-        
   #Adjusted width of outside shoulder, if curb present
   if(link$curb) {
     W_osstar = link$W_os - 1.5
     W_osstar = ifelse(W_osstar >= 0, W_osstar, 0)
   } else {
-    W_osstar = W_os
+    W_osstar = link$W_os
   }
   
-  #Effective total weidth of outside through lane
-  if(link$v_m < 160 | link$div) {
+  #Is protected?
+  if(link$protected) {
+    P_pkstar = 1
+  } else {
+    P_pkstar = link$p_pk
+  }
+  
+  #Total width of outside thru lane, bike lane, and paved shoulder/parking
+  if(link$p_pk == 0) {
+    W_t = link[ , W_ol + W_bl] + W_osstar + W_bufstar
+  } else {
+    W_t = link[ , W_ol + W_bl] + W_bufstar
+  }
+  
+  #Effective total width of outside through lane
+  if(link$v_m > 160 | link$div) {
     W_v = W_t
   } else {
-    W_v = W_t*(2 - 0.005*link$v_m)
+    W_v = W_t*(1.8 - 0.005*link$v_m)
   }
   
   #Effective width of outside through lane
-  if(W_ebl + W_osstar < 4) {
-    W_e = W_v - 10*p_pk
+  if(link$W_bl + W_osstar < 4) {
+    W_e = W_v - 10*P_pkstar
     W_e = ifelse(W_e >= 0, W_e, 0)
   } else {
-    W_e = W_v + W_ebl + W_osstar - 20*p_pk
+    W_e = W_v + link$W_bl + W_osstar - 20*P_pkstar
     W_e = ifelse(W_e >= 0, W_e, 0)
   }
   
@@ -50,49 +58,24 @@ func.bike.F_w.link  <- function(link) {
 }
 
 #Bicycle traffic speed factor (links)
-func.bike.F_s.link <- function(link, int) {
+func.bike.F_s.link <- function(link, control) {
   
+
   #Vehicle running speed
-  S_R = func.auto.S_R(link, int)
+  S_R = func.auto.S_R(link, control)
   
   #Adjusted motorized vehicle link running speed
   S_Ra = ifelse(S_R < 21, 21, S_R)
   
-  
   #Adjusted heavy vehicle percent
-  P_HVa = ifelse(link$v_m*(1 - 0.01*link$P_HV) < 200 & link$P_HV > 0.5, 
-                 0.5, 
+  P_HVa = ifelse(link$v_m*(1 - 0.01*link$P_HV) < 200 & link$P_HV > 50, 
+                 50, 
                  link$P_HV)
   
   #Motorized vehicle speed adjustment factor
   F_s = 0.199*(1.1199*log(S_Ra - 20) + 0.8103)*(1 + 0.1038*P_HVa)^2
   
   return(F_s)
-}
-
-#Bicycle level of service score for links
-func.bike.I_link <- function(link, int) {
-  
-  #### Caclulate final factors for LOS score
-  
-  #Cross-section adjustment factor
-  F_w = func.bike.F_w.link(link)
-  
-  #Motorized vehicle volume adjustment factor
-  v_ma = ifelse(link$v_m > 4*link$N_th, link$v_m, 4*link$N_th)
-  
-  F_v = 0.507*log(v_ma / (4*link$N_th))
-  
-  #Motorized vehicle speed adjustment factor
-  F_s = func.bike.F_s.link(link, int)
-  
-  #Pavement condition factor
-  F_p = 7.066 / link$P_c^2
-  
-  #### LOS Score
-  I_link = 0.760 + F_w + F_v + F_s + F_p
-  
-  return(I_link)
 }
 
 #Average bicycle delay for intersection
@@ -541,12 +524,37 @@ func.bike.I_int <- function(int, dir) {
   
   #Veh speed factor
   #F_s = 0.00013*n_15mj*int[traf_dir == dir, S_85mj]
-  F_s = (sqrt(n_15mj)*int[traf_dir == dir, S_85mj])/200
+  F_s = (sqrt(n_15mj)*int[traf_dir == dir, S_85mj])/400
   
   #LOS Score
   I_int = 4.1324 + F_w + F_v + F_s + F_delay
   
   return(I_int)
+}
+
+#Bicycle level of service score for links
+func.bike.I_link <- function(link, control) {
+  
+  #### Caclulate final factors for LOS score
+  
+  #Cross-section adjustment factor
+  F_w = func.bike.F_w.link(link)
+  
+  #Motorized vehicle volume adjustment factor
+  v_ma = ifelse(link$v_m > 4*link$N_th, link$v_m, 4*link$N_th)
+  
+  F_v = 0.507*log(v_ma / (4*link$N_th))
+  
+  #Motorized vehicle speed adjustment factor
+  F_s = func.bike.F_s.link(link, control)
+  
+  #Pavement condition factor
+  F_p = 7.066 / link$P_c^2
+  
+  #### LOS Score
+  I_link = 0.760 + F_w + F_v + F_s + F_p
+  
+  return(I_link)
 }
 
 #Bicycle LOS score for segment
@@ -556,7 +564,7 @@ func.bike.I_seg <- function(link, int) {
     segment_id = link$link_id,
     direction = link$link_dir,
     mode = "bicycle",
-    I_link = func.bike.I_link(link, int),
+    I_link = func.bike.I_link(link, int[traf_dir == link$link_dir, as.character(control)]),
     I_int = func.bike.I_int(int, link$link_dir)
   )
   
@@ -566,7 +574,7 @@ func.bike.I_seg <- function(link, int) {
   
   #Boundary indicator factor
   F_bi = 1
-
+  
   #Calculate score
   scores[ , I_seg := 0.160*I_link + 0.011*F_bi*exp(I_int) + 0.035*(N_aps/(LL/5280)) + 2.85]
   

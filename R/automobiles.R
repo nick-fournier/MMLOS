@@ -1,9 +1,9 @@
 #Segment running time
-func.auto.S_R <- function(link, int) {
+func.auto.S_R <- function(link, control) {
   
   
   #Signalization delay factor
-  f_x = switch(int[traf_dir == link$link_dir, control],
+  f_x = switch(control,
                "Signalized" = 1,
                "AWSC - Stop" = 1,
                "TWSC - Stop" = 1, 
@@ -14,7 +14,7 @@ func.auto.S_R <- function(link, int) {
   f_v = 2 / (1 + (1 - link$v_m / (52.8*link$N_th*link$S_f))^0.21)
   
   #Startup lost time
-  l1 = switch(int[traf_dir == link$link_dir, control],
+  l1 = switch(control,
               "Signalized" = 2, 
               "AWSC - Stop" = 2.5,
               "TWSC - Stop" = 2.5, 
@@ -31,7 +31,7 @@ func.auto.S_R <- function(link, int) {
   turndelay <- melt(turndelay, id.vars = "v_m")
   
   #Interpolate turn delay
-  d_ap = (1+link$N_aps)*turndelay[variable==link$N_th, approx(x = v_m, y = value, xout = link$v_m)$y]
+  d_ap = (1+link$N_aps)*turndelay[variable==link$N_th, approx(x = v_m, y = value, xout = link$v_m, rule = 2)$y]
   
   #Other delay
   d_other = 0
