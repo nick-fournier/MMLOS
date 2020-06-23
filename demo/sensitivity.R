@@ -379,8 +379,8 @@ ggplot(data = spdfact, aes(x = v_v, y = S_85mj, z = F_s)) +
   geom_contour_filled(binwidth = 1) +
   scale_fill_brewer(expression("Traffic\nexposure factor,"~F[s]), palette = "YlGnBu", 
                     labels = paste(0:floor(max(spdfact$F_s)),
-                                   1:ceiling(max(spdfact$F_s)), sep="-")) +
-  scale_x_continuous("Automobile traffic volume (veh/hr)", expand = c(0,0)) +
+                                   1:ceiling(max(spdfact$F_s)), sep="-"), direction = -1) +
+  scale_x_continuous("Automobile traffic volume (veh/hr)", expand = c(0,0), labels = scales::comma) +
   scale_y_continuous("Automobile traffic speed (mph)", expand = c(0,0)) +
   coord_fixed(ratio = 25) +
   theme_bw() +
