@@ -9,7 +9,7 @@ loaddat(dirs)
 \arguments{
 \item{dirs}{String vector containing the file locations of two CSV files for intersection and link data.
 For demonstration purposes, template data can be loaded by entering dir ="template".
-\n The input data format and description are as follows:
+The input data format and description are as follows:
 \tabular{lll}{
 VAR \tab TYPE \tab DESC \cr
 link_id     \tab LINK \tab Link Identification, name and direction or number                                     \cr

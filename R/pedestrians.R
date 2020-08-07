@@ -102,138 +102,138 @@ ped.d_signal <- function(int, dir) {
   with(int[traf_dir == dir, ], ((C - g)^2)/(2*C) )
 }
 
-#Current HCM Pedestrian delay for uncontrolled (e.g., TWSC)
-ped.d_twsc_og <- function(int, dir) {
-  
-  #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
-  xdir = switch(dir,
-                "NB" = "WB",
-                "SB" = "EB",
-                "EB" = "NB",
-                "WB" = "SB")
-  
-  #Opposite cross street dir
-  odir = switch(xdir,
-                "NB" = "SB",
-                "SB" = "NB",
-                "EB" = "WB",
-                "WB" = "EB")
-  
-  #Yield rate
-  M_y = int[traf_dir == xdir, M_yp]
-  
-  #Number of thru lanes (inclusive of opposite direction)
-  N_th = int[traf_dir == xdir, N_th]
-  
-  #Length of crosswalk
-  L = int[traf_dir == xdir, W_cd]
-  
-  #Total thru lanes
-  #int[traf_dir %in% c(xdir,odir), sum(N_th)]
-  
-  #Vehicle flow rate (veh/s)
-  v_v = int[traf_dir == xdir, v_v/3600]
-  
-  #Pedestrian flow rate (ped/s)
-  v_p = int[traf_dir == xdir, v_p/3600]
-  
-  #Critical headway
-  t_c = int[traf_dir == xdir, (W_cd/S_p) + t_sp]
-  
-  #Average number of peds waiting to cross
-  N_c = (v_p*exp(v_p*t_c) + v_v*exp(-v_v*t_c)) / ((v_p + v_v)*exp(v_p-v_v)*t_c)
-  
-  #Number of rows of peds
-  N_p = int[traf_dir == xdir, round( 8*(N_c - 1)/W_c)] + 1
-  
-  #Critical group headway
-  t_cg = t_c + 2*(N_p - 1)
-  
-  #Probability of blocked lane
-  P_b = 1 - exp(-t_cg * v_v / N_th)
-  
-  #Probability of delayed crossing
-  P_d = 1 - (1 - P_b)^N_th
-  
-  #Average gap waiting delay per pedestrian
-  d_g = (1/v_v)*(exp(v_v*t_cg) - v_v*t_cg - 1)
-  
-  #Average delay for any pedestrian
-  d_gd = d_g / P_d
-  
-  #Average headway
-  h = N_th/v_v
-  
-  #Average number of crossing events
-  n = round(d_gd/h)
-  
-  #Initial sum of PYi
-  sumPY = 0 
-  term1 = 0
-  
-  #Delay accounting for motorist yield probability
-  if(N_th == 1) {
-    #One lane
-    for(i in 1:n) {
-      PY = P_d*M_y*(1 - M_y)^(i-1)
-      sumPY = sumPY + PY
-      
-      #Calculates and sums up the first term
-      term1 = h*(i - 0.5)*PY + term1
-      
-      #Calculates the second term
-      term2 = (P_d - sumPY)*d_gd
-    }
-    d_pd <- term1 + term2
-    
-  } else if(N_th == 2) {
-    #Two lane
-    for(i in 1:n) {
-      PY = (P_d - sumPY)*( ((2*P_b*(1-P_b)*M_y) + P_b^2 * M_y^2) / P_d)
-      sumPY = sumPY + PY
-      
-      #Calculates and sums up the first term
-      term1 = h*(i - 0.5)*PY + term1
-      
-      #Calculates the second term
-      term2 = (P_d - sumPY)*d_gd
-    }
-    d_pd <- term1 + term2
-    
-  } else if(N_th == 3) {
-    #Three lane
-    for(i in 1:n) {
-      PY = (P_d - sumPY)*((P_b^3 * M_y^3 + 3*P_b^2 * (1-P_b)*M_y^2 + 3*P_b*(1-P_b)^2 * M_y) / P_d)
-      sumPY = sumPY + PY
-      
-      #Calculates and sums up the first term
-      term1 = h*(i - 0.5)*PY + term1
-      
-      #Calculates the second term
-      term2 = (P_d - sumPY)*d_gd
-    }
-    d_pd <- term1 + term2
-    
-  } else if(N_th == 4) {
-    #Four lane
-    for(i in 1:n) {
-      PY = (P_d - sumPY)*((P_b^4 * M_y^4 + 4*P_b^3 * (1-P_b)*M_y^3 + 6*P_b*(1-P_b)^2 * M_y^2 + 4*P_b*(1-P_b)^3 * M_y) / P_d)
-      sumPY = sumPY + PY
-      
-      #Calculates and sums up the first term
-      term1 = h*(i - 0.5)*PY + term1
-      
-      #Calculates the second term
-      term2 = (P_d - sumPY)*d_gd
-    }
-    d_pd <- term1 + term2
-  } else {
-    stop(paste0("Invalid number of lanes: ", N_th))
-  }
-  
-  return(d_pd)
-  
-}
+# #Current HCM Pedestrian delay for uncontrolled (e.g., TWSC)
+# ped.d_twsc_og <- function(int, dir) {
+#   
+#   #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
+#   xdir = switch(dir,
+#                 "NB" = "WB",
+#                 "SB" = "EB",
+#                 "EB" = "NB",
+#                 "WB" = "SB")
+#   
+#   #Opposite cross street dir
+#   odir = switch(xdir,
+#                 "NB" = "SB",
+#                 "SB" = "NB",
+#                 "EB" = "WB",
+#                 "WB" = "EB")
+#   
+#   #Yield rate
+#   M_y = int[traf_dir == xdir, M_yp]
+#   
+#   #Number of thru lanes (inclusive of opposite direction)
+#   N_th = int[traf_dir == xdir, N_th]
+#   
+#   #Length of crosswalk
+#   L = int[traf_dir == xdir, W_cd]
+#   
+#   #Total thru lanes
+#   #int[traf_dir %in% c(xdir,odir), sum(N_th)]
+#   
+#   #Vehicle flow rate (veh/s)
+#   v_v = int[traf_dir == xdir, v_v/3600]
+#   
+#   #Pedestrian flow rate (ped/s)
+#   v_p = int[traf_dir == xdir, v_p/3600]
+#   
+#   #Critical headway
+#   t_c = int[traf_dir == xdir, (W_cd/S_p) + t_sp]
+#   
+#   #Average number of peds waiting to cross
+#   N_c = (v_p*exp(v_p*t_c) + v_v*exp(-v_v*t_c)) / ((v_p + v_v)*exp(v_p-v_v)*t_c)
+#   
+#   #Number of rows of peds
+#   N_p = int[traf_dir == xdir, round( 8*(N_c - 1)/W_c)] + 1
+#   
+#   #Critical group headway
+#   t_cg = t_c + 2*(N_p - 1)
+#   
+#   #Probability of blocked lane
+#   P_b = 1 - exp(-t_cg * v_v / N_th)
+#   
+#   #Probability of delayed crossing
+#   P_d = 1 - (1 - P_b)^N_th
+#   
+#   #Average gap waiting delay per pedestrian
+#   d_g = (1/v_v)*(exp(v_v*t_cg) - v_v*t_cg - 1)
+#   
+#   #Average delay for any pedestrian
+#   d_gd = d_g / P_d
+#   
+#   #Average headway
+#   h = N_th/v_v
+#   
+#   #Average number of crossing events
+#   n = round(d_gd/h)
+#   
+#   #Initial sum of PYi
+#   sumPY = 0 
+#   term1 = 0
+#   
+#   #Delay accounting for motorist yield probability
+#   if(N_th == 1) {
+#     #One lane
+#     for(i in 1:n) {
+#       PY = P_d*M_y*(1 - M_y)^(i-1)
+#       sumPY = sumPY + PY
+#       
+#       #Calculates and sums up the first term
+#       term1 = h*(i - 0.5)*PY + term1
+#       
+#       #Calculates the second term
+#       term2 = (P_d - sumPY)*d_gd
+#     }
+#     d_pd <- term1 + term2
+#     
+#   } else if(N_th == 2) {
+#     #Two lane
+#     for(i in 1:n) {
+#       PY = (P_d - sumPY)*( ((2*P_b*(1-P_b)*M_y) + P_b^2 * M_y^2) / P_d)
+#       sumPY = sumPY + PY
+#       
+#       #Calculates and sums up the first term
+#       term1 = h*(i - 0.5)*PY + term1
+#       
+#       #Calculates the second term
+#       term2 = (P_d - sumPY)*d_gd
+#     }
+#     d_pd <- term1 + term2
+#     
+#   } else if(N_th == 3) {
+#     #Three lane
+#     for(i in 1:n) {
+#       PY = (P_d - sumPY)*((P_b^3 * M_y^3 + 3*P_b^2 * (1-P_b)*M_y^2 + 3*P_b*(1-P_b)^2 * M_y) / P_d)
+#       sumPY = sumPY + PY
+#       
+#       #Calculates and sums up the first term
+#       term1 = h*(i - 0.5)*PY + term1
+#       
+#       #Calculates the second term
+#       term2 = (P_d - sumPY)*d_gd
+#     }
+#     d_pd <- term1 + term2
+#     
+#   } else if(N_th == 4) {
+#     #Four lane
+#     for(i in 1:n) {
+#       PY = (P_d - sumPY)*((P_b^4 * M_y^4 + 4*P_b^3 * (1-P_b)*M_y^3 + 6*P_b*(1-P_b)^2 * M_y^2 + 4*P_b*(1-P_b)^3 * M_y) / P_d)
+#       sumPY = sumPY + PY
+#       
+#       #Calculates and sums up the first term
+#       term1 = h*(i - 0.5)*PY + term1
+#       
+#       #Calculates the second term
+#       term2 = (P_d - sumPY)*d_gd
+#     }
+#     d_pd <- term1 + term2
+#   } else {
+#     stop(paste0("Invalid number of lanes: ", N_th))
+#   }
+#   
+#   return(d_pd)
+#   
+# }
 
 #Revised pedestrian delay for uncontrolled (e.g., TWSC)
 ped.d_twsc <- function(int, dir) {

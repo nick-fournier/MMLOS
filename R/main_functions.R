@@ -110,15 +110,14 @@ score2LOS <- function(score) {
 }
 
 
-#' Calculate the Multimodal Level of Service
+#' Calculate the Multi-modal Level of Service
 #' 
 #' @param dat List containing data table for intersections and links. See \code{\link{loaddat}} for formatting.
 #' @param revs Boolean where TRUE calculates LOS with proposed revisions, or FALSE using existing HCM 6th edition.
 #' @return A list containing a data tables for bicycle LOS and pedestrian LOS
 #' @examples
-#' MMLOS(dat, T)
-
-MMLOS <- function(dat, revs = T) {
+#' calcMMLOS(dat, T)
+calcMMLOS <- function(dat, revs = T) {
   #Split by intersection
   int.split <- split(dat$intersections, by = "int_id")  
   link.split <- split(dat$links, by = c("link_id","link_dir")) 

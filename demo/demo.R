@@ -9,18 +9,25 @@ library(extrafont)
 library(ggpubr)
 
 
+
+
+
+
+
+
+
+
 # #Load data in from files.
 # dat <- func.loaddat()
 # 
 # #
-# Current <- MMLOS(dat, revs = F)
+# Current <- calcMMLOSdat, revs = F)
 # 
-# Revisions <- MMLOS(dat, revs = T)
+# Revisions <- calcMMLOSdat, revs = T)
 # 
 # #Display
 # Current$bike
 # Revisions$bike
-
 
 
 
