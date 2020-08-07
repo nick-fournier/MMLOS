@@ -24,7 +24,7 @@ This contains the directory to formatted CSV files for intersections and links. 
 
 	los <- calcMMLOS(dat)
 
-See the not so vigorous [vignette](vignette/nsv-vignette.html) for simple usage.
+See the not so vigorous [vignette](https://htmlpreview.github.io/?https://github.com/nick-fournier/MMLOS/blob/master/vignette/nsv-vignette.html) for simple usage.
 
 ## References
 1. Kittelson and Associates. Collection of Working Papers: Pedestrian Crossing Delay and LOS - NCHRP Project 17-87 - Enhancing Pedestrian Volume Estimation and Developing HCM Pedestrian Methodologies for Safe and Sustainable Communities. 2020.
