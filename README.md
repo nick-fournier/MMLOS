@@ -10,11 +10,12 @@ The package calculates LOS using the current Highway Capacity Manual 6th edition
 
 The MMLOS package currently only supports LOS for bicycles and pedestrians, but will be extended to automobiles and transit in future versions. 
 
-1. Kittelson and Associates. Collection of Working Papers: Pedestrian Crossing Delay and LOS - NCHRP Project 17-87 - Enhancing Pedestrian Volume Estimation and Developing HCM Pedestrian Methodologies for Safe and Sustainable Communities. 2020.
-2. Fournier, N., Huang, A., and Skabardonis, A.  Improved Analysis Methodologies and Strategies for Complete Streets.
 
 ## Installation
+The MMLOS package can be installed in <em>R</em> with the following commands:
+		library(devtools) #Install devtools if not already installed!
+		install_github("nick-fournier/MMLOS")
 
-		library(devtools)
-		install_github("nick-fournier/complete-streets-los")
-
+## References
+1. Kittelson and Associates. Collection of Working Papers: Pedestrian Crossing Delay and LOS - NCHRP Project 17-87 - Enhancing Pedestrian Volume Estimation and Developing HCM Pedestrian Methodologies for Safe and Sustainable Communities. 2020.
+2. Fournier, N., Huang, A., and Skabardonis, A.  Improved Analysis Methodologies and Strategies for Complete Streets.
