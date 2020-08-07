@@ -49,6 +49,6 @@ The following supporting sub-functions are derived from the 6th Highway Capacity
   }
 }
 
-For more detail
+For more details, see help for individual functions.
 }
 
