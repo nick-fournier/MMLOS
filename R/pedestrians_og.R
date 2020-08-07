@@ -12,7 +12,7 @@
 
 
 #Pedestrian paved width factor (links)
-func.ogped.F_w.link  <- function(link) {
+ogped.F_w.link  <- function(link) {
   
   #Total width of outside thru lane, bike lane, and paved shoulder/parking
   W_t = link[, W_ol + W_bl + W_buf + W_os]
@@ -56,16 +56,16 @@ func.ogped.F_w.link  <- function(link) {
 }
 
 #Pedestrian level of service score for links
-func.ogped.I_link <- function(link, int) {
+ogped.I_link <- function(link, int) {
     
   #### Caclulate final factors for LOS score
-  F_w = func.ogped.F_w.link(link) #Cross-section adjustment factor
+  F_w = ogped.F_w.link(link) #Cross-section adjustment factor
   
   #Motorized vehicle volume adjustment factor
   F_v = 0.0091*link$v_m/(4*link$N_th) 
   
   #Vehicle running speed
-  S_R = func.auto.S_R(link, int)
+  S_R = auto.S_R(link, int)
   
   #Motorized vehicle speed adjustment factor
   F_s = 4*(S_R/100)^2 
@@ -77,22 +77,22 @@ func.ogped.I_link <- function(link, int) {
 }
 
 #Pedestrian control delay
-func.ogped.d_pd <- function(int, dir) {
+ogped.d_pd <- function(int, dir) {
   switch(int[traf_dir == dir, control],
-         "Signalized" = func.ogped.d_signal(int, dir), 
+         "Signalized" = ogped.d_signal(int, dir), 
          "AWSC - Stop" = 0,
-         "TWSC - Stop" = func.ogped.d_twsc(int, dir), 
+         "TWSC - Stop" = ogped.d_twsc(int, dir), 
          "Uncontrolled" = 0,
          "Yield" = 0)
   }
 
 #Pedestrian control delay from signal
-func.ogped.d_signal <- function(int, dir) {
+ogped.d_signal <- function(int, dir) {
   with(int[traf_dir == dir, ], ((C - g)^2)/(2*C) )
 }
 
 #Current HCM Pedestrian delay for uncontrolled (e.g., TWSC)
-func.ogped.d_twsc <- function(int, dir) {
+ogped.d_twsc <- function(int, dir) {
   
   #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
   xdir = switch(dir,
@@ -225,7 +225,7 @@ func.ogped.d_twsc <- function(int, dir) {
 }
 
 #Pedestrian crossing difficulty factor
-func.ogped.F_cd <- function(link, int, Ilink, Iint) {
+ogped.F_cd <- function(link, int, Ilink, Iint) {
   
   #Crossing direction for diversion
   mxdir = switch(link$link_dir,
@@ -248,10 +248,10 @@ func.ogped.F_cd <- function(link, int, Ilink, Iint) {
   D_d = 2 * D_c
   
   #Calculate average diversion delay from midsegment point
-  d_pd = (D_d / link$S_pf) + func.ogped.d_pd(int, mxdir)
+  d_pd = (D_d / link$S_pf) + ogped.d_pd(int, mxdir)
   
   #Calculate wait delay from control delay
-  d_pw = func.ogped.d_twsc(int, mxdir)
+  d_pw = ogped.d_twsc(int, mxdir)
   
   #Cossing delay
   d_px = min(d_pd, d_pw, 60)
@@ -266,7 +266,7 @@ func.ogped.F_cd <- function(link, int, Ilink, Iint) {
 }
 
 #Pedestrian LOS score for intersections
-func.ogped.I_int <- function(link, int) {
+ogped.I_int <- function(link, int) {
   
   #The traffic direction being crossed
   xdir = switch(link$link_dir,
@@ -283,7 +283,7 @@ func.ogped.I_int <- function(link, int) {
                 "WB" = "EB")
   
   #Intersection delay
-  d_pd = func.ogped.d_pd(int,link$link_dir)
+  d_pd = ogped.d_pd(int,link$link_dir)
   
   #Number of traffic lanes crossed
   N_d = int[traf_dir == xdir, N_d]
@@ -318,24 +318,24 @@ func.ogped.I_int <- function(link, int) {
 }
 
 #Pedestrian LOS score for segment
-func.ogped.I_seg <- function(link, int) {
+ogped.I_seg <- function(link, int) {
   #Put LOS scores for link and intersection into table
   scores = data.table(
     segment_id = link$link_id,
     direction = link$link_dir,
     mode = "pedestrian",
-    I_link = func.ogped.I_link(link, int),
-    I_int = func.ogped.I_int(link, int)
+    I_link = ogped.I_link(link, int),
+    I_int = ogped.I_int(link, int)
   )
   
-  F_cd = func.ogped.F_cd(link,int, scores$I_link, scores$I_int)
+  F_cd = ogped.F_cd(link,int, scores$I_link, scores$I_int)
   
   #Calculate score
   scores[ , I_seg := F_cd*(0.318*I_link + 0.220*I_int + 1.606)]
   
   #Get grade from score
   scores = cbind(scores,
-                 setNames(scores[ , lapply(.SD, func.score2LOS), .SDcols = c("I_link","I_int","I_seg"),], c("link_LOS","int_LOS","seg_LOS")))
+                 setNames(scores[ , lapply(.SD, score2LOS), .SDcols = c("I_link","I_int","I_seg"),], c("link_LOS","int_LOS","seg_LOS")))
   
   return(scores)
 }

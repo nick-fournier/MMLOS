@@ -1,5 +1,5 @@
 #Segment running time
-func.auto.S_R <- function(link, control) {
+auto.S_R <- function(link, control) {
   
   
   #Signalization delay factor

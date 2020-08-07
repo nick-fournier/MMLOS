@@ -9,7 +9,7 @@
 
 
 #Bicycle paved width factor (links)
-func.ogbike.F_w.link  <- function(link) {
+ogbike.F_w.link  <- function(link) {
   
   #Adjusted width of outside shoulder, if curb present
   if(link$curb) {
@@ -48,10 +48,10 @@ func.ogbike.F_w.link  <- function(link) {
 }
 
 #Bicycle traffic speed factor (links)
-func.ogbike.F_s.link <- function(link, int) {
+ogbike.F_s.link <- function(link, int) {
   
   #Vehicle running speed
-  S_R = func.auto.S_R(link, int)
+  S_R = auto.S_R(link, int)
   
   #Adjusted motorized vehicle link running speed
   S_Ra = ifelse(S_R < 21, 21, S_R)
@@ -69,12 +69,12 @@ func.ogbike.F_s.link <- function(link, int) {
 }
 
 #Bicycle level of service score for links
-func.ogbike.I_link <- function(link, int) {
+ogbike.I_link <- function(link, int) {
   
   #### Caclulate final factors for LOS score
   
   #Cross-section adjustment factor
-  F_w = func.ogbike.F_w.link(link)
+  F_w = ogbike.F_w.link(link)
   
   #Motorized vehicle volume adjustment factor
   v_ma = ifelse(link$v_m > 4*link$N_th, link$v_m, 4*link$N_th)
@@ -82,7 +82,7 @@ func.ogbike.I_link <- function(link, int) {
   F_v = 0.507*log(v_ma / (4*link$N_th))
   
   #Motorized vehicle speed adjustment factor
-  F_s = func.ogbike.F_s.link(link, int)
+  F_s = ogbike.F_s.link(link, int)
   
   #Pavement condition factor
   F_p = 7.066 / link$P_c^2
@@ -94,7 +94,7 @@ func.ogbike.I_link <- function(link, int) {
 }
 
 #Bicycle LOS score for intersections
-func.ogbike.I_int <- function(int, dir) {
+ogbike.I_int <- function(int, dir) {
   #The traffic direction being crossed
   xdir = switch(dir,
                 "NB" = "WB",
@@ -137,14 +137,14 @@ func.ogbike.I_int <- function(int, dir) {
 }
 
 #Bicycle LOS score for segment
-func.ogbike.I_seg <- function(link, int) {
+ogbike.I_seg <- function(link, int) {
   #Put LOS scores for link and intersection into table
   scores = data.table(
     segment_id = link$link_id,
     direction = link$link_dir,
     mode = "bicycle",
-    I_link = func.ogbike.I_link(link, int),
-    I_int = func.ogbike.I_int(link, int)
+    I_link = ogbike.I_link(link, int),
+    I_int = ogbike.I_int(link, int)
   )
   
   #Calculate segment LOS
@@ -159,7 +159,7 @@ func.ogbike.I_seg <- function(link, int) {
   
   #Get grade from score
   scores = cbind(scores,
-                 setNames(scores[ , lapply(.SD, func.score2LOS), .SDcols = c("I_link","I_int","I_seg"),], c("link_LOS","int_LOS","seg_LOS")))
+                 setNames(scores[ , lapply(.SD, score2LOS), .SDcols = c("I_link","I_int","I_seg"),], c("link_LOS","int_LOS","seg_LOS")))
   
   
   

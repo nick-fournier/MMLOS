@@ -9,7 +9,7 @@
 
 
 #Bicycle paved width factor (links)
-func.bike.F_w.link <- function(link) {
+bike.F_w.link <- function(link) {
   #Effective buffer width
   #W_bufstar = link[ , sqrt(W_blbuf^2 + 16*H_blbuf^0.5)]
   W_bufstar = link[ , 4*(W_blbuf^2 + (24*H_blbuf))^(1/4)]
@@ -58,11 +58,11 @@ func.bike.F_w.link <- function(link) {
 }
 
 #Bicycle traffic speed factor (links)
-func.bike.F_s.link <- function(link, control) {
+bike.F_s.link <- function(link, control) {
   
 
   #Vehicle running speed
-  S_R = func.auto.S_R(link, control)
+  S_R = auto.S_R(link, control)
   
   #Adjusted motorized vehicle link running speed
   S_Ra = ifelse(S_R < 21, 21, S_R)
@@ -79,19 +79,19 @@ func.bike.F_s.link <- function(link, control) {
 }
 
 #Average bicycle delay for intersection
-func.bike.d_bd <- function(int, dir) {
+bike.d_bd <- function(int, dir) {
   switch(int[traf_dir == dir, as.character(control)],
-         "Signalized" = func.bike.d_signal(int, dir), 
+         "Signalized" = bike.d_signal(int, dir), 
          "AWSC - Stop" = 0,
-         "TWSC - Stop" = func.bike.d_twsc(int, dir), 
-         "Uncontrolled" = func.bike.d_1stageleft(int,dir),
+         "TWSC - Stop" = bike.d_twsc(int, dir), 
+         "Uncontrolled" = bike.d_1stageleft(int,dir),
          "Yield" = 0)
 }
 
 #Bicycle control delay
-func.bike.d_signal <- function(int, dir) {
+bike.d_signal <- function(int, dir) {
   #Delay from signal and right-turning vehicle encroachment
-  d_bS = func.bike.d_bS(int, dir)
+  d_bS = bike.d_bS(int, dir)
   
   #Proportion of overall left turning bicycles
   P_L = int[traf_dir == dir, v_bl/v_b]
@@ -100,10 +100,10 @@ func.bike.d_signal <- function(int, dir) {
   P_L2 = int[traf_dir == dir, P_bl2]
   
   #One-stage left turn delay
-  d_bL1 = func.bike.d_1stageleft(int, dir)
+  d_bL1 = bike.d_1stageleft(int, dir)
   
   #Two-stage left turn delay
-  d_bL2 = func.bike.d_2stageleft(int, dir)
+  d_bL2 = bike.d_2stageleft(int, dir)
   
   #Average total bicycle delay at intersections
   d_bd = d_bS + P_L*((1 - P_L2)*d_bL1 + P_L2*d_bL2)
@@ -112,7 +112,7 @@ func.bike.d_signal <- function(int, dir) {
 }
 
 #One-stage left turn bicycle delay
-func.bike.d_1stageleft <- function(int, dir, tol = 1e-8) {
+bike.d_1stageleft <- function(int, dir, tol = 1e-8) {
   
   #Opposite cross street dir
   odir = switch(dir,
@@ -283,7 +283,7 @@ func.bike.d_1stageleft <- function(int, dir, tol = 1e-8) {
 }
 
 #Two-stage left turn bicycle delay
-func.bike.d_2stageleft <- function(int, dir) {
+bike.d_2stageleft <- function(int, dir) {
   
   #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
   xdir = switch(dir,
@@ -318,7 +318,7 @@ func.bike.d_2stageleft <- function(int, dir) {
 }
 
 #Bicycle delay from signal and right turning vehicles
-func.bike.d_bS <- function(int, dir) {
+bike.d_bS <- function(int, dir) {
   
   #Critical gap time
   t_c = 5
@@ -346,7 +346,7 @@ func.bike.d_bS <- function(int, dir) {
 }
 
 #Bicycle delay for uncontrolled (e.g., TWSC)
-func.bike.d_twsc <- function(int, dir) {
+bike.d_twsc <- function(int, dir) {
   
   #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
   xdir = switch(dir,
@@ -476,7 +476,7 @@ func.bike.d_twsc <- function(int, dir) {
 }
 
 #Bicycle LOS score for intersections
-func.bike.I_int <- function(int, dir) {
+bike.I_int <- function(int, dir) {
   #The traffic direction being crossed
   xdir = switch(dir,
                 "NB" = "WB",
@@ -517,7 +517,7 @@ func.bike.I_int <- function(int, dir) {
   F_v = int[traf_dir == dir, 0.0066*(v_lt + v_th + v_rt)/(4*N_th)]
   
   #Bike delay at intersection
-  d_bd = func.bike.d_bd(int, dir)
+  d_bd = bike.d_bd(int, dir)
   
   #Delay factor
   F_delay = 0.0401*ifelse(d_bd == 0, 0, log(d_bd))
@@ -533,12 +533,12 @@ func.bike.I_int <- function(int, dir) {
 }
 
 #Bicycle level of service score for links
-func.bike.I_link <- function(link, control) {
+bike.I_link <- function(link, control) {
   
   #### Caclulate final factors for LOS score
   
   #Cross-section adjustment factor
-  F_w = func.bike.F_w.link(link)
+  F_w = bike.F_w.link(link)
   
   #Motorized vehicle volume adjustment factor
   v_ma = ifelse(link$v_m > 4*link$N_th, link$v_m, 4*link$N_th)
@@ -546,7 +546,7 @@ func.bike.I_link <- function(link, control) {
   F_v = 0.507*log(v_ma / (4*link$N_th))
   
   #Motorized vehicle speed adjustment factor
-  F_s = func.bike.F_s.link(link, control)
+  F_s = bike.F_s.link(link, control)
   
   #Pavement condition factor
   F_p = 7.066 / link$P_c^2
@@ -558,14 +558,14 @@ func.bike.I_link <- function(link, control) {
 }
 
 #Bicycle LOS score for segment
-func.bike.I_seg <- function(link, int) {
+bike.I_seg <- function(link, int) {
   #Put LOS scores for link and intersection into table
   scores = data.table(
     segment_id = link$link_id,
     direction = link$link_dir,
     mode = "bicycle",
-    I_link = func.bike.I_link(link, int[traf_dir == link$link_dir, as.character(control)]),
-    I_int = func.bike.I_int(int, link$link_dir)
+    I_link = bike.I_link(link, int[traf_dir == link$link_dir, as.character(control)]),
+    I_int = bike.I_int(int, link$link_dir)
   )
   
   #Calculate segment LOS
@@ -580,7 +580,7 @@ func.bike.I_seg <- function(link, int) {
   
   #Get grade from score
   scores = cbind(scores,
-                 setNames(scores[ , lapply(.SD, func.score2LOS), .SDcols = c("I_link","I_int","I_seg"),], c("link_LOS","int_LOS","seg_LOS")))
+                 setNames(scores[ , lapply(.SD, score2LOS), .SDcols = c("I_link","I_int","I_seg"),], c("link_LOS","int_LOS","seg_LOS")))
   
   
   
