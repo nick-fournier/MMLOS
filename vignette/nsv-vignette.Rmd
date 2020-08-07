@@ -1,5 +1,5 @@
 ---
-title: "A not so vigorous vignette"
+title: "A not so vigorous vignette for MMLOS usage"
 author: "Nick Fournier"
 date: "8/7/2020"
 output: html_document
