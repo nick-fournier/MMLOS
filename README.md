@@ -13,13 +13,18 @@ The MMLOS package currently only supports LOS for bicycles and pedestrians, but 
 ## Installation
 The MMLOS package can be installed in <em>R</em> with the following commands:
 
-		library(devtools) #Install devtools if not already installed!
-		install_github("nick-fournier/MMLOS")
+	library(devtools) #Install devtools if not already installed!
+	install_github("nick-fournier/MMLOS")
 ## Usage
-For detailed usage
+Load data with:
 
-[a relative link](man/MMLOS.Rd)
+	dat <- loaddat(dirs)
+	
+This contains the directory to formatted CSV files for intersections and links. See the [input data descriptions](data/input_link_template.csv) file and the [link data](data/input_link_template.csv) and [intersection data](data/input_intersection_template.csv) template files for examples. The LOS is then calculated using the function:
 
+	los <- calcMMLOS(dat)
+
+See the [vignette](vignette/nsv-vignette.Rmd) for example usage.
 
 ## References
 1. Kittelson and Associates. Collection of Working Papers: Pedestrian Crossing Delay and LOS - NCHRP Project 17-87 - Enhancing Pedestrian Volume Estimation and Developing HCM Pedestrian Methodologies for Safe and Sustainable Communities. 2020.
