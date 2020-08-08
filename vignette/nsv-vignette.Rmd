@@ -69,6 +69,7 @@ existing <- calcMMLOS(dat, revs = F)
 
 Revisions <- calcMMLOS(dat, revs = T)
 
+
 #Display
 # Current$bike
 # Revisions$bike
