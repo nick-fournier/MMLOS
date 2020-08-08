@@ -30,7 +30,7 @@ tabular <- function(df, ...) {
 #' @examples
 #' loaddat(dirs = c(intersections = "./data/input_intersection_template.csv", 
 #'                  links = "./data/input_link_template.csv"))
-#' 
+#' @export
 loaddat <- function(dirs) {
   if(missing(dirs)){
 
@@ -67,7 +67,7 @@ loaddat <- function(dirs) {
   #Check for NA
   NAs = sapply(dat, function(x) any(is.na(x)))
   
-  print(paste0("WARNING: Data contains NAs in ", names(NAs[NAs]), ", make sure this is intentional"))
+  warning(paste0("WARNING: Data contains NAs in ", names(NAs[NAs]), ", make sure this is intentional"))
   
   
   try(if(!all(chk))
@@ -99,12 +99,36 @@ loadtab <- function() {
 }
 
 
-#LOS Grade from score
-score2LOS <- function(score) {
+#' Convert LOS score to letter grade
+#' 
+#' @param score Numeric LOS score 
+#' @param mode String for mode being converted. Bike or Pedestrian (future version to include Automobile and Transit)
+#' @return A character string for LOS grade.
+#' @examples
+#' score2LOS(score, mode)
+#' @export
+score2LOS <- function(score, mode) {
   
-  score2LOS <- data.table( LOS = c("A","B","C","D","E","F"), 
+  score2LOS <- data.table( LOS = c("A","B","C","D","E","F"),
                            lo_score = c(-Inf,2.00,2.75,3.50,4.25,5.00),
                            hi_score = c(2.00,2.75,3.50,4.25,5.00,Inf))
+  # 
+  # score2LOS <- data.table( "Inf_60" = c("A","B","C","D","E","F"),
+  #                          "40_60"  = c("B","B","C","D","E","F"),
+  #                          "24_40"  = c("C","C","C","D","E","F"),
+  #                          "15_24"  = c("D","D","D","D","E","F"),
+  #                          "8_15"   = c("E","E","E","E","E","F"),
+  #                          "-Inf_8" = c("F","F","F","F","F","F"),
+  #                          lo_score = c(-Inf,2.00,2.75,3.50,4.25,5.00),
+  #                          hi_score = c(2.00,2.75,3.50,4.25,5.00,Inf))
+  # 
+  # score2LOS <- melt(score2LOS, id.vars = c("lo_score","hi_score"), variable.factor = F)
+  # score2LOS[ , c("lo_space", "hi_space") := tstrsplit(variable, "_", fixed = T)]
+  # score2LOS[ , (c("lo_space", "hi_space")) := lapply(.SD, as.numeric), .SDcols = c("lo_space", "hi_space")]
+  # 
+  # if(mode == "Pedestrian")
+  #   score2LOS
+  # 
   
   return(score2LOS[score > lo_score & score <= hi_score, LOS])
 }
@@ -117,9 +141,10 @@ score2LOS <- function(score) {
 #' @return A list containing a data tables for bicycle LOS and pedestrian LOS
 #' @examples
 #' calcMMLOS(dat, T)
+#' @export
 calcMMLOS <- function(dat, revs = T) {
   #Split by intersection
-  int.split <- split(dat$intersections, by = "int_id")  
+  int.split <- split(dat$intersections, by = "int_id")
   link.split <- split(dat$links, by = c("link_id","link_dir")) 
   
   #Getting LOS score for each link, intersection, and segment.
@@ -136,6 +161,6 @@ calcMMLOS <- function(dat, revs = T) {
       ped = rbindlist(lapply(link.split, function(link) ogped.I_seg(link, int = int.split[[link$boundary_id]])))
     )
   }
-
+  
   return(LOS)
 }

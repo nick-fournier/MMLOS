@@ -51,7 +51,7 @@ ogbike.F_w.link  <- function(link) {
 ogbike.F_s.link <- function(link, int) {
   
   #Vehicle running speed
-  S_R = auto.S_R(link, int)
+  S_R = auto.S_R(link, control = int[traf_dir == link$link_dir, control])
   
   #Adjusted motorized vehicle link running speed
   S_Ra = ifelse(S_R < 21, 21, S_R)
@@ -70,8 +70,6 @@ ogbike.F_s.link <- function(link, int) {
 
 #Bicycle level of service score for links
 ogbike.I_link <- function(link, int) {
-  
-  #### Caclulate final factors for LOS score
   
   #Cross-section adjustment factor
   F_w = ogbike.F_w.link(link)
@@ -123,7 +121,7 @@ ogbike.I_int <- function(int, dir) {
   W_osstar = int[ traf_dir == dir, ifelse(curb & W_os - 1.5 >= 0, W_os - 1.5, W_os)]
   
   #Total width of outside thru lane
-  W_t = with(int, W_ol + W_bl + ifelse(p_pk > 0, 0, 1)*W_osstar)
+  W_t = int[ traf_dir == dir, W_ol + W_bl + ifelse(p_pk > 0, 0, 1)*W_osstar]
   
   #Cross-section factor
   F_w = 0.0153*W_cd - 0.2144*W_t
@@ -144,7 +142,7 @@ ogbike.I_seg <- function(link, int) {
     direction = link$link_dir,
     mode = "bicycle",
     I_link = ogbike.I_link(link, int),
-    I_int = ogbike.I_int(link, int)
+    I_int = ogbike.I_int(int, link$link_dir)
   )
   
   #Calculate segment LOS

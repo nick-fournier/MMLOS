@@ -268,16 +268,18 @@ bike.d_1stageleft <- function(int, dir, tol = 1e-8) {
     stop(paste0("Invalid number of lanes: ", N_th))
   }
   
-  l = int[traf_dir == dir, l]
-  C = int[traf_dir == dir, C]
-  g = int[traf_dir == dir, g]
-  t_sb = int[traf_dir == dir, t_sb]
-  
-  #Arrive on red delay
-  d_R = ((C-g)/C)*( (C-g)/2) + l + t_sb
-  
-  #
-  d_bL2 = d_bL2 + d_R
+  if( int[traf_dir == dir, control] == "Signalized") {
+    l = int[traf_dir == dir, l]
+    C = int[traf_dir == dir, C]
+    g = int[traf_dir == dir, g]
+    t_sb = int[traf_dir == dir, t_sb]
+    
+    #Arrive on red delay
+    d_R = ((C-g)/C)*( (C-g)/2) + l + t_sb
+    
+    #
+    d_bL2 = d_bL2 + d_R
+  }
   
   return(d_bL2)
 }

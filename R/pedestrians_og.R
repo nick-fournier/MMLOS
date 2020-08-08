@@ -15,7 +15,7 @@
 ogped.F_w.link  <- function(link) {
   
   #Total width of outside thru lane, bike lane, and paved shoulder/parking
-  W_t = link[, W_ol + W_bl + W_buf + W_os]
+  W_t = link[, W_ol + W_bl + W_swbuf + W_os]
   
   #Adjusted width of paved outside shoulder
   W_osstar = link$W_os - 1.5
@@ -29,8 +29,6 @@ ogped.F_w.link  <- function(link) {
   }
     
   #Total width shoulder, bike lane, and parking lane
-  W_l = link$W_bl + W_osstar + link$W_pk
-  
   if(link$p_pk < 0.25 | link$p_strp) {
     W_l = link$W_bl + W_osstar
   } else {
@@ -38,19 +36,19 @@ ogped.F_w.link  <- function(link) {
   }
   
   #Available sidewalk width
-  W_A = ifelse(link$W_T > 0, 0, link$W_T - W_buf)
+  W_A = ifelse(link$W_T > 0, 0, link$W_T - link$W_swbuf)
   
   #Adjusted available sidewalk
   W_aA = min(W_A, 10)
   
   #Buffer coeffient
-  f_b = ifelse(link$h_blsw > 3, 5.37, 1)
+  f_b = ifelse(link$H_swbuf > 3, 5.37, 1)
   
   #Sidewalk width coefficient
   f_sw = 6.0 - 0.3*W_aA
   
   #Cross-section adjustment factor
-  F_w = -1.2276*log(W_v + 0.5*W_l + 50*link$p_pk + link$W_buf*f_b + W_aA*f_sw)
+  F_w = -1.2276*log(W_v + 0.5*W_l + 50*link$p_pk + link$W_swbuf*f_b + W_aA*f_sw)
   
   return(F_w)
 }
@@ -65,7 +63,7 @@ ogped.I_link <- function(link, int) {
   F_v = 0.0091*link$v_m/(4*link$N_th) 
   
   #Vehicle running speed
-  S_R = auto.S_R(link, int)
+  S_R = auto.S_R(link, control = int[traf_dir == link$link_dir, control])
   
   #Motorized vehicle speed adjustment factor
   F_s = 4*(S_R/100)^2 
@@ -266,10 +264,10 @@ ogped.F_cd <- function(link, int, Ilink, Iint) {
 }
 
 #Pedestrian LOS score for intersections
-ogped.I_int <- function(link, int) {
+ogped.I_int <- function(int, dir) {
   
   #The traffic direction being crossed
-  xdir = switch(link$link_dir,
+  xdir = switch(dir,
                     "NB" = "WB",
                     "SB" = "EB", 
                     "EB" = "NB",
@@ -283,7 +281,7 @@ ogped.I_int <- function(link, int) {
                 "WB" = "EB")
   
   #Intersection delay
-  d_pd = ogped.d_pd(int,link$link_dir)
+  d_pd = ogped.d_pd(int,dir)
   
   #Number of traffic lanes crossed
   N_d = int[traf_dir == xdir, N_d]
@@ -294,16 +292,16 @@ ogped.I_int <- function(link, int) {
   n_15mj = (0.25 / N_d)*sum(int$v_v, na.rm = T)
   
   #Left and right turns with ped movement
-  v_rtlt = int[traf_dir == link$link_dir, v_rtor + v_ltperm]
+  v_rtlt = int[traf_dir == dir, v_rtor + v_ltperm]
   
   #Number of right turn channel islands
-  N_rtcid = int[traf_dir == link$link_dir, N_rtcid]
+  N_rtcid = int[traf_dir == dir, N_rtcid]
   
   #Delay factor
   F_delay = 0.0401*ifelse(d_pd == 0, 0, log(d_pd))
   
   #Veh speed factor
-  F_s = 0.00013*n_15mj*int[traf_dir == link$link_dir, S_85mj]
+  F_s = 0.00013*n_15mj*int[traf_dir == dir, S_85mj]
   
   #Veh volume factor
   F_v = 0.00569*(v_rtlt / 4) - N_rtcid*(0.0027*n_15mj - 0.1946)
@@ -325,7 +323,7 @@ ogped.I_seg <- function(link, int) {
     direction = link$link_dir,
     mode = "pedestrian",
     I_link = ogped.I_link(link, int),
-    I_int = ogped.I_int(link, int)
+    I_int = ogped.I_int(int, link$link_dir)
   )
   
   F_cd = ogped.F_cd(link,int, scores$I_link, scores$I_int)

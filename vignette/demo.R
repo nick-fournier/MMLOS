@@ -18,7 +18,7 @@ library(ggpubr)
 
 
 # #Load data in from files.
-# dat <- func.loaddat()
+# dat <- loaddat()
 # 
 # #
 # Current <- calcMMLOSdat, revs = F)
@@ -96,15 +96,15 @@ int.spdvol <- rbindlist(lapply(c("NB","SB","EB","WB"), function(x) {
 LOS <- rbindlist(pblapply(unique(int.spdvol$int_id), function(x) {
   int = int.spdvol[int_id == x, ]
   data.table("v_v" = int$v_v[1], "S_85mj" = int$S_85mj[1],
-             I_int.rev = func.bike.I_int(int, "EB"),
-             I_int.og = func.ogbike.I_int(int, "EB"))
+             I_int.rev = bike.I_int(int, "EB"),
+             I_int.og = ogbike.I_int(int, "EB"))
 }))
 
 #Melt into longform
 LOS <- melt(LOS, c("v_v","S_85mj"))
 
 #Score
-LOS$LOS <- sapply(LOS$value, MMLOS::func.score2LOS)
+LOS$LOS <- sapply(LOS$value, MMLOS::score2LOS)
 
 
 #### #LOS plot ####

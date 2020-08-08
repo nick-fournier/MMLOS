@@ -107,5 +107,4 @@ Load the link and intersection data into R
 \examples{
 loaddat(dirs = c(intersections = "./data/input_intersection_template.csv", 
                  links = "./data/input_link_template.csv"))
-
 }

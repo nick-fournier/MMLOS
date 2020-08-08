@@ -1,3 +1,8 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
 # MMLOS
 A Multi-Modal Level of Service (MMLOS) calculator for complete streets projects.
 
