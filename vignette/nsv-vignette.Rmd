@@ -3,11 +3,14 @@ title: "A not so vigorous vignette for MMLOS usage"
 author: "Nick Fournier, PhD"
 date: "8/7/2020"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)
 library(data.table)
+library(ggplot2)
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 knitr::opts_knit$set(root.dir = "../")
 ```
@@ -49,9 +52,7 @@ First install (if you haven't already) and load the package:
 library(MMLOS)
 ```
 
-After roadway data has been properly formatted into the **link** and **intersection** CSV files, they can be imported to *R*. the **dirs** 
-
-For now we'll just use the template data.
+After roadway data has been properly formatted into the **link** and **intersection** CSV files, they can be imported to *R*. The **dirs** parameter is a string vector with the two file locations. If left empty, a GUI prompt will pop up. Otherwise if "template" is entered, it'll just use the template files I have provided. For now we'll just use the template data.
 
 ```{r loaddat}
 dat <- loaddat("template")
@@ -63,152 +64,53 @@ We can take a peak at this. Note the NA's in this example are because some inter
 lapply(loaddat("template"),function(x) head(x,8))
 ```
 
-Now we can calculate the LOS. First lets do it using the existing HCM methodology:
-```{r existing}
+Now we can calculate the LOS. The "existing" result uses the current HCM methodology, and the "revised" result uses the proposed revisions. Let's display what the results look like for the existing methodology. The results have a list of data tables for each mode.
+
+```{r calc MMLOS}
 existing <- calcMMLOS(dat, revs = F)
+revised <- calcMMLOS(dat, revs = T)
 
-Revisions <- calcMMLOS(dat, revs = T)
-
-
-#Display
-# Current$bike
-# Revisions$bike
+#Display results
+print(existing)
 
 ```
 
-## Including Plots
+The results can be exported to a CSV by using the command:
 
-You can also embed plots, for example:
+```{r eval=FALSE}
+fwrite(existing, "./some output folder/existing LOS.csv")
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+fwrite(revised, "./some output folder/revised LOS.csv")
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+Alright now lets compare the results a bit. Basically what I am doing here is combining the two results into a single data table and formatting it to be plotted. The links with negative LOS is due to parking-protected bicycle lanes. In general we can see that the revised version provides a more conservative outcome, i.e., a worse LOS score for the segment.
+
+```{r merge} 
+
+# Add a new column with the methodology version
+existing[['bike']][ , method := "Existing"]
+revised[['bike']][ , method := "Revised"]
+
+# Combine the data tables vertically (stacking rows)
+bike <- rbind(existing[['bike']], revised[['bike']])
+
+# Let's create a new unique ID column that contains the segment ID, direction, and methodology version
+bike[ , id := paste(segment_id, direction, method)]
+
+#Re-shape the data from wide into long format
+bike <- melt(bike[ , .(id, method, I_int, I_link, I_seg)], id.vars = c("id","method"))
+
+#Plot
+ggplot(data = bike, aes(x = id, y = value, fill = variable, alpha = method)) + 
+  geom_col(position = "dodge") +
+  scale_fill_brewer("LOS component", palette = "Set1") +
+  scale_alpha_discrete("Methodology", range = c(0.5,1)) +
+  labs(x = NULL, y = "LOS Score") +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+```
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-#library(MMLOS)
-library(data.table)
-library(ggplot2)
-library(gridExtra)
-library(pbapply)
-library(extrafont)
-library(ggpubr)
-
-
-
-
-
-
-
-
-
-
-
-
-#### LOS Analysis of speed vs volume at intersections ####
-#Intersections vary speed and volume
-int.spdvol <- expand.grid(
-  int_id   = NA,
-  app_dir  = NA,
-  traf_dir = NA,
-  N_d      = 1,
-  N_th     = 1,
-  S_85mj   = seq(5, 50, by = 5), #links$S_f and int$S_85mj
-  v_rt     = NA,
-  v_lt     = NA,
-  v_th     = NA,
-  v_v      = seq(50, 1200, by = 50), #Vehicle volume at intersection
-  v_rtor   = NA,
-  v_ltperm = NA,
-  v_p      = 100,
-  v_b      = 250,
-  v_bl     = 250/4,
-  v_br     = 250/4,
-  P_bl2    = 0.5,
-  N_rtcid  = 0,
-  g        = 31.7,
-  l        = 3.3,
-  C        = 90,
-  Walkmi   = 31.7,
-  W_c      = 12,
-  W_cd     = 24,
-  L        = 24,
-  W_bl     = 5,
-  W_ol     = 12,
-  p_pk     = 0.8,
-  W_os     = 8,
-  M_yp     = 0.5,
-  M_yb     = 0.05,
-  S_p      = 3.5,
-  S_b      = 10,
-  t_sb     = 3,
-  t_sp     = 3,
-  control  = "Signalized",
-  curb     = TRUE)
-
-#Calculate subsequent dummy vars
-int.spdvol <- as.data.table(int.spdvol)
-int.spdvol[ , v_rt := v_v/4]
-int.spdvol[ , v_lt := v_v/4]
-int.spdvol[ , v_th := v_v/2]
-int.spdvol[ , v_rtor := v_v/2]
-int.spdvol[ , v_ltperm := v_v/4]
-int.spdvol[ , int_id := 1:nrow(int.spdvol)]
-int.spdvol <- rbindlist(lapply(c("NB","SB","EB","WB"), function(x) {
-  tmp = int.spdvol
-  tmp$traf_dir <- rep(x, nrow(int.spdvol))
-  tmp$app_dir <- rep(switch(x,
-                            "NB" = "S",
-                            "SB" = "N",
-                            "EB" = "W",
-                            "WB" = "E"),
-                     nrow(int.spdvol))
-  return(tmp)
-}))
-
-#Calculate LOS
-LOS <- rbindlist(pblapply(unique(int.spdvol$int_id), function(x) {
-  int = int.spdvol[int_id == x, ]
-  data.table("v_v" = int$v_v[1], "S_85mj" = int$S_85mj[1],
-             I_int.rev = bike.I_int(int, "EB"),
-             I_int.og = ogbike.I_int(int, "EB"))
-}))
-
-#Melt into longform
-LOS <- melt(LOS, c("v_v","S_85mj"))
-
-#Score
-LOS$LOS <- sapply(LOS$value, MMLOS::score2LOS)
-
-
-#### #LOS plot ####
-plot.LOS = lapply(c("I_int.rev","I_int.og"), function(x) {
-  ggplot(data = LOS[variable == x, ], aes(x = v_v, y = S_85mj, z = value)) + 
-    # geom_tile() +
-    # scale_fill_distiller("LOS", palette = "RdYlGn", limits = range(LOS$value)) +
-    geom_contour_filled(breaks = c(-Inf,2.00,2.75,3.50,4.25,5.00,Inf)) +
-    scale_fill_manual("LOS score", values = rev(RColorBrewer::brewer.pal(n = 6, name = "RdYlGn")),
-                      labels = c("A","B","C","D","E","F")) +
-    scale_x_continuous("Automobile traffic volume (veh/hr)", expand = c(0,0)) +
-    scale_y_continuous("Automobile traffic speed (mph)", expand = c(0,0)) +
-    coord_fixed(ratio = 25) +
-    theme_bw() +
-    theme(text = element_text(family = "Times New Roman"), legend.position = "bottom", )
-})
-names(plot.LOS) <- c("rev","og")
-
-ggarrange(plot.LOS$rev, plot.LOS$og, ncol = 2, common.legend = T, legend = "right")

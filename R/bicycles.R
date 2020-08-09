@@ -538,8 +538,7 @@ bike.I_int <- function(int, dir) {
 bike.I_link <- function(link, control) {
   
   #### Caclulate final factors for LOS score
-  
-  #Cross-section adjustment factor
+    #Cross-section adjustment factor
   F_w = bike.F_w.link(link)
   
   #Motorized vehicle volume adjustment factor

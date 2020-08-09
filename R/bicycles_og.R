@@ -7,27 +7,26 @@
 #7. DETERMINE LINK LOS
 #9. DETERMINE BICYCLE LOS SCORE FOR SEGMENT
 
-
 #Bicycle paved width factor (links)
-ogbike.F_w.link  <- function(link) {
-  
+ogbike.F_w.link <- function(link) {
+
   #Adjusted width of outside shoulder, if curb present
   if(link$curb) {
     W_osstar = link$W_os - 1.5
     W_osstar = ifelse(W_osstar >= 0, W_osstar, 0)
   } else {
-    W_osstar = W_os
+    W_osstar = link$W_os
   }
   
   #Total width of outside thru lane, bike lane, and paved shoulder/parking
   if(link$p_pk == 0) {
-    W_t = link[, W_ol + W_bl + W_osstar]
+    W_t = link[ , W_ol + W_bl] + W_osstar
   } else {
-    W_t = link[, W_ol + W_bl]
+    W_t = link[ , W_ol + W_bl]
   }
   
-  #Effective total weidth of outside through lane
-  if(link$v_m < 160 | link$div) {
+  #Effective total width of outside through lane
+  if(link$v_m > 160 | link$div) {
     W_v = W_t
   } else {
     W_v = W_t*(2 - 0.005*link$v_m)
@@ -46,6 +45,7 @@ ogbike.F_w.link  <- function(link) {
   
   return(F_w)
 }
+
 
 #Bicycle traffic speed factor (links)
 ogbike.F_s.link <- function(link, int) {
