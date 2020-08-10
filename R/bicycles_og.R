@@ -132,7 +132,6 @@ ogbike.I_int <- function(int, dir) {
 
   #Number of traffic lanes crossed
   N_d = int[traf_dir == xdir, N_d]
-  
   N_d = ifelse(is.na(N_d), int[traf_dir == odir, N_d], N_d)
   
   #Curb to curb width of cross street
@@ -172,7 +171,7 @@ ogbike.I_seg <- function(link, int) {
     segment_id = link$link_id,
     direction = link$link_dir,
     mode = "bicycle",
-    I_link = ogbike.I_link(link, int),
+    I_link = ogbike.I_link(link,  int[traf_dir == link$link_dir, as.character(control)]),
     I_int = ogbike.I_int(int, link$link_dir)
   )
   

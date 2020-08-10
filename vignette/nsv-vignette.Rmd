@@ -81,16 +81,36 @@ fwrite(existing, "./some output folder/existing LOS.csv")
 fwrite(revised, "./some output folder/revised LOS.csv")
 ```
 
-## Existing versus revised HCM methodology
 
-Alright now lets compare the results a bit for bikes. Basically what I am doing here is combining the two results into a single data table and formatting it to be plotted. 
+## Differences between existing and revised HCM results
 
-```{r merge score} 
+Alright now lets compare the results a bit for bikes to see how the revised methodology alters the outcome. The numeric scores then translate to letter grades, let's see how they compare. First we subset the letter grades in each result and combine them into a table. Although the row order is already sorted in each table, I like to use the merge command to ensure that nothing becomes mixed up. I then add the suffixed of " Existing" and " Revised" to distinguish the columns from each other.
+
+```{r score table} 
 # Add a new column with the methodology version
 # This is data.table syntax for assigning to a column.
 existing[['bike']][ , method := "Existing"]
 revised[['bike']][ , method := "Revised"]
 
+
+# Combine the data tables horizontally (add columns).
+# We select only the letter grade columns
+bike.grade <- merge(existing[['bike']][ , .(segment_id,direction, link_LOS, int_LOS, seg_LOS)],
+      revised[['bike']][ , .(segment_id,direction, link_LOS, int_LOS, seg_LOS)],
+      by = c("segment_id","direction"),
+      suffixes = c(" Existing"," Revised"))
+
+#Sort columns to my liking
+bike.grade <- bike.grade[ , c(1:2,order(colnames(bike.grade)[-(1:2)])+2), with = F]
+```
+
+```{r table, echo = FALSE}
+kable(bike.grade)
+```
+In general we can see that the revised version tends to have higher (worse) LOS score at intersections. This is because it now accounts for additional bicycle delay. We can also see that a few links (i.e., westbound Shattuck-Walnut, eastbound Spruce-Arch/Le Conte, and westbound Walnut-Oxford) had a reduced LOS score. This reduced LOS score is due to the revised LOS methodology accounting for separated bike lanes, specifically parking protected lanes that provide vertical separation. 
+It is hard to tell exactly what's going on through, because the magnitude of score differences cannot be seen after the score is converted into a discrete letter grade. Let's see what the numbers look like visually. Basically what I am doing here is combining the two results into a single data table again, but stacked vertically (long format), and adding some row ID's to keep it organized. 
+
+```{r score plot}
 # Add row number, help us to sort it later
 existing[['bike']]$rn <- 1:nrow(existing[['bike']])
 revised[['bike']]$rn <- 1:nrow(existing[['ped']])
@@ -106,12 +126,21 @@ bike.scores <- melt(bike.scores[ , .(id, rn, method, I_int, I_link, I_seg)], id.
 
 #Sort data
 bike.scores <- bike.scores[order(rn), ]
-
 ```
 
-In general we can see that the revised version tends to have higher (worse) LOS score at intersections. This is because it now accounts for additional bicycle delay. We can also see that a few links (i.e., westbound Shattuck-Walnut, eastbound Spruce-Arch/Le Conte, and westbound Walnut-Oxford) had a reduced LOS score. This reduced LOS score is due to the revised LOS methodology accounting for separated bike lanes, specifically parking protected lanes that provide vertical separation. 
+
+Long format is generally easier to plot with because you are storing all the values in one column, which are then categorized by a "variable" column. To show what I mean, let's print the table out. 
+
+
+```{r long form}
+head(bike.scores)
+```
+
+The benefit of this is that instead of having to create separate plots of each possible combination of Existing/Revised X I_int/I_link/I_seg X segement_id, it is just a matter of putting segment_id on the x-axis, value on the y-axis, and then group by the variables (i.e., I_int/I_link/I_seg and Existing/Revised). For plotting, I am using [ggplot2](https://ggplot2.tidyverse.org/). ggplot is a great package that helps make pretty graphs. 
+ 
 
 ```{r plot compare}
+library(ggplot2)
 #Plot
 ggplot(data = bike.scores, aes(x = id, y = value, fill = variable, alpha = method)) + 
   geom_col(position = "dodge") +
@@ -123,26 +152,116 @@ ggplot(data = bike.scores, aes(x = id, y = value, fill = variable, alpha = metho
 
 ```
 
-The numeric scores then translate to letter grades, let's see how they compare. First we subset the letter grades in each result and combine them into a table. Although the row order is already sorted in each table, I like to use the merge command to ensure that nothing becomes mixed up. I then add the suffixed of " Existing" and " Revised" to distinguish the columns from each other.
+The resulting plot generally reflects what we saw in the table, but we can see that the segment LOS score is less sensitive to changes from intersections than from links.
 
-```{r score table}
-# Combine the data tables horizontally (add columns).
-# We select only the letter grade columns
-bike.grade <- merge(existing[['bike']][ , .(segment_id,direction, link_LOS, int_LOS, seg_LOS)],
-      revised[['bike']][ , .(segment_id,direction, link_LOS, int_LOS, seg_LOS)],
-      by = c("segment_id","direction"),
-      suffixes = c(" Existing"," Revised"))
 
-#Sort columns to my liking
-bike.grade <- bike.grade[ , c(1:2,order(colnames(bike.grade)[-(1:2)])+2), with = F]
+## Existing versus revised HCM methodology
+Getting a little bit more advanced, we can inspect how LOS score outputs vary while varying the input values. We can start by creating some starting default parameters. This is as if we are constructing the input data by hand in *R* instead of importing it from a CSV file. Most parameters are constant except for average mid-segment speed $S_85mj$, and volume $v_v$, which will vary from 15 to 45 mph and 100 to 1200 vph in increments of 5 mph and 100 vph, respectively. The function "expand.grid" will then generate a data frame for all possible combinations of these sequences. 
+
+
+```{r  default pars}
+int.spdvol <- expand.grid(
+  int_id   = NA,
+  app_dir  = NA,
+  traf_dir = NA,
+  N_d      = 1,
+  N_th     = 1,
+  S_85mj   = seq(15, 45, by = 5),
+  v_rt     = NA,
+  v_lt     = NA,
+  v_th     = NA,
+  v_v      = seq(100, 1200, by = 100),
+  v_rtor   = NA,
+  v_ltperm = NA,
+  v_p      = 100,
+  v_b      = 250,
+  v_bl     = 250/4,
+  v_br     = 250/4,
+  P_bl2    = 0.5,
+  N_rtcid  = 0,
+  g        = 31.7,
+  l        = 3.3,
+  C        = 90,
+  Walkmi   = 31.7,
+  W_c      = 12,
+  W_cd     = 24,
+  L        = 24,
+  W_bl     = 5,
+  W_ol     = 12,
+  p_pk     = 0.8,
+  W_os     = 8,
+  M_yp     = 0.5,
+  M_yb     = 0.05,
+  S_p      = 3.5,
+  S_b      = 10,
+  t_sb     = 3,
+  t_sp     = 3,
+  control  = "Signalized",
+  curb     = TRUE)
+```
+
+I then do some house keeping, filling in some default values. Setting the right and left turn volume to be $\frac{1}{4}$ of total volume, proportionally. The right-on-red and permissive lefts are then further half of the left and right turn volumes. I also fill in the intersection approach directions.
+
+```{r cleanup}
+int.spdvol <- as.data.table(int.spdvol)
+int.spdvol[ , v_rt := v_v/4]
+int.spdvol[ , v_lt := v_v/4]
+int.spdvol[ , v_th := v_v/2]
+int.spdvol[ , v_rtor := v_rt/2]
+int.spdvol[ , v_ltperm := v_lt/2]
+int.spdvol[ , int_id := 1:nrow(int.spdvol)]
+int.spdvol <- rbindlist(lapply(c("NB","SB","EB","WB"), function(x) {
+  tmp = int.spdvol
+  tmp$traf_dir <- rep(x, nrow(int.spdvol))
+  tmp$app_dir <- rep(switch(x,
+                        "NB" = "S",
+                        "SB" = "N",
+                        "EB" = "W",
+                        "WB" = "E"),
+                     nrow(int.spdvol))
+  return(tmp)
+}))
 
 ```
 
-The resulting table generally reflects what we saw in the above plot.
+You don't need to understand this, just know that I'm creating a big data table that has all possible combinations of speed and volume. Now we are going to actually calculate the LOS score using the data matrix we created. This goes through the data table twice, once using existing HCM and once using the revisions. There are a lot of combinations, this might take a few seconds to compute. Then, I again reshape the data into long form for plotting. 
 
-```{r table, echo = FALSE}
-kable(bike.grade)
+```{r calc los}
+#Calculate Intersection LOS
+LOS.int <- rbindlist(lapply(unique(int.spdvol$int_id), function(x) {
+  int = int.spdvol[int_id == x, ]
+  data.table("v_v" = int$v_v[1], "S_85mj" = int$S_85mj[1],
+             Revised = bike.I_int(int, "EB"),
+             Existing = ogbike.I_int(int, "EB"))
+}))
+
+#Melt into longform
+LOS.int <- melt(LOS.int, c("v_v","S_85mj"))
+
+#Score
+LOS.int$LOS <- sapply(LOS.int$value, score2LOS)
 ```
 
+Now we can plot the two and compare them. I use another package here called [ggpubr](https://cran.r-project.org/web/packages/ggpubr/index.html), which accompanies ggplot2 for presentation. In this case it let's me plot them side by side. So what we see here is that the revisions account for traffic speed exposure while existing HCM methodology does not.
 
+
+```{r plot variations}
+plot.LOSint = lapply(c("Existing","Revised"), function(x) {
+  ggplot(data = LOS.int[variable == x, ], ) +
+    #geom_tile(aes(x = v_v, y = S_85mj, fill = value)) +
+    #scale_fill_distiller("LOS", palette = "RdYlGn", limits = range(LOS.int$value)) +
+    geom_contour_filled(aes(x = v_v, y = S_85mj, z = value), breaks = c(-Inf,2.00,2.75,3.50,4.25,5.00,Inf)) +
+    scale_fill_manual("LOS score", values = rev(RColorBrewer::brewer.pal(n = 6, name = "RdYlGn")),
+                       labels = c("A","B","C","D","E","F"), drop = F) +
+    scale_x_continuous("Automobile traffic volume (veh/hr)", expand = c(0,0)) +
+    scale_y_continuous("Automobile traffic speed (mph)", expand = c(0,0)) +
+    coord_fixed(ratio = 25) +
+    theme_bw() + ggtitle(paste(x, "HCM Methodology")) +
+    theme(text = element_text(family = "Times New Roman"), legend.position = "bottom")
+})
+names(plot.LOSint) <- c("rev","og")
+
+library(ggpubr)
+ggarrange(plotlist = plot.LOSint, ncol = 2, common.legend = T, legend = "right")
+```
 
