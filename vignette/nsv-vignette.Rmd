@@ -1,7 +1,7 @@
 ---
-title: "A not so vigorous vignette for MMLOS usage"
+title: "MMLOS usage"
 author: "Nick Fournier, PhD"
-date: "8/7/2020"
+date: "8/10/2020"
 output: html_document
 editor_options: 
   chunk_output_type: console
@@ -17,9 +17,7 @@ knitr::opts_knit$set(root.dir = "../")
 
 ### R Markdown
 
-This is a vignette going through a simple example use of **MMLOS**, the Multi-Modal Level of Service calculator from the Highway Capacity Manual in *R*.
-
-In this vignette we will go over basic usage of MMLOS for calculating the LOS of links, intersections, and segments for bicycles and pedestrians (automobiles and transit to be implemented in future versions). This includes loading the link and intersection data from CSV and the proper data format of the CSV data. We will also do a bit of plotting the results, and comparing the results from the existing HCM methodology to our proposed revisions.
+This is a vignette going through a simple example use of **MMLOS**, the Multi-Modal Level of Service calculator from the Highway Capacity Manual in *R*. In this vignette we will go over basic usage of MMLOS for calculating the LOS of links, intersections, and segments for bicycles and pedestrians (automobiles and transit to be implemented in future versions). This includes loading the link and intersection data from CSV and the proper data format of the CSV data. We will also do a bit of plotting the results, and comparing the results from the existing HCM methodology to our proposed revisions.
 
 
 ### Data formatting
@@ -84,7 +82,7 @@ fwrite(revised, "./some output folder/revised LOS.csv")
 ```
 
 
-Alright now lets compare the results a bit. Basically what I am doing here is combining the two results into a single data table and formatting it to be plotted. The links with negative LOS is due to parking-protected bicycle lanes. In general we can see that the revised version provides a more conservative outcome, i.e., a worse LOS score for the segment.
+Alright now lets compare the results a bit. Basically what I am doing here is combining the two results into a single data table and formatting it to be plotted. 
 
 ```{r merge} 
 
@@ -100,7 +98,10 @@ bike[ , id := paste(segment_id, direction, method)]
 
 #Re-shape the data from wide into long format
 bike <- melt(bike[ , .(id, method, I_int, I_link, I_seg)], id.vars = c("id","method"))
+```
+In general we can see that the revised version tends to have higher (worse) LOS score at intersections. This is because it now accounts for additional bicycle delay.
 
+```{r plot compare}
 #Plot
 ggplot(data = bike, aes(x = id, y = value, fill = variable, alpha = method)) + 
   geom_col(position = "dodge") +
