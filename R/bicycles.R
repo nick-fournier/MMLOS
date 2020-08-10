@@ -1,18 +1,26 @@
 
-#1. DETERMINE BICYCLE RUNNING SPEED
-#2. DETERMINE Bicycle DELAY AT INTERSECTION
-#3. DETERMINE BICYCLE TRAVEL SPEED
-#4. DETERMINE BICYCLE LOS SCORE FOR INTERSECTION
-#6. DETERMINE BICYCLE LOS SCORE FOR LINK
-#7. DETERMINE LINK LOS
-#9. DETERMINE BICYCLE LOS SCORE FOR SEGMENT
 
-
-#Bicycle paved width factor (links)
+#' Bicycle paved width factor (links)
+#' 
+#' @param link Data.table of link data.
+#' @return Numeric value, unitless.
+#' @examples
+#' bike.F_w.link(link)
+#' @export
 bike.F_w.link <- function(link) {
+  
+  #Is protected?
+  if(link$protected) {
+    P_pkstar = 1
+    H_blbuf = 4.5
+  } else {
+    P_pkstar = link$p_pk
+    H_blbuf = link$H_blbuf
+  }  
+  
   #Effective buffer width
   #W_bufstar = link[ , sqrt(W_blbuf^2 + 16*H_blbuf^0.5)]
-  W_bufstar = link[ , 4*(W_blbuf^2 + (24*H_blbuf))^(1/4)]
+  W_bufstar = 4*(link$W_blbuf^2 + (24*H_blbuf))^(1/4)
   
   #Adjusted width of outside shoulder, if curb present
   if(link$curb) {
@@ -22,12 +30,7 @@ bike.F_w.link <- function(link) {
     W_osstar = link$W_os
   }
   
-  #Is protected?
-  if(link$protected) {
-    P_pkstar = 1
-  } else {
-    P_pkstar = link$p_pk
-  }
+
   
   #Total width of outside thru lane, bike lane, and paved shoulder/parking
   if(link$p_pk == 0) {
@@ -57,7 +60,16 @@ bike.F_w.link <- function(link) {
   return(F_w)
 }
 
-#Bicycle traffic speed factor (links)
+
+#' Bicycle traffic speed factor (links)
+#' 
+#' @param link Data.table of link data.
+#' @param control String containing the boundary intersection control type 
+#' (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")
+#' @return Numeric value, unitless.
+#' @examples
+#' bike.F_s.link(link)
+#' @export
 bike.F_s.link <- function(link, control) {
   
 
@@ -78,7 +90,15 @@ bike.F_s.link <- function(link, control) {
   return(F_s)
 }
 
-#Average bicycle delay for intersection
+
+#' Average bicycle delay for intersection
+#' 
+#' @param link Data.table of link data.
+#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB")
+#' @return Numeric value, unitless.
+#' @examples
+#' bike.d_bd(int, dir)
+#' @export
 bike.d_bd <- function(int, dir) {
   switch(int[traf_dir == dir, as.character(control)],
          "Signalized" = bike.d_signal(int, dir), 
@@ -88,7 +108,15 @@ bike.d_bd <- function(int, dir) {
          "Yield" = 0)
 }
 
-#Bicycle control delay
+
+#' Bicycle control delay
+#' 
+#' @param int Data.table of intersection data.
+#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB")
+#' @return Numeric value in average seconds per bike.
+#' @examples
+#' bike.d_signal(int, dir)
+#' @export
 bike.d_signal <- function(int, dir) {
   #Delay from signal and right-turning vehicle encroachment
   d_bS = bike.d_bS(int, dir)
@@ -111,7 +139,20 @@ bike.d_signal <- function(int, dir) {
   return(d_bd)
 }
 
-#One-stage left turn bicycle delay
+
+#' One-stage left turn bicycle delay
+#' 
+#' @param int Data.table of intersection data.
+#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB")
+#' @param tol a tolerance threshold for the summation loop. Default is 1e-8. 
+#' This tolerance in included to shorten run time for excessively long loops. 
+#' For instances that cause large n (e.g., high traffic volume), 
+#' the run time can become blown out even though the improvement becomes arbitrarily small.
+#' To reduce run time, a precision tolerance can be set when improvement is less than this value.
+#' @return Numeric value in average seconds per bike.
+#' @examples
+#' bike.d_1stageleft(int, dir, tol = 1e-8)
+#' @export
 bike.d_1stageleft <- function(int, dir, tol = 1e-8) {
   
   #Opposite cross street dir
@@ -284,7 +325,15 @@ bike.d_1stageleft <- function(int, dir, tol = 1e-8) {
   return(d_bL2)
 }
 
-#Two-stage left turn bicycle delay
+
+#' Two-stage left turn bicycle delay
+#' 
+#' @param int Data.table of intersection data.
+#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB").
+#' @return Numeric value in average seconds per bike.
+#' @examples
+#' bike.d_2stageleft(int, dir)
+#' @export
 bike.d_2stageleft <- function(int, dir) {
   
   #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
@@ -319,7 +368,14 @@ bike.d_2stageleft <- function(int, dir) {
   
 }
 
-#Bicycle delay from signal and right turning vehicles
+
+#' Bicycle delay from signal and right turning vehicles
+#' 
+#' @param int Data.table of intersection data.
+#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB").
+#' @return Numeric value in average seconds per bike.
+#' @examples
+#' bike.d_bS(int, dir)
 bike.d_bS <- function(int, dir) {
   
   #Critical gap time
@@ -347,7 +403,14 @@ bike.d_bS <- function(int, dir) {
   return(d_bS)
 }
 
-#Bicycle delay for uncontrolled (e.g., TWSC)
+
+#' Bicycle delay for uncontrolled intersections (e.g., Two-way Stop Controlled Intersections)
+#' 
+#' @param int Data.table of intersection data.
+#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB").
+#' @return Numeric value in average seconds per bike.
+#' @examples
+#' bike.d_bS(int, dir)
 bike.d_twsc <- function(int, dir) {
   
   #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
@@ -477,7 +540,14 @@ bike.d_twsc <- function(int, dir) {
   
 }
 
-#Bicycle LOS score for intersections
+#' Bicycle LOS score for intersections
+#' 
+#' @param int Data.table of intersection data.
+#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB").
+#' @return A numeric LOS score, unitless.
+#' @examples
+#' bike.I_int(int, dir)
+#' @export
 bike.I_int <- function(int, dir) {
   #The traffic direction being crossed
   xdir = switch(dir,
@@ -534,7 +604,16 @@ bike.I_int <- function(int, dir) {
   return(I_int)
 }
 
-#Bicycle level of service score for links
+
+#' Bicycle level of service score for links
+#' 
+#' @param link Data.table of link data.
+#' @param control String containing the boundary intersection control type 
+#' (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield").
+#' @return A numeric LOS score, unitless.
+#' @examples
+#' bike.I_link(link, control)
+#' @export
 bike.I_link <- function(link, control) {
   
   #### Caclulate final factors for LOS score
@@ -558,7 +637,15 @@ bike.I_link <- function(link, control) {
   return(I_link)
 }
 
-#Bicycle LOS score for segment
+
+#' Bicycle LOS score for segment
+#' 
+#' @param link Data.table of link data.
+#' @param int Data.table of intersection data.
+#' @return A data.table with numeric and letter grade LOS scores.
+#' @examples
+#' bike.I_seg(link, int)
+#' @export
 bike.I_seg <- function(link, int) {
   #Put LOS scores for link and intersection into table
   scores = data.table(
@@ -582,8 +669,6 @@ bike.I_seg <- function(link, int) {
   #Get grade from score
   scores = cbind(scores,
                  setNames(scores[ , lapply(.SD, score2LOS), .SDcols = c("I_link","I_int","I_seg"),], c("link_LOS","int_LOS","seg_LOS")))
-  
-  
   
   return(scores)
 }

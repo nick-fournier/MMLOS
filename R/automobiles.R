@@ -1,4 +1,12 @@
-#Segment running time
+#' Determine segment running speed for automobiles
+#' 
+#' @param link Data.table of link data.
+#' @param control String containing the boundary intersection control type
+#' (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")
+#' @return Numeric value in mi/hr.
+#' @examples
+#' auto.S_R(link, control)
+#' @export
 auto.S_R <- function(link, control) {
   
   #Signalization delay factor

@@ -1,17 +1,12 @@
 
-#1. DETERMINE FREE-FLOW WALKING SPEED
-#2. DETERMINE AVERAGE PEDESTRIAN SPACE
-#3. DETERMINE PEDESTRIAN DELAY AT INTERSECTION
-#4. DETERMINE PEDESTRIAN TRAVEL SPEED
-#5. DETERMINE PEDESTRIAN LOS SCORE FOR INTERSECTION
-#6. DETERMINE PEDESTRIAN LOS SCORE FOR LINK
-#7. DETERMINE LINK LOS
-#8. DETERMINE ROADWAY CROSSING DIFFICULTY FACTOR
-#9. DETERMINE PEDESTRIAN LOS SCORE FOR SEGMENT
-#10. DETERMINE SEGMENT LOS
 
-
-#Pedestrian paved width factor (links)
+#' Pedestrian paved width factor (links)
+#' 
+#' @param link Data.table of link data.
+#' @return Numeric value, unitless.
+#' @examples
+#' ped.F_w.link(link)
+#' @export
 ped.F_w.link  <- function(link) {
   
   #Total width of outside thru lane, bike lane, and paved shoulder/parking
@@ -53,7 +48,15 @@ ped.F_w.link  <- function(link) {
   return(F_w)
 }
 
-#Pedestrian traffic speed factor (links)
+
+#' Pedestrian traffic speed factor (links)
+#' 
+#' @param link Data.table of link data.
+#' @param int Data.table of intersection data.
+#' @return Numeric value, unitless.
+#' @examples
+#' ped.F_s.link(int, dir)
+#' @export
 ped.F_s.link <- function(link, int) {
   #Vehicle running speed
   S_R = auto.S_R(link, int)
@@ -64,28 +67,15 @@ ped.F_s.link <- function(link, int) {
   return(F_s)
 }
 
-#Pedestrian level of service score for links
-ped.I_link <- function(link, int) {
-  
-  #### Caclulate final factors for LOS score
-  F_w = ped.F_w.link(link) #Cross-section adjustment factor
-  
-  #Motorized vehicle volume adjustment factor
-  F_v = 0.0091*link$v_m/(4*link$N_th) 
-  
-  #Vehicle running speed
-  S_R = auto.S_R(link, control = int[traf_dir == link$link_dir, control])
-  
-  #Motorized vehicle speed adjustment factor
-  F_s = 4*(S_R/100)^2 
-  
-  #### LOS Score
-  I_link = 6.0468 + F_w + F_v + F_s
-  
-  return(I_link)
-}
 
-#Pedestrian control delay
+#' Pedestrian control delay
+#' 
+#' @param int Data.table of intersection data.
+#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB")
+#' @return Numeric value, unitless.
+#' @examples
+#' ped.d_pd(int, dir)
+#' @export
 ped.d_pd <- function(int, dir) {
   switch(int[traf_dir == dir, control],
          "Signalized" = ped.d_signal(int, dir), 
@@ -95,12 +85,28 @@ ped.d_pd <- function(int, dir) {
          "Yield" = 0)
   }
 
-#Pedestrian control delay from signal
+
+#' Pedestrian control delay from signal
+#' 
+#' @param int Data.table of intersection data.
+#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB")
+#' @return Numeric value, unitless.
+#' @examples
+#' ped.d_signal(int, dir)
+#' @export
 ped.d_signal <- function(int, dir) {
   with(int[traf_dir == dir, ], ((C - g)^2)/(2*C) )
 }
 
-#Revised pedestrian delay for uncontrolled (e.g., TWSC)
+
+#' Revised pedestrian delay for uncontrolled (e.g., TWSC)
+#' 
+#' @param int Data.table of intersection data.
+#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB")
+#' @return Numeric value, unitless.
+#' @examples
+#' ped.d_twsc(int, dir)
+#' @export
 ped.d_twsc <- function(int, dir) {
   
   #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
@@ -230,7 +236,16 @@ ped.d_twsc <- function(int, dir) {
   
 }
 
-#Pedestrian level of service score for midsegment crossings
+
+#' Pedestrian level of service score for midsegment crossings
+#' 
+#' @param link Data.table of link data.
+#' @param int Data.table of boundary intersection data.
+#' (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")
+#' @return A numeric LOS score
+#' @examples
+#' ped.I_mx(link, int)
+#' @export
 ped.I_mx <- function(link, int) {
   
   #Crossing direction for diversion
@@ -269,7 +284,46 @@ ped.I_mx <- function(link, int) {
   return(min(I_pd, I_pw, 6))
 }
 
-#Pedestrian LOS score for intersections
+
+#' Pedestrian level of service score for links
+#' 
+#' @param link Data.table of link data.
+#' @param int Data.table of intersection data.
+#' @return Numeric value, unitless.
+#' @examples
+#' ped.I_link(int, dir)
+#' @export
+ped.I_link <- function(link, int) {
+  
+  #### Caclulate final factors for LOS score
+  F_w = ped.F_w.link(link) #Cross-section adjustment factor
+  
+  #Motorized vehicle volume adjustment factor
+  F_v = 0.0091*link$v_m/(4*link$N_th) 
+  
+  #Vehicle running speed
+  S_R = auto.S_R(link, control = int[traf_dir == link$link_dir, control])
+  
+  #Motorized vehicle speed adjustment factor
+  F_s = 4*(S_R/100)^2 
+  
+  #### LOS Score
+  I_link = 6.0468 + F_w + F_v + F_s
+  
+  return(I_link)
+}
+
+
+
+#' Pedestrian LOS score for intersections
+#' 
+#' @param link Data.table of link data.
+#' @param int Data.table of boundary intersection data.
+#' (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")
+#' @return A numeric LOS score
+#' @examples
+#' ped.I_int(link, int)
+#' @export
 ped.I_int <- function(link, int) {
   
   #The traffic direction being crossed
@@ -321,7 +375,14 @@ ped.I_int <- function(link, int) {
   return(I_int)
 }
 
-#Pedestrian LOS score for segment
+#' Pedestrian LOS score for segment
+#' 
+#' @param link Data.table of link data.
+#' @param int Data.table of intersection data.
+#' @return A data.table with numeric and letter grade LOS scores
+#' @examples
+#' ped.I_seg(link, int)
+#' @export
 ped.I_seg <- function(link, int) {
   #Put LOS scores for link and intersection into table
   scores = data.table(
@@ -348,137 +409,3 @@ ped.I_seg <- function(link, int) {
   
   return(scores)
 }
-
-
-# #old(?) HCM Pedestrian delay for uncontrolled (e.g., TWSC)
-# ped.d_twsc_og <- function(int, dir) {
-#   
-#   #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
-#   xdir = switch(dir,
-#                 "NB" = "WB",
-#                 "SB" = "EB",
-#                 "EB" = "NB",
-#                 "WB" = "SB")
-#   
-#   #Opposite cross street dir
-#   odir = switch(xdir,
-#                 "NB" = "SB",
-#                 "SB" = "NB",
-#                 "EB" = "WB",
-#                 "WB" = "EB")
-#   
-#   #Yield rate
-#   M_y = int[traf_dir == xdir, M_yp]
-#   
-#   #Number of thru lanes (inclusive of opposite direction)
-#   N_th = int[traf_dir == xdir, N_th]
-#   
-#   #Length of crosswalk
-#   L = int[traf_dir == xdir, W_cd]
-#   
-#   #Total thru lanes
-#   #int[traf_dir %in% c(xdir,odir), sum(N_th)]
-#   
-#   #Vehicle flow rate (veh/s)
-#   v_v = int[traf_dir == xdir, v_v/3600]
-#   
-#   #Pedestrian flow rate (ped/s)
-#   v_p = int[traf_dir == xdir, v_p/3600]
-#   
-#   #Critical headway
-#   t_c = int[traf_dir == xdir, (W_cd/S_p) + t_sp]
-#   
-#   #Average number of peds waiting to cross
-#   N_c = (v_p*exp(v_p*t_c) + v_v*exp(-v_v*t_c)) / ((v_p + v_v)*exp(v_p-v_v)*t_c)
-#   
-#   #Number of rows of peds
-#   N_p = int[traf_dir == xdir, round( 8*(N_c - 1)/W_c)] + 1
-#   
-#   #Critical group headway
-#   t_cg = t_c + 2*(N_p - 1)
-#   
-#   #Probability of blocked lane
-#   P_b = 1 - exp(-t_cg * v_v / N_th)
-#   
-#   #Probability of delayed crossing
-#   P_d = 1 - (1 - P_b)^N_th
-#   
-#   #Average gap waiting delay per pedestrian
-#   d_g = (1/v_v)*(exp(v_v*t_cg) - v_v*t_cg - 1)
-#   
-#   #Average delay for any pedestrian
-#   d_gd = d_g / P_d
-#   
-#   #Average headway
-#   h = N_th/v_v
-#   
-#   #Average number of crossing events
-#   n = round(d_gd/h)
-#   
-#   #Initial sum of PYi
-#   sumPY = 0 
-#   term1 = 0
-#   
-#   #Delay accounting for motorist yield probability
-#   if(N_th == 1) {
-#     #One lane
-#     for(i in 1:n) {
-#       PY = P_d*M_y*(1 - M_y)^(i-1)
-#       sumPY = sumPY + PY
-#       
-#       #Calculates and sums up the first term
-#       term1 = h*(i - 0.5)*PY + term1
-#       
-#       #Calculates the second term
-#       term2 = (P_d - sumPY)*d_gd
-#     }
-#     d_pd <- term1 + term2
-#     
-#   } else if(N_th == 2) {
-#     #Two lane
-#     for(i in 1:n) {
-#       PY = (P_d - sumPY)*( ((2*P_b*(1-P_b)*M_y) + P_b^2 * M_y^2) / P_d)
-#       sumPY = sumPY + PY
-#       
-#       #Calculates and sums up the first term
-#       term1 = h*(i - 0.5)*PY + term1
-#       
-#       #Calculates the second term
-#       term2 = (P_d - sumPY)*d_gd
-#     }
-#     d_pd <- term1 + term2
-#     
-#   } else if(N_th == 3) {
-#     #Three lane
-#     for(i in 1:n) {
-#       PY = (P_d - sumPY)*((P_b^3 * M_y^3 + 3*P_b^2 * (1-P_b)*M_y^2 + 3*P_b*(1-P_b)^2 * M_y) / P_d)
-#       sumPY = sumPY + PY
-#       
-#       #Calculates and sums up the first term
-#       term1 = h*(i - 0.5)*PY + term1
-#       
-#       #Calculates the second term
-#       term2 = (P_d - sumPY)*d_gd
-#     }
-#     d_pd <- term1 + term2
-#     
-#   } else if(N_th == 4) {
-#     #Four lane
-#     for(i in 1:n) {
-#       PY = (P_d - sumPY)*((P_b^4 * M_y^4 + 4*P_b^3 * (1-P_b)*M_y^3 + 6*P_b*(1-P_b)^2 * M_y^2 + 4*P_b*(1-P_b)^3 * M_y) / P_d)
-#       sumPY = sumPY + PY
-#       
-#       #Calculates and sums up the first term
-#       term1 = h*(i - 0.5)*PY + term1
-#       
-#       #Calculates the second term
-#       term2 = (P_d - sumPY)*d_gd
-#     }
-#     d_pd <- term1 + term2
-#   } else {
-#     stop(paste0("Invalid number of lanes: ", N_th))
-#   }
-#   
-#   return(d_pd)
-#   
-# }

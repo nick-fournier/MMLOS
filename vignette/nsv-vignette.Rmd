@@ -22,7 +22,7 @@ This is a vignette going through a simple example use of **MMLOS**, the Multi-Mo
 
 ### Data formatting
 
-Let's begin with with a [description of data](https://github.com/nick-fournier/MMLOS/blob/master/data/input_link_template.csv), shown below. There are two CSV files, one for links and one for segments. Templates can be found at [data/input_intersection_template.csv](https://github.com/nick-fournier/MMLOS/blob/master/data/input_intersection_template.csv) and [data/input_link_template.csv](https://github.com/nick-fournier/MMLOS/blob/master/data/input_link_template.csv).
+Let's begin with with a [description of data](https://github.com/nick-fournier/MMLOS/blob/master/data/input_link_template.csv), shown below. There are two CSV files, one for links and one for segments. Templates can be found at [data/input_intersection_template.csv](https://github.com/nick-fournier/MMLOS/blob/master/data/input_intersection_template.csv) and [data/input_link_template.csv](https://github.com/nick-fournier/MMLOS/blob/master/data/input_link_template.csv). These templates are based on data collected along Hearst Avenue, a site where complete streets improvements were recently made.
 
 
 ```{r link description, echo = F} 
@@ -39,7 +39,7 @@ kable(dat, caption = "Intersection data format:")
 
 ### General Usage
 
-First install (if you haven't already) and load the package:
+First install, if you haven't already, and load the package. MMLOS includes the dependency [data.table"](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html), which provides efficient data handling functions coded in C++, offering a much faster alternative to base-*R* data frames.
 
 ```{r libload} 
 # #Install the MMLOS package (commented out to avoid errors)
@@ -81,29 +81,39 @@ fwrite(existing, "./some output folder/existing LOS.csv")
 fwrite(revised, "./some output folder/revised LOS.csv")
 ```
 
+## Existing versus revised HCM methodology
 
-Alright now lets compare the results a bit. Basically what I am doing here is combining the two results into a single data table and formatting it to be plotted. 
+Alright now lets compare the results a bit for bikes. Basically what I am doing here is combining the two results into a single data table and formatting it to be plotted. 
 
-```{r merge} 
-
+```{r merge score} 
 # Add a new column with the methodology version
+# This is data.table syntax for assigning to a column.
 existing[['bike']][ , method := "Existing"]
 revised[['bike']][ , method := "Revised"]
 
-# Combine the data tables vertically (stacking rows)
-bike <- rbind(existing[['bike']], revised[['bike']])
+# Add row number, help us to sort it later
+existing[['bike']]$rn <- 1:nrow(existing[['bike']])
+revised[['bike']]$rn <- 1:nrow(existing[['ped']])
+
+# Combine the data tables vertically (stacking rows). Vertical format makes plotting easier
+bike.scores <- rbind(existing[['bike']], revised[['bike']])
 
 # Let's create a new unique ID column that contains the segment ID, direction, and methodology version
-bike[ , id := paste(segment_id, direction, method)]
+bike.scores[ , id := paste(segment_id, direction, method)]
 
-#Re-shape the data from wide into long format
-bike <- melt(bike[ , .(id, method, I_int, I_link, I_seg)], id.vars = c("id","method"))
+#Re-shape the data from wide into long format. This is for the numeric scores
+bike.scores <- melt(bike.scores[ , .(id, rn, method, I_int, I_link, I_seg)], id.vars = c("id","rn","method"))
+
+#Sort data
+bike.scores <- bike.scores[order(rn), ]
+
 ```
-In general we can see that the revised version tends to have higher (worse) LOS score at intersections. This is because it now accounts for additional bicycle delay.
+
+In general we can see that the revised version tends to have higher (worse) LOS score at intersections. This is because it now accounts for additional bicycle delay. We can also see that a few links (i.e., westbound Shattuck-Walnut, eastbound Spruce-Arch/Le Conte, and westbound Walnut-Oxford) had a reduced LOS score. This reduced LOS score is due to the revised LOS methodology accounting for separated bike lanes, specifically parking protected lanes that provide vertical separation. 
 
 ```{r plot compare}
 #Plot
-ggplot(data = bike, aes(x = id, y = value, fill = variable, alpha = method)) + 
+ggplot(data = bike.scores, aes(x = id, y = value, fill = variable, alpha = method)) + 
   geom_col(position = "dodge") +
   scale_fill_brewer("LOS component", palette = "Set1") +
   scale_alpha_discrete("Methodology", range = c(0.5,1)) +
@@ -111,6 +121,27 @@ ggplot(data = bike, aes(x = id, y = value, fill = variable, alpha = method)) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
+```
+
+The numeric scores then translate to letter grades, let's see how they compare. First we subset the letter grades in each result and combine them into a table. Although the row order is already sorted in each table, I like to use the merge command to ensure that nothing becomes mixed up. I then add the suffixed of " Existing" and " Revised" to distinguish the columns from each other.
+
+```{r score table}
+# Combine the data tables horizontally (add columns).
+# We select only the letter grade columns
+bike.grade <- merge(existing[['bike']][ , .(segment_id,direction, link_LOS, int_LOS, seg_LOS)],
+      revised[['bike']][ , .(segment_id,direction, link_LOS, int_LOS, seg_LOS)],
+      by = c("segment_id","direction"),
+      suffixes = c(" Existing"," Revised"))
+
+#Sort columns to my liking
+bike.grade <- bike.grade[ , c(1:2,order(colnames(bike.grade)[-(1:2)])+2), with = F]
+
+```
+
+The resulting table generally reflects what we saw in the above plot.
+
+```{r table, echo = FALSE}
+kable(bike.grade)
 ```
 
 

@@ -1,17 +1,11 @@
 
-#1. DETERMINE FREE-FLOW WALKING SPEED
-#2. DETERMINE AVERAGE PEDESTRIAN SPACE
-#3. DETERMINE PEDESTRIAN DELAY AT INTERSECTION
-#4. DETERMINE PEDESTRIAN TRAVEL SPEED
-#5. DETERMINE PEDESTRIAN LOS SCORE FOR INTERSECTION
-#6. DETERMINE PEDESTRIAN LOS SCORE FOR LINK
-#7. DETERMINE LINK LOS
-#8. DETERMINE ROADWAY CROSSING DIFFICULTY FACTOR
-#9. DETERMINE PEDESTRIAN LOS SCORE FOR SEGMENT
-#10. DETERMINE SEGMENT LOS
-
-
-#Pedestrian paved width factor (links)
+#' Pedestrian paved width factor (links)
+#' 
+#' @param link Data.table of link data.
+#' @return Numeric value, unitless.
+#' @examples
+#' ogped.F_w.link(link)
+#' @export
 ogped.F_w.link  <- function(link) {
   
   #Total width of outside thru lane, bike lane, and paved shoulder/parking
@@ -53,28 +47,14 @@ ogped.F_w.link  <- function(link) {
   return(F_w)
 }
 
-#Pedestrian level of service score for links
-ogped.I_link <- function(link, int) {
-    
-  #### Caclulate final factors for LOS score
-  F_w = ogped.F_w.link(link) #Cross-section adjustment factor
-  
-  #Motorized vehicle volume adjustment factor
-  F_v = 0.0091*link$v_m/(4*link$N_th) 
-  
-  #Vehicle running speed
-  S_R = auto.S_R(link, control = int[traf_dir == link$link_dir, control])
-  
-  #Motorized vehicle speed adjustment factor
-  F_s = 4*(S_R/100)^2 
-  
-  #### LOS Score
-  I_link = 6.0468 + F_w + F_v + F_s
-  
-  return(I_link)
-}
-
-#Pedestrian control delay
+#' Pedestrian control delay
+#' 
+#' @param int Data.table of intersection data.
+#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB")
+#' @return Numeric value, unitless.
+#' @examples
+#' ogped.d_pd(int, dir)
+#' @export
 ogped.d_pd <- function(int, dir) {
   switch(int[traf_dir == dir, control],
          "Signalized" = ogped.d_signal(int, dir), 
@@ -84,12 +64,26 @@ ogped.d_pd <- function(int, dir) {
          "Yield" = 0)
   }
 
-#Pedestrian control delay from signal
+#' Pedestrian control delay from signal
+#' 
+#' @param int Data.table of intersection data.
+#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB")
+#' @return Numeric value, unitless.
+#' @examples
+#' ogped.d_signal(int, dir)
+#' @export
 ogped.d_signal <- function(int, dir) {
   with(int[traf_dir == dir, ], ((C - g)^2)/(2*C) )
 }
 
-#Current HCM Pedestrian delay for uncontrolled (e.g., TWSC)
+#' Revised pedestrian delay for uncontrolled (e.g., TWSC)
+#' 
+#' @param int Data.table of intersection data.
+#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB")
+#' @return Numeric value, unitless.
+#' @examples
+#' ogped.d_twsc(int, dir)
+#' @export
 ogped.d_twsc <- function(int, dir) {
   
   #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
@@ -222,7 +216,17 @@ ogped.d_twsc <- function(int, dir) {
   
 }
 
-#Pedestrian crossing difficulty factor
+#' Pedestrian level of service score for mid-segment crossings
+#' 
+#' @param link Data.table of link data.
+#' @param int Data.table of boundary intersection data.
+#' (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")
+#' @param Ilink Numeric LOS score for links.
+#' @param Iint Numeric LOS score for intersections.
+#' @return A numeric LOS score
+#' @examples
+#' ogped.F_cd(link, int, Ilink, Iint)
+#' @export
 ogped.F_cd <- function(link, int, Ilink, Iint) {
   
   #Crossing direction for diversion
@@ -254,16 +258,50 @@ ogped.F_cd <- function(link, int, Ilink, Iint) {
   #Cossing delay
   d_px = min(d_pd, d_pw, 60)
   
-  
-  #
-  
   #Crossing difficulty factor
   F_cd = 1 + (0.10*d_px - (0.318*Ilink + 0.220*Iint + 1.606))/7.5
   
   return(F_cd)
 }
 
-#Pedestrian LOS score for intersections
+#' Pedestrian level of service score for links
+#' 
+#' @param link Data.table of link data.
+#' @param int Data.table of intersection data.
+#' @return Numeric value, unitless.
+#' @examples
+#' ogped.I_link(int, dir)
+#' @export
+ogped.I_link <- function(link, int) {
+  
+  #### Caclulate final factors for LOS score
+  F_w = ogped.F_w.link(link) #Cross-section adjustment factor
+  
+  #Motorized vehicle volume adjustment factor
+  F_v = 0.0091*link$v_m/(4*link$N_th) 
+  
+  #Vehicle running speed
+  S_R = auto.S_R(link, control = int[traf_dir == link$link_dir, control])
+  
+  #Motorized vehicle speed adjustment factor
+  F_s = 4*(S_R/100)^2 
+  
+  #### LOS Score
+  I_link = 6.0468 + F_w + F_v + F_s
+  
+  return(I_link)
+}
+
+
+#' Pedestrian LOS score for intersections
+#' 
+#' @param link Data.table of link data.
+#' @param int Data.table of boundary intersection data.
+#' (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")
+#' @return A numeric LOS score
+#' @examples
+#' ped.I_int(link, int)
+#' @export
 ogped.I_int <- function(int, dir) {
   
   #The traffic direction being crossed
@@ -315,7 +353,15 @@ ogped.I_int <- function(int, dir) {
   return(I_int)
 }
 
-#Pedestrian LOS score for segment
+
+#' Pedestrian LOS score for segment
+#' 
+#' @param link Data.table of link data.
+#' @param int Data.table of intersection data.
+#' @return A data.table with numeric and letter grade LOS scores
+#' @examples
+#' ped.I_seg(link, int)
+#' @export
 ogped.I_seg <- function(link, int) {
   #Put LOS scores for link and intersection into table
   scores = data.table(

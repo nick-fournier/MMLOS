@@ -72,19 +72,19 @@ int.spdvol <- rbindlist(lapply(c("NB","SB","EB","WB"), function(x) {
 LOS.int <- rbindlist(pblapply(unique(int.spdvol$int_id), function(x) {
   int = int.spdvol[int_id == x, ]
   data.table("v_v" = int$v_v[1], "S_85mj" = int$S_85mj[1],
-             I_int.rev = func.bike.I_int(int, "EB"),
-             I_int.og = func.ogbike.I_int(int, "EB"))
+             I_int.rev = bike.I_int(int, "EB"),
+             I_int.og = ogbike.I_int(int, "EB"))
 }))
 
 #Melt into longform
 LOS.int <- melt(LOS.int, c("v_v","S_85mj"))
 
 #Score
-LOS.int$LOS <- sapply(LOS.int$value, MMLOS::func.score2LOS)
+LOS.int$LOS <- sapply(LOS.int$value, MMLOS::score2LOS)
 
 #### PLOT: #LOS intersection plot
 plot.LOSint = lapply(c("I_int.rev","I_int.og"), function(x) {
-  ggplot(data = LOS[variable == x, ], aes(x = v_v, y = S_85mj, z = value)) + 
+  ggplot(data = LOS.int[variable == x, ], aes(x = v_v, y = S_85mj, z = value)) + 
     # geom_tile() +
     # scale_fill_distiller("LOS", palette = "RdYlGn", limits = range(LOS$value)) +
     geom_contour_filled(breaks = c(-Inf,2.00,2.75,3.50,4.25,5.00,Inf)) +
@@ -161,10 +161,10 @@ link.spdvol <- split(link.spdvol, link.spdvol$link_id)
 LOS.link <- rbindlist(pblapply(link.spdvol, function(link) {
   data.table("v_v" = link$v_m, "S_85mj" = link$S_f, "hilo" = link$hilo,
              "H_buf" = link$H_blbuf, "W_buf" = link$W_blbuf,
-             "S_R" = func.auto.S_R(link, "Signalized"),
-             "F_s" = func.bike.F_s.link(link, "Signalized"),
-             "Current HCM" = func.ogbike.I_link(link, "Signalized"),
-             "Revisions" = func.bike.I_link(link, "Signalized")
+             "S_R" = auto.S_R(link, "Signalized"),
+             "F_s" = bike.F_s.link(link, "Signalized"),
+             "Current HCM" = ogbike.I_link(link, "Signalized"),
+             "Revisions" = bike.I_link(link, "Signalized")
   )
 }))
 
@@ -262,7 +262,7 @@ int.rtbikevol <- rbindlist(lapply(c("NB","SB","EB","WB"), function(x) {
 #### Right turning vehicle delay
 rtdelay <- rbindlist(lapply(unique(int.rtbikevol$int_id), function(x) {
   int = int.rtbikevol[int_id == x, ]
-  data.table("v_rt" = int$v_rt[1], "v_b" = int$v_b[1], "Proposed revisions" = func.bike.d_bS(int, "EB"))
+  data.table("v_rt" = int$v_rt[1], "v_b" = int$v_b[1], "Proposed revisions" = bike.d_bS(int, "EB"))
 }))
 
 rtdelay <- merge(rtdelay, 
@@ -457,8 +457,8 @@ int.ltbike <- int.ltbike[order(-v_v), ]
 ltdelay <- rbindlist(pblapply(unique(int.ltbike$int_id), function(x) {
   int = int.ltbike[int_id == x, ]
   data.table("v_v" = int$v_v[1], "v_b" = int$v_b[1], "N_d" = int$N_d[1],
-             "One-stage turn delay" = func.bike.d_1stageleft(int, "EB"), #One-stage left turn delay
-             "Two-stage turn delay" = func.bike.d_2stageleft(int, "EB")  #Two-stage left turn delay
+             "One-stage turn delay" = bike.d_1stageleft(int, "EB"), #One-stage left turn delay
+             "Two-stage turn delay" = bike.d_2stageleft(int, "EB")  #Two-stage left turn delay
              )
 }))
 
@@ -543,7 +543,7 @@ link.sepbl <- split(link.sepbl, link.sepbl$link_id)
 sepbl <- rbindlist(lapply(link.sepbl, function(link) {
   data.table("W_buf" = link$W_blbuf, "H_buf" = link$H_blbuf,
              "v_m" = link$v_m, "S_f" = link$S_f,
-             "F_w" = func.bike.F_w.link(link)
+             "F_w" = bike.F_w.link(link)
              )
 }))
 range(sepbl$F_w)

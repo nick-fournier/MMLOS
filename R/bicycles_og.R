@@ -1,13 +1,12 @@
 
-#1. DETERMINE BICYCLE RUNNING SPEED
-#2. DETERMINE Bicycle DELAY AT INTERSECTION
-#3. DETERMINE BICYCLE TRAVEL SPEED
-#4. DETERMINE BICYCLE LOS SCORE FOR INTERSECTION
-#6. DETERMINE BICYCLE LOS SCORE FOR LINK
-#7. DETERMINE LINK LOS
-#9. DETERMINE BICYCLE LOS SCORE FOR SEGMENT
 
-#Bicycle paved width factor (links)
+#' Bicycle paved width factor (links)
+#' 
+#' @param link Data.table of link data.
+#' @return Numeric value, unitless.
+#' @examples
+#' ogbike.F_w.link(link)
+#' @export
 ogbike.F_w.link <- function(link) {
 
   #Adjusted width of outside shoulder, if curb present
@@ -47,11 +46,19 @@ ogbike.F_w.link <- function(link) {
 }
 
 
-#Bicycle traffic speed factor (links)
-ogbike.F_s.link <- function(link, int) {
+#' Bicycle traffic speed factor (links)
+#' 
+#' @param link Data.table of link data.
+#' @param control String containing the boundary intersection control type 
+#' (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")
+#' @return Numeric value, unitless.
+#' @examples
+#' ogbike.F_s.link(link)
+#' @export
+ogbike.F_s.link <- function(link, control) {
   
   #Vehicle running speed
-  S_R = auto.S_R(link, control = int[traf_dir == link$link_dir, control])
+  S_R = auto.S_R(link, control)
   
   #Adjusted motorized vehicle link running speed
   S_Ra = ifelse(S_R < 21, 21, S_R)
@@ -68,8 +75,16 @@ ogbike.F_s.link <- function(link, int) {
   return(F_s)
 }
 
-#Bicycle level of service score for links
-ogbike.I_link <- function(link, int) {
+
+#' Bicycle level of service score for links
+#' 
+#' @param link Data.table of link data.
+#' @param control String containing the boundary intersection control type (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")
+#' @return A numeric LOS score
+#' @examples
+#' ogbike.I_link(link, control)
+#' @export
+ogbike.I_link <- function(link, control) {
   
   #Cross-section adjustment factor
   F_w = ogbike.F_w.link(link)
@@ -80,7 +95,7 @@ ogbike.I_link <- function(link, int) {
   F_v = 0.507*log(v_ma / (4*link$N_th))
   
   #Motorized vehicle speed adjustment factor
-  F_s = ogbike.F_s.link(link, int)
+  F_s = ogbike.F_s.link(link, control)
   
   #Pavement condition factor
   F_p = 7.066 / link$P_c^2
@@ -91,7 +106,15 @@ ogbike.I_link <- function(link, int) {
   return(I_link)
 }
 
-#Bicycle LOS score for intersections
+
+#' Bicycle LOS score for intersections
+#' 
+#' @param int Data.table of intersection data.
+#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB")
+#' @return A numeric LOS score
+#' @examples
+#' ogbike.I_int(int, dir)
+#' @export
 ogbike.I_int <- function(int, dir) {
   #The traffic direction being crossed
   xdir = switch(dir,
@@ -134,7 +157,15 @@ ogbike.I_int <- function(int, dir) {
   return(I_int)
 }
 
-#Bicycle LOS score for segment
+
+#' Bicycle LOS score for segment
+#' 
+#' @param link Data.table of link data.
+#' @param int Data.table of intersection data.
+#' @return A data.table with numeric and letter grade LOS scores
+#' @examples
+#' ogbike.I_seg(link, int)
+#' @export
 ogbike.I_seg <- function(link, int) {
   #Put LOS scores for link and intersection into table
   scores = data.table(
