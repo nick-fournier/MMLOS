@@ -29,5 +29,6 @@ This contains the directory to formatted CSV files for intersections and links. 
 See the not so vigorous [vignette](https://htmlpreview.github.io/?https://github.com/nick-fournier/MMLOS/blob/master/vignette/nsv-vignette.html) for simple usage.
 
 ## References
-1. Kittelson and Associates. Collection of Working Papers: Pedestrian Crossing Delay and LOS - NCHRP Project 17-87 - Enhancing Pedestrian Volume Estimation and Developing HCM Pedestrian Methodologies for Safe and Sustainable Communities. 2020.
+1. Kittelson and Associates Inc., Highway Safety Research Center at the University of North Carolina, and Portland State University. Collection of Working Papers: Pedestrian Crossing Delay and LOS - NCHRP Project 17-87 - Enhancing Pedestrian Volume Estimation and Developing HCM Pedestrian Methodologies for Safe and Sustainable Communities. 2020.
+
 2. Fournier, N., Huang, A., and Skabardonis, A.  Improved Analysis Methodologies and Strategies for Complete Streets.
