@@ -1129,7 +1129,7 @@ ggplot(data = bike.scores, aes(x = id, y = value, fill = variable, alpha = metho
 </div>
 <div id="existing-versus-revised-hcm-methodology" class="section level2">
 <h2>Existing versus revised HCM methodology</h2>
-<p>Getting a little bit more advanced, we can inspect how LOS score outputs vary while varying the input values. We can start by creating some starting default parameters. This is as if we are constructing the input data by hand in <em>R</em> instead of importing it from a CSV file. Most parameters are constant except for average mid-segment speed <span class="math inline">\(S_85mj\)</span>, and volume <span class="math inline">\(v_v\)</span>, which will vary from 15 to 45 mph and 100 to 1200 vph in increments of 5 mph and 100 vph, respectively. The function “expand.grid” will then generate a data frame for all possible combinations of these sequences.</p>
+<p>Getting a little bit more advanced, we can inspect how LOS score outputs vary while varying the input values. We can start by creating some starting default parameters. This is as if we are constructing the input data by hand in <em>R</em> instead of importing it from a CSV file. Most parameters are constant except for average mid-segment speed <span class="math inline">\(S_{85mj}\)</span>, and volume <span class="math inline">\(v_v\)</span>, which will vary from 15 to 45 mph and 100 to 1200 vph in increments of 5 mph and 100 vph, respectively. The function “expand.grid” will then generate a data frame for all possible combinations of these sequences.</p>
 <pre class="r"><code>int.spdvol &lt;- expand.grid(
   int_id   = NA,
   app_dir  = NA,
