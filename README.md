@@ -31,4 +31,4 @@ See the not so vigorous [vignette](https://htmlpreview.github.io/?https://github
 ## References
 1. Kittelson and Associates Inc., Highway Safety Research Center at the University of North Carolina, and Portland State University. Collection of Working Papers: Pedestrian Crossing Delay and LOS - NCHRP Project 17-87 - Enhancing Pedestrian Volume Estimation and Developing HCM Pedestrian Methodologies for Safe and Sustainable Communities. 2020.
 
-2. Fournier, N., Huang, A., and Skabardonis, A.  Improved Analysis Methodologies and Strategies for Complete Streets.
+2. Fournier, N., Huang, A., and Skabardonis, A.  Improved Analysis Methodologies and Strategies for Complete Streets (Working paper). 2020.
