@@ -156,7 +156,7 @@ The resulting plot generally reflects what we saw in the table, but we can see t
 
 
 ## Existing versus revised HCM methodology
-Getting a little bit more advanced, we can inspect how LOS score outputs vary while varying the input values. We can start by creating some starting default parameters. This is as if we are constructing the input data by hand in *R* instead of importing it from a CSV file. Most parameters are constant except for average mid-segment speed $S_85mj$, and volume $v_v$, which will vary from 15 to 45 mph and 100 to 1200 vph in increments of 5 mph and 100 vph, respectively. The function "expand.grid" will then generate a data frame for all possible combinations of these sequences. 
+Getting a little bit more advanced, we can inspect how LOS score outputs vary while varying the input values. We can start by creating some starting default parameters. This is as if we are constructing the input data by hand in *R* instead of importing it from a CSV file. Most parameters are constant except for average mid-segment speed $S_{85mj}$, and volume $v_v$, which will vary from 15 to 45 mph and 100 to 1200 vph in increments of 5 mph and 100 vph, respectively. The function "expand.grid" will then generate a data frame for all possible combinations of these sequences. 
 
 
 ```{r  default pars}
