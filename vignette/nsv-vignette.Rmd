@@ -265,3 +265,6 @@ library(ggpubr)
 ggarrange(plotlist = plot.LOSint, ncol = 2, common.legend = T, legend = "right")
 ```
 
+## Final thoughts
+
+Okay now that we've gone through a short example, that should be enough to get going. More to come in future revisions.
