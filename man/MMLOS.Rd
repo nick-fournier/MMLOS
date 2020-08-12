@@ -41,12 +41,21 @@ The following supporting sub-functions are derived from the 6th Highway Capacity
 \code{\link{ogped.F_cd}} -- calculates the pedestrian crossing difficulty factor (removed from revisions), \cr
 \code{\link{ped.I_int}} and \code{\link{ogped.I_int}} -- calculates the numeric pedestrian LOS score for intersections, \cr
 \code{\link{ped.I_link}} and \code{\link{ogped.I_link}} -- calculates the numeric pedestrian LOS score for links, \cr
-\code{\link{ped.I_mx}} -- calculates pedestrian LOS for mid-segment crossing, \cr
-\code{\link{ped.I_seg}} and \code{\link{ogped.I_seg}} -- calculates the combined numeric link and intersection LOS score for segments
+\code{\link{ped.I_mx}} -- calculates pedestrian LOS for mid-segment crossing, and \cr
+\code{\link{ped.I_seg}} and \code{\link{ogped.I_seg}} -- calculates the combined numeric link and intersection LOS score for segments.
+}
+\item{Automobile LOS sub-functions}{
+\code{\link{auto.S_R}} -- calculates motorized running speed for the segment, \cr
+\code{\link{auto.satflow}} -- calculates saturation flow rate of the segment, and \cr
+\code{\link{auto.VCratio}} -- calcualtes the volume-to-capacity ratio for the segment. \cr
+}
+\item{Transit LOS sub-functions}{
+\code{\link{transit.I_seg}} -- calculates motorized running speed for the segment.
+(Note: For transit, there is no separate calculation for intersections or links). \cr
 }
 \item{General functions:}{
 \code{\link{score2LOS} -- converts numeric LOS score to discrete letter grades.
-  }
+   }
 }
 
 For more details, see help for individual functions.
