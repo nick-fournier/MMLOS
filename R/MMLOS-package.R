@@ -13,7 +13,6 @@
 #' 
 #' \describe{
 #'   \item{Bicycle LOS sub-functions}{
-#'    \code{\link{auto.S_R}} -- calculates the automobile running speed of the segment, \cr
 #'    \code{\link{bike.d_1stageleft}} -- calculates the bicycle delay for one-stage left turns, \cr
 #'    \code{\link{bike.d_2stageleft}} -- calculates the bicycle delay for two-stage left turns, \cr
 #'    \code{\link{bike.d_bS}} -- calculates bicycle control delay for signalized intersection, \cr
@@ -39,9 +38,9 @@
 #'    \code{\link{ped.I_seg}} and \code{\link{ogped.I_seg}} -- calculates the combined numeric link and intersection LOS score for segments.
 #'    }
 #'    \item{Automobile LOS sub-functions}{
-#'    \code{\link{auto.S_R}} -- calculates motorized running speed for the segment, \cr
+#'    \code{\link{auto.S_R}} -- calculates the automobile running speed of the segment, \cr
 #'    \code{\link{auto.satflow}} -- calculates saturation flow rate of the segment, and \cr
-#'    \code{\link{auto.VCratio}} -- calcualtes the volume-to-capacity ratio for the segment. \cr
+#'    \code{\link{auto.VCratio}} -- calculates the volume-to-capacity ratio for the segment. \cr
 #'    }
 #'    \item{Transit LOS sub-functions}{
 #'    \code{\link{transit.I_seg}} -- calculates motorized running speed for the segment. 
