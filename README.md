@@ -8,7 +8,7 @@ The package calculates LOS using the current Highway Capacity Manual 6th edition
 - bicycle delay from right turning vehicle conflict in bicycle lanes at intersections, and
 - bicycle delay for left-turning bicycles performing one- and two-stage left turns.
 
-The MMLOS package currently only supports LOS for bicycles and pedestrians, but will be extended to automobiles and transit in future versions.
+The MMLOS package currently only supports LOS for bicycles and pedestrians, but is currently being extended to automobiles and transit in future versions.
 
 If you are not familiar with *R*, do not fear, this package is made simple. To run it, you only need to have the open-source *R*-programming language installed on your computer. If you do not have *R*, I recommend starting out with its companion IDE [RStudio](https://rstudio.com/products/rstudio/download/). *R* and RStudio is a *very* high-level statistical programming language intended for data analysis and research. It's designed to be less of a "programming" language and more of an "analysis" language, so it is easy to use and easy to learn. But you don't need to be fluent to run this package, just click and type a few commands.
 

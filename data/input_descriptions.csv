@@ -6,6 +6,7 @@ LL,LINK,Link length (ft)
 N_aps,LINK,Number of access point approaches on right side of subject direction
 v_m,LINK,Outside lane demand flow rate at midsegment (veh/h)
 v_ped,LINK,Pedestrian flow rate (walking in both directions)(ped/hr)
+v_s,LINK,Transit frequency (veh/hr)
 P_HV,LINK,Heavy vehicle percentage
 S_f,LINK,"Free flow speed, default to speed limit (mph)"
 S_pf,LINK,Pedestrian walking speeed (ft/s)
@@ -23,6 +24,7 @@ pwindow,LINK,Portion of sidewalk length adjacent to window display
 pbuilding,LINK,Portion of sidewalk adjacent to building face
 pfence,LINK,Portion of sidewalk adjacent to fence or low wall
 p_pk,LINK,Proportion of on-street parking occupied
+p_g,LINK,Approach grade
 P_c,LINK,Pavement condition rating (0 to 5)
 p_mx,LINK,Proportion of midblock pedestrian demand (default = 0.35)
 H_swbuf,LINK,Height of barrier between street and bike lane
@@ -34,14 +36,16 @@ curb,LINK,Curb is present?
 sharedbl,LINK,Shared bike and pedestrian path? (bikelane and sidewalk)
 n_bus,LINK,Number of local buses on street segment per hour (bus/h)
 n_xbus,LINK,Number of express buses stopping in segment per hour (bus/h)
-t_ex,LINK,Average excess wait time (min)
+p_ot,LINK,"Proportion of transit vehicles arriving on-time, within the threshold late time. Default = 0.75"
+t_late,LINK,Threshold late time. Deault = 5 min
 L_f,LINK,Average passenger load factor (p/seat)
-S,LINK,Average transit travel speed (mi/h)
-l_pt,LINK,Average passenger trip length (mi)
+F_l,LINK,Average transit travel speed (mi/h)
+L_pt,LINK,Average passenger trip length (mi)
 pop,LINK,Is the segment in the CBD of a metro area of 5 million or more?
 p_sh,LINK,Percent stops in segment with a shelter
 p_be,LINK,Percent stops in segment with a bench
 bus,LINK,Does the link direction has bus service?
+nearside,LINK,Is the bus stop on the near-side of the intersection?
 int_id,INT,"Intersection identification, name and direction or number"
 app_dir,INT,Intersection approach direction
 traf_dir,INT,Traffic direction
@@ -62,7 +66,8 @@ v_bl,INT,Bicycle left turn volume (veh/hr)
 v_br,INT,Bicycle right turn volume (veh/hr)
 P_bl2,INT,Proportion of two-stage left turns for bicycles (decimal)
 N_rtcid,INT,Number of right-turn channelizing islands along the crosswalk
-g,INT,Green time
+g,INT,Green time (s)
+gped,INT,Green time for pedestrians (s)
 l,INT,Clearance time
 C,INT,Cycle length (s)
 Walkmi,INT,Pedestrian walk setting for the phase serving the minor street through movement (s)

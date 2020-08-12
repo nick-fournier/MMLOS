@@ -379,8 +379,8 @@ summary {
 <table>
 <caption>Link data format:</caption>
 <colgroup>
-<col width="14%"></col>
-<col width="85%"></col>
+<col width="11%"></col>
+<col width="88%"></col>
 </colgroup>
 <thead>
 <tr class="header">
@@ -418,131 +418,139 @@ summary {
 <td align="left">Pedestrian flow rate (walking in both directions)(ped/hr)</td>
 </tr>
 <tr class="even">
+<td align="left">v_s</td>
+<td align="left">Transit frequency (veh/hr)</td>
+</tr>
+<tr class="odd">
 <td align="left">P_HV</td>
 <td align="left">Heavy vehicle percentage</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">S_f</td>
 <td align="left">Free flow speed, default to speed limit (mph)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">S_pf</td>
 <td align="left">Pedestrian walking speeed (ft/s)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">S_b</td>
 <td align="left">Bicycle running speed (mph)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">N_th</td>
 <td align="left">Number of through lanes in the subject direction of travel</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">W_T</td>
 <td align="left">Total walkway width</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">W_bl</td>
 <td align="left">Bicycle lane width (ft) (Entire entire width if shared with peds)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">W_swbuf</td>
 <td align="left">Buffer width from sidewalk to street (ft)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">W_blbuf</td>
 <td align="left">Buffer width from bike lane to street (ft)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">W_os</td>
 <td align="left">Paved outside shoulder width [includes parking] (ft)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">W_ol</td>
 <td align="left">Outside travel lane (closest to sidewalk) width (ft)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">w_oi</td>
 <td align="left">Fixed object width on inside of sidewalk</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">w_oo</td>
 <td align="left">Fixed object width on outside of sidewalk</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">pwindow</td>
 <td align="left">Portion of sidewalk length adjacent to window display</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">pbuilding</td>
 <td align="left">Portion of sidewalk adjacent to building face</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">pfence</td>
 <td align="left">Portion of sidewalk adjacent to fence or low wall</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">p_pk</td>
 <td align="left">Proportion of on-street parking occupied</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">P_c</td>
 <td align="left">Pavement condition rating (0 to 5)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">p_mx</td>
 <td align="left">Proportion of midblock pedestrian demand (default = 0.35)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">H_swbuf</td>
 <td align="left">Height of barrier between street and bike lane</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">H_blbuf</td>
 <td align="left">Height of barrier between street and sidewalk</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">protected</td>
 <td align="left">Is the bike lane protected by parking?</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">div</td>
 <td align="left">Is the street divided?</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">p_strp</td>
 <td align="left">Are parking spaces striped?</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">curb</td>
 <td align="left">Curb is present?</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">sharedbl</td>
 <td align="left">Shared bike and pedestrian path? (bikelane and sidewalk)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">n_bus</td>
 <td align="left">Number of local buses on street segment per hour (bus/h)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">n_xbus</td>
 <td align="left">Number of express buses stopping in segment per hour (bus/h)</td>
 </tr>
+<tr class="odd">
+<td align="left">p_ot</td>
+<td align="left">Proportion of transit vehicles arriving on-time, within the threshold late time. Default = 0.75</td>
+</tr>
 <tr class="even">
-<td align="left">t_ex</td>
-<td align="left">Average excess wait time (min)</td>
+<td align="left">t_late</td>
+<td align="left">Threshold late time. Deault = 5 min</td>
 </tr>
 <tr class="odd">
 <td align="left">L_f</td>
 <td align="left">Average passenger load factor (p/seat)</td>
 </tr>
 <tr class="even">
-<td align="left">S</td>
+<td align="left">F_l</td>
 <td align="left">Average transit travel speed (mi/h)</td>
 </tr>
 <tr class="odd">
-<td align="left">l_pt</td>
+<td align="left">L_pt</td>
 <td align="left">Average passenger trip length (mi)</td>
 </tr>
 <tr class="even">
@@ -560,6 +568,10 @@ summary {
 <tr class="odd">
 <td align="left">bus</td>
 <td align="left">Does the link direction has bus service?</td>
+</tr>
+<tr class="even">
+<td align="left">nearside</td>
+<td align="left">Is the bus stop on the near-side of the intersection?</td>
 </tr>
 </tbody>
 </table>
@@ -795,15 +807,15 @@ library(MMLOS)</code></pre>
 ## 8: TRUE  TRUE
 ## 
 ## $links
-##                 link_id link_dir   boundary_id  LL N_aps v_m v_ped P_HV S_f
-## 1:      Shattuck-Walnut       EB      Shattuck 240     0 330   100 0.02  25
-## 2:      Shattuck-Walnut       WB        Walnut 240     0 339   100 0.02  25
-## 3:        Walnut-Oxford       EB        Walnut 260     0 380   100 0.02  25
-## 4:        Walnut-Oxford       WB        Oxford 260     0 222   100 0.04  25
-## 5:        Oxford-Spruce       EB        Oxford 200     0 632   100 0.02  25
-## 6:        Oxford-Spruce       WB        Spruce 200     0 462   100 0.02  25
-## 7: Spruce-Arch/Le Conte       EB        Spruce 400     0 665   100 0.02  25
-## 8: Spruce-Arch/Le Conte       WB Arch/Le Conte 400     0 323   100 0.10  25
+##                 link_id link_dir   boundary_id  LL N_aps v_m v_ped v_s P_HV S_f
+## 1:      Shattuck-Walnut       EB      Shattuck 240     0 330   100   2 0.02  25
+## 2:      Shattuck-Walnut       WB        Walnut 240     0 339   100   0 0.02  25
+## 3:        Walnut-Oxford       EB        Walnut 260     0 380   100   2 0.02  25
+## 4:        Walnut-Oxford       WB        Oxford 260     0 222   100   0 0.04  25
+## 5:        Oxford-Spruce       EB        Oxford 200     0 632   100   2 0.02  25
+## 6:        Oxford-Spruce       WB        Spruce 200     0 462   100   0 0.02  25
+## 7: Spruce-Arch/Le Conte       EB        Spruce 400     0 665   100  10 0.02  25
+## 8: Spruce-Arch/Le Conte       WB Arch/Le Conte 400     0 323   100   0 0.10  25
 ##    S_pf S_b N_th W_T W_bl W_swbuf W_blbuf W_os W_ol w_oi w_oo pwindow pbuilding
 ## 1:  3.3  10    1   5    5       0       0    0   12    0    0    0.25      0.75
 ## 2:  3.3  10    1   5    5       0       0   10   12    0    0    0.25      0.75
@@ -822,15 +834,15 @@ library(MMLOS)</code></pre>
 ## 6:      0  0.9 3.5 0.35       0       0     FALSE FALSE  FALSE TRUE    FALSE
 ## 7:      0  0.9 3.5 0.35       0       0      TRUE FALSE   TRUE TRUE    FALSE
 ## 8:      0  0.9 3.5 0.35       0       0     FALSE FALSE   TRUE TRUE    FALSE
-##    n_bus n_xbus t_ex  L_f  S l_pt   pop p_sh p_be  bus
-## 1:     5      0    0 0.85 15  3.7 FALSE    0    1 TRUE
-## 2:     5      0    0 0.85 15  3.7 FALSE    0    1 TRUE
-## 3:     5      0    0 0.85 15  3.7 FALSE    0    1 TRUE
-## 4:     5      0    0 0.85 15  3.7 FALSE    0    1 TRUE
-## 5:     5      0    0 0.85 15  3.7 FALSE    0    1 TRUE
-## 6:     5      0    0 0.85 15  3.7 FALSE    0    1 TRUE
-## 7:     5      0    0 0.85 15  3.7 FALSE    0    1 TRUE
-## 8:     5      0    0 0.85 15  3.7 FALSE    0    1 TRUE</code></pre>
+##    n_bus n_xbus p_ot t_late  F_l  S L_pt  pop p_sh p_be   bus nearside
+## 1:     5      0 0.75      5 0.85 15  3.7 TRUE    0    1  TRUE     TRUE
+## 2:     5      0 0.00      0 0.85 15  3.7 TRUE    0    1 FALSE    FALSE
+## 3:     5      0 0.75      5 0.85 15  3.7 TRUE    0    1  TRUE     TRUE
+## 4:     5      0 0.00      0 0.85 15  3.7 TRUE    0    1 FALSE    FALSE
+## 5:     5      0 0.75      5 0.85 15  3.7 TRUE    0    1  TRUE     TRUE
+## 6:     5      0 0.00      0 0.85 15  3.7 TRUE    0    1 FALSE    FALSE
+## 7:     5      0 0.75      5 0.85 15  3.7 TRUE    0    1  TRUE     TRUE
+## 8:     5      0 0.00      0 0.85 15  3.7 TRUE    0    1 FALSE    FALSE</code></pre>
 <p>Now we can calculate the LOS. The “existing” result uses the current HCM methodology, and the “revised” result uses the proposed revisions. Let’s display what the results look like for the existing methodology. The results have a list of data tables for each mode.</p>
 <pre class="r"><code>existing &lt;- calcMMLOS(dat, revs = F)
 revised &lt;- calcMMLOS(dat, revs = T)
