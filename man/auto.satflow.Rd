@@ -13,7 +13,7 @@ auto.satflow(link, int)
 (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")}
 }
 \value{
-Numeric value in mi/hr.
+Numeric value in veh/hr.
 }
 \description{
 Determine the adjusted saturation flow rate
