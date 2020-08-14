@@ -40,7 +40,7 @@ bike.F_w.link <- function(link) {
   }
   
   #Effective total width of outside through lane
-  if(link$v_m > 160 | link$div) {
+  if(link$v_m > 160 | link$div > 0) {
     W_v = W_t
   } else {
     W_v = W_t*(1.8 - 0.005*link$v_m)
@@ -594,9 +594,13 @@ bike.I_int <- function(int, dir) {
   #Delay factor
   F_delay = 0.0401*ifelse(d_bd == 0, 0, log(d_bd))
   
+  #Midsegment speed
+  if(is.na(link$S_85mj)) S_85mj = auto.S_f(link)
+  else S_85mj = link$S_85mj
+  
   #Veh speed factor
   #F_s = 0.00013*n_15mj*int[traf_dir == dir, S_85mj]
-  F_s = (sqrt(n_15mj)*int[traf_dir == dir, S_85mj])/400
+  F_s = (sqrt(n_15mj)*S_85mj)/400
   
   #LOS Score
   I_int = 4.1324 + F_w + F_v + F_s + F_delay

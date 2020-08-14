@@ -52,13 +52,57 @@ auto.S_R <- function(link, control) {
   return(S_R)
 }
 
+#' Determine base free-flow speed
+#' 
+#' @param link Data.table of link data.
+#' @return Numeric value in mi/hr.
+#' @examples
+#' auto.S_fo(link)
+#' @export
+#' 
+auto.S_f <- function(link, int, dat) {
+
+  #Opposite street dir
+  odir = switch(link$link_dir,
+                "NB" = "SB",
+                "SB" = "NB",
+                "EB" = "WB",
+                "WB" = "EB")
+  
+  #Opposite direction
+  olink <- dat$links[link_id == link$link_id & link_dir != link$link_dir, ]
+  
+  #Speed constant
+  s0 = 25.6 + 0.47*link$S_lim
+  
+  #Cross-section factor
+  f_cs = 1.5*link$div - 0.47*link$curb
+  
+  #Access point density
+  D_a = 5280*(link$N_aps + olink$N_aps)/(link$LL - int[traf_dir==odir, W_cd])
+  
+  #Access point density factor
+  f_A = -0.078*D_a/link$N_th
+  
+  #Base free-flow speed
+  S_fo = S0  + f_cs + f_A
+  
+  #Adjustment for signal spacing
+  f_L = 1.02 - 4.7*(S_fo - 19.5)/(max(link$LL, 400))
+  f_L = ifelse(f_L > 1, 1, f_L)
+  
+  #Free-flow speed
+  S_f = S_fo*f_L
+
+  return(S_f)  
+}
 
 #' Determine the adjusted saturation flow rate
 #' 
 #' @param link Data.table of link data.
 #' @param control String containing the boundary intersection control type
 #' (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")
-#' @return Numeric value in mi/hr.
+#' @return Numeric value in veh/hr.
 #' @examples
 #' auto.satflow(link, int)
 #' @export
@@ -176,7 +220,7 @@ auto.satflow <- function(link, int) {
 #' @param link Data.table of link data.
 #' @param control String containing the boundary intersection control type
 #' (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")
-#' @return Numeric value in mi/hr.
+#' @return Numeric value (decimal).
 #' @examples
 #' auto.S_R(link, control)
 #' @export

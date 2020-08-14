@@ -17,7 +17,7 @@ ped.F_w.link  <- function(link) {
   w_osstar = ifelse(W_osstar >= 0, W_osstar, link$W_os)
   
   #Effective total width
-  if(link$v_m > 160 | link$div) {
+  if(link$v_m > 160 | link$div > 0) {
     W_v = W_t
   } else {
     W_v = W_t*(2 - 0.005*link$v_m)
@@ -340,6 +340,10 @@ ped.I_int <- function(link, int) {
                 "EB" = "WB",
                 "WB" = "EB")
   
+  #Midsegment speed
+  if(is.na(link$S_85mj)) S_85mj = auto.S_f(link)
+  else S_85mj = link$S_85mj
+  
   #Intersection delay
   d_pd = ped.d_pd(int,link$link_dir)
   
@@ -361,7 +365,7 @@ ped.I_int <- function(link, int) {
   F_delay = 0.0401*ifelse(d_pd == 0, 0, log(d_pd))
   
   #Veh speed factor
-  F_s = 0.00013*n_15mj*int[traf_dir == link$link_dir, S_85mj]
+  F_s = 0.00013*n_15mj*S_85mj
   
   #Veh volume factor
   F_v = 0.00569*(v_rtlt / 4) - N_rtcid*(0.0027*n_15mj - 0.1946)

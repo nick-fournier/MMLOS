@@ -8,7 +8,9 @@ v_m,LINK,Outside lane demand flow rate at midsegment (veh/h)
 v_ped,LINK,Pedestrian flow rate (walking in both directions)(ped/hr)
 v_s,LINK,Transit frequency (veh/hr)
 P_HV,LINK,Heavy vehicle percentage
-S_f,LINK,"Free flow speed, default to speed limit (mph)"
+S_lim,LINK,Posted speed limit (mi/hr)
+S_f,LINK,"Free-flow speed (mi/hr). If not measured, leave blank, it will be calculated using HCM methodology."
+S_85mj,LINK,"85th Percentile speed along midsegment. If unavailable, leave blank. Defaults to free-flow speed."
 S_pf,LINK,Pedestrian walking speeed (ft/s)
 S_b,LINK,Bicycle running speed (mph)
 N_th,LINK,Number of through lanes in the subject direction of travel
@@ -30,7 +32,7 @@ p_mx,LINK,Proportion of midblock pedestrian demand (default = 0.35)
 H_swbuf,LINK,Height of barrier between street and bike lane
 H_blbuf,LINK,Height of barrier between street and sidewalk
 protected,LINK,Is the bike lane protected by parking?
-div,LINK,Is the street divided?
+div,LINK,Percent of street divided by median (decimal).
 p_strp,LINK,Are parking spaces striped?
 curb,LINK,Curb is present?
 sharedbl,LINK,Shared bike and pedestrian path? (bikelane and sidewalk)
@@ -52,7 +54,6 @@ traf_dir,INT,Traffic direction
 N_d,INT,Number of traffic lanes crossed when traversing the crosswalk
 N_dc,INT,Number of cross treet traffic lanes crossed when going through intersection
 N_th,INT,Number of through lanes in the midsegment (both directions)
-S_85mj,INT,85th Percentile speed at midsegment on the street crossed (mi/h)
 v_rt,INT,Right-turn demand flow rate (veh/h) 
 v_lt,INT,Left-turn demand flow rate (veh/h) 
 v_th,INT,Through movement demand flow rate (veh/h) 

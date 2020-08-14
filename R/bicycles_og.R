@@ -25,7 +25,7 @@ ogbike.F_w.link <- function(link) {
   }
   
   #Effective total width of outside through lane
-  if(link$v_m > 160 | link$div) {
+  if(link$v_m > 160 | link$div > 0) {
     W_v = W_t
   } else {
     W_v = W_t*(2 - 0.005*link$v_m)
