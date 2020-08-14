@@ -54,10 +54,12 @@ auto.S_R <- function(link, control) {
 
 #' Determine base free-flow speed
 #' 
-#' @param link Data.table of link data.
+#' @param link Data.table of subject link data.
+#' @param link Data.table of subject intersection data.
+#' @param link Data.table of entire data set.
 #' @return Numeric value in mi/hr.
 #' @examples
-#' auto.S_fo(link)
+#' auto.S_fo(link, int, dat)
 #' @export
 #' 
 auto.S_f <- function(link, int, dat) {
