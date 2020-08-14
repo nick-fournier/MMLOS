@@ -12,94 +12,95 @@ For demonstration purposes, template data can be loaded by entering dir ="templa
 The input data format and description are as follows:
 \tabular{lll}{
 VAR \tab TYPE \tab DESC \cr
-link_id     \tab LINK \tab Link Identification, name and direction or number                                              \cr
-link_dir    \tab LINK \tab Direction                                                                                      \cr
-boundary_id \tab LINK \tab Corresponding segment boundary intersection                                                    \cr
-LL          \tab LINK \tab Link length (ft)                                                                               \cr
-N_aps       \tab LINK \tab Number of access point approaches on right side of subject direction                           \cr
-v_m         \tab LINK \tab Outside lane demand flow rate at midsegment (veh/h)                                            \cr
-v_ped       \tab LINK \tab Pedestrian flow rate (walking in both directions)(ped/hr)                                      \cr
-v_s         \tab LINK \tab Transit frequency (veh/hr)                                                                     \cr
-P_HV        \tab LINK \tab Heavy vehicle percentage                                                                       \cr
-S_f         \tab LINK \tab Free flow speed, default to speed limit (mph)                                                  \cr
-S_pf        \tab LINK \tab Pedestrian walking speeed (ft/s)                                                               \cr
-S_b         \tab LINK \tab Bicycle running speed (mph)                                                                    \cr
-N_th        \tab LINK \tab Number of through lanes in the subject direction of travel                                     \cr
-W_T         \tab LINK \tab Total walkway width                                                                            \cr
-W_bl        \tab LINK \tab Bicycle lane width (ft) (Entire entire width if shared with peds)                              \cr
-W_swbuf     \tab LINK \tab Buffer width from sidewalk to street (ft)                                                      \cr
-W_blbuf     \tab LINK \tab Buffer width from bike lane to street (ft)                                                     \cr
-W_os        \tab LINK \tab Paved outside shoulder width \link{includes parking} (ft)                                           \cr
-W_ol        \tab LINK \tab Outside travel lane (closest to sidewalk) width (ft)                                           \cr
-w_oi        \tab LINK \tab Fixed object width on inside of sidewalk                                                       \cr
-w_oo        \tab LINK \tab Fixed object width on outside of sidewalk                                                      \cr
-pwindow     \tab LINK \tab Portion of sidewalk length adjacent to window display                                          \cr
-pbuilding   \tab LINK \tab Portion of sidewalk adjacent to building face                                                  \cr
-pfence      \tab LINK \tab Portion of sidewalk adjacent to fence or low wall                                              \cr
-p_pk        \tab LINK \tab Proportion of on-street parking occupied                                                       \cr
-p_g         \tab LINK \tab Approach grade                                                                                 \cr
-P_c         \tab LINK \tab Pavement condition rating (0 to 5)                                                             \cr
-p_mx        \tab LINK \tab Proportion of midblock pedestrian demand (default = 0.35)                                      \cr
-H_swbuf     \tab LINK \tab Height of barrier between street and bike lane                                                 \cr
-H_blbuf     \tab LINK \tab Height of barrier between street and sidewalk                                                  \cr
-protected   \tab LINK \tab Is the bike lane protected by parking?                                                         \cr
-div         \tab LINK \tab Is the street divided?                                                                         \cr
-p_strp      \tab LINK \tab Are parking spaces striped?                                                                    \cr
-curb        \tab LINK \tab Curb is present?                                                                               \cr
-sharedbl    \tab LINK \tab Shared bike and pedestrian path? (bikelane and sidewalk)                                       \cr
-n_bus       \tab LINK \tab Number of local buses on street segment per hour (bus/h)                                       \cr
-n_xbus      \tab LINK \tab Number of express buses stopping in segment per hour (bus/h)                                   \cr
-p_ot        \tab LINK \tab Proportion of transit vehicles arriving on-time, within the threshold late time. Default = 0.75\cr
-t_late      \tab LINK \tab Threshold late time. Deault = 5 min                                                            \cr
-L_f         \tab LINK \tab Average passenger load factor (p/seat)                                                         \cr
-F_l         \tab LINK \tab Average transit travel speed (mi/h)                                                            \cr
-L_pt        \tab LINK \tab Average passenger trip length (mi)                                                             \cr
-pop         \tab LINK \tab Is the segment in the CBD of a metro area of 5 million or more?                                \cr
-p_sh        \tab LINK \tab Percent stops in segment with a shelter                                                        \cr
-p_be        \tab LINK \tab Percent stops in segment with a bench                                                          \cr
-bus         \tab LINK \tab Does the link direction has bus service?                                                       \cr
-nearside    \tab LINK \tab Is the bus stop on the near-side of the intersection?                                          \cr
-int_id      \tab INT  \tab Intersection identification, name and direction or number                                      \cr
-app_dir     \tab INT  \tab Intersection approach direction                                                                \cr
-traf_dir    \tab INT  \tab Traffic direction                                                                              \cr
-N_d         \tab INT  \tab Number of traffic lanes crossed when traversing the crosswalk                                  \cr
-N_dc        \tab INT  \tab Number of cross treet traffic lanes crossed when going through intersection                    \cr
-N_th        \tab INT  \tab Number of through lanes in the midsegment (both directions)                                    \cr
-S_85mj      \tab INT  \tab 85th Percentile speed at midsegment on the street crossed (mi/h)                               \cr
-v_rt        \tab INT  \tab Right-turn demand flow rate (veh/h)                                                            \cr
-v_lt        \tab INT  \tab Left-turn demand flow rate (veh/h)                                                             \cr
-v_th        \tab INT  \tab Through movement demand flow rate (veh/h)                                                      \cr
-v_v         \tab INT  \tab Vehicle flow rate at crosswalk (veh/h)                                                         \cr
-v_vc        \tab INT  \tab Vehicle flow rate at cross street (veh/h)                                                      \cr
-v_rtor      \tab INT  \tab Right-turn-on-red flow rate (veh/h)                                                            \cr
-v_ltperm    \tab INT  \tab Permited left-turn demand flow rate (veh/h)                                                    \cr
-v_p         \tab INT  \tab Pedestrian demand flow rate (ped/h)                                                            \cr
-v_b         \tab INT  \tab Bicycle flow rate                                                                              \cr
-v_bl        \tab INT  \tab Bicycle left turn volume (veh/hr)                                                              \cr
-v_br        \tab INT  \tab Bicycle right turn volume (veh/hr)                                                             \cr
-P_bl2       \tab INT  \tab Proportion of two-stage left turns for bicycles (decimal)                                      \cr
-N_rtcid     \tab INT  \tab Number of right-turn channelizing islands along the crosswalk                                  \cr
-g           \tab INT  \tab Green time (s)                                                                                 \cr
-gped        \tab INT  \tab Green time for pedestrians (s)                                                                 \cr
-l           \tab INT  \tab Clearance time                                                                                 \cr
-C           \tab INT  \tab Cycle length (s)                                                                               \cr
-Walkmi      \tab INT  \tab Pedestrian walk setting for the phase serving the minor street through movement (s)            \cr
-W_c         \tab INT  \tab Crosswalk width (ft)                                                                           \cr
-W_cd        \tab INT  \tab Curb-to-curb width of the street being crossed i.e., crosswalk length (ft)                     \cr
-L           \tab INT  \tab Curb-to-curb width of the cross street, i.e., through length (ft)                              \cr
-W_bl        \tab INT  \tab Bicycle lane width (ft)                                                                        \cr
-W_ol        \tab INT  \tab Outside travel lane (closest to sidewalk) width (ft)                                           \cr
-p_pk        \tab INT  \tab Proportion of on-street parking occupied                                                       \cr
-W_pk        \tab INT  \tab Striped parking lane width (ft)                                                                \cr
-W_os        \tab INT  \tab Paved outside shoulder width (ft)                                                              \cr
-M_yp        \tab INT  \tab Motorist pedestrian yield rate (decimal)                                                       \cr
-M_yb        \tab INT  \tab Motorist bicycle yield rate (decimal)                                                          \cr
-S_p         \tab INT  \tab Pedestrian crossing speed (ft/s)                                                               \cr
-S_b         \tab INT  \tab Bicycle crossing speed (ft/s)                                                                  \cr
-t_sb        \tab INT  \tab Bicycle start-up and clearance time (s)                                                        \cr
-t_sp        \tab INT  \tab Pedestrian start-up and clearance time (s)                                                     \cr
-control     \tab INT  \tab Traffic control?                                                                               \cr
-curb        \tab INT  \tab Curb is present?                                                                               \cr
+link_id     \tab LINK \tab Link Identification, name and direction or number                                                  \cr
+link_dir    \tab LINK \tab Direction                                                                                          \cr
+boundary_id \tab LINK \tab Corresponding segment boundary intersection                                                        \cr
+LL          \tab LINK \tab Link length (ft)                                                                                   \cr
+N_aps       \tab LINK \tab Number of access point approaches on right side of subject direction                               \cr
+v_m         \tab LINK \tab Outside lane demand flow rate at midsegment (veh/h)                                                \cr
+v_ped       \tab LINK \tab Pedestrian flow rate (walking in both directions)(ped/hr)                                          \cr
+v_s         \tab LINK \tab Transit frequency (veh/hr)                                                                         \cr
+P_HV        \tab LINK \tab Heavy vehicle percentage                                                                           \cr
+S_lim       \tab LINK \tab Posted speed limit (mi/hr)                                                                         \cr
+S_f         \tab LINK \tab Free-flow speed (mi/hr). If not measured, leave blank, it will be calculated using HCM methodology.\cr
+S_85mj      \tab LINK \tab 85th Percentile speed along midsegment. If unavailable, leave blank. Defaults to free-flow speed.  \cr
+S_pf        \tab LINK \tab Pedestrian walking speeed (ft/s)                                                                   \cr
+S_b         \tab LINK \tab Bicycle running speed (mph)                                                                        \cr
+N_th        \tab LINK \tab Number of through lanes in the subject direction of travel                                         \cr
+W_T         \tab LINK \tab Total walkway width                                                                                \cr
+W_bl        \tab LINK \tab Bicycle lane width (ft) (Entire entire width if shared with peds)                                  \cr
+W_swbuf     \tab LINK \tab Buffer width from sidewalk to street (ft)                                                          \cr
+W_blbuf     \tab LINK \tab Buffer width from bike lane to street (ft)                                                         \cr
+W_os        \tab LINK \tab Paved outside shoulder width \link{includes parking} (ft)                                               \cr
+W_ol        \tab LINK \tab Outside travel lane (closest to sidewalk) width (ft)                                               \cr
+w_oi        \tab LINK \tab Fixed object width on inside of sidewalk                                                           \cr
+w_oo        \tab LINK \tab Fixed object width on outside of sidewalk                                                          \cr
+pwindow     \tab LINK \tab Portion of sidewalk length adjacent to window display                                              \cr
+pbuilding   \tab LINK \tab Portion of sidewalk adjacent to building face                                                      \cr
+pfence      \tab LINK \tab Portion of sidewalk adjacent to fence or low wall                                                  \cr
+p_pk        \tab LINK \tab Proportion of on-street parking occupied                                                           \cr
+p_g         \tab LINK \tab Approach grade                                                                                     \cr
+P_c         \tab LINK \tab Pavement condition rating (0 to 5)                                                                 \cr
+p_mx        \tab LINK \tab Proportion of midblock pedestrian demand (default = 0.35)                                          \cr
+H_swbuf     \tab LINK \tab Height of barrier between street and bike lane                                                     \cr
+H_blbuf     \tab LINK \tab Height of barrier between street and sidewalk                                                      \cr
+protected   \tab LINK \tab Is the bike lane protected by parking?                                                             \cr
+div         \tab LINK \tab Percent of street divided by median (decimal).                                                     \cr
+p_strp      \tab LINK \tab Are parking spaces striped?                                                                        \cr
+curb        \tab LINK \tab Curb is present?                                                                                   \cr
+sharedbl    \tab LINK \tab Shared bike and pedestrian path? (bikelane and sidewalk)                                           \cr
+n_bus       \tab LINK \tab Number of local buses on street segment per hour (bus/h)                                           \cr
+n_xbus      \tab LINK \tab Number of express buses stopping in segment per hour (bus/h)                                       \cr
+p_ot        \tab LINK \tab Proportion of transit vehicles arriving on-time, within the threshold late time. Default = 0.75    \cr
+t_late      \tab LINK \tab Threshold late time. Deault = 5 min                                                                \cr
+L_f         \tab LINK \tab Average passenger load factor (p/seat)                                                             \cr
+F_l         \tab LINK \tab Average transit travel speed (mi/h)                                                                \cr
+L_pt        \tab LINK \tab Average passenger trip length (mi)                                                                 \cr
+pop         \tab LINK \tab Is the segment in the CBD of a metro area of 5 million or more?                                    \cr
+p_sh        \tab LINK \tab Percent stops in segment with a shelter                                                            \cr
+p_be        \tab LINK \tab Percent stops in segment with a bench                                                              \cr
+bus         \tab LINK \tab Does the link direction has bus service?                                                           \cr
+nearside    \tab LINK \tab Is the bus stop on the near-side of the intersection?                                              \cr
+int_id      \tab INT  \tab Intersection identification, name and direction or number                                          \cr
+app_dir     \tab INT  \tab Intersection approach direction                                                                    \cr
+traf_dir    \tab INT  \tab Traffic direction                                                                                  \cr
+N_d         \tab INT  \tab Number of traffic lanes crossed when traversing the crosswalk                                      \cr
+N_dc        \tab INT  \tab Number of cross treet traffic lanes crossed when going through intersection                        \cr
+N_th        \tab INT  \tab Number of through lanes in the midsegment (both directions)                                        \cr
+v_rt        \tab INT  \tab Right-turn demand flow rate (veh/h)                                                                \cr
+v_lt        \tab INT  \tab Left-turn demand flow rate (veh/h)                                                                 \cr
+v_th        \tab INT  \tab Through movement demand flow rate (veh/h)                                                          \cr
+v_v         \tab INT  \tab Vehicle flow rate at crosswalk (veh/h)                                                             \cr
+v_vc        \tab INT  \tab Vehicle flow rate at cross street (veh/h)                                                          \cr
+v_rtor      \tab INT  \tab Right-turn-on-red flow rate (veh/h)                                                                \cr
+v_ltperm    \tab INT  \tab Permited left-turn demand flow rate (veh/h)                                                        \cr
+v_p         \tab INT  \tab Pedestrian demand flow rate (ped/h)                                                                \cr
+v_b         \tab INT  \tab Bicycle flow rate                                                                                  \cr
+v_bl        \tab INT  \tab Bicycle left turn volume (veh/hr)                                                                  \cr
+v_br        \tab INT  \tab Bicycle right turn volume (veh/hr)                                                                 \cr
+P_bl2       \tab INT  \tab Proportion of two-stage left turns for bicycles (decimal)                                          \cr
+N_rtcid     \tab INT  \tab Number of right-turn channelizing islands along the crosswalk                                      \cr
+g           \tab INT  \tab Green time (s)                                                                                     \cr
+gped        \tab INT  \tab Green time for pedestrians (s)                                                                     \cr
+l           \tab INT  \tab Clearance time                                                                                     \cr
+C           \tab INT  \tab Cycle length (s)                                                                                   \cr
+Walkmi      \tab INT  \tab Pedestrian walk setting for the phase serving the minor street through movement (s)                \cr
+W_c         \tab INT  \tab Crosswalk width (ft)                                                                               \cr
+W_cd        \tab INT  \tab Curb-to-curb width of the street being crossed i.e., crosswalk length (ft)                         \cr
+L           \tab INT  \tab Curb-to-curb width of the cross street, i.e., through length (ft)                                  \cr
+W_bl        \tab INT  \tab Bicycle lane width (ft)                                                                            \cr
+W_ol        \tab INT  \tab Outside travel lane (closest to sidewalk) width (ft)                                               \cr
+p_pk        \tab INT  \tab Proportion of on-street parking occupied                                                           \cr
+W_pk        \tab INT  \tab Striped parking lane width (ft)                                                                    \cr
+W_os        \tab INT  \tab Paved outside shoulder width (ft)                                                                  \cr
+M_yp        \tab INT  \tab Motorist pedestrian yield rate (decimal)                                                           \cr
+M_yb        \tab INT  \tab Motorist bicycle yield rate (decimal)                                                              \cr
+S_p         \tab INT  \tab Pedestrian crossing speed (ft/s)                                                                   \cr
+S_b         \tab INT  \tab Bicycle crossing speed (ft/s)                                                                      \cr
+t_sb        \tab INT  \tab Bicycle start-up and clearance time (s)                                                            \cr
+t_sp        \tab INT  \tab Pedestrian start-up and clearance time (s)                                                         \cr
+control     \tab INT  \tab Traffic control?                                                                                   \cr
+curb        \tab INT  \tab Curb is present?                                                                                   \cr
 major       \tab INT  \tab Is the leg on the major street corridor (as opposed to a minor street approach)?Note 1
 }}
 }
