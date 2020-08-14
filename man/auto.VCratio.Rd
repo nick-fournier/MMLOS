@@ -13,7 +13,7 @@ auto.VCratio(link, int)
 (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")}
 }
 \value{
-Numeric value in mi/hr.
+Numeric value (decimal).
 }
 \description{
 Determine the volume to capacity ratio for critical intersection
