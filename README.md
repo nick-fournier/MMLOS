@@ -26,11 +26,9 @@ This contains the directory to formatted CSV files for intersections and links. 
 
 	los <- calcMMLOS(dat)
 
-See the not so vigorous [vignette](https://htmlpreview.github.io/?https://github.com/nick-fournier/MMLOS/blob/master/vignette/nsv-vignette.html) for simple usage. For more methodological details, see the bicycle revisions working paper titled [Bicycle Level of Service: Accounting for protected lanes, traffic exposure, and delay](https://github.com/nick-fournier/MMLOS/blob/master/docs/Bicycle%20LOS_7-28-2020_draft.pdf) and for pedestrian revisions see the [collection of working papers](https://github.com/nick-fournier/MMLOS/blob/master/docs/Collection_of_working_papers.pdf) from NCHRP report 17-87.
+For more methodological details, see the bicycle revisions working paper titled [Bicycle Level of Service: Accounting for protected lanes, traffic exposure, and delay](https://github.com/nick-fournier/MMLOS/blob/master/docs/Bicycle%20LOS_7-28-2020_draft.pdf) and for pedestrian revisions see the [collection of working papers](https://github.com/nick-fournier/MMLOS/blob/master/docs/Collection_of_working_papers.pdf) from NCHRP report 17-87.
 
-
-
-
+For an example usage, see the [vignette](https://htmlpreview.github.io/?https://github.com/nick-fournier/MMLOS/blob/master/vignette/nsv-vignette.html) which runs through a few simple calculations and plots the results.
 
 ## References
 1. Kittelson and Associates Inc., Highway Safety Research Center at the University of North Carolina, and Portland State University. Enhancing Pedestrian Volume Estimation and Developing HCM Pedestrian Methodologies for Safe and Sustainable Communities.*Collection of Working Papers: Pedestrian Crossing Delay and LOS - NCHRP Project 17-87.* 2020.
