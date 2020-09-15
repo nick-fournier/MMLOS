@@ -126,6 +126,10 @@ bike.scores <- melt(bike.scores[ , .(id, rn, method, I_int, I_link, I_seg)], id.
 
 #Sort data
 bike.scores <- bike.scores[order(rn), ]
+
+#Reshape for another plot
+bike.scoresxy <- dcast(bike.scores, rn+variable~method, value.var = "value")
+
 ```
 
 
@@ -152,7 +156,18 @@ ggplot(data = bike.scores, aes(x = id, y = value, fill = variable, alpha = metho
 
 ```
 
-The resulting plot generally reflects what we saw in the table, but we can see that the segment LOS score is less sensitive to changes from intersections than from links.
+The resulting plot generally reflects what we saw in the table, but we can see that the segment LOS score is less sensitive to changes from intersections than from links. In another perspective we can compare the LOS from each methodology. Points above the diagonal line mean that the revised method yielded a higher (i.e., worse) LOS score, and points below the diagonal mean the revised method yielded a lower (i.e., better) LOS score. 
+
+
+```{r plot compare xy}
+ggplot(data = bike.scoresxy, aes(x = Existing, y = Revised, color = variable)) + 
+  geom_point() +
+  geom_abline(slope = 1) +
+  scale_color_brewer("LOS component", palette = "Set1") +
+  labs(x = "Existing HCM LOS score", y = "Revised HCM LOS Score") +
+  theme_bw()
+
+```
 
 
 ## Existing versus revised HCM methodology
