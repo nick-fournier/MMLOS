@@ -4,10 +4,12 @@
 \alias{ogbike.F_w.link}
 \title{Bicycle paved width factor (links)}
 \usage{
-ogbike.F_w.link(link)
+ogbike.F_w.link(link, int)
 }
 \arguments{
 \item{link}{Data.table of link data.}
+
+\item{int}{Data.table of subject intersection data.}
 }
 \value{
 Numeric value, unitless.

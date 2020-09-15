@@ -48,7 +48,10 @@ transit.I_seg <- function(link, int) {
   }
   
   ### 
-
+  
+  #Midsegment flow per lane in direction of travel
+  v_m = int[ traf_dir == link$link_dir, sum(v_rt + v_lt + v_th) / N_th]
+  
   #Motorized vehicle running speed along segment
   S_R = auto.S_R(link, int[traf_dir == link$link_dir, control])
   
@@ -62,7 +65,7 @@ transit.I_seg <- function(link, int) {
   d_ps = t_d*f_dt
   
   #Reentry delay
-  d_re = link$v_m*int[traf_dir == link$link_dir, g] / (s - link$v_m)
+  d_re = int[traf_dir == link$link_dir, g] / (s - v_m)
   
   #Delay due to a stop
   d_ts = d_ad + d_ps + d_re
@@ -77,7 +80,7 @@ transit.I_seg <- function(link, int) {
   S_Ttseg = (3600*link$LL) / (5280*(t_Rt + d_t))
   
   # Headway factor
-  F_h = 4*exp(-1.434/(link$v_s))
+  F_h = 4*exp(-1.434/(link$n_bus))
   
   
   #Passenger load weighting factor

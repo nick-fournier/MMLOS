@@ -4,7 +4,7 @@
 \alias{ped.F_w.link}
 \title{Pedestrian paved width factor (links)}
 \usage{
-ped.F_w.link(link)
+ped.F_w.link(link, int)
 }
 \arguments{
 \item{link}{Data.table of link data.}

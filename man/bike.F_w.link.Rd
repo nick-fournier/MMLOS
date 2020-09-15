@@ -4,7 +4,7 @@
 \alias{bike.F_w.link}
 \title{Bicycle paved width factor (links)}
 \usage{
-bike.F_w.link(link)
+bike.F_w.link(link, int)
 }
 \arguments{
 \item{link}{Data.table of link data.}

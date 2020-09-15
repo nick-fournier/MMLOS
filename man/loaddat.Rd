@@ -17,16 +17,13 @@ link_dir    \tab LINK \tab Direction                                            
 boundary_id \tab LINK \tab Corresponding segment boundary intersection                                                        \cr
 LL          \tab LINK \tab Link length (ft)                                                                                   \cr
 N_aps       \tab LINK \tab Number of access point approaches on right side of subject direction                               \cr
-v_m         \tab LINK \tab Outside lane demand flow rate at midsegment (veh/h)                                                \cr
-v_ped       \tab LINK \tab Pedestrian flow rate (walking in both directions)(ped/hr)                                          \cr
-v_s         \tab LINK \tab Transit frequency (veh/hr)                                                                         \cr
 P_HV        \tab LINK \tab Heavy vehicle percentage                                                                           \cr
 S_lim       \tab LINK \tab Posted speed limit (mi/hr)                                                                         \cr
 S_f         \tab LINK \tab Free-flow speed (mi/hr). If not measured, leave blank, it will be calculated using HCM methodology.\cr
 S_85mj      \tab LINK \tab 85th Percentile speed along midsegment. If unavailable, leave blank. Defaults to free-flow speed.  \cr
 S_pf        \tab LINK \tab Pedestrian walking speeed (ft/s)                                                                   \cr
 S_b         \tab LINK \tab Bicycle running speed (mph)                                                                        \cr
-N_th        \tab LINK \tab Number of through lanes in the subject direction of travel                                         \cr
+N_mth       \tab LINK \tab Number of midsegment through lanes in the subject direction of travel                              \cr
 W_T         \tab LINK \tab Total walkway width                                                                                \cr
 W_bl        \tab LINK \tab Bicycle lane width (ft) (Entire entire width if shared with peds)                                  \cr
 W_swbuf     \tab LINK \tab Buffer width from sidewalk to street (ft)                                                          \cr
@@ -63,21 +60,18 @@ nearside    \tab LINK \tab Is the bus stop on the near-side of the intersection?
 int_id      \tab INT  \tab Intersection identification, name and direction or number                                          \cr
 app_dir     \tab INT  \tab Intersection approach direction                                                                    \cr
 traf_dir    \tab INT  \tab Traffic direction                                                                                  \cr
-N_d         \tab INT  \tab Number of traffic lanes crossed when traversing the crosswalk                                      \cr
-N_dc        \tab INT  \tab Number of cross treet traffic lanes crossed when going through intersection                        \cr
+N_dc        \tab INT  \tab Number of traffic lanes crossed when traversing the crosswalk                                      \cr
 N_th        \tab INT  \tab Number of through lanes in the midsegment (both directions)                                        \cr
 v_rt        \tab INT  \tab Right-turn demand flow rate (veh/h)                                                                \cr
 v_lt        \tab INT  \tab Left-turn demand flow rate (veh/h)                                                                 \cr
 v_th        \tab INT  \tab Through movement demand flow rate (veh/h)                                                          \cr
-v_v         \tab INT  \tab Vehicle flow rate at crosswalk (veh/h)                                                             \cr
-v_vc        \tab INT  \tab Vehicle flow rate at cross street (veh/h)                                                          \cr
 v_rtor      \tab INT  \tab Right-turn-on-red flow rate (veh/h)                                                                \cr
 v_ltperm    \tab INT  \tab Permited left-turn demand flow rate (veh/h)                                                        \cr
 v_p         \tab INT  \tab Pedestrian demand flow rate (ped/h)                                                                \cr
-v_b         \tab INT  \tab Bicycle flow rate                                                                                  \cr
+v_bth       \tab INT  \tab Bicycle flow rate                                                                                  \cr
 v_bl        \tab INT  \tab Bicycle left turn volume (veh/hr)                                                                  \cr
 v_br        \tab INT  \tab Bicycle right turn volume (veh/hr)                                                                 \cr
-P_bl2       \tab INT  \tab Proportion of two-stage left turns for bicycles (decimal)                                          \cr
+p_bl2       \tab INT  \tab Proportion of two-stage left turns for bicycles (decimal)                                          \cr
 N_rtcid     \tab INT  \tab Number of right-turn channelizing islands along the crosswalk                                      \cr
 g           \tab INT  \tab Green time (s)                                                                                     \cr
 gped        \tab INT  \tab Green time for pedestrians (s)                                                                     \cr
@@ -92,8 +86,7 @@ S_p         \tab INT  \tab Pedestrian crossing speed (ft/s)                     
 S_b         \tab INT  \tab Bicycle crossing speed (ft/s)                                                                      \cr
 t_sb        \tab INT  \tab Bicycle start-up and clearance time (s)                                                            \cr
 t_sp        \tab INT  \tab Pedestrian start-up and clearance time (s)                                                         \cr
-control     \tab INT  \tab Traffic control?                                                                                   \cr
-major       \tab INT  \tab Is the leg on the major street corridor (as opposed to a minor street approach)?Note 1
+control     \tab INT  \tab Traffic control?
 }}
 }
 \value{

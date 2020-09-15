@@ -1,3 +1,60 @@
+#' Determine the segment running time
+#' 
+#' @param link Data.table of link data.
+#' @param int  Data.table of subject intersection data.
+#' @return Numeric value (decimal).
+#' @examples
+#' auto.S_R(link, control)
+#' @export
+auto.t_R <- function(link, int, dat) {
+  
+  #Free flow speed
+  S_f = auto.S_f(link, int, dat)
+  
+  #Signalization delay factor
+  f_x = switch(int[traf_dir == link$link_dir, as.character(control)],
+               "Signalized" = 1,
+               "AWSC - Stop" = 1,
+               "TWSC - Stop" = 1, 
+               "Uncontrolled" = 0, 
+               "Yield" = min(v_v*(1 - p_rt - p_lt)/c_th, 1))
+  #Midsegment flow per lane in direction of travel
+  v_vm = int[ traf_dir == link$link_dir, sum(v_rt + v_lt + v_th)]
+  
+  #Proximity adjustment factor
+  f_v = 2 / (1 + (1 - v_vm / (52.8*link$N_mth*S_f))^0.21)
+  
+  #Startup lost time
+  l1 = switch(int[traf_dir == link$link_dir, as.character(control)],
+              "Signalized" = 2, 
+              "AWSC - Stop" = 2.5,
+              "TWSC - Stop" = 2.5, 
+              "Uncontrolled" = 0,
+              "Yield" = 2.5)
+  
+  
+  #Hardcoded table of vehicle turn delay for each approach, including the boundary
+  turndelay <- data.table( "v_m" = c(0,200,300,400,500,600,700),
+                           "1" = c(0.00,0.04,0.08,0.12,0.18,0.27,0.39),
+                           "2" = c(0.00,0.04,0.08,0.15,0.25,0.41,0.72),
+                           "3" = c(0.00,0.05,0.09,0.15,0.15,0.15,0.15))
+  #Melt into long for convenience.
+  turndelay <- melt(turndelay, id.vars = "v_m")
+  
+  
+  #Interpolate turn delay
+  d_ap = (1+link$N_aps)*turndelay[variable==link$N_mth, approx(x = v_m, y = value, xout = v_vm / link$N_mth, rule = 2)$y]
+  
+  #Other delay
+  d_other = 0
+  
+  #Motorized vehicle midsegment running time
+  t_R = f_x * ((6.0 - l1) / (0.0025*link$LL)) + ((3600*link$LL)/(5280*S_f)) * f_v + d_ap + d_other
+  
+  return(t_R)
+}
+
+
 #' Determine segment running speed for automobiles
 #' 
 #' @param link Data.table of subject link data.
@@ -50,7 +107,7 @@ auto.S_f <- function(link, int, dat) {
   D_a = 5280*(link$N_aps + olink$N_aps)/(link$LL - int[traf_dir==odir, W_cd])
   
   #Access point density factor
-  f_A = -0.078*D_a/link$N_th
+  f_A = -0.078*D_a/link$N_mth
   
   #Base free-flow speed
   S_fo = s0  + f_cs + f_A
@@ -107,10 +164,10 @@ auto.satflow <- function(link, int) {
   #Slope grade
   f_g = 1 - (link$p_g/200)
   #Parking
-  f_p = ((link$N_th - 0.1 - (18*N_m/3600))/link$N_th)
+  f_p = ((link$N_mth - 0.1 - (18*N_m/3600))/link$N_mth)
   f_p = ifelse(f_p < 0.05, 0.05, f_p)
   #bus blocking
-  f_bb = (link$N_th - (14.4*link$n_bus/3600))/link$N_th
+  f_bb = (link$N_mth - (14.4*link$n_bus/3600))/link$N_mth
   f_bb = ifelse(f_bb < 0.05, 0.05, f_bb)
   #Area of type
   f_a = 0.9
@@ -197,66 +254,12 @@ auto.VCratio <- function(link, int) {
   s = auto.satflow(link, int)
   
   #Lane group capacity
-  c = link$N_th*s*int[traf_dir == link$link_dir, g/C]
+  c = link$N_mth*s*int[traf_dir == link$link_dir, g/C]
   
   #V/C Ratio
   X = int[traf_dir == link$link_dir, v_v] / c
   
   return(X)
-}
-
-
-#' Determine the segment running time
-#' 
-#' @param link Data.table of link data.
-#' @param int  Data.table of subject intersection data.
-#' @return Numeric value (decimal).
-#' @examples
-#' auto.S_R(link, control)
-#' @export
-auto.t_R <- function(link, int, dat) {
-  
-  #Free flow speed
-  S_f = auto.S_f(link, int, dat)
-  
-  #Signalization delay factor
-  f_x = switch(int[traf_dir==link$link_dir, as.character(control)],
-               "Signalized" = 1,
-               "AWSC - Stop" = 1,
-               "TWSC - Stop" = 1, 
-               "Uncontrolled" = 0, 
-               "Yield" = min(v_v*(1 - p_rt - p_lt)/c_th, 1))
-  
-  #Proximity adjustment factor
-  f_v = 2 / (1 + (1 - link$v_m / (52.8*link$N_th*S_f))^0.21)
-  
-  #Startup lost time
-  l1 = switch(int[traf_dir==link$link_dir, as.character(control)],
-              "Signalized" = 2, 
-              "AWSC - Stop" = 2.5,
-              "TWSC - Stop" = 2.5, 
-              "Uncontrolled" = 0,
-              "Yield" = 2.5)
-  
-  
-  #Hardcoded table of vehicle turn delay for each approach, including the boundary
-  turndelay <- data.table( v_m = c(0,200,300,400,500,600,700),
-                           "1" = c(0.00,0.04,0.08,0.12,0.18,0.27,0.39),
-                           "2" = c(0.00,0.04,0.08,0.15,0.25,0.41,0.72),
-                           "3" = c(0.00,0.05,0.09,0.15,0.15,0.15,0.15))
-  #Melt into long for convenience.
-  turndelay <- melt(turndelay, id.vars = "v_m")
-  
-  #Interpolate turn delay
-  d_ap = (1+link$N_aps)*turndelay[variable==link$N_th, approx(x = v_m, y = value, xout = link$v_m, rule = 2)$y]
-  
-  #Other delay
-  d_other = 0
-  
-  #Motorized vehicle midsegment running time
-  t_R = f_x * ((6.0 - l1) / (0.0025*link$LL)) + ((3600*link$LL)/(5280*S_f)) * f_v + d_ap + d_other
-  
-  return(t_R)
 }
 
 
@@ -275,9 +278,9 @@ auto.delay <- function(link,int) {
   X = auto.VCratio(link, int)
   
   #Control delay
-  if(int[traf_dir==link$link_dir, as.character(control)] == "Signalized") {
+  if(int[traf_dir == link$link_dir, as.character(control)] == "Signalized") {
     #Uniform delay
-    d1 = int[traf_dir==link$link_dir, (0.5*C*(1-g/C)^2) / (1-(min(1,X)*g/C))]
+    d1 = int[traf_dir == link$link_dir, (0.5*C*(1-g/C)^2) / (1-(min(1,X)*g/C))]
     ### Incremental delay
     
     
@@ -303,8 +306,8 @@ auto.delay <- function(link,int) {
   }
   
   
-  d = switch(int[traf_dir==link$link_dir, as.character(control)],
-                "Signalized" = int[traf_dir==link$link_dir, (0.5*C*(1-g/C)^2) / (1-(min(1,X)*g/C))],
+  d = switch(int[traf_dir == link$link_dir, as.character(control)],
+                "Signalized" = int[traf_dir == link$link_dir, (0.5*C*(1-g/C)^2) / (1-(min(1,X)*g/C))],
                 "AWSC - Stop" = 1,
                 "TWSC - Stop" = 1, 
                 "Uncontrolled" = 0, 

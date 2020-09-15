@@ -6,7 +6,10 @@
 #' @examples
 #' ogped.F_w.link(link)
 #' @export
-ogped.F_w.link  <- function(link) {
+ogped.F_w.link  <- function(link, int) {
+  
+  #Midsegment flow per lane in direction of travel
+  v_vm = int[ traf_dir == link$link_dir, sum(v_rt + v_lt + v_th)] / link$N_mth
   
   #Total width of outside thru lane, bike lane, and paved shoulder/parking
   W_t = link[, W_ol + W_bl + W_swbuf + W_os]
@@ -16,10 +19,10 @@ ogped.F_w.link  <- function(link) {
   w_osstar = ifelse(W_osstar >= 0, W_osstar, link$W_os)
   
   #Effective total width
-  if(link$v_m > 160 | link$div > 0) {
+  if(v_vm > 160 | link$div > 0) {
     W_v = W_t
   } else {
-    W_v = W_t*(2 - 0.005*link$v_m)
+    W_v = W_t*(2 - 0.005*v_vm)
   }
     
   #Total width shoulder, bike lane, and parking lane
@@ -113,7 +116,11 @@ ogped.d_twsc <- function(int, dir) {
   #int[traf_dir %in% c(xdir,odir), sum(N_th)]
   
   #Vehicle flow rate (veh/s)
-  v_v = int[traf_dir == xdir, v_v/3600]
+  #v_v = int[traf_dir == xdir, v_v/3600]
+  #v_v = int[traf_dir == xdir, (v_v/N_dc)/3600]
+  
+  v_v = int[traf_dir %in% c(dir, odir), sum(v_lt + v_rt + v_th, na.rm = T)/3600]
+  #v_v = (v_v / int[traf_dir == xdir, N_dc]) / 3600
   
   #Pedestrian flow rate (ped/s)
   v_p = int[traf_dir == xdir, v_p/3600]
@@ -237,7 +244,7 @@ ogped.F_cd <- function(link, int, Ilink, Iint) {
                  "WB" = "NB")
   
   #If missing approach, just choose opposite equivalent
-  if( is.na(int[traf_dir == mxdir, N_d]) ) {
+  if( is.na(int[traf_dir == mxdir, N_dc]) ) {
     mxdir = switch(mxdir,
                    "NB" = "SB",
                    "SB" = "NB",
@@ -274,11 +281,14 @@ ogped.F_cd <- function(link, int, Ilink, Iint) {
 #' @export
 ogped.I_link <- function(link, int, dat) {
   
+  #Midsegment flow per lane in direction of travel
+  v_vm = int[ traf_dir == link$link_dir, sum(v_rt + v_lt + v_th)]
+  
   #### Caclulate final factors for LOS score
-  F_w = ogped.F_w.link(link) #Cross-section adjustment factor
+  F_w = ogped.F_w.link(link, int) #Cross-section adjustment factor
   
   #Motorized vehicle volume adjustment factor
-  F_v = 0.0091*link$v_m/(4*link$N_th) 
+  F_v = 0.0091*v_vm/(4*link$N_mth) 
   
   #Vehicle running speed
   S_R = auto.S_R(link, int, dat)
@@ -325,12 +335,12 @@ ogped.I_int <- function(link, int, dat) {
   d_pd = ogped.d_pd(int,dir)
   
   #Number of traffic lanes crossed
-  N_d = int[traf_dir == xdir, N_d]
+  N_dc = int[traf_dir == xdir, N_dc]
   
-  N_d = ifelse(is.na(N_d), int[traf_dir == odir, N_d], N_d)
+  N_dc = ifelse(is.na(N_dc), int[traf_dir == odir, N_dc], N_dc)
   
   #Vehicle count traveling on major street during 15-min period
-  n_15mj = (0.25 / N_d)*sum(int$v_v, na.rm = T)
+  n_15mj = (0.25 / N_dc)*sum(int$v_v, na.rm = T)
   
   #Left and right turns with ped movement
   v_rtlt = int[traf_dir == dir, v_rtor + v_ltperm]
@@ -352,7 +362,7 @@ ogped.I_int <- function(link, int, dat) {
   F_v = 0.00569*(v_rtlt / 4) - N_rtcid*(0.0027*n_15mj - 0.1946)
   
   #Cross-section factor
-  F_w = 0.681*(N_d)^0.514
+  F_w = 0.681*(N_dc)^0.514
   
   #LOS score
   I_int = 0.5997 + F_w + F_v + F_s + F_delay

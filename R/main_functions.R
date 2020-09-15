@@ -52,8 +52,7 @@ loaddat <- function(dirs) {
   dat = lapply(dirs, fread)
   
   #Check order and names
-  if(colnames(dat[[2]])[1] == "int_id")
-    dat = rev(dat)
+  if(colnames(dat[[2]])[1] == "int_id") dat = rev(dat)
     
   names(dat) = c("INT","LINK")
   
@@ -62,14 +61,17 @@ loaddat <- function(dirs) {
   
   #Check if same amount is there
   chk.len = sapply(names(dat), function(x) length(dat[[x]]) == desc[TYPE == x, .N])
+  
+  
+  msg.len = paste(sapply(names(chk.len[!chk.len]), function(i) {
+    paste0("Data does not have the expected number of columns in the '", i, "' data. There are ",
+           length(dat[[names(chk.len[!chk.len])]]), " when there should be ", desc[TYPE == i, .N],
+           ". Recheck the input data.")
+  }), collapse = "\n  ")
+  
 
   try(if(!all(chk.len))
-    stop(  paste0("Data does not have the expected number of columns in the '",
-                  names(chk.len[!chk.len]), "' data. There are ",
-                  length(dat[[names(chk.len[!chk.len])]]),
-                  " when there should be ", 
-                  desc[TYPE == names(chk.len[chk.len]), .N],
-                  ". Recheck the input data.\n"))
+    stop(msg.len)
     )
   
   #check names
@@ -84,10 +86,13 @@ loaddat <- function(dirs) {
   #Check for NA
   NAs = sapply(dat, function(x) any(is.na(x)))
   
+  #Warning if NAs
   warning(paste0("WARNING: Data contains NAs in ", names(NAs[NAs]), ", make sure this is intentional.\n  "))
   
+  #Error with names
   try(if(!all(chk.nam))
-    stop(paste0("Data does not match expected input format for '", names(chk.nam[!chk.nam]),"'! Check file selection or fix file formatting."))
+    stop(paste0("Data headers do not match expected input format for '", names(chk.nam[!chk.nam]),
+                "'! Check file selection or fix file formatting."))
     )
   
   return(dat)

@@ -7,7 +7,7 @@
 #' @examples
 #' bike.F_w.link(link)
 #' @export
-bike.F_w.link <- function(link) {
+bike.F_w.link <- function(link, int) {
   
   #Is protected?
   if(link$protected) {
@@ -21,6 +21,9 @@ bike.F_w.link <- function(link) {
   #Effective buffer width
   #W_bufstar = link[ , sqrt(W_blbuf^2 + 16*H_blbuf^0.5)]
   W_bufstar = 4*(link$W_blbuf^2 + (24*H_blbuf))^(1/4)
+  
+  #Midsegment flow per lane in direction of travel
+  v_vm = int[ traf_dir == link$link_dir, sum(v_rt + v_lt + v_th)] / link$N_mth
   
   #Adjusted width of outside shoulder, if curb present
   if(link$curb) {
@@ -40,10 +43,10 @@ bike.F_w.link <- function(link) {
   }
   
   #Effective total width of outside through lane
-  if(link$v_m > 160 | link$div > 0) {
+  if(v_vm > 160 | link$div > 0) {
     W_v = W_t
   } else {
-    W_v = W_t*(1.8 - 0.005*link$v_m)
+    W_v = W_t*(1.8 - 0.005*v_vm)
   }
   
   #Effective width of outside through lane
@@ -72,15 +75,17 @@ bike.F_w.link <- function(link) {
 #' @export
 bike.F_s.link <- function(link, int, dat) {
   
-
   #Vehicle running speed
   S_R = auto.S_R(link, int, dat)
   
   #Adjusted motorized vehicle link running speed
   S_Ra = ifelse(S_R < 21, 21, S_R)
   
+  #Midsegment flow per lane in direction of travel
+  v_vm = int[ traf_dir == link$link_dir, sum(v_rt + v_lt + v_th)] / link$N_mth
+  
   #Adjusted heavy vehicle percent
-  P_HVa = ifelse(link$v_m*(1 - 0.01*link$P_HV) < 200 & link$P_HV > 50, 
+  P_HVa = ifelse(v_vm*(1 - 0.01*link$P_HV) < 200 & link$P_HV > 50, 
                  50, 
                  link$P_HV)
   
@@ -122,10 +127,10 @@ bike.d_signal <- function(link, int) {
   d_bS = bike.d_bS(link, int)
   
   #Proportion of overall left turning bicycles
-  P_L = int[traf_dir == link$link_dir, v_bl/v_b]
+  P_L = int[traf_dir == link$link_dir, v_bl/(v_bth + v_bl + v_br)]
   
   #Proportion of two-stage left turns
-  P_L2 = int[traf_dir == link$link_dir, P_bl2]
+  P_L2 = int[traf_dir == link$link_dir, p_bl2]
   
   #One-stage left turn delay
   d_bL1 = bike.d_1stageleft(link, int)
@@ -169,9 +174,9 @@ bike.d_1stageleft <- function(link, int, tol = 1e-8) {
   M_y = int[traf_dir == dir, M_yb]
   
   #Volume of bicycles and vehicles in veh per sec
-  v_b = int[traf_dir == dir, v_b/3600]
-  v_v = int[traf_dir == dir, v_v/3600]
-  #v_v = int[traf_dir == dir, (v_v/N_d)/3600]
+  v_b = int[traf_dir == dir, (v_bth + v_bl + v_br)/3600]
+  v_v = int[traf_dir == dir, sum(v_lt + v_rt + v_th, na.rm = T)/3600]
+  #v_v = int[traf_dir == dir, (v_v/N_dc)/3600]
   
   #Number of thru lanes (inclusive of opposite direction)
   N_th = int[traf_dir == dir, N_th]
@@ -409,7 +414,7 @@ bike.d_bS <- function(link, int) {
   c_b = int[traf_dir == dir, 2000*g/C]
   
   #Calculate delay from signal, including right-turn vehicle enroachment
-  d_bS = int[traf_dir == dir, (0.5*C*(1-(g/C))^2) / (1 - min(v_b/c_be, 1)*(g/C)) ]
+  d_bS = int[traf_dir == dir, (0.5*C*(1-(g/C))^2) / (1 - min((v_bth + v_bl + v_br)/c_be, 1)*(g/C)) ]
 
   
   return(d_bS)
@@ -452,10 +457,12 @@ bike.d_twsc <- function(link, int) {
   #int[traf_dir %in% c(xdir,odir), sum(N_th)]
   
   #Vehicle flow rate (veh/s)
-  v_v = int[traf_dir == xdir, (v_v/N_d)/3600]
+  #v_v = int[traf_dir == xdir, (v_v/N_dc)/3600]
+  #Vehicle flow rate in veh/s
+  v_v = int[traf_dir %in% c(dir, odir), sum(v_lt + v_rt + v_th)/3600]
   
   #Bicycle flow rate (bike/s)
-  v_p = int[traf_dir == xdir, v_b/3600]
+  v_p = int[traf_dir == xdir, (v_bth + v_bl + v_br)/3600]
   
   #Critical headway
   t_c = int[traf_dir == xdir, (W_cd/S_b) + t_sb]
@@ -583,9 +590,9 @@ bike.I_int <- function(link, int) {
                 "WB" = "EB")
 
   #Number of traffic lanes crossed
-  N_d = int[traf_dir == xdir, N_d]
+  N_dc = int[traf_dir == xdir, N_dc]
   
-  N_d = ifelse(is.na(N_d), int[traf_dir == odir, N_d], N_d)
+  N_dc = ifelse(is.na(N_dc), int[traf_dir == odir, N_dc], N_dc)
   
   #Curb to curb width of cross street
   W_cd = int[traf_dir == xdir, W_cd]
@@ -600,8 +607,11 @@ bike.I_int <- function(link, int) {
   #W_t = int[ traf_dir == dir, W_ol + W_bl + ifelse(p_pk > 0, 0, 1)*W_osstar]
   W_t = link[, W_ol + W_bl + ifelse(p_pk > 0, 0, 1)*W_osstar]
   
+  #Intersection volume
+  v_v = int[ , sum(v_lt + v_rt + v_th, na.rm = T)]
+  
   #Vehicle count traveling on major street during 15-min period
-  n_15mj = (0.25 / N_d)*sum(int$v_v, na.rm = T)
+  n_15mj = (0.25 / N_dc)*v_v
   
   #Cross-section factor
   F_w = 0.0153*W_cd - 0.2144*W_t
@@ -641,11 +651,14 @@ bike.I_int <- function(link, int) {
 bike.I_link <- function(link, int, dat) {
   
   #### Caclulate final factors for LOS score
-    #Cross-section adjustment factor
-  F_w = bike.F_w.link(link)
+  #Cross-section adjustment factor
+  F_w = bike.F_w.link(link, int)
+  
+  #Midsegment flow per lane in direction of travel
+  v_vm = int[ traf_dir == link$link_dir, sum(v_rt + v_lt + v_th)]
   
   #Motorized vehicle volume adjustment factor
-  v_ma = ifelse(link$v_m > 4*link$N_th, link$v_m, 4*link$N_th)
+  v_ma = ifelse(v_vm > 4*link$N_th, v_vm, 4*link$N_th)
   
   F_v = 0.507*log(v_ma / (4*link$N_th))
   

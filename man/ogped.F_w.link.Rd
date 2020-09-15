@@ -4,7 +4,7 @@
 \alias{ogped.F_w.link}
 \title{Pedestrian paved width factor (links)}
 \usage{
-ogped.F_w.link(link)
+ogped.F_w.link(link, int)
 }
 \arguments{
 \item{link}{Data.table of link data.}

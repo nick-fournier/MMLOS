@@ -4,16 +4,13 @@ link_dir,LINK,Direction
 boundary_id,LINK,Corresponding segment boundary intersection
 LL,LINK,Link length (ft)
 N_aps,LINK,Number of access point approaches on right side of subject direction
-v_m,LINK,Outside lane demand flow rate at midsegment (veh/h)
-v_ped,LINK,Pedestrian flow rate (walking in both directions)(ped/hr)
-v_s,LINK,Transit frequency (veh/hr)
 P_HV,LINK,Heavy vehicle percentage
 S_lim,LINK,Posted speed limit (mi/hr)
 S_f,LINK,"Free-flow speed (mi/hr). If not measured, leave blank, it will be calculated using HCM methodology."
 S_85mj,LINK,"85th Percentile speed along midsegment. If unavailable, leave blank. Defaults to free-flow speed."
 S_pf,LINK,Pedestrian walking speeed (ft/s)
 S_b,LINK,Bicycle running speed (mph)
-N_th,LINK,Number of through lanes in the subject direction of travel
+N_mth,LINK,Number of midsegment through lanes in the subject direction of travel
 W_T,LINK,Total walkway width
 W_bl,LINK,Bicycle lane width (ft) (Entire entire width if shared with peds)
 W_swbuf,LINK,Buffer width from sidewalk to street (ft)
@@ -50,21 +47,18 @@ nearside,LINK,Is the bus stop on the near-side of the intersection?
 int_id,INT,"Intersection identification, name and direction or number"
 app_dir,INT,Intersection approach direction
 traf_dir,INT,Traffic direction
-N_d,INT,Number of traffic lanes crossed when traversing the crosswalk
-N_dc,INT,Number of cross treet traffic lanes crossed when going through intersection
+N_dc,INT,Number of traffic lanes crossed when traversing the crosswalk
 N_th,INT,Number of through lanes in the midsegment (both directions)
 v_rt,INT,Right-turn demand flow rate (veh/h) 
 v_lt,INT,Left-turn demand flow rate (veh/h) 
 v_th,INT,Through movement demand flow rate (veh/h) 
-v_v,INT,Vehicle flow rate at crosswalk (veh/h)
-v_vc,INT,Vehicle flow rate at cross street (veh/h)
 v_rtor,INT,Right-turn-on-red flow rate (veh/h)
 v_ltperm,INT,Permited left-turn demand flow rate (veh/h)
 v_p,INT,Pedestrian demand flow rate (ped/h)
-v_b,INT,Bicycle flow rate
+v_bth,INT,Bicycle flow rate
 v_bl,INT,Bicycle left turn volume (veh/hr)
 v_br,INT,Bicycle right turn volume (veh/hr)
-P_bl2,INT,Proportion of two-stage left turns for bicycles (decimal)
+p_bl2,INT,Proportion of two-stage left turns for bicycles (decimal)
 N_rtcid,INT,Number of right-turn channelizing islands along the crosswalk
 g,INT,Green time (s)
 gped,INT,Green time for pedestrians (s)
@@ -80,4 +74,3 @@ S_b,INT,Bicycle crossing speed (ft/s)
 t_sb,INT,Bicycle start-up and clearance time (s)
 t_sp,INT,Pedestrian start-up and clearance time (s)
 control,INT,Traffic control?
-major,INT,Is the leg on the major street corridor (as opposed to a minor street approach)?Note 1

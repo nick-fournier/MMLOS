@@ -3,12 +3,16 @@
 #' Bicycle paved width factor (links)
 #' 
 #' @param link Data.table of link data.
+#' @param int  Data.table of subject intersection data.
 #' @return Numeric value, unitless.
 #' @examples
 #' ogbike.F_w.link(link)
 #' @export
-ogbike.F_w.link <- function(link) {
+ogbike.F_w.link <- function(link, int) {
 
+  #Midsegment flow per lane in direction of travel
+  v_vm = int[ traf_dir == link$link_dir, sum(v_rt + v_lt + v_th)] / link$N_mth
+  
   #Adjusted width of outside shoulder, if curb present
   if(link$curb) {
     W_osstar = link$W_os - 1.5
@@ -25,10 +29,10 @@ ogbike.F_w.link <- function(link) {
   }
   
   #Effective total width of outside through lane
-  if(link$v_m > 160 | link$div > 0) {
+  if(v_vm > 160 | link$div > 0) {
     W_v = W_t
   } else {
-    W_v = W_t*(2 - 0.005*link$v_m)
+    W_v = W_t*(2 - 0.005*v_vm)
   }
   
   #Effective width of outside through lane
@@ -63,9 +67,11 @@ ogbike.F_s.link <- function(link, int, dat) {
   #Adjusted motorized vehicle link running speed
   S_Ra = ifelse(S_R < 21, 21, S_R)
   
+  #Midsegment flow per lane in direction of travel
+  v_vm = int[ traf_dir == link$link_dir, sum(v_rt + v_lt + v_th)] / link$N_mth
   
   #Adjusted heavy vehicle percent
-  P_HVa = ifelse(link$v_m*(1 - 0.01*link$P_HV) < 200 & link$P_HV > 0.5, 
+  P_HVa = ifelse(v_vm*(1 - 0.01*link$P_HV) < 200 & link$P_HV > 0.5, 
                  0.5, 
                  link$P_HV)
   
@@ -87,10 +93,13 @@ ogbike.F_s.link <- function(link, int, dat) {
 ogbike.I_link <- function(link, int, dat) {
   
   #Cross-section adjustment factor
-  F_w = ogbike.F_w.link(link)
+  F_w = ogbike.F_w.link(link, int)
+  
+  #Midsegment flow per lane in direction of travel
+  v_vm = int[ traf_dir == link$link_dir, sum(v_rt + v_lt + v_th)] / link$N_mth
   
   #Motorized vehicle volume adjustment factor
-  v_ma = ifelse(link$v_m > 4*link$N_th, link$v_m, 4*link$N_th)
+  v_ma = ifelse(v_vm > 4*link$N_th, v_vm, 4*link$N_th)
   
   F_v = 0.507*log(v_ma / (4*link$N_th))
   
@@ -136,8 +145,8 @@ ogbike.I_int <- function(link, int) {
                 "WB" = "EB")
 
   #Number of traffic lanes crossed
-  N_d = int[traf_dir == xdir, N_d]
-  N_d = ifelse(is.na(N_d), int[traf_dir == odir, N_d], N_d)
+  N_dc = int[traf_dir == xdir, N_dc]
+  N_dc = ifelse(is.na(N_dc), int[traf_dir == odir, N_dc], N_dc)
   
   #Curb to curb width of cross street
   W_cd = int[traf_dir == xdir, W_cd]
