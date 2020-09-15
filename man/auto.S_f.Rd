@@ -7,7 +7,11 @@
 auto.S_f(link, int, dat)
 }
 \arguments{
-\item{link}{Data.table of entire data set.}
+\item{link}{Data.table of subject link data.}
+
+\item{int}{Data.table of subject intersection data.}
+
+\item{dat}{Data.table of entire data set.}
 }
 \value{
 Numeric value in mi/hr.
@@ -16,5 +20,5 @@ Numeric value in mi/hr.
 Determine base free-flow speed
 }
 \examples{
-auto.S_fo(link, int, dat)
+auto.S_f(link, int, dat)
 }

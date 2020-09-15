@@ -4,12 +4,12 @@
 \alias{bike.d_signal}
 \title{Bicycle control delay}
 \usage{
-bike.d_signal(int, dir)
+bike.d_signal(link, int)
 }
 \arguments{
-\item{int}{Data.table of intersection data.}
+\item{link}{Data.table of subject link data.}
 
-\item{dir}{String with subject intersection approach being studied ("NB","SB","EB","WB")}
+\item{int}{Data.table of subject intersection data.}
 }
 \value{
 Numeric value in average seconds per bike.

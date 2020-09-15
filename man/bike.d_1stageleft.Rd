@@ -4,18 +4,18 @@
 \alias{bike.d_1stageleft}
 \title{One-stage left turn bicycle delay}
 \usage{
-bike.d_1stageleft(int, dir, tol = 1e-08)
+bike.d_1stageleft(link, int, tol = 1e-08)
 }
 \arguments{
 \item{int}{Data.table of intersection data.}
-
-\item{dir}{String with subject intersection approach being studied ("NB","SB","EB","WB")}
 
 \item{tol}{a tolerance threshold for the summation loop. Default is 1e-8.
 This tolerance in included to shorten run time for excessively long loops.
 For instances that cause large n (e.g., high traffic volume),
 the run time can become blown out even though the improvement becomes arbitrarily small.
 To reduce run time, a precision tolerance can be set when improvement is less than this value.}
+
+\item{dir}{String with subject intersection approach being studied ("NB","SB","EB","WB")}
 }
 \value{
 Numeric value in average seconds per bike.

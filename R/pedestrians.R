@@ -51,8 +51,8 @@ ped.F_w.link  <- function(link) {
 
 #' Pedestrian traffic speed factor (links)
 #' 
-#' @param link Data.table of link data.
-#' @param int Data.table of intersection data.
+#' @param link Data.table of subject link data.
+#' @param int  Data.table of subject intersection data.
 #' @return Numeric value, unitless.
 #' @examples
 #' ped.F_s.link(int, dir)
@@ -70,8 +70,8 @@ ped.F_s.link <- function(link, int) {
 
 #' Pedestrian control delay
 #' 
-#' @param int Data.table of intersection data.
-#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB")
+#' @param link Data.table of subject link data.
+#' @param int  Data.table of subject intersection data.
 #' @return Numeric value, unitless.
 #' @examples
 #' ped.d_pd(int, dir)
@@ -108,7 +108,7 @@ ped.d_signal <- function(int, dir) {
 #' ped.d_twsc(int, dir)
 #' @export
 ped.d_twsc <- function(int, dir) {
-  
+
   #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
   xdir = switch(dir,
                 "NB" = "WB",
@@ -287,13 +287,14 @@ ped.I_mx <- function(link, int) {
 
 #' Pedestrian level of service score for links
 #' 
-#' @param link Data.table of link data.
-#' @param int Data.table of intersection data.
+#' @param link Data.table of subject link data.
+#' @param int  Data.table of subject intersection data.
+#' @param dat Data.table of entire data set.
 #' @return Numeric value, unitless.
 #' @examples
 #' ped.I_link(int, dir)
 #' @export
-ped.I_link <- function(link, int) {
+ped.I_link <- function(link, int, dat) {
   
   #### Caclulate final factors for LOS score
   F_w = ped.F_w.link(link) #Cross-section adjustment factor
@@ -302,7 +303,7 @@ ped.I_link <- function(link, int) {
   F_v = 0.0091*link$v_m/(4*link$N_th) 
   
   #Vehicle running speed
-  S_R = auto.S_R(link, control = int[traf_dir == link$link_dir, control])
+  S_R = auto.S_R(link, int, dat)
   
   #Motorized vehicle speed adjustment factor
   F_s = 4*(S_R/100)^2 
@@ -317,14 +318,14 @@ ped.I_link <- function(link, int) {
 
 #' Pedestrian LOS score for intersections
 #' 
-#' @param link Data.table of link data.
-#' @param int Data.table of boundary intersection data.
-#' (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")
+#' @param link Data.table of subject link data.
+#' @param int  Data.table of subject intersection data.
+#' @param dat Data.table of entire data set.
 #' @return A numeric LOS score
 #' @examples
 #' ped.I_int(link, int)
 #' @export
-ped.I_int <- function(link, int) {
+ped.I_int <- function(link, int, dat) {
   
   #The traffic direction being crossed
   xdir = switch(link$link_dir,
@@ -341,11 +342,11 @@ ped.I_int <- function(link, int) {
                 "WB" = "EB")
   
   #Midsegment speed
-  if(is.na(link$S_85mj)) S_85mj = auto.S_f(link)
+  if(is.na(link$S_85mj)) S_85mj = auto.S_f(link, int, dat)
   else S_85mj = link$S_85mj
   
   #Intersection delay
-  d_pd = ped.d_pd(int,link$link_dir)
+  d_pd = ped.d_pd(int, link$link_dir)
   
   #Number of traffic lanes crossed
   N_d = int[traf_dir == xdir, N_d]
@@ -381,21 +382,22 @@ ped.I_int <- function(link, int) {
 
 #' Pedestrian LOS score for segment
 #' 
-#' @param link Data.table of link data.
-#' @param int Data.table of intersection data.
+#' @param link Data.table of subject link data.
+#' @param int  Data.table of subject intersection data.
+#' @param dat Data.table of entire data set.
 #' @return A data.table with numeric and letter grade LOS scores
 #' @examples
 #' ped.I_seg(link, int)
 #' @export
-ped.I_seg <- function(link, int) {
+ped.I_seg <- function(link, int, dat) {
   #Put LOS scores for link and intersection into table
   scores = data.table(
     segment_id = link$link_id,
     direction = link$link_dir,
     mode = "pedestrian",
-    I_link = ped.I_link(link, int),
+    I_link = ped.I_link(link, int, dat),
     I_mx = ped.I_mx(link, int),
-    I_int = ped.I_int(link, int)
+    I_int = ped.I_int(link, int, dat)
   )
   
   #Calculate segment LOS

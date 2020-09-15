@@ -9,8 +9,7 @@ auto.VCratio(link, int)
 \arguments{
 \item{link}{Data.table of link data.}
 
-\item{control}{String containing the boundary intersection control type
-(Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")}
+\item{int}{Data.table of subject intersection data.}
 }
 \value{
 Numeric value (decimal).
@@ -19,5 +18,5 @@ Numeric value (decimal).
 Determine the volume to capacity ratio for critical intersection
 }
 \examples{
-auto.S_R(link, control)
+auto.VCratio(link, int)
 }

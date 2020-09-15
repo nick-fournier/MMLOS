@@ -1,15 +1,16 @@
 #' Determine segment running speed for automobiles
 #' 
-#' @param link Data.table of link data.
+#' @param link Data.table of subject link data.
 #' @param int  Data.table of subject intersection data.
+#' @param dat Data.table of entire data set.
 #' @return Numeric value in mi/hr.
 #' @examples
 #' auto.S_R(link, control)
 #' @export
-auto.S_R <- function(link, int) {
+auto.S_R <- function(link, int, dat) {
   
   #Segment running time
-  t_R = auto.t_R(link,int)
+  t_R = auto.t_R(link, int, dat)
   #Link running speed
   S_R = (3600*link$LL) / (5280*t_R)
   
@@ -52,7 +53,7 @@ auto.S_f <- function(link, int, dat) {
   f_A = -0.078*D_a/link$N_th
   
   #Base free-flow speed
-  S_fo = S0  + f_cs + f_A
+  S_fo = s0  + f_cs + f_A
   
   #Adjustment for signal spacing
   f_L = 1.02 - 4.7*(S_fo - 19.5)/(max(link$LL, 400))
@@ -67,8 +68,9 @@ auto.S_f <- function(link, int, dat) {
 
 #' Determine the adjusted saturation flow rate
 #' 
-#' @param link Data.table of link data.
+#' @param link Data.table of subject link data.
 #' @param int  Data.table of subject intersection data.
+#' @param dat Data.table of entire data set.
 #' @return Numeric value in veh/hr.
 #' @examples
 #' auto.satflow(link, int)
@@ -212,7 +214,10 @@ auto.VCratio <- function(link, int) {
 #' @examples
 #' auto.S_R(link, control)
 #' @export
-auto.t_R <- function(link,int) {
+auto.t_R <- function(link, int, dat) {
+  
+  #Free flow speed
+  S_f = auto.S_f(link, int, dat)
   
   #Signalization delay factor
   f_x = switch(int[traf_dir==link$link_dir, as.character(control)],
@@ -223,7 +228,7 @@ auto.t_R <- function(link,int) {
                "Yield" = min(v_v*(1 - p_rt - p_lt)/c_th, 1))
   
   #Proximity adjustment factor
-  f_v = 2 / (1 + (1 - link$v_m / (52.8*link$N_th*link$S_f))^0.21)
+  f_v = 2 / (1 + (1 - link$v_m / (52.8*link$N_th*S_f))^0.21)
   
   #Startup lost time
   l1 = switch(int[traf_dir==link$link_dir, as.character(control)],
@@ -249,7 +254,7 @@ auto.t_R <- function(link,int) {
   d_other = 0
   
   #Motorized vehicle midsegment running time
-  t_R = f_x * ((6.0 - l1) / (0.0025*link$LL)) + ((3600*link$LL)/(5280*link$S_f)) * f_v + d_ap + d_other
+  t_R = f_x * ((6.0 - l1) / (0.0025*link$LL)) + ((3600*link$LL)/(5280*S_f)) * f_v + d_ap + d_other
   
   return(t_R)
 }
@@ -257,8 +262,9 @@ auto.t_R <- function(link,int) {
 
 #' Determine the intersection delay
 #' 
-#' @param link Data.table of link data.
+#' @param link Data.table of subject link data.
 #' @param int  Data.table of subject intersection data.
+#' @param dat Data.table of entire data set.
 #' @return Numeric value (decimal).
 #' @examples
 #' auto.S_R(link, control)
@@ -314,7 +320,7 @@ auto.delay <- function(link,int) {
 #' @examples
 #' auto.S_R(link, control)
 #' @export
-auto.S_Tseg <- function(link,int) {
+auto.S_Tseg <- function(link, int) {
   
   
 

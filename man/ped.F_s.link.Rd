@@ -7,9 +7,9 @@
 ped.F_s.link(link, int)
 }
 \arguments{
-\item{link}{Data.table of link data.}
+\item{link}{Data.table of subject link data.}
 
-\item{int}{Data.table of intersection data.}
+\item{int}{Data.table of subject intersection data.}
 }
 \value{
 Numeric value, unitless.

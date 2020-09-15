@@ -4,12 +4,14 @@
 \alias{ped.I_link}
 \title{Pedestrian level of service score for links}
 \usage{
-ped.I_link(link, int)
+ped.I_link(link, int, dat)
 }
 \arguments{
-\item{link}{Data.table of link data.}
+\item{link}{Data.table of subject link data.}
 
-\item{int}{Data.table of intersection data.}
+\item{int}{Data.table of subject intersection data.}
+
+\item{dat}{Data.table of entire data set.}
 }
 \value{
 Numeric value, unitless.

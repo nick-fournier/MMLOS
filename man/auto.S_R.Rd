@@ -4,13 +4,14 @@
 \alias{auto.S_R}
 \title{Determine segment running speed for automobiles}
 \usage{
-auto.S_R(link, control)
+auto.S_R(link, int, dat)
 }
 \arguments{
-\item{link}{Data.table of link data.}
+\item{link}{Data.table of subject link data.}
 
-\item{control}{String containing the boundary intersection control type
-(Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")}
+\item{int}{Data.table of subject intersection data.}
+
+\item{dat}{Data.table of entire data set.}
 }
 \value{
 Numeric value in mi/hr.

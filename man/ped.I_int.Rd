@@ -4,13 +4,14 @@
 \alias{ped.I_int}
 \title{Pedestrian LOS score for intersections}
 \usage{
-ped.I_int(link, int)
+ped.I_int(link, int, dat)
 }
 \arguments{
-\item{link}{Data.table of link data.}
+\item{link}{Data.table of subject link data.}
 
-\item{int}{Data.table of boundary intersection data.
-(Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")}
+\item{int}{Data.table of subject intersection data.}
+
+\item{dat}{Data.table of entire data set.}
 }
 \value{
 A numeric LOS score

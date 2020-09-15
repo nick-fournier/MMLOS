@@ -4,13 +4,12 @@
 \alias{bike.I_link}
 \title{Bicycle level of service score for links}
 \usage{
-bike.I_link(link, control)
+bike.I_link(link, int, dat)
 }
 \arguments{
-\item{link}{Data.table of link data.}
+\item{link}{Data.table of subject link data.}
 
-\item{control}{String containing the boundary intersection control type
-(Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield").}
+\item{int}{Data.table of subject intersection data.}
 }
 \value{
 A numeric LOS score, unitless.

@@ -4,13 +4,14 @@
 \alias{ogbike.F_s.link}
 \title{Bicycle traffic speed factor (links)}
 \usage{
-ogbike.F_s.link(link, control)
+ogbike.F_s.link(link, int, dat)
 }
 \arguments{
-\item{link}{Data.table of link data.}
+\item{link}{Data.table of subject link data.}
 
-\item{control}{String containing the boundary intersection control type
-(Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")}
+\item{int}{Data.table of subject intersection data.}
+
+\item{dat}{Data.table of entire data set.}
 }
 \value{
 Numeric value, unitless.

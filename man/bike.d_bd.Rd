@@ -4,12 +4,12 @@
 \alias{bike.d_bd}
 \title{Average bicycle delay for intersection}
 \usage{
-bike.d_bd(int, dir)
+bike.d_bd(link, int)
 }
 \arguments{
-\item{dir}{String with subject intersection approach being studied ("NB","SB","EB","WB")}
+\item{link}{Data.table of subject link data.}
 
-\item{link}{Data.table of link data.}
+\item{int}{Data.table of subject intersection data.}
 }
 \value{
 Numeric value, unitless.

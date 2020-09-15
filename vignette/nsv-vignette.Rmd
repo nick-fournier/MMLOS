@@ -156,90 +156,51 @@ The resulting plot generally reflects what we saw in the table, but we can see t
 
 
 ## Existing versus revised HCM methodology
-Getting a little bit more advanced, we can inspect how LOS score outputs vary while varying the input values. We can start by creating some starting default parameters. This is as if we are constructing the input data by hand in *R* instead of importing it from a CSV file. Most parameters are constant except for average mid-segment speed $S_{85mj}$, and volume $v_v$, which will vary from 15 to 45 mph and 100 to 1200 vph in increments of 5 mph and 100 vph, respectively. The function "expand.grid" will then generate a data frame for all possible combinations of these sequences. 
-
+Getting a little bit more advanced, we can inspect how LOS score outputs vary while varying the input values. We can start by creating some starting default parameters. I start with the default template data, creating a list with every possible combination of speed and volume. Most parameters are constant except for average mid-segment speed $S_{85mj}$, and volume $v_v$, which will vary from 15 to 45 mph and 100 to 1200 vph in increments of 5 mph and 100 vph, respectively. The function "expand.grid" will then generate a data frame for all possible combinations of these sequences. I then do some house keeping, filling in some default values. Setting the right and left turn volume to be $\frac{1}{4}$ of total volume, proportionally. The right-on-red and permissive lefts are then further half of the left and right turn volumes.
 
 ```{r  default pars}
-int.spdvol <- expand.grid(
-  int_id   = NA,
-  app_dir  = NA,
-  traf_dir = NA,
-  N_d      = 1,
-  N_th     = 1,
-  S_85mj   = seq(15, 45, by = 5),
-  v_rt     = NA,
-  v_lt     = NA,
-  v_th     = NA,
-  v_v      = seq(100, 1200, by = 100),
-  v_rtor   = NA,
-  v_ltperm = NA,
-  v_p      = 100,
-  v_b      = 250,
-  v_bl     = 250/4,
-  v_br     = 250/4,
-  P_bl2    = 0.5,
-  N_rtcid  = 0,
-  g        = 31.7,
-  l        = 3.3,
-  C        = 90,
-  Walkmi   = 31.7,
-  W_c      = 12,
-  W_cd     = 24,
-  L        = 24,
-  W_bl     = 5,
-  W_ol     = 12,
-  p_pk     = 0.8,
-  W_os     = 8,
-  M_yp     = 0.5,
-  M_yb     = 0.05,
-  S_p      = 3.5,
-  S_b      = 10,
-  t_sb     = 3,
-  t_sp     = 3,
-  control  = "Signalized",
-  curb     = TRUE)
-```
+combos <- data.table(expand.grid(vol = seq(100, 1200, by = 100),
+                                 spd = seq(15, 45, by = 5)))
 
-I then do some house keeping, filling in some default values. Setting the right and left turn volume to be $\frac{1}{4}$ of total volume, proportionally. The right-on-red and permissive lefts are then further half of the left and right turn volumes. I also fill in the intersection approach directions.
+#Just grabbing the first link and intersection from the data. Just as filler data
+int <- split(dat$intersections, by = "int_id")[[1]]
+link <- split(dat$links, by = c("link_id","link_dir"))[[1]]
 
-```{r cleanup}
-int.spdvol <- as.data.table(int.spdvol)
-int.spdvol[ , v_rt := v_v/4]
-int.spdvol[ , v_lt := v_v/4]
-int.spdvol[ , v_th := v_v/2]
-int.spdvol[ , v_rtor := v_rt/2]
-int.spdvol[ , v_ltperm := v_lt/2]
-int.spdvol[ , int_id := 1:nrow(int.spdvol)]
-int.spdvol <- rbindlist(lapply(c("NB","SB","EB","WB"), function(x) {
-  tmp = int.spdvol
-  tmp$traf_dir <- rep(x, nrow(int.spdvol))
-  tmp$app_dir <- rep(switch(x,
-                        "NB" = "S",
-                        "SB" = "N",
-                        "EB" = "W",
-                        "WB" = "E"),
-                     nrow(int.spdvol))
-  return(tmp)
-}))
+combodat <- lapply(1:nrow(combos), function(x) {
+  link$S_85mj <- combos[x, spd]
+  int$v_v <- combos[x, vol]
+  
+  int[ , v_rt := v_v/4]
+  int[ , v_lt := v_v/4]
+  int[ , v_th := v_v/2]
+  int[ , v_rtor := v_rt/2]
+  int[ , v_ltperm := v_lt/2]
+  int[ , int_id := x]
+  return( list("intersection" = int, "link" = link) )
+})
+
 
 ```
 
-You don't need to understand this, just know that I'm creating a big data table that has all possible combinations of speed and volume. Now we are going to actually calculate the LOS score using the data matrix we created. This goes through the data table twice, once using existing HCM and once using the revisions. There are a lot of combinations, this might take a few seconds to compute. Then, I again reshape the data into long form for plotting. 
+You don't need to understand all of this, just know that I'm creating a big data table that has all possible combinations of speed and volume. Now we are going to actually calculate the LOS score using the data matrix we created. This goes through the data table twice, once using existing HCM and once using the revisions. There are a lot of combinations, this might take a few seconds to compute. Then, I again reshape the data into long form for plotting. 
 
 ```{r calc los}
 #Calculate Intersection LOS
-LOS.int <- rbindlist(lapply(unique(int.spdvol$int_id), function(x) {
-  int = int.spdvol[int_id == x, ]
-  data.table("v_v" = int$v_v[1], "S_85mj" = int$S_85mj[1],
-             Revised = bike.I_int(int, "EB"),
-             Existing = ogbike.I_int(int, "EB"))
-}))
+LOS.dat <- lapply(combodat, function(x) {
+  data.table("v_v" = x[['intersection']]$v_v[1],
+             "S_85mj" = x[['link']]$S_85mj[1],
+             Revised = bike.I_int(x[['link']], x[['intersection']]),
+             Existing = ogbike.I_int(x[['link']], x[['intersection']]))
+  })
+#combine list items into data table
+LOS.dat <- rbindlist(LOS.dat)
 
-#Melt into longform
-LOS.int <- melt(LOS.int, c("v_v","S_85mj"))
+#Melt into long form
+LOS.dat <- melt(LOS.dat, c("v_v","S_85mj"))
 
 #Score
-LOS.int$LOS <- sapply(LOS.int$value, score2LOS)
+LOS.dat$LOS <- sapply(LOS.dat$value, score2LOS)
+
 ```
 
 Now we can plot the two and compare them. I use another package here called [ggpubr](https://cran.r-project.org/web/packages/ggpubr/index.html), which accompanies ggplot2 for presentation. In this case it let's me plot them side by side. So what we see here is that the revisions account for traffic speed exposure while existing HCM methodology does not.
@@ -247,7 +208,7 @@ Now we can plot the two and compare them. I use another package here called [ggp
 
 ```{r plot variations}
 plot.LOSint = lapply(c("Existing","Revised"), function(x) {
-  ggplot(data = LOS.int[variable == x, ], ) +
+  ggplot(data = LOS.dat[variable == x, ], ) +
     #geom_tile(aes(x = v_v, y = S_85mj, fill = value)) +
     #scale_fill_distiller("LOS", palette = "RdYlGn", limits = range(LOS.int$value)) +
     geom_contour_filled(aes(x = v_v, y = S_85mj, z = value), breaks = c(-Inf,2.00,2.75,3.50,4.25,5.00,Inf)) +
@@ -263,6 +224,7 @@ names(plot.LOSint) <- c("rev","og")
 
 library(ggpubr)
 ggarrange(plotlist = plot.LOSint, ncol = 2, common.legend = T, legend = "right")
+
 ```
 
 ## Final thoughts

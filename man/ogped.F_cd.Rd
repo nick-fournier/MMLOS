@@ -9,12 +9,12 @@ ogped.F_cd(link, int, Ilink, Iint)
 \arguments{
 \item{link}{Data.table of link data.}
 
-\item{int}{Data.table of boundary intersection data.
-(Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")}
-
 \item{Ilink}{Numeric LOS score for links.}
 
 \item{Iint}{Numeric LOS score for intersections.}
+
+\item{dir}{String with subject intersection approach being studied ("NB","SB","EB","WB")
+(Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")}
 }
 \value{
 A numeric LOS score

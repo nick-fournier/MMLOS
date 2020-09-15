@@ -63,18 +63,18 @@ bike.F_w.link <- function(link) {
 
 #' Bicycle traffic speed factor (links)
 #' 
-#' @param link Data.table of link data.
-#' @param control String containing the boundary intersection control type 
-#' (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield")
+#' @param link Data.table of subject link data.
+#' @param int  Data.table of subject intersection data.
+#' @param dat Data.table of entire data set.
 #' @return Numeric value, unitless.
 #' @examples
 #' bike.F_s.link(link)
 #' @export
-bike.F_s.link <- function(link, control) {
+bike.F_s.link <- function(link, int, dat) {
   
 
   #Vehicle running speed
-  S_R = auto.S_R(link, control)
+  S_R = auto.S_R(link, int, dat)
   
   #Adjusted motorized vehicle link running speed
   S_Ra = ifelse(S_R < 21, 21, S_R)
@@ -93,45 +93,45 @@ bike.F_s.link <- function(link, control) {
 
 #' Average bicycle delay for intersection
 #' 
-#' @param link Data.table of link data.
-#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB")
+#' @param link Data.table of subject link data.
+#' @param int  Data.table of subject intersection data.
 #' @return Numeric value, unitless.
 #' @examples
 #' bike.d_bd(int, dir)
 #' @export
-bike.d_bd <- function(int, dir) {
-  switch(int[traf_dir == dir, as.character(control)],
-         "Signalized" = bike.d_signal(int, dir), 
+bike.d_bd <- function(link, int) {
+  switch(int[traf_dir == link$link_dir, as.character(control)],
+         "Signalized" = bike.d_signal(link, int), 
          "AWSC - Stop" = 0,
-         "TWSC - Stop" = bike.d_twsc(int, dir), 
-         "Uncontrolled" = bike.d_1stageleft(int,dir),
+         "TWSC - Stop" = bike.d_twsc(link, int), 
+         "Uncontrolled" = bike.d_1stageleft(link, int),
          "Yield" = 0)
 }
 
 
 #' Bicycle control delay
 #' 
-#' @param int Data.table of intersection data.
-#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB")
+#' @param link Data.table of subject link data.
+#' @param int  Data.table of subject intersection data.
 #' @return Numeric value in average seconds per bike.
 #' @examples
 #' bike.d_signal(int, dir)
 #' @export
-bike.d_signal <- function(int, dir) {
+bike.d_signal <- function(link, int) {
   #Delay from signal and right-turning vehicle encroachment
-  d_bS = bike.d_bS(int, dir)
+  d_bS = bike.d_bS(link, int)
   
   #Proportion of overall left turning bicycles
-  P_L = int[traf_dir == dir, v_bl/v_b]
+  P_L = int[traf_dir == link$link_dir, v_bl/v_b]
   
   #Proportion of two-stage left turns
-  P_L2 = int[traf_dir == dir, P_bl2]
+  P_L2 = int[traf_dir == link$link_dir, P_bl2]
   
   #One-stage left turn delay
-  d_bL1 = bike.d_1stageleft(int, dir)
+  d_bL1 = bike.d_1stageleft(link, int)
   
   #Two-stage left turn delay
-  d_bL2 = bike.d_2stageleft(int, dir)
+  d_bL2 = bike.d_2stageleft(link, int)
   
   #Average total bicycle delay at intersections
   d_bd = d_bS + P_L*((1 - P_L2)*d_bL1 + P_L2*d_bL2)
@@ -153,7 +153,10 @@ bike.d_signal <- function(int, dir) {
 #' @examples
 #' bike.d_1stageleft(int, dir, tol = 1e-8)
 #' @export
-bike.d_1stageleft <- function(int, dir, tol = 1e-8) {
+bike.d_1stageleft <- function(link, int, tol = 1e-8) {
+  
+  #Traffic direction
+  dir = link$link_dir
   
   #Opposite cross street dir
   odir = switch(dir,
@@ -186,7 +189,9 @@ bike.d_1stageleft <- function(int, dir, tol = 1e-8) {
   N_c = (v_b*exp(v_b*t_cb) + v_v*exp(-v_v*t_cb)) / ( (v_b + v_v)*exp((v_b - v_v)*t_cb) )
   
   #Distribution of platooned bicycles
-  W_bl = int[traf_dir == dir, ifelse(W_bl < 2.5, 2.5, W_bl)]
+  W_bl = link[, ifelse(W_bl < 2.5, 2.5, W_bl)]
+  #W_bl = int[traf_dir == dir, ifelse(W_bl < 2.5, 2.5, W_bl)]
+  
   N_b = 2.5*N_c/W_bl
   N_b = max(2.5*N_c/W_bl, 1.0)
   
@@ -328,13 +333,16 @@ bike.d_1stageleft <- function(int, dir, tol = 1e-8) {
 
 #' Two-stage left turn bicycle delay
 #' 
-#' @param int Data.table of intersection data.
-#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB").
+#' @param link Data.table of subject link data.
+#' @param int  Data.table of subject intersection data.
 #' @return Numeric value in average seconds per bike.
 #' @examples
 #' bike.d_2stageleft(int, dir)
 #' @export
-bike.d_2stageleft <- function(int, dir) {
+bike.d_2stageleft <- function(link, int) {
+  
+  #Traffic direction
+  dir = link$link_dir
   
   #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
   xdir = switch(dir,
@@ -371,18 +379,22 @@ bike.d_2stageleft <- function(int, dir) {
 
 #' Bicycle delay from signal and right turning vehicles
 #' 
-#' @param int Data.table of intersection data.
-#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB").
+#' @param link Data.table of subject link data.
+#' @param int  Data.table of subject intersection data.
 #' @return Numeric value in average seconds per bike.
 #' @examples
 #' bike.d_bS(int, dir)
-bike.d_bS <- function(int, dir) {
+bike.d_bS <- function(link, int) {
+  
+  #Traffic direction
+  dir = link$link_dir
   
   #Critical gap time
   t_c = 5
   
   #Saturation flow rate
-  s_b = max(1500*floor(int[traf_dir == dir, W_bl]/2.5), 1500)
+  #s_b = max(1500*floor(int[traf_dir == dir, W_bl]/2.5), 1500)
+  s_b = max(1500*floor(link[ , W_bl]/2.5), 1500)
   
   #Right turning vehicle volume per second
   v_RTV = int[traf_dir == dir, v_rt]/3600
@@ -406,12 +418,15 @@ bike.d_bS <- function(int, dir) {
 
 #' Bicycle delay for uncontrolled intersections (e.g., Two-way Stop Controlled Intersections)
 #' 
-#' @param int Data.table of intersection data.
-#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB").
+#' @param link Data.table of subject link data.
+#' @param int  Data.table of subject intersection data.
 #' @return Numeric value in average seconds per bike.
 #' @examples
 #' bike.d_bS(int, dir)
-bike.d_twsc <- function(int, dir) {
+bike.d_twsc <- function(link, int) {
+  
+  #Traffic direction
+  dir = link$link_dir
   
   #Picking the crosswalk data from the travel direction (it is perpendicular to vehicles)
   xdir = switch(dir,
@@ -542,13 +557,17 @@ bike.d_twsc <- function(int, dir) {
 
 #' Bicycle LOS score for intersections
 #' 
-#' @param int Data.table of intersection data.
-#' @param dir String with subject intersection approach being studied ("NB","SB","EB","WB").
+#' @param link Data.table of subject link data.
+#' @param int  Data.table of subject intersection data.
 #' @return A numeric LOS score, unitless.
 #' @examples
 #' bike.I_int(int, dir)
 #' @export
-bike.I_int <- function(int, dir) {
+bike.I_int <- function(link, int) {
+  
+  #Traffic direction
+  dir = link$link_dir
+  
   #The traffic direction being crossed
   xdir = switch(dir,
                 "NB" = "WB",
@@ -574,10 +593,12 @@ bike.I_int <- function(int, dir) {
   W_cd = ifelse(is.na(W_cd), 0, W_cd)
   
   #Adjusted width of paved outside shoulder
-  W_osstar = int[ traf_dir == dir, ifelse(curb & W_os - 1.5 >= 0, W_os - 1.5, W_os)]
+  #W_osstar = int[ traf_dir == dir, ifelse(curb & W_os - 1.5 >= 0, W_os - 1.5, W_os)]
+  W_osstar = link[ , ifelse(curb & W_os - 1.5 >= 0, W_os - 1.5, W_os)]
   
   #Total width of outside thru lane
-  W_t = int[ traf_dir == dir, W_ol + W_bl + ifelse(p_pk > 0, 0, 1)*W_osstar]
+  #W_t = int[ traf_dir == dir, W_ol + W_bl + ifelse(p_pk > 0, 0, 1)*W_osstar]
+  W_t = link[, W_ol + W_bl + ifelse(p_pk > 0, 0, 1)*W_osstar]
   
   #Vehicle count traveling on major street during 15-min period
   n_15mj = (0.25 / N_d)*sum(int$v_v, na.rm = T)
@@ -589,13 +610,13 @@ bike.I_int <- function(int, dir) {
   F_v = int[traf_dir == dir, 0.0066*(v_lt + v_th + v_rt)/(4*N_th)]
   
   #Bike delay at intersection
-  d_bd = bike.d_bd(int, dir)
+  d_bd = bike.d_bd(link, int)
   
   #Delay factor
   F_delay = 0.0401*ifelse(d_bd == 0, 0, log(d_bd))
   
   #Midsegment speed
-  if(is.na(link$S_85mj)) S_85mj = auto.S_f(link)
+  if(is.na(link$S_85mj)) S_85mj = auto.S_f(link, int, dat)
   else S_85mj = link$S_85mj
   
   #Veh speed factor
@@ -611,14 +632,13 @@ bike.I_int <- function(int, dir) {
 
 #' Bicycle level of service score for links
 #' 
-#' @param link Data.table of link data.
-#' @param control String containing the boundary intersection control type 
-#' (Signalized", "AWSC - Stop", "TWSC - Stop", "Uncontrolled", "Yield").
+#' @param link Data.table of subject link data.
+#' @param int  Data.table of subject intersection data.
 #' @return A numeric LOS score, unitless.
 #' @examples
 #' bike.I_link(link, control)
 #' @export
-bike.I_link <- function(link, control) {
+bike.I_link <- function(link, int, dat) {
   
   #### Caclulate final factors for LOS score
     #Cross-section adjustment factor
@@ -630,7 +650,7 @@ bike.I_link <- function(link, control) {
   F_v = 0.507*log(v_ma / (4*link$N_th))
   
   #Motorized vehicle speed adjustment factor
-  F_s = bike.F_s.link(link, control)
+  F_s = bike.F_s.link(link, int, dat)
   
   #Pavement condition factor
   F_p = 7.066 / link$P_c^2
@@ -644,20 +664,21 @@ bike.I_link <- function(link, control) {
 
 #' Bicycle LOS score for segment
 #' 
-#' @param link Data.table of link data.
-#' @param int Data.table of intersection data.
+#' @param link Data.table of subject link data.
+#' @param int  Data.table of subject intersection data.
+#' @param dat Data.table of entire data set.
 #' @return A data.table with numeric and letter grade LOS scores.
 #' @examples
 #' bike.I_seg(link, int)
 #' @export
-bike.I_seg <- function(link, int) {
+bike.I_seg <- function(link, int, dat) {
   #Put LOS scores for link and intersection into table
   scores = data.table(
     segment_id = link$link_id,
     direction = link$link_dir,
     mode = "bicycle",
-    I_link = bike.I_link(link, int[traf_dir == link$link_dir, as.character(control)]),
-    I_int = bike.I_int(int, link$link_dir)
+    I_link = bike.I_link(link, int, dat),
+    I_int = bike.I_int(link, int)
   )
   
   #Calculate segment LOS

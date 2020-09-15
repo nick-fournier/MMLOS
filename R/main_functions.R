@@ -55,11 +55,28 @@ loaddat <- function(dirs) {
   if(colnames(dat[[2]])[1] == "int_id")
     dat = rev(dat)
     
-  names(dat) = c("intersections","links")
+  names(dat) = c("INT","LINK")
   
   #Check headers  
   desc <- fread("./data/input_descriptions.csv")
-  chk = sapply(c("intersections","links"), function(x) all(colnames(dat[[x]]) == desc[TYPE == x, VAR]))
+  
+  #Check if same amount is there
+  chk.len = sapply(names(dat), function(x) length(dat[[x]]) == desc[TYPE == x, .N])
+
+  try(if(!all(chk.len))
+    stop(  paste0("Data does not have the expected number of columns in the '",
+                  names(chk.len[!chk.len]), "' data. There are ",
+                  length(dat[[names(chk.len[!chk.len])]]),
+                  " when there should be ", 
+                  desc[TYPE == names(chk.len[chk.len]), .N],
+                  ". Recheck the input data.\n"))
+    )
+  
+  #check names
+  chk.nam = sapply(names(dat), function(x) all(colnames(dat[[x]]) == desc[TYPE == x, VAR]))
+
+  #Formal names
+  names(dat) = c("intersections","links")
   
   #Cleanup empty cells
   dat = lapply(dat, function(x) x[ , lapply(.SD, function(y) ifelse(y == "", NA, y))])
@@ -67,11 +84,10 @@ loaddat <- function(dirs) {
   #Check for NA
   NAs = sapply(dat, function(x) any(is.na(x)))
   
-  warning(paste0("WARNING: Data contains NAs in ", names(NAs[NAs]), ", make sure this is intentional"))
+  warning(paste0("WARNING: Data contains NAs in ", names(NAs[NAs]), ", make sure this is intentional.\n  "))
   
-  
-  try(if(!all(chk))
-    stop(paste0("Data does not match expected input format for '", names(chk[!chk]),"'! Check file selection or fix file formatting."))
+  try(if(!all(chk.nam))
+    stop(paste0("Data does not match expected input format for '", names(chk.nam[!chk.nam]),"'! Check file selection or fix file formatting."))
     )
   
   return(dat)
@@ -151,14 +167,14 @@ calcMMLOS <- function(dat, revs = T) {
   if(revs) {
     #Proposed revisions
     LOS = list(
-      bike = rbindlist(lapply(link.split, function(link) bike.I_seg(link, int = int.split[[link$boundary_id]]))),
-      ped = rbindlist(lapply(link.split, function(link) ped.I_seg(link, int = int.split[[link$boundary_id]])))
+      bike = rbindlist(lapply(link.split, function(link) bike.I_seg(link, int = int.split[[link$boundary_id]], dat))),
+      ped = rbindlist(lapply(link.split, function(link) ped.I_seg(link, int = int.split[[link$boundary_id]], dat)))
     )
   } else {
     #Existing HCM 
     LOS = list(
-      bike = rbindlist(lapply(link.split, function(link) ogbike.I_seg(link, int = int.split[[link$boundary_id]]))),
-      ped = rbindlist(lapply(link.split, function(link) ogped.I_seg(link, int = int.split[[link$boundary_id]])))
+      bike = rbindlist(lapply(link.split, function(link) ogbike.I_seg(link, int = int.split[[link$boundary_id]], dat))),
+      ped = rbindlist(lapply(link.split, function(link) ogped.I_seg(link, int = int.split[[link$boundary_id]], dat)))
     )
   }
   

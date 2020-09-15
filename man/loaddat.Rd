@@ -42,8 +42,8 @@ p_pk        \tab LINK \tab Proportion of on-street parking occupied             
 p_g         \tab LINK \tab Approach grade                                                                                     \cr
 P_c         \tab LINK \tab Pavement condition rating (0 to 5)                                                                 \cr
 p_mx        \tab LINK \tab Proportion of midblock pedestrian demand (default = 0.35)                                          \cr
-H_swbuf     \tab LINK \tab Height of barrier between street and bike lane                                                     \cr
-H_blbuf     \tab LINK \tab Height of barrier between street and sidewalk                                                      \cr
+H_blbuf     \tab LINK \tab Height of barrier between street and bike lane                                                     \cr
+H_swbuf     \tab LINK \tab Height of barrier between street and sidewalk                                                      \cr
 protected   \tab LINK \tab Is the bike lane protected by parking?                                                             \cr
 div         \tab LINK \tab Percent of street divided by median (decimal).                                                     \cr
 p_strp      \tab LINK \tab Are parking spaces striped?                                                                        \cr
@@ -53,8 +53,7 @@ n_bus       \tab LINK \tab Number of local buses on street segment per hour (bus
 n_xbus      \tab LINK \tab Number of express buses stopping in segment per hour (bus/h)                                       \cr
 p_ot        \tab LINK \tab Proportion of transit vehicles arriving on-time, within the threshold late time. Default = 0.75    \cr
 t_late      \tab LINK \tab Threshold late time. Deault = 5 min                                                                \cr
-L_f         \tab LINK \tab Average passenger load factor (p/seat)                                                             \cr
-F_l         \tab LINK \tab Average transit travel speed (mi/h)                                                                \cr
+F_l         \tab LINK \tab Average passenger load factor (p/seat)                                                             \cr
 L_pt        \tab LINK \tab Average passenger trip length (mi)                                                                 \cr
 pop         \tab LINK \tab Is the segment in the CBD of a metro area of 5 million or more?                                    \cr
 p_sh        \tab LINK \tab Percent stops in segment with a shelter                                                            \cr
@@ -87,12 +86,6 @@ C           \tab INT  \tab Cycle length (s)                                     
 Walkmi      \tab INT  \tab Pedestrian walk setting for the phase serving the minor street through movement (s)                \cr
 W_c         \tab INT  \tab Crosswalk width (ft)                                                                               \cr
 W_cd        \tab INT  \tab Curb-to-curb width of the street being crossed i.e., crosswalk length (ft)                         \cr
-L           \tab INT  \tab Curb-to-curb width of the cross street, i.e., through length (ft)                                  \cr
-W_bl        \tab INT  \tab Bicycle lane width (ft)                                                                            \cr
-W_ol        \tab INT  \tab Outside travel lane (closest to sidewalk) width (ft)                                               \cr
-p_pk        \tab INT  \tab Proportion of on-street parking occupied                                                           \cr
-W_pk        \tab INT  \tab Striped parking lane width (ft)                                                                    \cr
-W_os        \tab INT  \tab Paved outside shoulder width (ft)                                                                  \cr
 M_yp        \tab INT  \tab Motorist pedestrian yield rate (decimal)                                                           \cr
 M_yb        \tab INT  \tab Motorist bicycle yield rate (decimal)                                                              \cr
 S_p         \tab INT  \tab Pedestrian crossing speed (ft/s)                                                                   \cr
@@ -100,7 +93,6 @@ S_b         \tab INT  \tab Bicycle crossing speed (ft/s)                        
 t_sb        \tab INT  \tab Bicycle start-up and clearance time (s)                                                            \cr
 t_sp        \tab INT  \tab Pedestrian start-up and clearance time (s)                                                         \cr
 control     \tab INT  \tab Traffic control?                                                                                   \cr
-curb        \tab INT  \tab Curb is present?                                                                                   \cr
 major       \tab INT  \tab Is the leg on the major street corridor (as opposed to a minor street approach)?Note 1
 }}
 }

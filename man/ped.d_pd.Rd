@@ -7,9 +7,9 @@
 ped.d_pd(int, dir)
 }
 \arguments{
-\item{int}{Data.table of intersection data.}
+\item{int}{Data.table of subject intersection data.}
 
-\item{dir}{String with subject intersection approach being studied ("NB","SB","EB","WB")}
+\item{link}{Data.table of subject link data.}
 }
 \value{
 Numeric value, unitless.

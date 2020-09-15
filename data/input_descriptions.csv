@@ -29,8 +29,8 @@ p_pk,LINK,Proportion of on-street parking occupied
 p_g,LINK,Approach grade
 P_c,LINK,Pavement condition rating (0 to 5)
 p_mx,LINK,Proportion of midblock pedestrian demand (default = 0.35)
-H_swbuf,LINK,Height of barrier between street and bike lane
-H_blbuf,LINK,Height of barrier between street and sidewalk
+H_blbuf,LINK,Height of barrier between street and bike lane
+H_swbuf,LINK,Height of barrier between street and sidewalk
 protected,LINK,Is the bike lane protected by parking?
 div,LINK,Percent of street divided by median (decimal).
 p_strp,LINK,Are parking spaces striped?
@@ -40,8 +40,7 @@ n_bus,LINK,Number of local buses on street segment per hour (bus/h)
 n_xbus,LINK,Number of express buses stopping in segment per hour (bus/h)
 p_ot,LINK,"Proportion of transit vehicles arriving on-time, within the threshold late time. Default = 0.75"
 t_late,LINK,Threshold late time. Deault = 5 min
-L_f,LINK,Average passenger load factor (p/seat)
-F_l,LINK,Average transit travel speed (mi/h)
+F_l,LINK,Average passenger load factor (p/seat)
 L_pt,LINK,Average passenger trip length (mi)
 pop,LINK,Is the segment in the CBD of a metro area of 5 million or more?
 p_sh,LINK,Percent stops in segment with a shelter
@@ -74,12 +73,6 @@ C,INT,Cycle length (s)
 Walkmi,INT,Pedestrian walk setting for the phase serving the minor street through movement (s)
 W_c,INT,Crosswalk width (ft)
 W_cd,INT,"Curb-to-curb width of the street being crossed i.e., crosswalk length (ft)"
-L,INT,"Curb-to-curb width of the cross street, i.e., through length (ft)"
-W_bl,INT,Bicycle lane width (ft)
-W_ol,INT,Outside travel lane (closest to sidewalk) width (ft)
-p_pk,INT,Proportion of on-street parking occupied
-W_pk,INT,Striped parking lane width (ft)
-W_os,INT,Paved outside shoulder width (ft)
 M_yp,INT,Motorist pedestrian yield rate (decimal)
 M_yb,INT,Motorist bicycle yield rate (decimal)
 S_p,INT,Pedestrian crossing speed (ft/s)
@@ -87,5 +80,4 @@ S_b,INT,Bicycle crossing speed (ft/s)
 t_sb,INT,Bicycle start-up and clearance time (s)
 t_sp,INT,Pedestrian start-up and clearance time (s)
 control,INT,Traffic control?
-curb,INT,Curb is present?
 major,INT,Is the leg on the major street corridor (as opposed to a minor street approach)?Note 1

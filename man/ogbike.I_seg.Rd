@@ -4,7 +4,7 @@
 \alias{ogbike.I_seg}
 \title{Bicycle LOS score for segment}
 \usage{
-ogbike.I_seg(link, int)
+ogbike.I_seg(link, int, dat)
 }
 \arguments{
 \item{link}{Data.table of link data.}

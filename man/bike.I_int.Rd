@@ -4,12 +4,12 @@
 \alias{bike.I_int}
 \title{Bicycle LOS score for intersections}
 \usage{
-bike.I_int(int, dir)
+bike.I_int(link, int)
 }
 \arguments{
-\item{int}{Data.table of intersection data.}
+\item{link}{Data.table of subject link data.}
 
-\item{dir}{String with subject intersection approach being studied ("NB","SB","EB","WB").}
+\item{int}{Data.table of subject intersection data.}
 }
 \value{
 A numeric LOS score, unitless.

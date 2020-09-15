@@ -4,7 +4,7 @@
 \alias{ogped.I_link}
 \title{Pedestrian level of service score for links}
 \usage{
-ogped.I_link(link, int)
+ogped.I_link(link, int, dat)
 }
 \arguments{
 \item{link}{Data.table of link data.}

@@ -4,12 +4,12 @@
 \alias{bike.d_twsc}
 \title{Bicycle delay for uncontrolled intersections (e.g., Two-way Stop Controlled Intersections)}
 \usage{
-bike.d_twsc(int, dir)
+bike.d_twsc(link, int)
 }
 \arguments{
-\item{int}{Data.table of intersection data.}
+\item{link}{Data.table of subject link data.}
 
-\item{dir}{String with subject intersection approach being studied ("NB","SB","EB","WB").}
+\item{int}{Data.table of subject intersection data.}
 }
 \value{
 Numeric value in average seconds per bike.

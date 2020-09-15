@@ -4,7 +4,7 @@
 \alias{ogbike.I_link}
 \title{Bicycle level of service score for links}
 \usage{
-ogbike.I_link(link, control)
+ogbike.I_link(link, int, dat)
 }
 \arguments{
 \item{link}{Data.table of link data.}
