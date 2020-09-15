@@ -658,9 +658,9 @@ bike.I_link <- function(link, int, dat) {
   v_vm = int[ traf_dir == link$link_dir, sum(v_rt + v_lt + v_th)]
   
   #Motorized vehicle volume adjustment factor
-  v_ma = ifelse(v_vm > 4*link$N_th, v_vm, 4*link$N_th)
+  v_ma = ifelse(v_vm > 4*link$N_mth, v_vm, 4*link$N_mth)
   
-  F_v = 0.507*log(v_ma / (4*link$N_th))
+  F_v = 0.507*log(v_ma / (4*link$N_mth))
   
   #Motorized vehicle speed adjustment factor
   F_s = bike.F_s.link(link, int, dat)

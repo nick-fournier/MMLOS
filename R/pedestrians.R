@@ -347,8 +347,11 @@ ped.I_int <- function(link, int, dat) {
                 "WB" = "EB")
   
   #Midsegment speed
-  if(is.na(link$S_85mj)) S_85mj = auto.S_f(link, int, dat)
-  else S_85mj = link$S_85mj
+  if(is.na(link$S_85mj)) {
+    S_85mj = auto.S_f(link, int, dat)
+  } else {
+    S_85mj = link$S_85mj
+  }
   
   #Intersection delay
   d_pd = ped.d_pd(int, link$link_dir)
@@ -358,7 +361,7 @@ ped.I_int <- function(link, int, dat) {
   N_dc = ifelse(is.na(N_dc), int[traf_dir == odir, N_dc], N_dc)
 
   #Vehicle count traveling on major street during 15-min period
-  n_15mj = (0.25 / N_dc)*int[, sum(v_lt + v_rt + v_th)]
+  n_15mj = (0.25 / N_dc)*int[, sum(v_lt + v_rt + v_th, na.rm = T)]
   
   #Left and right turns with ped movement
   v_rtlt = int[traf_dir == link$link_dir, v_rtor + v_ltperm]
