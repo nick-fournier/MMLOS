@@ -11,12 +11,6 @@ library(ggpubr)
 
 
 
-
-
-
-
-
-
 # #Load data in from files.
 # dat <- loaddat()
 # 
