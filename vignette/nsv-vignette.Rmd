@@ -92,7 +92,6 @@ Alright now lets compare the results a bit for bikes to see how the revised meth
 existing[['bike']][ , method := "Existing"]
 revised[['bike']][ , method := "Revised"]
 
-
 # Combine the data tables horizontally (add columns).
 # We select only the letter grade columns
 bike.grade <- merge(existing[['bike']][ , .(segment_id,direction, link_LOS, int_LOS, seg_LOS)],
@@ -121,17 +120,22 @@ bike.scores <- rbind(existing[['bike']], revised[['bike']])
 # Let's create a new unique ID column that contains the segment ID, direction, and methodology version
 bike.scores[ , id := paste(segment_id, direction, method)]
 
+library(data.table)
 #Re-shape the data from wide into long format. This is for the numeric scores
 bike.scores <- melt(bike.scores[ , .(id, rn, method, I_int, I_link, I_seg)], id.vars = c("id","rn","method"))
 
 #Sort data
 bike.scores <- bike.scores[order(rn), ]
 
+#Labels
+bike.scores[variable == "I_int", variable := "Intersection"]
+bike.scores[variable == "I_link", variable := "Link"]
+bike.scores[variable == "I_seg", variable := "Segment"]
+
 #Reshape for another plot
 bike.scoresxy <- dcast(bike.scores, rn+variable~method, value.var = "value")
 
 ```
-
 
 Long format is generally easier to plot with because you are storing all the values in one column, which are then categorized by a "variable" column. To show what I mean, let's print the table out. 
 
