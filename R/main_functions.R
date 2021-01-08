@@ -187,7 +187,7 @@ score2LOS <- function(score, mode) {
 
 #' Calculate the Multi-modal Level of Service
 #' 
-#' @param input_data List containing data table for intersections and links. See \code{\link{loadMMLOS}} for formatting.
+#' @param input_data List containing data table for intersections and links. See \code{\link{MMLOSload}} for formatting.
 #' @param revs Boolean where TRUE calculates LOS with proposed revisions, or FALSE using existing HCM 6th edition.
 #' @return A list containing a data tables for bicycle LOS and pedestrian LOS
 #' @examples
@@ -196,7 +196,7 @@ score2LOS <- function(score, mode) {
 MMLOScalc <- function(input_data, revs = T) {
   
   if(class(input_data) != 'MMLOS.INPUT') {
-    input_data = loadMMLOS(input_data)
+    input_data = MMLOSload(input_data)
   }
   
   #Split by intersection

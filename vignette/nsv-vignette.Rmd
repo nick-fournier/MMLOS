@@ -25,6 +25,7 @@ This is a vignette going through a simple example use of **MMLOS**, the Multi-Mo
 Let's begin with with a [description of data](https://github.com/nick-fournier/MMLOS/blob/master/data/input_link_template.csv), shown below. There are two CSV files, one for links and one for segments. Templates can be found at [data/input_intersection_template.csv](https://github.com/nick-fournier/MMLOS/blob/master/data/input_intersection_template.csv) and [data/input_link_template.csv](https://github.com/nick-fournier/MMLOS/blob/master/data/input_link_template.csv). These templates are based on data collected along Hearst Avenue, a site where complete streets improvements were recently made.
 
 
+
 ```{r link description, echo = F} 
 dat = fread("./data/input_descriptions.csv")[TYPE == "LINK", .(VAR,DESC)]
 dat = setNames(dat, c("Variable","Description"))
@@ -50,23 +51,23 @@ First install, if you haven't already, and load the package. MMLOS includes the 
 library(MMLOS)
 ```
 
-After roadway data has been properly formatted into the **link** and **intersection** CSV files, they can be imported to *R*. The **dirs** parameter is a string vector with the two file locations. If left empty, a GUI prompt will pop up. Otherwise if "template" is entered, it'll just use the template files I have provided. For now we'll just use the template data.
+After roadway data has been properly formatted into the **link** and **intersection** CSV files, they can be imported to *R*. The **dirs** parameter is a string vector with the two file locations. If left empty, a GUI prompt will pop up. Otherwise if one of the templates "berkeley" or "pasadena" are entered, it'll just use the template files I have provided. For now we'll just use the template data.
 
 ```{r loaddat}
-dat <- loaddat("template")
+dat <- MMLOSload("berkeley")
 ```
 
-We can take a peak at this. Note the NA's in this example are because some intersections are only three-ways, so one approach is missing.
+We can take a peak at this. Note the NAs in this example are because some intersections are only three-ways, so one approach is missing.
 
 ```{r head}
-lapply(loaddat("template"),function(x) head(x,8))
+lapply(MMLOSload("berkeley"),function(x) head(x,8))
 ```
 
 Now we can calculate the LOS. The "existing" result uses the current HCM methodology, and the "revised" result uses the proposed revisions. Let's display what the results look like for the existing methodology. The results have a list of data tables for each mode.
 
 ```{r calc MMLOS}
-existing <- calcMMLOS(dat, revs = F)
-revised <- calcMMLOS(dat, revs = T)
+existing <- MMLOScalc(dat, revs = F)
+revised <- MMLOScalc(dat, revs = T)
 
 #Display results
 print(existing)
@@ -76,9 +77,10 @@ print(existing)
 The results can be exported to a CSV by using the command:
 
 ```{r eval=FALSE}
-fwrite(existing, "./some output folder/existing LOS.csv")
 
-fwrite(revised, "./some output folder/revised LOS.csv")
+MMLOSsave(existing, "./some output folder/existing LOS.csv")
+MMLOSsave(revised, "./some output folder/revised LOS.csv")
+
 ```
 
 
@@ -112,7 +114,7 @@ It is hard to tell exactly what's going on through, because the magnitude of sco
 ```{r score plot}
 # Add row number, help us to sort it later
 existing[['bike']]$rn <- 1:nrow(existing[['bike']])
-revised[['bike']]$rn <- 1:nrow(existing[['ped']])
+revised[['bike']]$rn <- 1:nrow(revised[['bike']])
 
 # Combine the data tables vertically (stacking rows). Vertical format makes plotting easier
 bike.scores <- rbind(existing[['bike']], revised[['bike']])
