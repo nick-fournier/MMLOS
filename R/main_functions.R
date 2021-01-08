@@ -23,15 +23,15 @@ tabular <- function(df, ...) {
 #' Load the link and intersection data into R
 #' 
 #' @param dirs String vector containing the file locations of two CSV files for intersection and link data.
-#' For demonstration purposes, template data can be loaded by entering dir ="template".
+#' Leave blank as `loadMMLOS()` to use GUI. For demonstration purposes, template data can be loaded by entering dir ="template".
 #' The input data format and description are as follows:
 #' `r tabular(fread("./data/input_descriptions.csv"))`
 #' @return Returns a list containing two data tables for intersections and links.
 #' @examples
-#' loaddat(dirs = c(intersections = "./data/input_intersection_template.csv", 
+#' loadMMLOS(dirs = c(intersections = "./data/input_intersection_template.csv", 
 #'                  links = "./data/input_link_template.csv"))
 #' @export
-loaddat <- function(dirs) {
+MMLOSload <- function(dirs) {
   if(missing(dirs)){
 
     print("Select data file for intersections")
@@ -42,10 +42,15 @@ loaddat <- function(dirs) {
     
     dirs = c(intersections = int.dir, links = link.dir)
     
-  } else if(dirs[1]=="template") {
+  } else if(dirs[1]=="berkeley") {
     
-    dirs = c(intersections = "./data/input_intersection_template.csv", 
-             links = "./data/input_link_template.csv")
+    dirs = c(intersections = "./data/input_intersection_hearstave_template.csv", 
+             links = "./data/input_link_hearstave_template.csv")
+    
+  } else if(dirs[1]=="pasadena") {
+    
+    dirs = c(intersections = "./data/input_intersection_coloradoblvd_template.csv", 
+             links = "./data/input_link_coloradoblvd_template.csv")
   }
   
   #Read data
@@ -95,8 +100,33 @@ loaddat <- function(dirs) {
                 "'! Check file selection or fix file formatting."))
     )
   
+  
+  class(dat) <- "MMLOS.INPUT"
+  
   return(dat)
   
+}
+
+
+#' Save the output somewhere to CSV
+#' 
+#' @param dat The data you are saving
+#' @param output_folder String containing the file output location.
+#' @examples
+#' saveMMLOS(dat = los_norcal, output_folder = "./outputdata")
+#' @export
+MMLOSsave <- function(dat, output_folder) {
+  if(missing(output_folder)){
+    print("Select output location")
+    output_folder = choose.dir()
+  }
+  
+  #Read data
+  for(n in names(dat)) fwrite(dat[[n]], paste0(output_folder,"/MMLOS_", n,".csv"))
+
+
+  return(print(paste0("Saved to ", output_folder)))
+
 }
 
 #Leftover load function... might repurpose it.
@@ -157,31 +187,38 @@ score2LOS <- function(score, mode) {
 
 #' Calculate the Multi-modal Level of Service
 #' 
-#' @param dat List containing data table for intersections and links. See \code{\link{loaddat}} for formatting.
+#' @param input_data List containing data table for intersections and links. See \code{\link{loadMMLOS}} for formatting.
 #' @param revs Boolean where TRUE calculates LOS with proposed revisions, or FALSE using existing HCM 6th edition.
 #' @return A list containing a data tables for bicycle LOS and pedestrian LOS
 #' @examples
-#' calcMMLOS(dat, T)
+#' calcMMLOS(input_data, T)
 #' @export
-calcMMLOS <- function(dat, revs = T) {
+MMLOScalc <- function(input_data, revs = T) {
+  
+  if(class(input_data) != 'MMLOS.INPUT') {
+    input_data = loadMMLOS(input_data)
+  }
+  
   #Split by intersection
-  int.split <- split(dat$intersections, by = "int_id")
-  link.split <- split(dat$links, by = c("link_id","link_dir")) 
+  int.split <- split(input_data$intersections, by = "int_id")
+  link.split <- split(input_data$links, by = c("link_id","link_dir")) 
   
   #Getting LOS score for each link, intersection, and segment.
   if(revs) {
     #Proposed revisions
     LOS = list(
-      bike = rbindlist(lapply(link.split, function(link) bike.I_seg(link, int = int.split[[link$boundary_id]], dat))),
-      ped = rbindlist(lapply(link.split, function(link) ped.I_seg(link, int = int.split[[link$boundary_id]], dat)))
+      bike = rbindlist(lapply(link.split, function(link) bike.I_seg(link, int = int.split[[link$boundary_id]], input_data))),
+      ped = rbindlist(lapply(link.split, function(link) ped.I_seg(link, int = int.split[[link$boundary_id]], input_data)))
     )
   } else {
     #Existing HCM 
     LOS = list(
-      bike = rbindlist(lapply(link.split, function(link) ogbike.I_seg(link, int = int.split[[link$boundary_id]], dat))),
-      ped = rbindlist(lapply(link.split, function(link) ogped.I_seg(link, int = int.split[[link$boundary_id]], dat)))
+      bike = rbindlist(lapply(link.split, function(link) ogbike.I_seg(link, int = int.split[[link$boundary_id]], input_data))),
+      ped = rbindlist(lapply(link.split, function(link) ogped.I_seg(link, int = int.split[[link$boundary_id]], input_data)))
     )
   }
+  
+  class(LOS) <- "MMLOS.OUTPUT"
   
   return(LOS)
 }

@@ -570,7 +570,7 @@ bike.d_twsc <- function(link, int) {
 #' @examples
 #' bike.I_int(int, dir)
 #' @export
-bike.I_int <- function(link, int) {
+bike.I_int <- function(link, int, dat) {
   
   #Traffic direction
   dir = link$link_dir
@@ -691,7 +691,7 @@ bike.I_seg <- function(link, int, dat) {
     direction = link$link_dir,
     mode = "bicycle",
     I_link = bike.I_link(link, int, dat),
-    I_int = bike.I_int(link, int)
+    I_int = bike.I_int(link, int, dat)
   )
   
   #Calculate segment LOS

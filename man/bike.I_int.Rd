@@ -4,7 +4,7 @@
 \alias{bike.I_int}
 \title{Bicycle LOS score for intersections}
 \usage{
-bike.I_int(link, int)
+bike.I_int(link, int, dat)
 }
 \arguments{
 \item{link}{Data.table of subject link data.}

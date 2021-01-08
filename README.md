@@ -13,18 +13,60 @@ The MMLOS package currently only supports LOS for bicycles and pedestrians, but 
 If you are not familiar with *R*, do not fear, this package is made simple. To run it, you only need to have the open-source *R*-programming language installed on your computer. If you do not have *R*, I recommend starting out with its companion IDE [RStudio](https://rstudio.com/products/rstudio/download/). *R* and RStudio is a *very* high-level statistical programming language intended for data analysis and research. It's designed to be less of a "programming" language and more of an "analysis" language, so it is easy to use and easy to learn. But you don't need to be fluent to run this package, just click and type a few commands.
 
 ## Installation
-The MMLOS package can be installed in <em>R</em> with the following commands:
-
-	library(devtools) #Install devtools if not already installed!
+The MMLOS package can be installed in <em>R</em> through this GitHub Repo using devtools with the following commands:
+  
+```{r}
+  #If devtools is not already installed, type install.packages('devtools') to install it
+  #Load devtools from the library
+	library(devtools)
+	
+	#Then install this package through GitHub using this
 	install_github("nick-fournier/MMLOS")
+```
+	
 ## Usage
-Load data with:
+To use this package, there are two steps.
 
-	dat <- loaddat(dirs)
+1. Setup your data for links and intersections into a spreadsheet and save it as a CSV file in the correct format. For a description of variable inputs and formatting, see the [input data descriptions](data/input_link_template.csv) file. To start you off, I have also provided two working templates in the [data](data/) directory for Hearst Avenue in Berkeley, CA and Colorado Boulevard in Pasadena, CA. For both locations, there are two example input files, one for [link data](data/input_link_hearstave_template.csv) and the other [intersection data](data/input_intersection_hearstave_template.csv) template files.
 
-This contains the directory to formatted CSV files for intersections and links. See the [input data descriptions](data/input_link_template.csv) file and the [link data](data/input_link_template.csv) and [intersection data](data/input_intersection_template.csv) template files for examples. The LOS is then calculated using the function:
 
-	los <- calcMMLOS(dat)
+2. Next run the `MMLOScalc()` function on the two data files. This function loads the data into the *R* environment and runs the LOS calculations. To import your data, you can either leave the input blank and then navigate with the Graphic User Interface (GUI) to select your input files, or you can also just directly specify the file locations. You may also use my example templates by typing 'berkeley' or 'pasadena'. Here's an example of each:
+
+```{r}
+  #GUI
+  los_gui <- calcMMLOS()
+
+  #Specific input
+  dirs <- c(intersections = "C:/some directory/intersections_data.csv", 
+            links = "C:/some directory/links_data.csv")
+            
+	los_dirs <- calcMMLOS(input_data = dirs)
+	
+	
+	#Using my template data
+	los_norcal <- calcMMLOS(input_data = 'berkeley')
+	los_socal <- calcMMLOS(input_data = 'pasadena')
+```
+	
+
+It might give you a warning about NAs in the data. This happens if any cells are empty in the CSV file. This might be OK if, for example, you have a three-way intersection instead of a four-way so you must leave some cells blank.
+
+
+And finally, you may save your output if you'd like. For those of you *R*ookies out there that aren't familiar with saving CSV files in *R*, you can use the function `MMLOSsave(dat, output_folder)`. The `output_folder` parameter is optional like `input_data`, if it's left blank a GUI will pop up. 
+
+
+```{r}
+  #With GUI
+  MMLOSsave(dat = los_norcal)
+  
+  #Without GUIT
+  MMLOSsave(dat = los_socal, output_folder = "C:\\Users\\YourName\\Desktop")
+  
+```
+
+
+*NOTE: For the GUIs, I have only tested on Windows. May not work on other operating systems.
+
 
 For more methodological details, see the bicycle revisions working paper titled [Bicycle Level of Service: Accounting for protected lanes, traffic exposure, and delay](https://github.com/nick-fournier/MMLOS/blob/master/docs/Bicycle%20LOS_7-28-2020_draft.pdf) and for pedestrian revisions see the [collection of working papers](https://github.com/nick-fournier/MMLOS/blob/master/docs/Collection_of_working_papers.pdf) from NCHRP report 17-87.
 

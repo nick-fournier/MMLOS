@@ -272,7 +272,7 @@ auto.VCratio <- function(link, int) {
 #' @examples
 #' auto.S_R(link, control)
 #' @export
-auto.delay <- function(link,int) {
+auto.delay <- function(link, int) {
   
   #Volume/Capacity Ratio
   X = auto.VCratio(link, int)

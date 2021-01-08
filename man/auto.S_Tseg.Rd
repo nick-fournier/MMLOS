@@ -4,7 +4,7 @@
 \alias{auto.S_Tseg}
 \title{Determine the segment travel speed}
 \usage{
-auto.S_Tseg(link, int)
+auto.S_Tseg(link, int, dat)
 }
 \arguments{
 \item{link}{Data.table of link data.}
