@@ -45,7 +45,7 @@ loaddat <- function(dirs) {
   } else if(dirs[1]=="template") {
     
     dirs = c(intersections = "./data/input_intersection_template.csv", 
-                links = "./data/input_link_template.csv")
+             links = "./data/input_link_template.csv")
   }
   
   #Read data

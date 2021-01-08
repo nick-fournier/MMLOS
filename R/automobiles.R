@@ -323,17 +323,14 @@ auto.delay <- function(link,int) {
 #' @examples
 #' auto.S_R(link, control)
 #' @export
-auto.S_Tseg <- function(link, int) {
+auto.S_Tseg <- function(link, int, dat) {
   
-  
-
-  
-  #Through delay
-  d_t = 
+  #Through delay (Control delay, Signal only, does not have 4-way stop yet (?) )
+  d_t = auto.delay(link, int)
   
   
   #Segment running time
-  t_R = auto.t_R(link,int)
+  t_R = auto.t_R(link, int, dat)
   
   #Segment travel speed
   S_Tseg = 3600*link$LL / (5280 * (t_R + d_t))
