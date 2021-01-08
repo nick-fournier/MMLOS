@@ -59,7 +59,7 @@ And finally, you may save your output if you'd like. For those of you *R*ookies 
   #With GUI
   MMLOSsave(dat = los_norcal)
   
-  #Without GUIT
+  #Without GUI
   MMLOSsave(dat = los_socal, output_folder = "C:\\Users\\YourName\\Desktop")
   
 ```
