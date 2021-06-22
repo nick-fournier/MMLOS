@@ -22,7 +22,7 @@ This is a vignette going through a simple example use of **MMLOS**, the Multi-Mo
 
 ### Data formatting
 
-Let's begin with with a [description of data](https://github.com/nick-fournier/MMLOS/blob/master/data/input_link_template.csv), shown below. There are two CSV files, one for links and one for segments. Templates can be found at [data/input_intersection_template.csv](https://github.com/nick-fournier/MMLOS/blob/master/data/input_intersection_template.csv) and [data/input_link_template.csv](https://github.com/nick-fournier/MMLOS/blob/master/data/input_link_template.csv). These templates are based on data collected along Hearst Avenue, a site where complete streets improvements were recently made.
+Let's begin with with a [description of data](https://github.com/nick-fournier/MMLOS/blob/master/data/input_description.csv), shown below. There are two CSV files, one for links and one for segments. Templates can be found at [data/input_intersection_template.csv](https://github.com/nick-fournier/MMLOS/blob/master/data/input_intersection_hearstave_template.csv) and [data/input_link_template.csv](https://github.com/nick-fournier/MMLOS/blob/master/data/input_link_hearstave_template.csv). These templates are based on data collected along Hearst Avenue, a site where complete streets improvements were recently made.
 
 
 
@@ -250,7 +250,7 @@ ggarrange(plotlist = plot.LOSint, ncol = 2, common.legend = T, legend = "right")
 
 ## Final thoughts
 
-Okay now that we've gone through a short example, that should be enough to get going. More to come in future revisions. For more methodological details, see the bicycle revisions working paper titled [Bicycle Level of Service: Accounting for protected lanes, traffic exposure, and delay](https://github.com/nick-fournier/MMLOS/blob/master/docs/Bicycle%20LOS_7-28-2020_draft.pdf) and for pedestrian revisions see the [collection of working papers](https://github.com/nick-fournier/MMLOS/blob/master/docs/Collection_of_working_papers.pdf) from NCHRP report 17-87.
+Okay now that we've gone through a short example, that should be enough to get going. More to come in future revisions. For more methodological details, see the bicycle revisions working paper titled [Improved Analysis Methodologies and Strategies for Complete Streets](https://github.com/nick-fournier/MMLOS/blob/master/docs/65A0723_Complete%20Streets%20Memo_DRAFT_4-30-2021.pdf) and for pedestrian revisions see the [collection of working papers](https://github.com/nick-fournier/MMLOS/blob/master/docs/Collection_of_working_papers.pdf) from NCHRP report 17-87.
 
 
 

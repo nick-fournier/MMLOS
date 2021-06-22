@@ -68,7 +68,7 @@ And finally, you may save your output if you'd like. For those of you *R*ookies 
 *NOTE: For the GUIs, I have only tested on Windows. May not work on other operating systems.
 
 
-For more methodological details, see the bicycle revisions working paper titled [Bicycle Level of Service: Accounting for protected lanes, traffic exposure, and delay](https://github.com/nick-fournier/MMLOS/blob/master/docs/Bicycle%20LOS_7-28-2020_draft.pdf) and for pedestrian revisions see the [collection of working papers](https://github.com/nick-fournier/MMLOS/blob/master/docs/Collection_of_working_papers.pdf) from NCHRP report 17-87.
+For more methodological details, see the bicycle revisions working paper titled [Improved Analysis Methodologies and Strategies for Complete Streets](https://github.com/nick-fournier/MMLOS/blob/master/docs/65A0723_Complete%20Streets%20Memo_DRAFT_4-30-2021.pdf) and for pedestrian revisions see the [collection of working papers](https://github.com/nick-fournier/MMLOS/blob/master/docs/Collection_of_working_papers.pdf) from NCHRP report 17-87.
 
 For an example usage, see the [vignette](https://htmlpreview.github.io/?https://github.com/nick-fournier/MMLOS/blob/master/vignette/nsv-vignette.html) which runs through a few simple calculations and plots the results.
 
@@ -76,5 +76,3 @@ For an example usage, see the [vignette](https://htmlpreview.github.io/?https://
 1. Kittelson and Associates Inc., Highway Safety Research Center at the University of North Carolina, and Portland State University. Enhancing Pedestrian Volume Estimation and Developing HCM Pedestrian Methodologies for Safe and Sustainable Communities.*Collection of Working Papers: Pedestrian Crossing Delay and LOS - NCHRP Project 17-87.* 2020.
 
 2. Fournier, N., Huang, A., and Skabardonis, A. Improved Analysis Methodologies and Strategies for Complete Streets. *Working paper.* 2020.
-
-3. Fournier, N., Huang, A., and Skabardonis, A. Bicycle Level of Service: Accounting for protected lanes, traffic exposure, and delay. *Transportation Research Board Annual Meeting.* 2021
