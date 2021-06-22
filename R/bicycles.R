@@ -19,8 +19,13 @@ bike.F_w.link <- function(link, int) {
   }  
   
   #Effective buffer width
+  A = 0.5
+  B = 1
+  wmax = 12
   #W_bufstar = link[ , sqrt(W_blbuf^2 + 16*H_blbuf^0.5)]
-  W_bufstar = 4*(link$W_blbuf^2 + (24*H_blbuf))^(1/4)
+  # W_bufstar = 4*(link$W_blbuf^2 + (24*H_blbuf))^(1/4)
+  W_bufstar = wmax*(1 - exp(-A*link$W_blbuf-B*H_blbuf))
+  
   
   #Midsegment flow per lane in direction of travel
   v_vm = int[ traf_dir == link$link_dir, sum(v_rt + v_lt + v_th)] / link$N_mth

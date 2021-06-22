@@ -53,20 +53,22 @@ pasa.scores = formatdata(pasa.ex, pasa.rev)
 
 #### Plotting ####
 #Berk Bar Plot
-ggplot(data = berk.scores[['wide']], aes(x = id, y = value, fill = variable, alpha = method)) + 
+berk.bar <- ggplot(data = berk.scores[['wide']], aes(x = id, y = value, fill = variable, alpha = method)) + 
   geom_col(position = "dodge") +
   scale_fill_brewer("LOS component", palette = "Set1") +
   scale_alpha_discrete("Methodology", range = c(0.5,1)) +
   labs(x = NULL, y = "LOS Score") +
+  coord_fixed(ylim = c(0,5)) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 #Pasadena Bar Plot
-ggplot(data = pasa.scores[['wide']], aes(x = id, y = value, fill = variable, alpha = method)) + 
+pasa.bar <- ggplot(data = pasa.scores[['wide']], aes(x = id, y = value, fill = variable, alpha = method)) + 
   geom_col(position = "dodge") +
   scale_fill_brewer("LOS component", palette = "Set1") +
   scale_alpha_discrete("Methodology", range = c(0.5,1)) +
   labs(x = NULL, y = "LOS Score") +
+  coord_fixed(ylim = c(0,5)) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
@@ -77,9 +79,10 @@ berk.scat <- ggplot(data = berk.scores[['long']], aes(x = Existing, y = Revised,
   geom_abline(slope = 1) +
   scale_color_brewer("LOS component", palette = "Set1") +
   labs(x = "Existing HCM LOS score", y = "Revised HCM LOS Score") +
-  coord_cartesian(xlim = c(0,5), ylim = c(0,5)) +
-  ggtitle("Hearst Aveneue, Berkeley, CA") +
-  theme_bw()
+  coord_fixed(xlim = c(0,5), ylim = c(0,5)) +
+  ggtitle("Hearst Avenue, Berkeley, CA") +
+  theme_bw() + theme(legend.position = 'none')
+  
 
 #Pasadena Scat Plot
 pasa.scat <- ggplot(data = pasa.scores[['long']], aes(x = Existing, y = Revised, color = variable)) + 
@@ -87,13 +90,27 @@ pasa.scat <- ggplot(data = pasa.scores[['long']], aes(x = Existing, y = Revised,
   geom_abline(slope = 1) +
   scale_color_brewer("LOS component", palette = "Set1") +
   labs(x = "Existing HCM LOS score", y = "Revised HCM LOS Score") +
-  coord_cartesian(xlim = c(0,6), ylim = c(0,6)) +
+  coord_fixed(xlim = c(0,6), ylim = c(0,6)) +
   ggtitle("Colorado Boulevard, Pasadena, CA") +
-  theme_bw()
+  theme_bw() + 
+  theme(legend.position = c(0.7,0.25),
+        legend.box.background = element_rect(fill = "transparent"),
+        legend.key = element_rect(fill = "transparent"),
+        legend.background = element_rect(fill = "transparent"))  
 
 
 #
 ggarrange(plotlist = list(berk.scat, pasa.scat), ncol = 2, common.legend = T, legend = "right")
+ggarrange(plotlist = list(berk.bar, pasa.bar), ncol = 2, common.legend = T, legend = "right")
+
+
+ggsave(filename = "C:\\Users\\nichf\\Desktop\\berk_scat.png", plot = berk.scat, width = 3.5, height = 3.5, units = "in")
+ggsave(filename = "C:\\Users\\nichf\\Desktop\\pasa_scat.png", plot = pasa.scat, width = 3.5, height = 3.5, units = "in")
+
+ggsave(filename = "C:\\Users\\nichf\\Desktop\\berk_bar.png", plot = berk.bar, width = 6, height = 5, units = "in")
+ggsave(filename = "C:\\Users\\nichf\\Desktop\\pasa_bar.png", plot = pasa.bar, width = 6, height = 5, units = "in")
+
+
 
 
 
